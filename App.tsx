@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import {
   Text,
   Link,
@@ -10,21 +10,21 @@ import {
   NativeBaseProvider,
   extendTheme,
   VStack,
-  Box,
+  Box
 } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
 
 // Define the config
 const config = {
   useSystemColorMode: false,
-  initialColorMode: "dark",
+  initialColorMode: "dark"
 };
 
 // extend the theme
 export const theme = extendTheme({ config });
 type MyThemeType = typeof theme;
 declare module "native-base" {
-  interface ICustomTheme extends MyThemeType {}
+  type ICustomTheme = MyThemeType;
 }
 export default function App() {
   return (
@@ -44,8 +44,8 @@ export default function App() {
               _web={{
                 _text: {
                   fontFamily: "monospace",
-                  fontSize: "sm",
-                },
+                  fontSize: "sm"
+                }
               }}
               px={2}
               py={1}
