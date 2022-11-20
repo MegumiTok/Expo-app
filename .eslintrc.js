@@ -36,6 +36,13 @@ module.exports = {
     //追加
     react: {
       version: "detect"
+    },
+    "import/resolver": {
+      //追加
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "babel-module": {} //　eslint-import-resolver-babel-moduleを参考に足してみたが中身はなんだろう
     }
   },
   rules: {
