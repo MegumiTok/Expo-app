@@ -2,7 +2,14 @@
 
 The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
 
-# Usage
+# コミットメッセージ
+| 記号 | Description | 
+| --- | --- |
+| :white_check_mark:| 小さな修正など完了、特にエラーなし|
+| :wrench: | 修正中/作業中 | 
+| :tada: |  | 
+
+# 便利コマンド
 
 expo-cliを使用
 ```sh

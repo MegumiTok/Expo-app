@@ -101,7 +101,6 @@ module.exports = {
     "react-native/no-color-literals": 0, // スタイルシートに関するカスタマイズ
     // "react-native/no-raw-text": 0, //スタイルシートに関するカスタマイズ
     // "import/no-extraneous-dependencies": 2,
-    // "import/extensions": ["error", "never", { svg: "always" }], //何であったのかわからん。消していいはず。上の方のやつとダブルし。
     "import/no-duplicates": 2,
     "import/no-cycle": 0,
     "import/prefer-default-export": 0,
@@ -112,7 +111,6 @@ module.exports = {
     "import/no-named-as-default": 0,
     "import/no-unused-modules": 0,
     "import/no-deprecated": 0,
-    // camelcase: 2,
     "comma-dangle": 0
   }
 };
