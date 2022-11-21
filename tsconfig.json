@@ -23,6 +23,7 @@
       "@private/*": ["src/private/*"],
       "@navigation/*": ["src/navigation/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@screens/*": ["src/screens/*"],
     }
   },
   "include": ["./src/**/*", "App.tsx", "db.json"] //App.tsxの場所がsrc/にいるときは変更必要。

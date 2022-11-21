@@ -7,9 +7,10 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { View } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 
-import Test from "src/templates/Test";
+import Test from "@components/Test";
 import { Colors } from "@components/styles/theme/Colors";
 
+import { Feed } from "src/screens/Feed";
 //type--------------------------------------
 // import type {
 //   RootStackParamList,
@@ -104,7 +105,7 @@ const MenuStack = createNativeStackNavigator();
 const FeedScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
-      <Stack.Screen name={Routes.Feed} component={Test} />
+      <Stack.Screen name={Routes.Feed} component={Feed} />
     </Stack.Navigator>
   );
 };

@@ -1,12 +1,14 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
-import Test from "src/templates/Test";
+import { MenuProvider } from "react-native-popup-menu";
+import Test from "@components/Test";
 import AppNavigator from "./AppNavigator";
 
 export const Navigation = () => {
   return (
     <SafeAreaProvider>
-      <AppNavigator />
+      <MenuProvider>
+        <AppNavigator />
+      </MenuProvider>
     </SafeAreaProvider>
   );
 };
