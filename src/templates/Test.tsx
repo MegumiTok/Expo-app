@@ -1,4 +1,4 @@
-import { Center } from "native-base";
+import { Center, Text } from "native-base";
 
 export const Test = () => {
   return (
@@ -15,7 +15,7 @@ export const Test = () => {
           lg: 250
         }}
       >
-        Test
+        <Text> Test</Text>
       </Center>
     </Center>
   );

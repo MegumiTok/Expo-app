@@ -35,7 +35,7 @@ git checkout -b <ブランチ名> //新しいブランチを作って同時に�
 console.log(typeof(something))　//ダンさんが教えてくれた望遠鏡
 watchman watch-del-all && rm -rf node_modules/ && yarn cache clean && yarn install && yarn start -- --reset-cache
 ```
-# mein
+# main
 メインブランチ
 
 # dev

@@ -1,12 +1,12 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Text, View } from "native-base";
 import Test from "src/templates/Test";
+import AppNavigator from "./AppNavigator";
 
 export const Navigation = () => {
   return (
     <SafeAreaProvider>
-      <Test />
+      <AppNavigator />
     </SafeAreaProvider>
   );
 };
