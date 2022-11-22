@@ -10,7 +10,10 @@ import { FontAwesome } from "@expo/vector-icons";
 import Test from "@components/Test";
 import { Colors } from "@components/styles/theme/Colors";
 
+//screens
 import { Feed } from "src/screens/Feed";
+import { CreatorList } from "src/screens/CreatorList";
+
 //type--------------------------------------
 // import type {
 //   RootStackParamList,
@@ -114,7 +117,7 @@ const FeedScreens = () => {
 const CreatorScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
-      <Stack.Screen name={Routes.Test} component={Test} />
+      <Stack.Screen name={Routes.CreatorList} component={CreatorList} />
     </Stack.Navigator>
   );
 };

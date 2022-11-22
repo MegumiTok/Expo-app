@@ -11,6 +11,11 @@ import type {
 import type { Post } from "./PostTypes";
 import type { Creator } from "./AuthTypes";
 
+import type {
+  StackNavigationProp,
+  StackScreenProps
+} from "@react-navigation/stack";
+
 export enum Routes {
   Test = "Test", // <--あとで消す
   Chats = "Chats",
@@ -66,3 +71,9 @@ export type RootStackParamList = {
 };
 
 export type FeedProps = NativeStackScreenProps<RootStackParamList, Routes.Feed>;
+
+export type CreatorListProps = StackNavigationProp<
+  //💚StackNavigationPropを使う
+  RootStackParamList,
+  Routes.CreatorList
+>;

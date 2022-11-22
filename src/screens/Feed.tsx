@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import { posts } from "@assets/data/posts";
+
 import { LoadingView } from "@components/styles/LoadingView";
 import FeedPost from "@components/FeedPost";
 //type--------------------------------------------
