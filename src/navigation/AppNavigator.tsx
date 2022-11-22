@@ -15,6 +15,7 @@ import { Colors } from "@components/styles/theme/Colors";
 import { Feed } from "src/pages/Feed";
 import { CreatorList } from "src/pages/CreatorList";
 import { SearchPage } from "@pages/SearchPage";
+import { EventNavigator } from "./EventNavigator";
 
 //private
 import Pra from "@private/Pra";
@@ -144,7 +145,7 @@ const SearchScreens = () => {
 const EventScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
-      <Stack.Screen name={Routes.Test} component={Test} />
+      <Stack.Screen name={Routes.EventList} component={EventNavigator} />
     </Stack.Navigator>
   );
 };
