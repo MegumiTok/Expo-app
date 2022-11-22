@@ -18,7 +18,7 @@ module.exports = function (api) {
             "@private": "./src/private",
             "@navigation": "./src/navigation",
             "@hooks": "./src/hooks",
-            "@screens": "./src/screens"
+            "@pages": "./src/pages"
           }
         }
       ],

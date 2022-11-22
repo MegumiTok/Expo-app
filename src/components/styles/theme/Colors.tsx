@@ -9,8 +9,7 @@ export const Colors = {
   primary: {
     //ブルー
     general: "#5FDAE6",
-    // dark: "#29BDCB", //ブルー
-    dark: "#232122", //Attack of Titan
+    dark: "#29BDCB", //ブルー
     light: "#A1F1F8", //ブルー
     // light: "#000101", //Attack of Titan
     extraLight: "#DFFCFF"

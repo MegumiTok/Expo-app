@@ -3,6 +3,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Feather from "react-native-vector-icons/Feather";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { View } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
@@ -11,8 +12,12 @@ import Test from "@components/Test";
 import { Colors } from "@components/styles/theme/Colors";
 
 //screens
-import { Feed } from "src/screens/Feed";
-import { CreatorList } from "src/screens/CreatorList";
+import { Feed } from "src/pages/Feed";
+import { CreatorList } from "src/pages/CreatorList";
+import { SearchPage } from "@pages/SearchPage";
+
+//private
+import Pra from "@private/Pra";
 
 //type--------------------------------------
 // import type {
@@ -59,12 +64,12 @@ const AppNavigator = () => {
           }}
         />
         <Tab.Screen
-          name="ItemTab"
-          component={ItemScreens}
+          name="SearchTab"
+          component={SearchScreens}
           options={{
-            tabBarLabel: "Item",
+            tabBarLabel: "Search",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="shopping" color={color} size={27} />
+              <Feather name="search" color={color} size={27} />
             )
           }}
         />
@@ -123,10 +128,14 @@ const CreatorScreens = () => {
 };
 
 // + Item Tab
-const ItemScreens = () => {
+const SearchScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
-      <Stack.Screen name={Routes.Test} component={Test} />
+      <Stack.Screen
+        name={Routes.Search}
+        component={SearchPage}
+        options={{ header: () => null }}
+      />
     </Stack.Navigator>
   );
 };
@@ -143,8 +152,8 @@ const EventScreens = () => {
 //+ Menu Tab
 const MenuScreens = () => {
   return (
-    <Stack.Navigator screenOptions={StackCommonScreenOptions}>
-      <Stack.Screen name={Routes.Test} component={Test} />
+    <Stack.Navigator>
+      <Stack.Screen name={Routes.Test} component={Pra} />
     </Stack.Navigator>
   );
 };
@@ -169,31 +178,5 @@ const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
         resizeMode="contain"
       />
     )
-    // headerRight: () => (
-    //   <View style={{ flexDirection: "row" }}>
-    //     <MaterialCommunityIcons
-    //       name="cart"
-    //       color={"white"}
-    //       size={30}
-    //       style={{ top: 2, right: 3 }}
-    //     />
-    //     <MaterialCommunityIcons
-    //       name="bell"
-    //       color={"white"}
-    //       size={25}
-    //       style={{ top: 5, right: -3 }}
-    //     />
-    //   </View>
-    // ),
-
-    // headerRight: () => (
-    //   <TouchableWithoutFeedback
-    //     style={{ flexDirection: "row" }}
-    //     onPress={() => navigate(Routes.AddPost)}
-    //     // onPress={() => true}
-    //   >
-    //     <FontAwesome5 name="plus-square" size={30} color="white" />
-    //   </TouchableWithoutFeedback>
-    // )
   };
 };
