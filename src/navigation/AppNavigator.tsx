@@ -21,6 +21,7 @@ import Menu from "@pages/Menu";
 // sub page---------------------------------------
 import { Profile } from "@pages/Profile";
 import SinglePostPage from "@pages/SinglePostPage";
+import WebShop from "@pages/WebShop";
 //data
 import MenuList from "@assets/data/MenuList";
 
@@ -32,14 +33,24 @@ import MenuList from "@assets/data/MenuList";
 import type { FC } from "react";
 import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { Routes } from "@models/NavTypes";
+import { useState } from "react";
 
 // TabNavigator
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigator = () => {
+  // const isTabVisible = useSelector(state => state.tabs.isTabVisible);
+  // const [isTabVisible, setIsTabVisible] = useState(null);
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        activeColor="#f0edf6"
+        // inactiveColor={Colors.secondary.general}
+        barStyle={{
+          backgroundColor: Colors.primary.dark
+          // display: isTabVisible ? null : "none"
+        }}
+      >
         <Tab.Screen
           name="FeedTab"
           component={FeedScreens}
@@ -138,6 +149,14 @@ const CreatorScreens = () => {
         component={SinglePostPage}
         options={{
           headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name={Routes.WebShop}
+        component={WebShop}
+        options={{
+          headerShown: false
+          //tabBarStyle: { display: "none" }
         }}
       />
     </Stack.Navigator>
