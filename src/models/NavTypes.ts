@@ -16,6 +16,11 @@ import type {
   StackScreenProps
 } from "@react-navigation/stack";
 
+import type {
+  BottomTabNavigationProp,
+  BottomTabScreenProps
+} from "@react-navigation/bottom-tabs";
+
 export enum Routes {
   Test = "Test", // <--あとで消す
   Chats = "Chats",
@@ -77,3 +82,12 @@ export type CreatorListProps = StackNavigationProp<
   RootStackParamList,
   Routes.CreatorList
 >;
+
+export type RootStackScreenProps<T extends keyof RootStackParamList> =
+  StackScreenProps<RootStackParamList, T>;
+
+export type CreatorTabScreenProps<T extends keyof CreatorTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<CreatorTabParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;

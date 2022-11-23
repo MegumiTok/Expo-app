@@ -72,10 +72,9 @@ export const CreatorList = () => {
           return (
             <Pressable
               onPress={() =>
-                // navigate("Profile", {
-                //   item
-                // })
-                null
+                navigate("Profile", {
+                  item
+                })
               }
               style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
             >
@@ -91,7 +90,7 @@ export const CreatorList = () => {
                   }}
                 >
                   <SharedElement
-                    id={`item.${item.item}.backdrop`}
+                    id={`item.${item.creatorId}.backdrop`}
                     style={StyleSheet.absoluteFillObject}
                   >
                     <Animated.View
@@ -105,7 +104,7 @@ export const CreatorList = () => {
                     />
                   </SharedElement>
                   <SharedElement
-                    id={`item.${item.item}.image`}
+                    id={`item.${item.creatorId}.image`}
                     style={styles.posterImage} //これを足してやらないとimageが消える
                   >
                     <Image
@@ -113,7 +112,7 @@ export const CreatorList = () => {
                       style={styles.posterImage}
                     />
                   </SharedElement>
-                  <SharedElement id={`item.${item.item}.meta`}>
+                  <SharedElement id={`item.${item.creatorId}.meta`}>
                     <View style={{ alignItems: "center" }}>
                       <Text
                         style={{

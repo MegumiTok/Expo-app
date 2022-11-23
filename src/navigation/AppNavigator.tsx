@@ -11,14 +11,17 @@ import { FontAwesome } from "@expo/vector-icons";
 import Test from "@components/Test";
 import { Colors } from "@components/styles/theme/Colors";
 
-//screens
+//main page---------------------------------------
 import { Feed } from "src/pages/Feed";
 import { CreatorList } from "src/pages/CreatorList";
 import { SearchPage } from "@pages/SearchPage";
 import { EventNavigator } from "./EventNavigator";
+import Menu from "@pages/Menu";
 
-//private
-import Pra from "@private/Pra";
+// sub page---------------------------------------
+import { Profile } from "@pages/Profile";
+//data
+import MenuList from "@assets/data/MenuList";
 
 //type--------------------------------------
 // import type {
@@ -124,6 +127,11 @@ const CreatorScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen name={Routes.CreatorList} component={CreatorList} />
+      <Stack.Screen
+        name={Routes.Profile}
+        component={Profile}
+        options={() => options}
+      />
     </Stack.Navigator>
   );
 };
@@ -153,15 +161,25 @@ const EventScreens = () => {
 //+ Menu Tab
 const MenuScreens = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name={Routes.Test} component={Pra} />
-    </Stack.Navigator>
+    <MenuStack.Navigator screenOptions={StackCommonScreenOptions}>
+      <MenuStack.Screen name={Routes.Menu} component={Menu} />
+
+      {MenuList.map((item) => (
+        <MenuStack.Screen
+          key={item.name}
+          name={item.name}
+          component={item.component}
+          // sharedElements={item.sharedElements}
+          options={item.options}
+        />
+      ))}
+    </MenuStack.Navigator>
   );
 };
 
 //+Common(Stack - screenOptions)-------------------------------------------------------
 const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
-  const HEADER_ICON_SIZE = 50;
+  const HEADER_ICON_SIZE = 40;
 
   const { navigate } = useNavigation();
 
@@ -175,9 +193,31 @@ const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
     headerTitle: () => (
       <Image
         style={{ width: 200, height: HEADER_ICON_SIZE, top: -9 }}
-        source={require("@assets/images/logo.png")}
+        source={require("@assets/images/logo_2.png")}
         resizeMode="contain"
       />
     )
   };
+};
+
+const options = {
+  gestureEnabled: false,
+  headerBackTitleVisible: false,
+  transitionSpec: {
+    open: {
+      animation: "timing",
+      config: { duration: 400, easing: Easing.inOut(Easing.ease) }
+    },
+    close: {
+      animation: "timing",
+      config: { duration: 400, easing: Easing.inOut(Easing.ease) }
+    }
+  },
+  cardStyleInterpolator: ({ current: { progress } }) => {
+    return {
+      cardStyle: {
+        opacity: progress
+      }
+    };
+  }
 };
