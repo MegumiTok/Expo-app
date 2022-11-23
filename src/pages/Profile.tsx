@@ -19,20 +19,6 @@ import ProfileTabView from "@components/ProfileTabView";
 // type-------------
 import type { CreatorTabScreenProps } from "@models/NavTypes";
 
-//get the Size of component
-// export const useComponentHeight = () => {
-//   const [topHeight, setHeight] = useState(0);
-
-//   const onLayout: ComponentProps<typeof View>["onLayout"] = useCallback(
-//     (e: LayoutChangeEvent) => {
-//       setHeight(e.nativeEvent.layout.height);
-//     },
-//     []
-//   );
-
-//   return [topHeight, onLayout]; //分かりやすくするためにheightからtopHeightに名前変更
-// };
-
 export const Profile = ({
   route,
   navigation
