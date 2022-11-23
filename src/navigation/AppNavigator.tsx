@@ -201,6 +201,7 @@ const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
 };
 
 const options = {
+  header: () => null,
   gestureEnabled: false,
   headerBackTitleVisible: false,
   transitionSpec: {

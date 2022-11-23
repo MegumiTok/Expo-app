@@ -2,7 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 
 import { Text, TouchableOpacity } from "react-native";
-
+import Constants from "expo-constants";
 export const GoBack = () => {
   const navigation = useNavigation();
   return (
@@ -14,7 +14,7 @@ export const GoBack = () => {
         alignItems: "center",
         padding: 8,
         position: "absolute",
-        top: 20,
+        top: Constants.statusBarHeight,
         left: 20,
         zIndex: 2
       }}
