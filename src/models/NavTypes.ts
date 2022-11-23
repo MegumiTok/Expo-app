@@ -91,3 +91,8 @@ export type CreatorTabScreenProps<T extends keyof CreatorTabParamList> =
     BottomTabScreenProps<CreatorTabParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
+
+export type SinglePostProps = NativeStackScreenProps<
+  RootStackParamList,
+  Routes.SinglePost
+>;

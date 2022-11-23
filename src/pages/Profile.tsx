@@ -25,7 +25,7 @@ export const Profile = ({
 }: CreatorTabScreenProps<"Profile">) => {
   const { item } = route.params;
   const [topHeight, onLayout] = useComponentHeight(); //💚 headerのサイズ取得
-  console.log(Constants.statusBarHeight);
+  // console.log(Constants.statusBarHeight);
   return (
     <View flex={1} paddingTop={STATUS_BAR_HEIGHT}>
       <GoBack />

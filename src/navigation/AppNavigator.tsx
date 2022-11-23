@@ -20,6 +20,7 @@ import Menu from "@pages/Menu";
 
 // sub page---------------------------------------
 import { Profile } from "@pages/Profile";
+import SinglePostPage from "@pages/SinglePostPage";
 //data
 import MenuList from "@assets/data/MenuList";
 
@@ -131,6 +132,13 @@ const CreatorScreens = () => {
         name={Routes.Profile}
         component={Profile}
         options={() => options}
+      />
+      <Stack.Screen
+        name={Routes.SinglePost}
+        component={SinglePostPage}
+        options={{
+          headerShown: false
+        }}
       />
     </Stack.Navigator>
   );

@@ -32,9 +32,8 @@ export const PostsThumbnail: FC<Props> = ({ post }) => {
     <Pressable
       style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
       onPress={() => {
-        // setOpacity(0);
-        // navigation.navigate("SinglePost", { postId });
-        null;
+        setOpacity(0);
+        navigation.navigate("SinglePost", { postId });
       }}
     >
       <View
