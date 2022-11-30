@@ -32,11 +32,10 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
           <BorderGradient width={47} height={47} stroke={6} />
           <TouchableWithoutFeedback
             onPress={() =>
-              //   navigation.navigate("CreatorTab", {
-              //     screen: "Profile",
-              //     params: { item }
-              //   })
-              null
+              navigation.navigate("CreatorTab", {
+                screen: "Profile",
+                params: { item }
+              })
             }
           >
             <AvatarImage source={{ uri: item.creatorPhoto }} />

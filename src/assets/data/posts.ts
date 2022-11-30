@@ -8,7 +8,7 @@ export const posts = [
     date: "",
     genre: "neko",
     comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, officiis at. Fugit, mollitia, sunt explicabo veritatis ",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, officiis at. Fugit, mollitia, sunt explicabo veritatisLorem ipsum dolor sit amet consectetur adipisicing elit. Cum, officiis at. Fugit, mollitia, sunt explicabo veritatis Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, officiis at. Fugit, mollitia, sunt explicabo veritatis Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, officiis at. Fugit, mollitia, sunt explicabo veritatis s at. Fugit, mollitia, sunt explicabo veritatis Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, officiis at. Fugit, mollitia, sunt explicabo veritatis",
     // postedImage: string | [],
     postedImage:
       "https://images.freeimages.com/images/large-previews/df6/free-image-for-your-seo-blog-or-web-marketing-website-1636060.jpg", //一枚投稿のみ

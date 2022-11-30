@@ -7,7 +7,7 @@ import type { FeedProps } from "@models/NavTypes";
 
 // import { ReactionButtons } from "@components/templates/ReactionButtons";
 //compsーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-import ReadContinu from "./ReadContinu";
+import ReadContinue from "./ReadContinue";
 
 export const FeedPostFooter = ({ item }: FeedProps) => {
   return (
@@ -21,7 +21,7 @@ export const FeedPostFooter = ({ item }: FeedProps) => {
         {/* <SavedButtonAnimated /> */}
       </View>
       <View style={{ paddingHorizontal: 15, paddingBottom: 15 }}>
-        <ReadContinu section={item} />
+        <ReadContinue section={item} />
       </View>
     </>
   );

@@ -1,7 +1,8 @@
 import { GoBack } from "@components/styles/button";
 import { View, Text } from "native-base";
-import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
+// import { StatusBar } from "expo-status-bar";
+import { StatusBar } from "react-native";
+
 //const---------------------------------
 import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "@components/const";
 //styles------------------------------------------------
@@ -26,8 +27,10 @@ export const Profile = ({
   const { item } = route.params;
   const [topHeight, onLayout] = useComponentHeight(); //💚 headerのサイズ取得
   // console.log(Constants.statusBarHeight);
+  console.log(STATUS_BAR_HEIGHT);
   return (
     <View flex={1} paddingTop={STATUS_BAR_HEIGHT}>
+      <StatusBar animated={true} hidden={false} />
       <GoBack />
       <HeaderWrapper onLayout={onLayout}>
         <View

@@ -130,6 +130,13 @@ const FeedScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen name={Routes.Feed} component={Feed} />
+      <Stack.Screen
+        name={Routes.SinglePost}
+        component={SinglePostPage}
+        options={{
+          headerShown: false
+        }}
+      />
     </Stack.Navigator>
   );
 };
