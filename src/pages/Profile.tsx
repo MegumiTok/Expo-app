@@ -17,6 +17,7 @@ import { posts } from "@assets/data/posts";
 import { useComponentHeight } from "@hooks/useComponentHeight";
 //comps---------------
 import ProfileTabView from "@components/ProfileTabView";
+import BtnForCreatorsList from "@components/BtnForCreatorsList";
 // type-------------
 import type { CreatorTabScreenProps } from "@models/NavTypes";
 
@@ -26,12 +27,13 @@ export const Profile = ({
 }: CreatorTabScreenProps<"Profile">) => {
   const { item } = route.params;
   const [topHeight, onLayout] = useComponentHeight(); //💚 headerのサイズ取得
-  // console.log(Constants.statusBarHeight);
-  console.log(STATUS_BAR_HEIGHT);
+
+  // console.log(STATUS_BAR_HEIGHT);
   return (
     <View flex={1} paddingTop={STATUS_BAR_HEIGHT}>
       <StatusBar animated={true} hidden={false} />
       <GoBack />
+      <BtnForCreatorsList />
       <HeaderWrapper onLayout={onLayout}>
         <View
           style={{
