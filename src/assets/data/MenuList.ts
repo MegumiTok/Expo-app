@@ -3,6 +3,8 @@
 // import EditProfilePage from "@components/pages/EditProfilePage";
 // import LogoutPage from "@components/pages/authPage/LogoutPage";
 import Test from "@components/Test";
+import { AniOne } from "@private/AniOne";
+import { AniTwo } from "@private/AniTwo";
 
 export const MenuList = [
   {
@@ -10,7 +12,19 @@ export const MenuList = [
     label: "Test",
     component: Test,
     options: { headerShown: false }
+  },
+  {
+    name: "AniOne",
+    label: "AniOne",
+    component: AniOne,
+    options: { headerShown: false }
   }
+  // {
+  //   name: "AniTwo",
+  //   label: "AniTwo",
+  //   component: AniTwo,
+  //   options: { headerShown: false }
+  // }
   //   {
   //     name: "LogoutPage",
   //     label: "LogoutPage",

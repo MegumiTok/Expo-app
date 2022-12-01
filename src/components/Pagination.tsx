@@ -2,52 +2,44 @@ import type { ViewStyle } from "react-native";
 import { StyleSheet, View, Animated } from "react-native";
 
 export interface ScalingDotProps {
-  section: Array<any>;
-  data?: Array<any>;
+  dots: Array<any>;
   scrollX: Animated.Value;
   containerStyle?: ViewStyle;
   inActiveDotOpacity?: number;
-  inActiveDotColor?: string;
   activeDotScale?: number;
-  activeDotColor?: string;
 }
 import { creators } from "@assets/data/creators";
 //style-------------------------------------------
 import { Colors } from "@components/styles/theme/Colors";
-import { SCREEN_WIDTH } from "@components/styles/theme/layout";
-const ITEM_SIZE = SCREEN_WIDTH * 0.72;
-const DOT_SIZE = SCREEN_WIDTH / creators.length - 8 * 2; //アイテムの数に応じてドットサイズを変えるようにした
+import { SCREEN_WIDTH, SPACING } from "@components/styles/theme/layout";
+import { ITEM_SIZE } from "@pages/CreatorList";
 
 export const Pagination = ({
   scrollX,
-  section,
-  data,
-
-  //   dotStyle,
-  containerStyle,
-  inActiveDotOpacity,
-  inActiveDotColor,
-  activeDotScale,
-  activeDotColor
+  dots,
+  inActiveDotOpacity, //もしpropsで値を渡したかったらこのようにする
+  activeDotScale // 学習のため、使っていないが残しておく
 }: ScalingDotProps) => {
   const defaultProps = {
-    inActiveDotColor: inActiveDotColor || "#00000070",
-    activeDotColor: activeDotColor || Colors.primary.general,
+    inActiveDotColor: "#00000070",
+    activeDotColor: Colors.primary.general,
     animationType: "scale",
     inActiveDotOpacity: inActiveDotOpacity || 0.5,
     activeDotScale: activeDotScale || 1.5
   };
-
+  console.log("DOT_SIZEは", DOT_SIZE);
+  console.log("SCREEN_WIDTH", SCREEN_WIDTH);
   return (
     <View style={styles.pagination}>
-      {/* {section ? section : section=data} */}
-      {section.map((_, index: number) => {
+      {dots.map((_, index: number) => {
+        // console.log(index);
+        // console.log("長さ", creators.length);
         const inputRange = [
           (index - 1) * ITEM_SIZE,
           index * ITEM_SIZE,
           (index + 1) * ITEM_SIZE
         ];
-        const colour = scrollX.interpolate({
+        const color = scrollX.interpolate({
           inputRange,
           outputRange: [
             defaultProps.inActiveDotColor,
@@ -58,7 +50,7 @@ export const Pagination = ({
         });
 
         const scale = scrollX.interpolate({
-          inputRange: inputRange,
+          inputRange,
           outputRange: [1, defaultProps.activeDotScale, 1],
           extrapolate: "clamp"
         });
@@ -79,17 +71,20 @@ export const Pagination = ({
               { opacity },
               { transform: [{ scale }] },
               //   dotStyle,
-              { backgroundColor: colour }
+              { backgroundColor: color }
             ]}
           />
         );
       })}
-      {/* {console.log(scrollX)} */}
+      {/* {console.log("scrollXは", scrollX)} */}
     </View>
   );
 };
 
 export default Pagination;
+
+const num = creators.length;
+const DOT_SIZE = (SCREEN_WIDTH - SPACING * 2) / (2 * num); //アイテムの数に応じてドットサイズを変えるようにした
 
 const styles = StyleSheet.create({
   dotStyle: {
@@ -101,10 +96,9 @@ const styles = StyleSheet.create({
 
   pagination: {
     alignSelf: "center",
+    // backgroundColor: "tomato",
     flexDirection: "row",
-    // height: DOT_SIZE,
     position: "absolute",
     top: 50
-    // paddingTop: 50,
   }
 });
