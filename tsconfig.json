@@ -1,6 +1,30 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules without default export
+    "jsx": "react-native",
+    // "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "moduleResolution": "node", // Specify module resolution strategy
+    "noEmit": true, // not emit outputs
+    "target": "esnext", // Specify ECMAScript target version
+    "baseUrl": ".",
+    // "baseUrl": "src",//とするとフォルダ移動してもファイルの位置を書き換えなくて済むようになるので便利かも
+    // create paths to our futur modules
+    "paths": {
+      "@models/*": ["src/models/*"],
+      "@functions/*": ["src/functions/*"],
+      // "@redux/*": ["src/redux/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@private/*": ["src/private/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@pages/*": ["src/pages/*"],
+    }
+  },
+  "include": ["./src/**/*", "App.tsx", "db.json"] //App.tsxの場所がsrc/にいるときは変更必要。
 }

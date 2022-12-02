@@ -1,23 +1,29 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    "react-native/react-native": true
   },
   extends: [
     // Remember, "rules" always “wins” over "extends"
     // 順番は大事なので下手に変えないように
     // 共有設定間で設定ルールの値が衝突したら、後に記述されたものが先に記述されたものを 上書きする
     // pluginsと両方記述することで機能する
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
 
     "plugin:react/recommended",
-    // 'standard-with-typescript',
+    "@react-native-community",
 
-    "plugin:import/errors",
-    "plugin:import/warnings",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+
+    "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier" //prettier　は一番最後に書く
+
+    "plugin:react-native/all",
+    "prettier" // 競合避けるため prettier は最後に読み込み
   ],
   overrides: [],
   parser: "@typescript-eslint/parser",
@@ -30,15 +36,29 @@ module.exports = {
       jsx: true
     }
   },
-  plugins: ["@typescript-eslint", "import", "jsx-a11y", "react", "react-hooks"],
+  plugins: [
+    "@typescript-eslint",
+    "import",
+    "jsx-a11y",
+    "react-native",
+    "react-hooks"
+  ],
   root: true,
   settings: {
     //追加
     react: {
       version: "detect"
+    },
+    // 以下拡張子のモジュールのインポートでエラー出ないように設定
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "babel-module": {} //　eslint-import-resolver-babel-moduleを参考に足してみたが中身はなんだろう
     }
   },
   rules: {
+    // "react/prop-types": "off",
     quotes: [
       "error",
       "double",

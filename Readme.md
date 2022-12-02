@@ -7,7 +7,7 @@ The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
 | --- | --- |
 | :white_check_mark:| 小さな修正など完了、特にエラーなし|
 | :wrench: | 修正中/作業中 | 
-| :tada: |  | 
+| :tada: | 大きめの修正完了 | 
 
 # 便利コマンド
 
@@ -34,6 +34,20 @@ git checkout -b <ブランチ名> //新しいブランチを作って同時に�
 ```sh
 console.log(typeof(something))　//ダンさんが教えてくれた望遠鏡
 watchman watch-del-all && rm -rf node_modules/ && yarn cache clean && yarn install && yarn start -- --reset-cache
+yarn add -D @types/styled-system  // 型対応
 ```
+# コメント
+高さに問題がある時もしかすると以下の出力結果が0になっているかもしれません。
+```js
+console.log(Constants.statusBarHeight);
+```
+その場合はreloadしてください。
+
+# main
+メインブランチ
+
+# dev
+作業中ブランチ
+
 # v1
 NativeBase docsから作られたアプリにeslintとprettierを加えただけのスッピンの状態
