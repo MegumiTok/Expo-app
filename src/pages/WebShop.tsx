@@ -87,7 +87,7 @@ export const WebShop = ({ navigation }: Props) => {
         onNavigationStateChange={setNavigationState}
         // source={{ uri: route.params.url }}
         source={{
-          uri: "https://github.com/sleepyshowdy"
+          uri: "https://github.com/MegumiTok"
         }}
         style={{ width: SCREEN_WIDTH }}
       />

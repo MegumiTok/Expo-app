@@ -9,15 +9,10 @@ import {
 } from "react-native";
 import { View } from "native-base";
 import { SharedElement } from "react-navigation-shared-element";
-import { useNavigation } from "@react-navigation/native";
-
 import Pagination from "@components/Pagination";
 
 import { SCREEN_WIDTH, SPACING } from "@components/styles/theme/layout";
 import { Colors } from "@components/styles/theme/Colors";
-
-//private-------------
-import { PraTwo } from "@private/PraTwo";
 
 export const ITEM_SIZE = SCREEN_WIDTH * 0.72;
 const EMPTY_ITEM_SIZE = (SCREEN_WIDTH - ITEM_SIZE) / 2; //コツ
@@ -27,13 +22,12 @@ import { creators } from "@assets/data/creators";
 import type { CreatorListProps } from "@models/NavTypes";
 import type { Creator } from "@models/AuthTypes";
 
-export const CreatorList = () => {
-  const { navigate } = useNavigation<CreatorListProps>();
+export const CreatorList = ({ navigation: { navigate } }) => {
+  // const { navigate } = useNavigation<CreatorListProps>();
   const scrollX = useRef(new Animated.Value(0)).current;
   return (
     <View flex={1} bg={"white"}>
       <Pagination scrollX={scrollX} dots={creators} />
-      {/* <PraTwo dots={creators} /> */}
       <Animated.FlatList
         data={creators}
         keyExtractor={(item) => item.creatorId} //ここのnullの可能性外したいので型指定でnullは不可

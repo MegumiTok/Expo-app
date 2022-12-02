@@ -27,8 +27,8 @@ export const Pagination = ({
     inActiveDotOpacity: inActiveDotOpacity || 0.5,
     activeDotScale: activeDotScale || 1.5
   };
-  console.log("DOT_SIZEは", DOT_SIZE);
-  console.log("SCREEN_WIDTH", SCREEN_WIDTH);
+  // console.log("DOT_SIZEは", DOT_SIZE);
+  // console.log("SCREEN_WIDTH", SCREEN_WIDTH);
   return (
     <View style={styles.pagination}>
       {dots.map((_, index: number) => {
@@ -84,13 +84,15 @@ export const Pagination = ({
 export default Pagination;
 
 const num = creators.length;
-const DOT_SIZE = (SCREEN_WIDTH - SPACING * 2) / (2 * num); //アイテムの数に応じてドットサイズを変えるようにした
-
+//アイテムの数に応じてドットサイズを変えるようにした
+const DOT_SIZE = (SCREEN_WIDTH - SPACING * 2) / (2 * num); //<-- (1)ドットの隙間がDOT_SIZE一つ分の場合
+// const DOT_SIZE = (2 * (SCREEN_WIDTH - SPACING * 2)) / (3 * num); //<-- (2)ドットの隙間がDOT_SIZE二分の一個の場合
 const styles = StyleSheet.create({
   dotStyle: {
     borderRadius: DOT_SIZE / 2,
     height: DOT_SIZE,
-    marginHorizontal: DOT_SIZE / 2,
+    marginHorizontal: DOT_SIZE / 2, //<-- (1)
+    // marginHorizontal: DOT_SIZE / 4, //<-- (2)
     width: DOT_SIZE
   },
 

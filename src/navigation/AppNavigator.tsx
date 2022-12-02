@@ -25,6 +25,9 @@ import WebShop from "@pages/WebShop";
 //data
 import MenuList from "@assets/data/MenuList";
 
+// private
+import { CreatorListPra } from "@private/CreatorListPra";
+
 //type--------------------------------------
 // import type {
 //   RootStackParamList,
