@@ -43,11 +43,18 @@ console.log(Constants.statusBarHeight);
 ```
 その場合はreloadしてください。
 
-# main
+#　ブランチ
+## main
 メインブランチ
 
-# dev
+## dev
 作業中ブランチ
 
-# v1
+## v1
 NativeBase docsから作られたアプリにeslintとprettierを加えただけのスッピンの状態
+
+## v2
+デザイン部分完了　(firebase、Redux追加前)
+
+## v3
+coming soon...!!
