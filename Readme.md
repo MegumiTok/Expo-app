@@ -57,4 +57,7 @@ NativeBase docsから作られたアプリにeslintとprettierを加えただけ
 デザイン部分完了　(firebase、Redux追加前)
 
 ## v3
-coming soon...!!
+firebaseのAuthentication部分を実装（SignupPage、LogoutPage、LoginPage）
+
+## v4
+Coming soon...!

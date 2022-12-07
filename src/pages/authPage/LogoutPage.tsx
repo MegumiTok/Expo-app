@@ -6,8 +6,6 @@ import { signOut } from "firebase/auth";
 import { auth } from "src/config/firebase";
 
 export const LogoutPage = () => {
-  //   const currentUser = useAppSelector(selectCurrentUser);
-  // const { logout } = useContext(AuthContext);
   return (
     <Center flex={1}>
       {/* <Text>{currentUser.userName}さん</Text> */}

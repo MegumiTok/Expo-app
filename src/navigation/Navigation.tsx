@@ -23,8 +23,6 @@ export const Navigation = () => {
         // });
         setActiveUser(user);
         console.log("User is signed in", user.uid);
-        console.log("User name", user.displayName);
-        console.log("User photo", user.photoURL);
       } else {
         setActiveUser(null);
         console.log("User is signed out");
