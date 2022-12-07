@@ -24,6 +24,7 @@
       "@navigation/*": ["src/navigation/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
+      // "@env": [".env"],
     }
   },
   "include": ["./src/**/*", "App.tsx", "db.json"] //App.tsxの場所がsrc/にいるときは変更必要。

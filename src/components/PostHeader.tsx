@@ -1,7 +1,7 @@
 import { TouchableWithoutFeedback } from "react-native";
 
 //const---------------------------------
-import { TEST_IMAGE } from "./const";
+import { TEST_IMAGE } from "../config/const";
 //styles-----------------------------------------
 import {
   ContainerHeader,

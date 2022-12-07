@@ -5,6 +5,7 @@
 import Test from "@components/Test";
 import { AniOne } from "@private/AniOne";
 import { AniTwo } from "@private/AniTwo";
+import LogoutPage from "@pages/authPage/LogoutPage";
 
 export const MenuList = [
   {
@@ -18,19 +19,19 @@ export const MenuList = [
     label: "AniOne",
     component: AniOne,
     options: { headerShown: false }
-  }
+  },
   // {
   //   name: "AniTwo",
   //   label: "AniTwo",
   //   component: AniTwo,
   //   options: { headerShown: false }
   // }
-  //   {
-  //     name: "LogoutPage",
-  //     label: "LogoutPage",
-  //     component: LogoutPage,
-  //     options: { headerShown: true }
-  //   },
+  {
+    name: "LogoutPage",
+    label: "LogoutPage",
+    component: LogoutPage,
+    options: { headerShown: true }
+  }
   //   {
   //     name: "EditProfilePage",
   //     label: "EditProfilePage",

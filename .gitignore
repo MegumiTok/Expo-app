@@ -14,3 +14,10 @@ web-build/
 
 # Private
 private/
+
+# Environment variables 
+.env
+
+eas.json
+
+process.env

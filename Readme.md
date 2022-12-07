@@ -13,8 +13,8 @@ The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
 
 expo-cliを使用
 ```sh
-expo start
-expo start -c　//キャッシュをクリアしてくれる
+npx expo start
+npx expo start -c　//キャッシュをクリアしてくれる
 ```
 treeコマンド
 ```sh
@@ -43,11 +43,21 @@ console.log(Constants.statusBarHeight);
 ```
 その場合はreloadしてください。
 
-# main
+#　ブランチ
+## main
 メインブランチ
 
-# dev
+## dev
 作業中ブランチ
 
-# v1
+## v1
 NativeBase docsから作られたアプリにeslintとprettierを加えただけのスッピンの状態
+
+## v2
+デザイン部分完了　(firebase、Redux追加前)
+
+## v3
+firebaseのAuthentication部分を実装（SignupPage、LogoutPage、LoginPage）
+
+## v4
+Coming soon...!

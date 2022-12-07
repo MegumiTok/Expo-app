@@ -45,6 +45,13 @@ export enum Routes {
   AddEvent = "AddEvent"
 }
 
+export enum AuthRoutes {
+  Login = "Login",
+  Signup = "Signup",
+  ForgotPassword = "ForgotPassword",
+  OnbordingPage = "OnbordingPage"
+}
+
 export type CreatorTabParamList = {
   CreatorList: undefined;
   Profile: { item: Creator };
@@ -75,6 +82,14 @@ export type RootStackParamList = {
   AddEvent: undefined;
 };
 
+export type AuthStackParamList = {
+  //ここはinterfaceだとエラーでた
+  OnbordingPage: undefined;
+  Login: undefined;
+  Signup: undefined;
+  ForgotPassword: undefined;
+};
+
 export type FeedProps = NativeStackScreenProps<RootStackParamList, Routes.Feed>;
 
 export type CreatorListProps = StackNavigationProp<
@@ -96,3 +111,17 @@ export type SinglePostProps = NativeStackScreenProps<
   RootStackParamList,
   Routes.SinglePost
 >;
+
+//auth-----------------------------------------------------------
+
+export type SignUpProps = NativeStackScreenProps<
+  AuthStackParamList,
+  AuthRoutes.Signup
+>;
+export type LogInProps = NativeStackScreenProps<
+  AuthStackParamList,
+  AuthRoutes.Login
+>;
+export interface ForgotPasswordProps {
+  navigation: NativeStackNavigationProp<AuthStackParamList, "ForgotPassword">;
+}

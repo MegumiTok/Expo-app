@@ -10,7 +10,6 @@ module.exports = {
     // 共有設定間で設定ルールの値が衝突したら、後に記述されたものが先に記述されたものを 上書きする
     // pluginsと両方記述することで機能する
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
 
     "plugin:react/recommended",
     "@react-native-community",
@@ -22,7 +21,7 @@ module.exports = {
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
 
-    "plugin:react-native/all",
+    // "plugin:react-native/all", //外してrulesの方で好みに合わせることにしました。
     "prettier" // 競合避けるため prettier は最後に読み込み
   ],
   overrides: [],
@@ -58,6 +57,11 @@ module.exports = {
     }
   },
   rules: {
+    //
+    // "off" or 0 - turn the rule off
+    // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+    // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+    //
     // "react/prop-types": "off",
     quotes: [
       "error",
@@ -73,7 +77,7 @@ module.exports = {
     // "@typescript-eslint/no-explicit-any": 0, //あとで２にするべき
     "@typescript-eslint/explicit-module-boundary-types": 0, // exportする関数の返り値の型の明記
     "@typescript-eslint/consistent-type-imports": 2, // importするときtypeと書くことが強制され可読性が上がる
-    "@typescript-eslint/no-var-requires": 0, // 👧require使うために足してみた
+    "@typescript-eslint/no-var-requires": 0, // require使うために足してみた
     "@typescript-eslint/no-unused-vars": [
       // インポートの際のファイル拡張子を記述するかを定義するルール。
       "error",
@@ -115,7 +119,7 @@ module.exports = {
       }
     ],
     "react/react-in-jsx-scope": "off", // JSX 記述を使用する場合に react モジュールを React としてインポートすることを強制する。新しい JSX 変換形式を用いる場合はインポートが不要になるためこの設定を無効化
-    // "react-native/no-unused-styles": 2, // 未使用のstyleを検知
+    "react-native/no-unused-styles": 2, // 未使用のstyleを検知
     // "react-native/split-platform-components": 2, //スタイルシートに関するカスタマイズ
     "react-native/no-inline-styles": 0, // スタイルシートに関するカスタマイズ
     "react-native/no-color-literals": 0, // スタイルシートに関するカスタマイズ

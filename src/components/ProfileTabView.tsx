@@ -9,7 +9,7 @@ import {
   SPACING_SQUARE_SIZE,
   SPACING
 } from "@components/styles/theme/layout";
-import { STATUS_BAR_HEIGHT } from "./const";
+import { STATUS_BAR_HEIGHT } from "../config/const";
 //pages---------------------------------------------------
 import Products from "@pages/Products";
 import Posts from "@pages/Posts";

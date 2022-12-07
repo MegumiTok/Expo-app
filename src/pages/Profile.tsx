@@ -4,7 +4,7 @@ import { View, Text } from "native-base";
 import { StatusBar } from "react-native";
 
 //const---------------------------------
-import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "@components/const";
+import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "src/config/const";
 //styles------------------------------------------------
 import {
   HeaderWrapper,
