@@ -27,17 +27,7 @@ import Constants from "expo-constants";
 import { auth, db } from "src/config/firebase";
 import { ALL_USERS } from "src/config/const";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-  Timestamp
-} from "firebase/firestore";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 
 export const SignupPage = ({ navigation }: SignUpProps) => {
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
