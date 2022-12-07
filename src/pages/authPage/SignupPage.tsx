@@ -17,7 +17,7 @@ import { SPACING } from "@components/styles/theme/layout";
 //type--------------------------------
 import type { SignUpProps } from "@models/NavTypes";
 import { AuthRoutes } from "@models/NavTypes";
-import { Register } from "@models/AuthTypes";
+import type { Register } from "@models/AuthTypes";
 // import useUser from "@modules/context/hooks/useUser";
 
 // firebase--------------------------
