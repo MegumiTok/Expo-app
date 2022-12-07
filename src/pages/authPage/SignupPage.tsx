@@ -21,6 +21,7 @@ import { Register } from "@models/AuthTypes";
 // import useUser from "@modules/context/hooks/useUser";
 
 // firebase--------------------------
+import Constants from "expo-constants";
 import { auth, db } from "src/config/firebase";
 import { ALL_USERS } from "src/config/const";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -50,8 +51,6 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
 
   const onSubmit = async (data: Register) => {
     _inputStrictCheck(data);
-
-    console.log(data, "データ");
     if (canSave) {
       try {
         setAddRequestStatus("pending");
@@ -70,6 +69,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
         const { email, password, userName, userFlg } = resisterData;
 
         console.log("登録データ", resisterData);
+        console.log("apiKeyは", Constants.manifest.extra.apiKey);
 
         const userRef = doc(db, ALL_USERS, userName); //名前は変更不可にする
 

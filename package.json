@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@expo/metro-config": "^0.5.1",
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/bottom-tabs": "^6.4.1",
     "@react-navigation/material-bottom-tabs": "^6.2.5",
     "@react-navigation/material-top-tabs": "^6.3.1",
@@ -28,7 +29,6 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "dotenv": "^16.0.3",
     "expo": "^47.0.0",
-    "expo-cli": "^6.0.8",
     "expo-constants": "^14.0.2",
     "expo-splash-screen": "^0.17.5",
     "expo-status-bar": "~1.4.2",
