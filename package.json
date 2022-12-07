@@ -39,6 +39,7 @@
     "react-dom": "18.1.0",
     "react-hook-form": "^7.40.0",
     "react-native": "0.70.5",
+    "react-native-dotenv": "^3.4.2",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-pager-view": "6.0.1",
     "react-native-paper": "^4.12.5",
