@@ -20,26 +20,26 @@ import { getReactNativePersistence } from "firebase/auth/react-native";
 
 import { getStorage } from "firebase/storage";
 
-import {
-  API_KEY,
-  AUTH_DOMAIN,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APP_ID,
-  MEASUREMENT_ID
-} from "@env";
+// import {
+//   API_KEY,
+//   AUTH_DOMAIN,
+//   PROJECT_ID,
+//   STORAGE_BUCKET,
+//   MESSAGING_SENDER_ID,
+//   APP_ID,
+//   MEASUREMENT_ID
+// } from "@env";
 
-const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID,
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  measurementId: MEASUREMENT_ID
-};
+// const firebaseConfig = {
+//   apiKey: API_KEY,
+//   authDomain: AUTH_DOMAIN,
+//   projectId: PROJECT_ID,
+//   storageBucket: STORAGE_BUCKET,
+//   messagingSenderId: MESSAGING_SENDER_ID,
+//   appId: APP_ID,
+//   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//   measurementId: MEASUREMENT_ID
+// };
 
 // const firebaseConfig = {
 //   apiKey: Constants.manifest?.extra?.apiKey,
@@ -61,6 +61,16 @@ const firebaseConfig = {
 //   appId: process.env.APP_ID,
 //   measurementId: process.env.MEASUREMENT_ID
 // };
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBbxgT0JPTuFcsJ5j0Ei9zi_RuNbVPftkw",
+  authDomain: "expo-app-v1.firebaseapp.com",
+  projectId: "expo-app-v1",
+  storageBucket: "expo-app-v1.appspot.com",
+  messagingSenderId: "101103478402",
+  appId: "1:101103478402:web:af6a87e4405b54cf5fb69b",
+  measurementId: "G-P92J2XYT5E"
+};
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);

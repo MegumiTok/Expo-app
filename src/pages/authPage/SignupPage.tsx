@@ -22,15 +22,7 @@ import { Register } from "@models/AuthTypes";
 
 // firebase--------------------------
 
-import {
-  API_KEY,
-  AUTH_DOMAIN,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APP_ID,
-  MEASUREMENT_ID
-} from "@env";
+// import { API_KEY } from "@env";
 import Constants from "expo-constants";
 import { auth, db } from "src/config/firebase";
 import { ALL_USERS } from "src/config/const";
@@ -79,7 +71,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
         const { email, password, userName, userFlg } = resisterData;
 
         console.log("登録データ", resisterData);
-        console.log("apiKeyはkore", API_KEY);
+        //console.log("apiKeyはkore", API_KEY);// console.logでもエラーだとここで認証失敗する
 
         const userRef = doc(db, ALL_USERS, userName); //名前は変更不可にする
 
