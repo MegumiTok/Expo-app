@@ -13,8 +13,8 @@ The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
 
 expo-cliを使用
 ```sh
-expo start
-expo start -c　//キャッシュをクリアしてくれる
+npx expo start
+npx expo start -c　//キャッシュをクリアしてくれる
 ```
 treeコマンド
 ```sh
