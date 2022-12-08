@@ -22,6 +22,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
 
     // "plugin:react-native/all", //外してrulesの方で好みに合わせることにしました。
+
     "prettier" // 競合避けるため prettier は最後に読み込み
   ],
   overrides: [],
@@ -134,7 +135,8 @@ module.exports = {
     "import/no-named-as-default-member": 0,
     "import/no-named-as-default": 0,
     "import/no-unused-modules": 0,
-    "import/no-deprecated": 0,
+    // "import/no-deprecated": 2,
+    "import/no-duplicates": ["error", { considerQueryString: true }],
     "comma-dangle": 0
   }
 };

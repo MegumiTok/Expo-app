@@ -30,6 +30,11 @@ git branch -d <ブランチ名>　//--deleteオプション  指定したブラ�
 git checkout feature　//Switching Branches
 git checkout -b <ブランチ名> //新しいブランチを作って同時に切り替えてくれる
 ```
+Install Types for Packages
+>`@types/` prefix 
+```
+yarn add @types/react-transition-group
+```
 その他
 ```sh
 console.log(typeof(something))　//ダンさんが教えてくれた望遠鏡

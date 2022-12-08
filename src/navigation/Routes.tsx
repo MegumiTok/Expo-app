@@ -43,8 +43,6 @@ export const Routes = () => {
   return (
     <SafeAreaProvider>
       {user ? <AppNavigator /> : <AuthNavigator />}
-
-      {/* <AppNavigator /> */}
     </SafeAreaProvider>
   );
 };

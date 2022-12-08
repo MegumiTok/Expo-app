@@ -6,6 +6,7 @@ import Test from "@components/Test";
 import { AniOne } from "@private/AniOne";
 import { AniTwo } from "@private/AniTwo";
 import LogoutPage from "@pages/authPage/LogoutPage";
+import AddPostPage from "@pages/AddPostPage";
 
 export const MenuList = [
   {
@@ -30,6 +31,12 @@ export const MenuList = [
     name: "LogoutPage",
     label: "LogoutPage",
     component: LogoutPage,
+    options: { headerShown: true }
+  },
+  {
+    name: "AddPostPage",
+    label: "AddPostPage",
+    component: AddPostPage,
     options: { headerShown: true }
   }
   //   {
