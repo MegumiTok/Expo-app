@@ -7,7 +7,6 @@ import {
   Text,
   View,
   HStack,
-  VStack,
   Icon,
   Button,
   ScrollView
@@ -23,8 +22,9 @@ import Modal from "react-native-modal";
 import { useForm, Controller } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 //firebase------------------------------------------------------------
-import { serverTimestamp, doc, setDoc } from "firebase/firestore";
-import { postsColRef } from "src/config/firebase";
+import { serverTimestamp, doc, setDoc, addDoc } from "firebase/firestore";
+import { postsColRef, db } from "src/config/firebase";
+import { CREATORS_POSTS } from "src/config/const";
 //Context--------------------------------------------------------
 import useUser from "@hooks/useUser";
 
@@ -60,7 +60,7 @@ export const AddPostPage = () => {
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
-
+  const { user } = useUser();
   //   const genres = useAppSelector((state) => state.genre);
   //   const items: ItemType[] = genres;
 
@@ -88,8 +88,6 @@ export const AddPostPage = () => {
     formState: { errors }
   } = useForm<FormInput>();
 
-  const { user } = useUser();
-
   //追加すべき？（画像登録処理があるため）
   // const postStatus = useAppSelector((state) => state.posts.status);
   // const postError = useAppSelector((state) => state.posts.error);
@@ -110,7 +108,7 @@ export const AddPostPage = () => {
         aspect: [5, 4],
         quality: 0.0
       });
-      console.log(result); //💚ログ出し中
+      console.log("ログ出し中", result);
       if (!result.canceled) {
         setImageData(result);
         // const { url } = await PickImage.uploadImage(
@@ -141,12 +139,15 @@ export const AddPostPage = () => {
           `postImages/${user.displayName}`,
           "postImage"
         );
+
+        Alert.alert("Storageに画像を追加しました。");
+
         const postedData = {
           creatorName: user.displayName,
           creatorPhoto: user.photoURL,
           date: serverTimestamp(),
-          genre: data.genre, //<--
-          comment: data.comment, //<--
+          genre: data.genre,
+          comment: data.comment,
           postedImage: filename,
           imageW: imageData.width,
           imageH: imageData.height,
@@ -158,23 +159,26 @@ export const AddPostPage = () => {
             clap: 0,
             surprise: 0
           },
-          product: data.product || false, //<--
-          creatorId: user.uid, //userの方がAuthではなくfirebaseのUserTypeを使うべきかも
+          product: data.product || false,
+          creatorId: user.uid,
           postId: uuid.v4()
         } as Post;
         console.log("postedDataは:", postedData);
         try {
+          //When you use set() to create a document, you must specify an ID for the document to create.
+          //In some cases, it can be useful to create a document reference with an auto-generated ID, then use the reference later. For this use case, you can call doc():
           const postRef = doc(postsColRef);
-          await setDoc(postRef, postedData);
-          return postedData;
-        } catch (error) {
-          Alert.alert("画像追加できませんでした。");
-        }
-        // const resultAction = await dispatch(createNewPost(postedData));
-        // unwrapResult(resultAction);
+          await setDoc(postRef, postedData); //<--- ここがうまく行ってない
+          // const postRef = await addDoc(postsColRef, postedData);
+          // console.log("Document written with ID: ", postRef.id);
+          // return postedData;
 
-        //----------------------------------------------------------------------
-        Alert.alert("投稿しました。");
+          // const userRef = doc(db, CREATORS_POSTS, postedData.postId);
+          // await setDoc(userRef, postedData);//<--- ここがうまく行ってない
+        } catch (error) {
+          Alert.alert("Firestoreに保存を失敗しました");
+          console.log("Firestoreに保存を失敗しました", error); //<-- これでエラー内容確認
+        }
       } catch (error) {
         Alert.alert("エラーです。もう一度お願いします。");
       } finally {
@@ -185,9 +189,6 @@ export const AddPostPage = () => {
   };
 
   return (
-    // <KeyboardAvoidingView
-    //   behavior={Platform.OS === "ios" ? "padding" : "height"}
-    // >
     <ScrollView>
       {/* <Spacer /> */}
       <TouchableWithoutFeedback
@@ -285,7 +286,7 @@ export const AddPostPage = () => {
           </HStack>
 
           {/* 投稿ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */}
-          {/* <Spacer /> */}
+
           <View width={"100%"} mt={5}>
             <OutlineButton
               onPress={handleSubmit(onPressSaveButton)}
@@ -296,7 +297,6 @@ export const AddPostPage = () => {
         </Center>
       </TouchableWithoutFeedback>
     </ScrollView>
-    // </KeyboardAvoidingView>
   );
 };
 
