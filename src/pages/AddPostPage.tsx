@@ -111,11 +111,6 @@ export const AddPostPage = () => {
       console.log("ログ出し中", result);
       if (!result.canceled) {
         setImageData(result);
-        // const { url } = await PickImage.uploadImage(
-        //   result.uri,
-        //   `images/${user?.uid}`,
-        //   "postImage"
-        // );
       }
     } catch (error) {
       Alert.alert("エラーで投稿できませんでした");
@@ -134,7 +129,7 @@ export const AddPostPage = () => {
         }
 
         setAddRequestStatus("pending");
-        const { filename } = await PickImage.uploadImage(
+        const { fileName } = await PickImage.uploadImage(
           imageData.uri,
           `postImages/${user.displayName}`,
           "postImage"
@@ -148,7 +143,7 @@ export const AddPostPage = () => {
           date: serverTimestamp(),
           genre: data.genre,
           comment: data.comment,
-          postedImage: filename,
+          postedImage: fileName,
           imageW: imageData.width,
           imageH: imageData.height,
           isLiked: false,
@@ -168,13 +163,11 @@ export const AddPostPage = () => {
           //When you use set() to create a document, you must specify an ID for the document to create.
           //In some cases, it can be useful to create a document reference with an auto-generated ID, then use the reference later. For this use case, you can call doc():
           const postRef = doc(postsColRef);
-          await setDoc(postRef, postedData); //<--- ここがうまく行ってない
-          // const postRef = await addDoc(postsColRef, postedData);
+          await setDoc(postRef, postedData);
           // console.log("Document written with ID: ", postRef.id);
-          // return postedData;
 
           // const userRef = doc(db, CREATORS_POSTS, postedData.postId);
-          // await setDoc(userRef, postedData);//<--- ここがうまく行ってない
+          // await setDoc(userRef, postedData);
         } catch (error) {
           Alert.alert("Firestoreに保存を失敗しました");
           console.log("Firestoreに保存を失敗しました", error); //<-- これでエラー内容確認
