@@ -7,6 +7,7 @@ import { AniOne } from "@private/AniOne";
 import { AniTwo } from "@private/AniTwo";
 import LogoutPage from "@pages/authPage/LogoutPage";
 import AddPostPage from "@pages/AddPostPage";
+import TestTwo from "@private/TestTwo";
 
 export const MenuList = [
   {
@@ -37,6 +38,12 @@ export const MenuList = [
     name: "AddPostPage",
     label: "AddPostPage",
     component: AddPostPage,
+    options: { headerShown: true }
+  },
+  {
+    name: "TestTwo",
+    label: "TestTwo",
+    component: TestTwo,
     options: { headerShown: true }
   }
   //   {
