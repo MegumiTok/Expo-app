@@ -21,6 +21,8 @@ export interface Post {
   imageH: number;
   // documentID?: string;
   product: boolean; //追加
+
+  updatedAt?: any; //追加
 }
 
 // export interface AllPosts {

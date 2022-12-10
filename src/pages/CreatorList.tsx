@@ -19,25 +19,25 @@ import { LoadingView } from "@components/styles/LoadingView";
 export const ITEM_SIZE = SCREEN_WIDTH * 0.72;
 const EMPTY_ITEM_SIZE = (SCREEN_WIDTH - ITEM_SIZE) / 2; //コツ
 import { TEST_IMAGE } from "src/config/const";
-import { creators } from "@assets/data/creators"; //ローカルデータ
+// import { creators } from "@assets/data/creators"; //ローカルデータ
 // types ========================
 import type { CreatorListProps } from "@models/NavTypes";
 import type { Creator } from "@models/AuthTypes";
 
 // firebase----------------------------
 import { getDocs } from "firebase/firestore";
-import { postsColRef, allUsersColRef } from "src/config/firebase";
+import { allUsersColRef } from "src/config/firebase";
 
 export const CreatorList = ({ navigation: { navigate } }) => {
   // const { navigate } = useNavigation<CreatorListProps>();
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  const [posts, setPosts] = useState(null);
+  const [creators, setCreators] = useState(null);
   const [loading, setLoading] = useState(true);
 
   //useEffectいらない説もある
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchCreators = async () => {
       try {
         const list = [] as Creator[];
         const querySnapshot = await getDocs(allUsersColRef);
@@ -52,7 +52,7 @@ export const CreatorList = ({ navigation: { navigate } }) => {
             mainComment
           });
         });
-        setPosts(list);
+        setCreators(list);
         console.log("リスト", list);
 
         if (loading) {
@@ -64,7 +64,7 @@ export const CreatorList = ({ navigation: { navigate } }) => {
       }
     };
 
-    fetchPosts(); //async functionを使っているのでこのような書き方になる
+    fetchCreators(); //async functionを使っているのでこのような書き方になる
   }, [loading]); //🔴dependency array.を外したらuseEffectが永遠ループに入った
 
   return (
@@ -74,9 +74,9 @@ export const CreatorList = ({ navigation: { navigate } }) => {
         <LoadingView />
       ) : (
         <View flex={1} bg={"white"}>
-          <Pagination scrollX={scrollX} dots={posts} />
+          <Pagination scrollX={scrollX} dots={creators} />
           <Animated.FlatList
-            data={posts}
+            data={creators}
             keyExtractor={(item) => item.creatorId} //ここのnullの可能性外したいので型指定でnullは不可
             showsHorizontalScrollIndicator={false}
             horizontal

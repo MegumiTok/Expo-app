@@ -24,7 +24,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 //firebase------------------------------------------------------------
 import { serverTimestamp, doc, setDoc, addDoc } from "firebase/firestore";
 import { postsColRef, db } from "src/config/firebase";
-import { CREATORS_POSTS } from "src/config/const";
+import { CREATORS_POSTS, GENRES } from "src/config/const";
 //Context--------------------------------------------------------
 import useUser from "@hooks/useUser";
 
@@ -64,18 +64,7 @@ export const AddPostPage = () => {
   //   const genres = useAppSelector((state) => state.genre);
   //   const items: ItemType[] = genres;
 
-  const [items, setItems] = useState([
-    { label: "商品化アイテム", value: "商品化アイテム" },
-    { label: "ファッション", value: "ファッション" },
-    { label: "どうぶつ", value: "どうぶつ" },
-    { label: "食べ物", value: "食べ物" },
-    { label: "アニメ/マンガ", value: "アニメ/マンガ" },
-    { label: "ポップ", value: "ポップ" },
-    { label: "キャラクター", value: "キャラクター" },
-    { label: "LINEスタンプ", value: "LINEスタンプ" },
-    { label: "お知らせ", value: "お知らせ" },
-    { label: "フリージャンル", value: "フリージャンル" }
-  ]);
+  const [items, setItems] = useState(GENRES);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -146,7 +135,7 @@ export const AddPostPage = () => {
           date: serverTimestamp(),
           genre: data.genre,
           comment: data.comment,
-          postedImage: fileName,
+          postedImage: imageData?.uri,
           imageW: imageData?.width,
           imageH: imageData?.height,
           isLiked: false,
@@ -160,6 +149,7 @@ export const AddPostPage = () => {
           product: data.product || false,
           creatorId: user.uid,
           postId: randomId
+          // updatedAt
         } as Post;
         console.log("postedDataは:", postedData);
         try {
