@@ -137,6 +137,7 @@ module.exports = {
     "import/no-unused-modules": 0,
     // "import/no-deprecated": 2,
     "import/no-duplicates": ["error", { considerQueryString: true }],
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "react-hooks/exhaustive-deps": "warn" // <--- THIS IS THE NEW RULE
   }
 };

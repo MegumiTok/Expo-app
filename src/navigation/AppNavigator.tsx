@@ -70,7 +70,7 @@ const AppNavigator = () => {
         />
         <Tab.Screen
           name="CreatorTab"
-          component={Test}
+          component={CreatorScreens}
           options={{
             tabBarLabel: "Creator",
             tabBarIcon: ({ color }) => (

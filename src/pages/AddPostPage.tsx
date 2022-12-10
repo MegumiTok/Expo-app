@@ -128,11 +128,13 @@ export const AddPostPage = () => {
           return null;
         }
 
+        const randomId = uuid.v4();
+
         setAddRequestStatus("pending");
         const { fileName } = await PickImage.uploadImage(
           imageData.uri,
           `postImages/${user.displayName}`,
-          "postImage"
+          randomId //複数投稿があるので名前は変動型にすべき
         );
 
         Alert.alert("Storageに画像を追加しました。");
@@ -156,7 +158,7 @@ export const AddPostPage = () => {
           },
           product: data.product || false,
           creatorId: user.uid,
-          postId: uuid.v4()
+          postId: randomId
         } as Post;
         console.log("postedDataは:", postedData);
         try {

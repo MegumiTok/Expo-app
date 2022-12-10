@@ -1,11 +1,12 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   Text,
   StyleSheet,
   Image,
   Animated,
   Platform,
-  Pressable
+  Pressable,
+  Alert
 } from "react-native";
 import { View } from "native-base";
 import { SharedElement } from "react-navigation-shared-element";
@@ -22,9 +23,49 @@ import { creators } from "@assets/data/creators";
 import type { CreatorListProps } from "@models/NavTypes";
 import type { Creator } from "@models/AuthTypes";
 
+// firebase----------------------------
+import { getDocs } from "firebase/firestore";
+import { postsColRef } from "src/config/firebase";
+
 export const CreatorList = ({ navigation: { navigate } }) => {
   // const { navigate } = useNavigation<CreatorListProps>();
   const scrollX = useRef(new Animated.Value(0)).current;
+
+  const [posts, setPosts] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log("hello");
+
+    const fetchPosts = async () => {
+      try {
+        const list = [] as Creator[];
+        const querySnapshot = await getDocs(postsColRef);
+        querySnapshot.forEach((doc) => {
+          const { creatorId, creatorName, creatorPhoto, comment } = doc.data();
+
+          list.push({
+            creatorId,
+            creatorName,
+            creatorPhoto,
+            mainComment: comment
+          });
+        });
+        setPosts(list);
+        console.log("リスト", list);
+
+        if (loading) {
+          setLoading(false);
+        }
+      } catch (e) {
+        Alert.alert("fetchPostsに失敗しました。");
+        console.log("エラー:", e);
+      }
+    };
+
+    fetchPosts(); //async functionを使っているのでこのような書き方になる
+  }, [loading]);
+
   return (
     <View flex={1} bg={"white"}>
       <Pagination scrollX={scrollX} dots={creators} />
