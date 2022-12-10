@@ -1,4 +1,4 @@
-import { Text } from "native-base";
+import { Text, View } from "native-base";
 //npm i --save-dev @types/react-native-read-more-textをしたらエラー解決した
 
 import ReadMore from "react-native-read-more-text";
@@ -8,17 +8,17 @@ import basicStyles from "./styles/theme/basicStyleSheet";
 export const ReadContinue = ({ section }) => {
   const _renderTruncatedFooter = (handlePress: any) => {
     return (
-      <Text color="#76785F" marginTop={5} onPress={handlePress}>
-        もっと読む
-      </Text>
+      <View mt="5" color="#76785F">
+        <Text onPress={handlePress}>もっと読む</Text>
+      </View>
     );
   };
 
   const _renderRevealedFooter = (handlePress: any) => {
     return (
-      <Text color="#76785F" marginTop={5}>
-        たたむ
-      </Text>
+      <View mt="5" color="#76785F">
+        <Text onPress={handlePress}>たたむ</Text>
+      </View>
     );
   };
 
