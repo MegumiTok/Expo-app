@@ -36,37 +36,6 @@ export const CreatorList = ({ navigation: { navigate } }) => {
   const [loading, setLoading] = useState(true);
 
   //useEffectいらない説もある
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     try {
-  //       const list = [] as Creator[];
-  //       const querySnapshot = await getDocs(allUsersColRef);
-  //       querySnapshot.forEach((doc) => {
-  //         const { userId, userName, userPhoto, mainComment } = doc.data();
-
-  //         list.push({
-  //           creatorId: userId,
-  //           creatorName: userName,
-  //           // creatorPhoto: userPhoto,
-  //           creatorPhoto: userPhoto || TEST_IMAGE,
-  //           mainComment
-  //         });
-  //       });
-  //       setPosts(list);
-  //       console.log("リスト", list);
-
-  //       if (loading) {
-  //         setLoading(false);
-  //       }
-  //     } catch (e) {
-  //       Alert.alert("fetchPostsに失敗しました。");
-  //       console.log("エラー:", e);
-  //     }
-  //   };
-
-  //   fetchPosts(); //async functionを使っているのでこのような書き方になる
-  // }, [loading]);
-
   useEffect(() => {
     const fetchPosts = async () => {
       try {

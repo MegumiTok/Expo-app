@@ -72,9 +72,10 @@ export const EditProfilePage = () => {
     getUser();
   }, [user.displayName]);
 
-  const [imageData, setImageData] = useState<ImagePicker.ImageInfo>(
-    {} as ImagePicker.ImageInfo
-  );
+  //   const [imageData, setImageData] = useState<ImagePicker.ImageInfo>(
+  //     {} as ImagePicker.ImageInfo
+  //   );
+  const [imageData, setImageData] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
 
@@ -102,8 +103,11 @@ export const EditProfilePage = () => {
         quality: 0.0
       });
       console.log("ログ出し中", result);
+      console.log("ログ出し中", result.assets[0].uri);
       if (!result.canceled) {
-        setImageData(result);
+        const img = result.assets[0].uri;
+
+        setImageData(img);
       }
     } catch (error) {
       Alert.alert("エラーで投稿できませんでした");
@@ -112,8 +116,8 @@ export const EditProfilePage = () => {
 
   const canSave = Boolean(imageData) && addRequestStatus === "idle";
 
-  //アップロードされるImageのuri
-  const uploadImage = imageData.uri;
+  //   //アップロードされるImageのuri
+  //   const uploadImage = imageData.uri;
 
   const onPressSaveButton = async (data: FormInput) => {
     // console.log(data, "データ");
@@ -128,14 +132,14 @@ export const EditProfilePage = () => {
         console.log("user name", user?.displayName);
 
         const { filename } = await PickImage.uploadImage(
-          uploadImage, //uri
+          imageData, //uri
           // `userAvatar/${user.displayName}`, //path アバター写真は一個しかないので一段階削除
           "userAvatar", //path
           user?.displayName //fName
         );
         console.log("ファイル名", filename);
         const authInfo = {
-          userPhoto: uploadImage,
+          userPhoto: imageData,
           mainComment: data.mainComment,
           updatedAt: Timestamp.fromDate(new Date())
         } as Auth;
@@ -186,8 +190,8 @@ export const EditProfilePage = () => {
               <Circle size="100">
                 <ImageBackground
                   source={{
-                    uri: uploadImage
-                      ? uploadImage
+                    uri: imageData
+                      ? imageData
                       : userData?.userPhoto || TEST_IMAGE
                   }}
                   style={EditProfileStyle.photo}

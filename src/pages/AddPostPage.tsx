@@ -53,9 +53,9 @@ interface FormInput {
 }
 export const AddPostPage = () => {
   // const [postedImage, setPostedImage] = useState("");
-  const [imageData, setImageData] = useState<ImagePicker.ImageInfo>(
-    {} as ImagePicker.ImageInfo
-  );
+
+  const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
+
   const [open, setOpen] = useState<boolean>(false);
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
@@ -110,7 +110,8 @@ export const AddPostPage = () => {
       });
       console.log("ログ出し中", result);
       if (!result.canceled) {
-        setImageData(result);
+        const img = result.assets[0];
+        setImageData(img);
       }
     } catch (error) {
       Alert.alert("エラーで投稿できませんでした");
@@ -132,7 +133,7 @@ export const AddPostPage = () => {
 
         setAddRequestStatus("pending");
         const { fileName } = await PickImage.uploadImage(
-          imageData.uri,
+          imageData?.uri,
           `postImages/${user.displayName}`,
           randomId //複数投稿があるので名前は変動型にすべき
         );
@@ -146,8 +147,8 @@ export const AddPostPage = () => {
           genre: data.genre,
           comment: data.comment,
           postedImage: fileName,
-          imageW: imageData.width,
-          imageH: imageData.height,
+          imageW: imageData?.width,
+          imageH: imageData?.height,
           isLiked: false,
           reactions: {
             thumbsUp: 0,
@@ -201,7 +202,7 @@ export const AddPostPage = () => {
               style={{ position: "absolute", top: _width / 2 }}
               size="md"
             />
-            <PostImage source={{ uri: imageData.uri }} />
+            <PostImage source={{ uri: imageData?.uri }} />
           </PhotoWrapper>
           {/* コメント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
           <Button onPress={toggleModal}>コメントをかく</Button>
