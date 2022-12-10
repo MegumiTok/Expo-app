@@ -18,7 +18,7 @@ import { LoadingView } from "@components/styles/LoadingView";
 
 export const ITEM_SIZE = SCREEN_WIDTH * 0.72;
 const EMPTY_ITEM_SIZE = (SCREEN_WIDTH - ITEM_SIZE) / 2; //コツ
-
+import { TEST_IMAGE } from "src/config/const";
 import { creators } from "@assets/data/creators"; //ローカルデータ
 // types ========================
 import type { CreatorListProps } from "@models/NavTypes";
@@ -26,7 +26,7 @@ import type { Creator } from "@models/AuthTypes";
 
 // firebase----------------------------
 import { getDocs } from "firebase/firestore";
-import { postsColRef } from "src/config/firebase";
+import { postsColRef, allUsersColRef } from "src/config/firebase";
 
 export const CreatorList = ({ navigation: { navigate } }) => {
   // const { navigate } = useNavigation<CreatorListProps>();
@@ -35,19 +35,52 @@ export const CreatorList = ({ navigation: { navigate } }) => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //useEffectいらない説もある
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     try {
+  //       const list = [] as Creator[];
+  //       const querySnapshot = await getDocs(allUsersColRef);
+  //       querySnapshot.forEach((doc) => {
+  //         const { userId, userName, userPhoto, mainComment } = doc.data();
+
+  //         list.push({
+  //           creatorId: userId,
+  //           creatorName: userName,
+  //           // creatorPhoto: userPhoto,
+  //           creatorPhoto: userPhoto || TEST_IMAGE,
+  //           mainComment
+  //         });
+  //       });
+  //       setPosts(list);
+  //       console.log("リスト", list);
+
+  //       if (loading) {
+  //         setLoading(false);
+  //       }
+  //     } catch (e) {
+  //       Alert.alert("fetchPostsに失敗しました。");
+  //       console.log("エラー:", e);
+  //     }
+  //   };
+
+  //   fetchPosts(); //async functionを使っているのでこのような書き方になる
+  // }, [loading]);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const list = [] as Creator[];
-        const querySnapshot = await getDocs(postsColRef);
+        const querySnapshot = await getDocs(allUsersColRef);
         querySnapshot.forEach((doc) => {
-          const { creatorId, creatorName, creatorPhoto, comment } = doc.data();
+          const { userId, userName, userPhoto, mainComment } = doc.data();
 
           list.push({
-            creatorId,
-            creatorName,
-            creatorPhoto,
-            mainComment: comment
+            creatorId: userId,
+            creatorName: userName,
+            // creatorPhoto: userPhoto,
+            creatorPhoto: userPhoto || TEST_IMAGE,
+            mainComment
           });
         });
         setPosts(list);
@@ -63,7 +96,7 @@ export const CreatorList = ({ navigation: { navigate } }) => {
     };
 
     fetchPosts(); //async functionを使っているのでこのような書き方になる
-  }, [loading]);
+  }, [loading]); //🔴dependency array.を外したらuseEffectが永遠ループに入った
 
   return (
     //Viewで囲うとうまくいかない。<>だとok
@@ -72,7 +105,7 @@ export const CreatorList = ({ navigation: { navigate } }) => {
         <LoadingView />
       ) : (
         <View flex={1} bg={"white"}>
-          {/* <Pagination scrollX={scrollX} dots={posts} /> */}
+          <Pagination scrollX={scrollX} dots={posts} />
           <Animated.FlatList
             data={posts}
             keyExtractor={(item) => item.creatorId} //ここのnullの可能性外したいので型指定でnullは不可
@@ -150,7 +183,10 @@ export const CreatorList = ({ navigation: { navigate } }) => {
                         style={styles.posterImage} //これを足してやらないとimageが消える
                       >
                         <Image
-                          source={{ uri: item.creatorPhoto }}
+                          // source={{ uri: item.creatorPhoto }}
+                          source={{
+                            uri: item.creatorPhoto || TEST_IMAGE
+                          }}
                           style={styles.posterImage}
                         />
                       </SharedElement>
