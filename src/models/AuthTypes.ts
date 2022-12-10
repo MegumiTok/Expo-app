@@ -5,15 +5,15 @@ export type flg = "creator" | "general" | "stuff";
 export interface Auth {
   //all_usersのCollectionに入る情報
   //EditProfileページで最終的に全更新！
-  email: string | null; //setCurrentUserの都合でnull付けた
-  userName: string | null; //setCurrentUserの都合でnull付けた
-  userPhoto: string | null; //setCurrentUserの都合でnull付けた
-  userFlg: flg | null;
-
-  userId: string | null; //認証されたら付与
   createdAt: any; //型不明
+  email: string | null; //setCurrentUserの都合でnull
+  mainComment: string | null; //Creatorだけ登録
+  userFlg: flg | null;
+  userId: string | null; //認証されたら付与
+  userName: string | null; //setCurrentUserの都合でnull
+  userPhoto: string | null; //setCurrentUserの都合でnull
+
   updatedAt: any;
-  mainComment: string | null; //Creatroだけ登録
 }
 
 // export interface AuthProps {
