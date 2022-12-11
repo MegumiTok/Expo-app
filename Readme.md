@@ -64,5 +64,8 @@ NativeBase docsから作られたアプリにeslintとprettierを加えただけ
 ## v3
 firebaseのAuthentication部分を実装（SignupPage、LogoutPage、LoginPage）
 
+すべてをfirebaseベースで実装しようと思いましたがReduxで管理をしたくなったので途中でv4に切り替えてます。
+また随時v3ブランチに戻ってfirebaseでの実装をすすめようかな、と思います。
+
 ## v4
-Coming soon...!
+Reduxを実装していくブランチ

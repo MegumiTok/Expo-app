@@ -11,8 +11,8 @@ import {
   Button,
   ScrollView
 } from "native-base";
-import uuid from "react-native-uuid";
-import { TEST_IMAGE, CREATORS_POSTS, GENRES } from "src/config/const";
+
+import { CREATORS_POSTS, GENRES } from "src/config/const";
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -23,13 +23,12 @@ import Modal from "react-native-modal";
 import { useForm, Controller } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 //firebase------------------------------------------------------------
-import { serverTimestamp, doc, setDoc, addDoc } from "firebase/firestore";
-import { postsColRef, db } from "src/config/firebase";
+import { serverTimestamp, doc, setDoc } from "firebase/firestore";
+import { db } from "src/config/firebase";
 //Context--------------------------------------------------------
 import useUser from "@hooks/useUser";
 
 //type-----------------------------------------------------------------
-import type { ItemType } from "react-native-dropdown-picker";
 import type { Post } from "@models/PostTypes";
 
 //functions--------------------------------------------------------

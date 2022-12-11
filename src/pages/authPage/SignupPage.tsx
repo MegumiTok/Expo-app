@@ -24,21 +24,9 @@ import type { User } from "firebase/auth";
 
 // firebase--------------------------
 
-// import { API_KEY } from "@env";
-import Constants from "expo-constants";
-import { auth, db, allUsersColRef } from "src/config/firebase";
+import { auth, db } from "src/config/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-  Timestamp
-} from "firebase/firestore";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 
 export const SignupPage = ({ navigation }: SignUpProps) => {
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
