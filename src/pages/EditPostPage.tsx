@@ -8,9 +8,10 @@ import {
   TouchableWithoutFeedback,
   TextInput,
   Alert,
-  Image
+  Image,
+  StyleSheet
 } from "react-native";
-import { Text, Button, Center } from "native-base";
+import { Text, Button, Center, View, ScrollView } from "native-base";
 
 import { useForm, Controller } from "react-hook-form";
 import { LoadingView } from "@components/styles/LoadingView";
@@ -32,17 +33,10 @@ import { GENRES, CREATORS_POSTS } from "src/config/const";
 //style-------------------------------------------------------------------
 import { basicStyles } from "@components/styles/theme/basicStyleSheet";
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
+import { StyledTextInput } from "@components/styles/pageStyle/AddPostStyle";
 //types-----------------------------------------------------------
-
 import type { Post } from "@models/PostTypes";
-
 import type { FC } from "react";
-import type {
-  DropDownPickerProps,
-  ValueType,
-  ItemType
-} from "react-native-dropdown-picker";
-import Routes from "@navigation/Routes";
 
 interface FormInput {
   comment: string;
@@ -57,7 +51,7 @@ export const EditPostPage: FC<any> = ({ route }) => {
   //   const [value, setValue] = useState(null);
   //   const sizeItems = useMemo(() => getSizeItems(variants), [variants]);
   const [postData, setPostData] = useState<Post>();
-  const [loading, setLoading] = useState(false); //<----- true!!!
+  const [loading, setLoading] = useState(true); //<-- いらなかったが残しとく
 
   const [takasa, setTakasa] = useState<number>();
   const { item } = route.params;
@@ -97,67 +91,6 @@ export const EditPostPage: FC<any> = ({ route }) => {
     getPost();
   }, [item, loading]);
 
-  //   useEffect(() => {
-  //     const getPost = async () => {
-  //       try {
-  //         if (!item) {
-  //           return null;
-  //         }
-  //         console.log("postIdはこれ:", item.postId);
-  //         const q = query(postsColRef, where("postId", "==", item.postId)); //ドキュメントIDを参照して取ってくる方がスマートだとは思う
-
-  //         onSnapshot(q, (snapshot) => {
-  //           const post = [] as Post[];
-  //           snapshot.docs.forEach((doc) => {
-  //             // post.push({ ...doc.data() });
-  //             const {
-  //               creatorId,
-  //               creatorName,
-  //               creatorPhoto,
-  //               date,
-  //               genre,
-  //               comment,
-  //               postedImage,
-  //               reactions,
-  //               imageW,
-  //               imageH,
-  //               product
-  //             } = doc.data();
-  //             post.push({
-  //               postId: doc.id, //post更新時にpostIdをdocIdに合わせる仕様
-  //               creatorId,
-  //               creatorName,
-  //               creatorPhoto,
-  //               date,
-  //               genre,
-  //               comment,
-  //               postedImage,
-  //               reactions,
-  //               imageW,
-  //               imageH,
-  //               product
-  //             });
-  //           });
-  //           setPostData(post[0]);
-  //         });
-
-  //         const calculatedMaxH = Math.round(
-  //           (SCREEN_WIDTH * item.imageH) / item.imageW
-  //         ); //実際ポストされるのサイズに計算
-
-  //         const _takasa: number =
-  //           calculatedMaxH < PHOTO_HEIGHT ? calculatedMaxH : PHOTO_HEIGHT;
-
-  //         setTakasa(_takasa);
-
-  //         Alert.alert("Post情報取得に成功しました");
-  //       } catch (e) {
-  //         Alert.alert("Post情報取得に失敗しました。");
-  //         console.log("Post情報取得エラー:", e);
-  //       }
-  //     };
-  //     getPost();
-  //   }, [item]);
   const {
     control,
     handleSubmit,
@@ -229,78 +162,113 @@ export const EditPostPage: FC<any> = ({ route }) => {
       {loading ? (
         <LoadingView />
       ) : (
-        <TouchableWithoutFeedback
-          onPress={() => {
-            Keyboard.dismiss();
-          }}
-        >
-          <Center p={10} flex={1}>
-            <Image
-              style={{ width: SCREEN_WIDTH, height: takasa }}
-              source={{ uri: item.postedImage }}
-              resizeMode="contain"
-            />
-            <Controller
-              defaultValue=""
-              control={control}
-              name="comment"
-              rules={{
-                required: true
-              }}
-              render={({ field: { onChange, value, onBlur } }) => (
-                <TextInput
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  placeholder="ひとこと書いてください"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                />
-              )}
-            />
-            {errors.comment && (
-              <Text style={basicStyles.warningText}>
-                コメントの入力が必要です
-              </Text>
-            )}
-            {/* ジャンル＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-
-            <Controller
-              control={control}
-              rules={{
-                required: true
-              }}
-              render={({ field: { onChange, value } }) => (
-                <DropDownPicker
-                  value={value}
-                  items={items}
-                  open={open}
-                  //   setValue={(value) => {
-                  //     onChange(value);
-                  //   }}
-                  //   onChangeValue={(value) => {
-                  //     onChange(value);
-                  //   }}
-                  setValue={onChange}
-                  onChangeValue={onChange}
-                  setOpen={setOpen}
-                  setItems={setItems}
-                />
-              )}
-              name="genre"
-            />
-            {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-            <Button
-              onPress={handleSubmit(onPressSaveButton)}
-              disabled={!canSave}
-            >
-              <Text>編集終了</Text>
-            </Button>
-          </Center>
-        </TouchableWithoutFeedback>
+        <>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              Keyboard.dismiss();
+            }}
+          >
+            <ScrollView>
+              <Center p={10}>
+                <View paddingY={3}>
+                  <Text>コメントとジャンルを変更できます</Text>
+                  <Text>画像を変更したい場合は投稿をしなおしてください</Text>
+                </View>
+                <View style={styles.img}>
+                  <Image
+                    style={{ width: SCREEN_WIDTH, height: takasa }}
+                    source={{ uri: item.postedImage }}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={{}}>
+                  <Controller
+                    defaultValue=""
+                    control={control}
+                    name="comment"
+                    rules={{
+                      required: true
+                    }}
+                    render={({ field: { onChange, value, onBlur } }) => (
+                      <StyledTextInput
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                        value={value}
+                        placeholder={
+                          item?.comment
+                            ? item.comment
+                            : "ひとこと書いてください"
+                        }
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        multiline
+                        defaultValue={value} //足してみた
+                      />
+                    )}
+                  />
+                  {errors.comment && (
+                    <Text style={basicStyles.warningText}>
+                      コメントの入力が必要です
+                    </Text>
+                  )}
+                </View>
+                {/* ジャンル＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
+                <View>
+                  <Controller
+                    control={control}
+                    rules={{
+                      required: true
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <DropDownPicker
+                        style={styles.dropdown}
+                        value={value}
+                        items={items}
+                        open={open}
+                        //   setValue={(value) => {
+                        //     onChange(value);
+                        //   }}
+                        //   onChangeValue={(value) => {
+                        //     onChange(value);
+                        //   }}
+                        setValue={onChange}
+                        onChangeValue={onChange}
+                        setOpen={setOpen}
+                        setItems={setItems}
+                      />
+                    )}
+                    name="genre"
+                  />
+                </View>
+              </Center>
+            </ScrollView>
+          </TouchableWithoutFeedback>
+          {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
+          <Button
+            onPress={handleSubmit(onPressSaveButton)}
+            disabled={!canSave}
+            style={styles.button}
+            colorScheme="secondary"
+          >
+            完了
+          </Button>
+        </>
       )}
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  img: {
+    // borderColor: "pink",
+    // borderWidth: 3
+  },
+  button: {
+    position: "absolute",
+    bottom: 15,
+    alignSelf: "center"
+  },
+  dropdown: { marginVertical: 20, width: "100%" }
+});
 
 export default EditPostPage;
