@@ -30,7 +30,7 @@ import type { Post } from "@models/PostTypes";
 import useUser from "@hooks/useUser";
 
 // firebase----------------------------
-import { db, postsColRef } from "src/config/firebase";
+import { auth, db, postsColRef } from "src/config/firebase";
 
 import {
   doc,
@@ -40,14 +40,14 @@ import {
   updateDoc,
   query,
   where,
-  onSnapshot,
   getDocs
 } from "firebase/firestore";
-
+import { getAuth, updateProfile } from "firebase/auth";
 //type--------------------------------
 import type { Auth } from "@models/AuthTypes";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ErrorPage from "@components/ErrorPage";
+import type { User } from "firebase/auth";
 
 // import { parseISO, formatDistanceToNow } from "date-fns";
 
@@ -90,7 +90,7 @@ export const EditProfilePage = () => {
   const [imageData, setImageData] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
-  const [postId, setPostId] = useState("");
+  //   const [postId, setPostId] = useState("");
 
   const {
     control,
@@ -159,6 +159,7 @@ export const EditProfilePage = () => {
 
         Alert.alert("Storageに画像を追加しました。");
 
+        // これだとprofileを変更したときだけ画像が更新され、addPostページでは変更がない( addPostページではcreatorPhoto: user.photoURL, )
         try {
           if (user?.displayName) {
             //ここの断りが必要
@@ -179,16 +180,28 @@ export const EditProfilePage = () => {
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((document) => {
               // doc.data() is never undefined for query doc snapshots
-              setPostId(document.id);
+              //   setPostId(document.id);//これだとpostIdがレンダリング前で反映されない
+              //   console.log("potId", postId);
 
+              //ループの中で`updateDoc`を使うのが安全か不安だが今のところ問題見られない
+              console.log("potId", document.id);
+              const ref = doc(db, CREATORS_POSTS, document.id);
+              updateDoc(ref, {
+                creatorPhoto: imageData
+              });
               console.log(document.id, " => ", document.data());
             });
             // 🟡documentのIdが知りたくてこの書き方をしたがもっとスマートに書けないだろうか
-            console.log("potId", postId);
-            const ref = doc(db, CREATORS_POSTS, postId);
-            updateDoc(ref, {
-              creatorPhoto: imageData
-            });
+
+            const currentUser = auth.currentUser;
+
+            // そしてプロファイルの`photoURL`も更新する(冗長かもしれないがaddPostの時プロファイル情報を使っているので必要)
+            if (currentUser !== null) {
+              await updateProfile(currentUser, {
+                // update a user's basic profile information
+                photoURL: imageData
+              } as User);
+            }
           }
           // return { userPhoto, mainComment, userName, updatedAt };
         } catch (e) {
