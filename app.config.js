@@ -2,6 +2,15 @@ import "dotenv/config";
 
 export default {
   expo: {
+    plugins: [
+      [
+        "expo-image-picker",
+        {
+          photosPermission:
+            "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
     name: "my-app-v3",
     slug: "my-app-v3",
     version: "1.0.0",

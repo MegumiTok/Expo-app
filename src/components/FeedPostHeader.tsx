@@ -1,6 +1,7 @@
-import { TouchableWithoutFeedback } from "react-native";
+import { useEffect, useState } from "react";
+import { TouchableWithoutFeedback, Alert } from "react-native";
 import { VStack, Text } from "native-base";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/native";
 // import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {
@@ -9,7 +10,7 @@ import {
   MenuOption,
   MenuTrigger
 } from "react-native-popup-menu";
-
+import { Routes } from "@models/NavTypes";
 //styles------------------------------------------------
 import {
   LeftParts,
@@ -20,11 +21,17 @@ import {
   ContainerHeader
 } from "@components/styles/pageStyle/FeedStyle";
 import BorderGradient from "./styles/BorderGradient";
+// firebase----------------------------
+import { getDocs, doc, getDoc } from "firebase/firestore";
+import { allUsersColRef, db } from "src/config/firebase";
+import { ALL_USERS } from "src/config/const";
 //type--------------------------------------------
 import type { Post } from "@models/PostTypes";
+import type { Auth } from "@models/AuthTypes";
 
 export const FeedPostHeader = ({ item }: { item: Post }) => {
   const navigation = useNavigation();
+  // const postId = item.postId;
   return (
     <ContainerHeader>
       <LeftParts>
@@ -71,12 +78,10 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
         </MenuTrigger>
         <MenuOptions>
           <MenuOption
-            onSelect={() => {
-              // navigate("Update");
-            }}
+            onSelect={() => navigation.navigate(Routes.EditPost, { item })}
             text="編集"
           />
-          <MenuOption onSelect={() => true}>
+          <MenuOption onSelect={() => console.log(item.imageH)}>
             <Text>削除</Text>
           </MenuOption>
           {/* <MenuOption onSelect={() => true} text="共有" /> */}

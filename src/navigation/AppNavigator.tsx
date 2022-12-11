@@ -22,6 +22,8 @@ import Menu from "@pages/Menu";
 import { Profile } from "@pages/Profile";
 import SinglePostPage from "@pages/SinglePostPage";
 import WebShop from "@pages/WebShop";
+import AddPostPage from "@pages/AddPostPage";
+import EditPostPage from "@pages/EditPostPage";
 //data
 import MenuList from "@assets/data/MenuList";
 
@@ -133,9 +135,21 @@ const FeedScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen name={Routes.Feed} component={Feed} />
-      <Stack.Screen
+      {/* <Stack.Screen
         name={Routes.SinglePost}
         component={SinglePostPage}
+        options={{
+          headerShown: false
+        }}
+      /> */}
+      {/* <Stack.Screen
+        name={Routes.AddPost}
+        component={AddPostPage}
+        options={addPostPageOptions}
+      /> */}
+      <Stack.Screen
+        name={Routes.EditPost}
+        component={EditPostPage}
         options={{
           headerShown: false
         }}

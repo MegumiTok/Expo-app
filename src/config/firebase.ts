@@ -20,6 +20,8 @@ import { getReactNativePersistence } from "firebase/auth/react-native";
 
 import { getStorage } from "firebase/storage";
 
+import { All_EVENTS, ALL_USERS, CREATORS_POSTS } from "./const";
+
 // import {
 //   API_KEY,
 //   AUTH_DOMAIN,
@@ -81,3 +83,7 @@ export const auth = initializeAuth(app, {
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 // const analytics = getAnalytics(app);
+
+export const allUsersColRef = collection(db, ALL_USERS);
+export const postsColRef = collection(db, CREATORS_POSTS);
+export const allEventsColRef = collection(db, All_EVENTS);

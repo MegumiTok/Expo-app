@@ -1,5 +1,5 @@
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/native";
 
 import { Text, TouchableOpacity } from "react-native";
 import Constants from "expo-constants";

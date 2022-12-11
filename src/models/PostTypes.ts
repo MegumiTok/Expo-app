@@ -2,7 +2,7 @@ export interface Post {
   postId: string;
   creatorId: string; //selectPostsByUserで使用中
   creatorName: string | undefined | null;
-  creatorPhoto: string | undefined | null; //null必要（type Creator参照）
+  creatorPhoto: string | undefined | null; //null必要（type Creator参照）//userで管理しようと思ったがこちらの方が楽
   date: any;
   genre: string;
   comment: string;
@@ -21,6 +21,8 @@ export interface Post {
   imageH: number;
   // documentID?: string;
   product: boolean; //追加
+
+  updatedAt?: any; //追加
 }
 
 // export interface AllPosts {
