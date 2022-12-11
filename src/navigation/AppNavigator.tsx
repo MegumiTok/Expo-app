@@ -146,14 +146,14 @@ const FeedScreens = () => {
         name={Routes.AddPost}
         component={AddPostPage}
         options={addPostPageOptions}
-      />
+      /> */}
       <Stack.Screen
         name={Routes.EditPost}
         component={EditPostPage}
         options={{
           headerShown: false
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 };

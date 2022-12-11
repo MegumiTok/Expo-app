@@ -9,6 +9,7 @@ import LogoutPage from "@pages/authPage/LogoutPage";
 import AddPostPage from "@pages/AddPostPage";
 import TestTwo from "@private/TestTwo";
 import EditProfilePage from "@pages/EditProfilePage";
+import EditPostPage from "@pages/EditPostPage";
 
 export const MenuList = [
   {
@@ -53,19 +54,14 @@ export const MenuList = [
     component: EditProfilePage,
     options: { headerShown: true }
   }
-  //   {
-  //     name: "EditProfilePage",
-  //     label: "EditProfilePage",
-  //     component: EditProfilePage,
-  //     options: { headerShown: true }
-  //   }
+
   // { name: "StickyHeader", label: "StickyHeader", component: StickyHeader },
   // {
-  //   name: "AddPostPage",
-  //   label: "AddPostPage",
-  //   component: AddPostPage,
-  //   options: { headerShown: true },
-  // },
+  //   name: "EditPostPage",
+  //   label: "EditPostPage",
+  //   component: EditPostPage,
+  //   options: { headerShown: true }
+  // }
 ];
 
 export default MenuList;
