@@ -96,7 +96,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
           userName,
           email,
           userId: user.uid,
-          userPhoto: "",
+          userPhoto: TEST_IMAGE,
           userFlg: userFlg,
           createdAt: Timestamp.fromDate(new Date()),
           mainComment: ""

@@ -1,6 +1,19 @@
 import type { Post } from "./PostTypes";
 import { Status } from "./PostTypes";
 export type flg = "creator" | "general" | "stuff";
+
+//CreatorTypes-------------------------------
+
+export interface Creator {
+  creatorId: string; //uid keyExtraに使いたいのでnullをはずしたい
+  creatorName: string | null;
+  // email: string;
+  creatorPhoto: string | null;
+
+  posts?: Post[];
+  mainComment: string | null;
+}
+
 //AuthTypes-全ユーザーに共通している情報----------------------------
 export interface Auth {
   //all_usersのCollectionに入る情報
@@ -37,16 +50,4 @@ export interface Register {
   userFlg: flg;
 
   password: string; //登録時だけ必要
-}
-
-//CreatorTypes-------------------------------
-
-export interface Creator {
-  creatorId: string; //uid keyExtraに使いたいのでnullをはずしたい
-  creatorName: string | null;
-  // email: string;
-  creatorPhoto: string | null;
-
-  posts?: Post[];
-  mainComment: string | null;
 }

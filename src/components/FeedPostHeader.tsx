@@ -1,6 +1,7 @@
-import { TouchableWithoutFeedback } from "react-native";
+import { useEffect, useState } from "react";
+import { TouchableWithoutFeedback, Alert } from "react-native";
 import { VStack, Text } from "native-base";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/native";
 // import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {
@@ -20,11 +21,62 @@ import {
   ContainerHeader
 } from "@components/styles/pageStyle/FeedStyle";
 import BorderGradient from "./styles/BorderGradient";
+// firebase----------------------------
+import { getDocs, doc, getDoc } from "firebase/firestore";
+import { allUsersColRef, db } from "src/config/firebase";
+import { ALL_USERS } from "src/config/const";
 //type--------------------------------------------
 import type { Post } from "@models/PostTypes";
+import type { Auth } from "@models/AuthTypes";
 
 export const FeedPostHeader = ({ item }: { item: Post }) => {
   const navigation = useNavigation();
+
+  const [userData, setUserData] = useState<Auth>();
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const fetchCreators = async () => {
+  //     try {
+  //       const list = [] as Auth[];
+  //       const querySnapshot = await getDocs(allUsersColRef);
+  //       querySnapshot.forEach((doc) => {
+  //         const {
+  //           createdAt,
+  //           email,
+  //           mainComment,
+  //           userFlg,
+  //           userId,
+  //           userName,
+  //           userPhoto,
+  //           updatedAt
+  //         } = doc.data();
+
+  //         list.push({
+  //           createdAt,
+  //           email,
+  //           mainComment,
+  //           userFlg,
+  //           userId,
+  //           userName,
+  //           userPhoto,
+  //           updatedAt
+  //         });
+  //       });
+  //       setUserData(list);
+  //       console.log("リスト", list);
+
+  //       if (loading) {
+  //         setLoading(false);
+  //       }
+  //     } catch (e) {
+  //       Alert.alert("fetchPostsに失敗しました。");
+  //       console.log("エラー:", e);
+  //     }
+  //   };
+
+  //   fetchCreators(); //async functionを使っているのでこのような書き方になる
+  // }, [loading]); //🔴dependency array.を外したらuseEffectが永遠ループに入った
   return (
     <ContainerHeader>
       <LeftParts>

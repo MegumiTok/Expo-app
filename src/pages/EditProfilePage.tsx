@@ -14,7 +14,7 @@ import {
 } from "react-native";
 
 //const---------------------------------
-import { TEST_IMAGE, ALL_USERS } from "src/config/const";
+import { TEST_IMAGE, ALL_USERS, CREATORS_POSTS } from "src/config/const";
 //+functions----------------------------
 import { _inputStrictCheck } from "@functions/_inputStrictCheck";
 import * as PickImage from "@functions/_pickImage";
@@ -24,13 +24,25 @@ import Spacer from "@components/styles/Spacer";
 import { OutlineButton } from "@components/styles/button";
 import { EditProfileStyle } from "@components/styles/pageStyle/EditProfileStyle";
 import { StyledTextInput } from "@components/styles/pageStyle/AddPostStyle";
+import type { Post } from "@models/PostTypes";
 
 //context-----------------
 import useUser from "@hooks/useUser";
 
 // firebase----------------------------
-import { db } from "src/config/firebase";
-import { doc, setDoc, getDoc, Timestamp } from "firebase/firestore";
+import { db, postsColRef } from "src/config/firebase";
+
+import {
+  doc,
+  setDoc,
+  getDoc,
+  Timestamp,
+  updateDoc,
+  query,
+  where,
+  onSnapshot,
+  getDocs
+} from "firebase/firestore";
 
 //type--------------------------------
 import type { Auth } from "@models/AuthTypes";
@@ -78,6 +90,7 @@ export const EditProfilePage = () => {
   const [imageData, setImageData] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
+  const [postId, setPostId] = useState("");
 
   const {
     control,
@@ -150,13 +163,32 @@ export const EditProfilePage = () => {
           if (user?.displayName) {
             //ここの断りが必要
             const creatorRef = doc(db, ALL_USERS, user.displayName);
-
             await setDoc(
               //もともと無かったupdatedAtを追加したのでupdateにはsetDocを使う
               creatorRef,
               authInfo,
               { merge: true }
             );
+
+            //🔵creators_postコレクションのphotoもここで更新する
+            const q = query(
+              postsColRef,
+              where("creatorName", "==", user.displayName)
+            );
+            //After creating a query object, use the get() function to retrieve the results:
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((document) => {
+              // doc.data() is never undefined for query doc snapshots
+              setPostId(document.id);
+
+              console.log(document.id, " => ", document.data());
+            });
+            // 🟡documentのIdが知りたくてこの書き方をしたがもっとスマートに書けないだろうか
+            console.log("potId", postId);
+            const ref = doc(db, CREATORS_POSTS, postId);
+            updateDoc(ref, {
+              creatorPhoto: imageData
+            });
           }
           // return { userPhoto, mainComment, userName, updatedAt };
         } catch (e) {

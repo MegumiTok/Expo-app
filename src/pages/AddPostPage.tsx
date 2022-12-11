@@ -12,6 +12,7 @@ import {
   ScrollView
 } from "native-base";
 import uuid from "react-native-uuid";
+import { TEST_IMAGE, CREATORS_POSTS, GENRES } from "src/config/const";
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -24,7 +25,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 //firebase------------------------------------------------------------
 import { serverTimestamp, doc, setDoc, addDoc } from "firebase/firestore";
 import { postsColRef, db } from "src/config/firebase";
-import { CREATORS_POSTS, GENRES } from "src/config/const";
 //Context--------------------------------------------------------
 import useUser from "@hooks/useUser";
 
@@ -131,7 +131,7 @@ export const AddPostPage = () => {
 
         const postedData = {
           creatorName: user.displayName,
-          creatorPhoto: user.photoURL,
+          creatorPhoto: user.photoURL, //投稿時はログインしているのだからこれでいい
           date: serverTimestamp(),
           genre: data.genre,
           comment: data.comment,

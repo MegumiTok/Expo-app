@@ -15,11 +15,15 @@ import {
 import { LoadingView } from "@components/styles/LoadingView";
 import FeedPost from "@components/FeedPost";
 // firebase----------------------------
-import { getDocs } from "firebase/firestore";
-import { postsColRef } from "src/config/firebase";
+import { getDocs, doc, getDoc } from "firebase/firestore";
+import { postsColRef, db } from "src/config/firebase";
+import { ALL_USERS } from "src/config/const";
+//Context------------------------------------
+import useUser from "@hooks/useUser";
 //type--------------------------------------------
 import type { FC } from "react";
 import type { Post } from "@models/PostTypes";
+import type { Auth } from "@models/AuthTypes";
 
 export const Feed: FC = () => {
   const [refreshing, setRefreshing] = useState(false);
