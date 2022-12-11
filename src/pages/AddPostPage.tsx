@@ -118,7 +118,14 @@ export const AddPostPage = () => {
           return null;
         }
 
-        const randomId = uuid.v4();
+        // const randomId = uuid.v4();
+
+        const chars =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let randomId = "";
+        for (let i = 0; i < 8; i++) {
+          randomId += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
 
         setAddRequestStatus("pending");
         const { fileName } = await PickImage.uploadImage(
@@ -155,7 +162,8 @@ export const AddPostPage = () => {
         try {
           //When you use set() to create a document, you must specify an ID for the document to create.
           //In some cases, it can be useful to create a document reference with an auto-generated ID, then use the reference later. For this use case, you can call doc():
-          const postRef = doc(postsColRef);
+          // const postRef = doc(postsColRef);
+          const postRef = doc(db, CREATORS_POSTS, randomId); //✅docIdをpostIdと同じにすることで参照がしやすくなる
           await setDoc(postRef, postedData);
           // console.log("Document written with ID: ", postRef.id);
 

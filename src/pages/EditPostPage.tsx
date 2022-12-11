@@ -50,7 +50,7 @@ export const EditPostPage: FC<any> = ({ route }) => {
   const [items, setItems] = useState(GENRES);
   //   const [value, setValue] = useState(null);
   //   const sizeItems = useMemo(() => getSizeItems(variants), [variants]);
-  const [postData, setPostData] = useState<Post>();
+  //   const [postData, setPostData] = useState<Post>();
   const [loading, setLoading] = useState(true); //<-- いらなかったが残しとく
 
   const [takasa, setTakasa] = useState<number>();
@@ -104,9 +104,9 @@ export const EditPostPage: FC<any> = ({ route }) => {
   // }
 
   const onPressSaveButton = async (data: FormInput) => {
-    console.log(data, "編集後データ");
+    console.log("編集後データ", data);
     if (canSave) {
-      if (!postData) {
+      if (!item) {
         return null;
       }
       try {
@@ -134,11 +134,11 @@ export const EditPostPage: FC<any> = ({ route }) => {
         //   })
         // );
         // unwrapResult(resultAction);
-        const creatorRef = doc(db, CREATORS_POSTS, postData.postId);
+        const postRef = doc(db, CREATORS_POSTS, item.postId);
 
         await setDoc(
           //もともと無かったupdatedAtを追加したのでupdateにはsetDocを使う
-          creatorRef,
+          postRef,
           postInfo,
           { merge: true }
         );
