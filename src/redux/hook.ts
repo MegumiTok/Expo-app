@@ -3,7 +3,7 @@ import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "./store";
 import type { Login, Register } from "@models/AuthTypes";
-import { clearCurrentUser } from "./authSlice";
+// import { clearCurrentUser } from "./authSlice";
 
 import {
   logout,
@@ -35,16 +35,16 @@ export const useAuthentication = () => {
   const registerWithEmailPassword = (data: Register) => {
     dispatch(signUpWithEmailPassword(data));
   };
-  const logoutUser = () => {
-    dispatch(logout());
-    dispatch(clearCurrentUser());
-  };
+  // const logoutUser = () => {
+  //   dispatch(logout());
+  //   dispatch(clearCurrentUser());
+  // };
 
   return {
     loginWithEmailAndPassword,
     resetPassword,
-    registerWithEmailPassword,
-    logoutUser
+    registerWithEmailPassword
+    // logoutUser
     // loginWithGoogle,
   };
 };

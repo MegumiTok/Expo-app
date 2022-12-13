@@ -12,7 +12,7 @@ import {
   ScrollView
 } from "native-base";
 
-import { CREATORS_POSTS, GENRES } from "src/config/const";
+import { GENRES } from "src/config/const";
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -22,9 +22,12 @@ import Modal from "react-native-modal";
 //
 import { useForm, Controller } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-//firebase------------------------------------------------------------
-import { serverTimestamp, doc, setDoc } from "firebase/firestore";
-import { db } from "src/config/firebase";
+
+//redux--------------------------------------------------------------
+import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import "react-native-get-random-values";
+import { createNewPost } from "@Redux/postActions";
+import { unwrapResult, nanoid } from "@reduxjs/toolkit";
 //Context--------------------------------------------------------
 import useUser from "@hooks/useUser";
 
@@ -52,6 +55,8 @@ interface FormInput {
 }
 export const AddPostPage = () => {
   // const [postedImage, setPostedImage] = useState("");
+  const dispatch = useAppDispatch();
+  const genres = useAppSelector((state) => state.genre);
 
   const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
 
@@ -61,9 +66,9 @@ export const AddPostPage = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const { user } = useUser();
   //   const genres = useAppSelector((state) => state.genre);
-  //   const items: ItemType[] = genres;
 
-  const [items, setItems] = useState(GENRES);
+  const items = genres;
+  // const [items, setItems] = useState(GENRES);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -117,17 +122,17 @@ export const AddPostPage = () => {
           return null;
         }
 
-        // const randomId = uuid.v4();
+        // const chars =
+        //   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        // let randomId = "";
+        // for (let i = 0; i < 8; i++) {
+        //   randomId += chars.charAt(Math.floor(Math.random() * chars.length));
+        // }
 
-        const chars =
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        let randomId = "";
-        for (let i = 0; i < 8; i++) {
-          randomId += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
+        const randomId = nanoid();
 
         setAddRequestStatus("pending");
-        const { fileName } = await PickImage.uploadImage(
+        await PickImage.uploadImage(
           imageData?.uri,
           `postImages/${user.displayName}`,
           randomId //複数投稿があるので名前は変動型にすべき
@@ -138,7 +143,8 @@ export const AddPostPage = () => {
         const postedData = {
           creatorName: user.displayName,
           creatorPhoto: user.photoURL, //投稿時はログインしているのだからこれでいい
-          date: serverTimestamp(),
+          // date: serverTimestamp(),
+          date: new Date().toString(),
           genre: data.genre,
           comment: data.comment,
           postedImage: imageData?.uri,
@@ -158,20 +164,20 @@ export const AddPostPage = () => {
           // updatedAt
         } as Post;
         console.log("postedDataは:", postedData);
-        try {
-          //When you use set() to create a document, you must specify an ID for the document to create.
-          //In some cases, it can be useful to create a document reference with an auto-generated ID, then use the reference later. For this use case, you can call doc():
-          // const postRef = doc(postsColRef);
-          const postRef = doc(db, CREATORS_POSTS, randomId); //✅docIdをpostIdと同じにすることで参照がしやすくなる
-          await setDoc(postRef, postedData);
-          // console.log("Document written with ID: ", postRef.id);
+        // try {
+        //   const postRef = doc(db, CREATORS_POSTS, randomId); //✅docIdをpostIdと同じにすることで参照がしやすくなる
+        //   await setDoc(postRef, postedData);
+        //   // console.log("Document written with ID: ", postRef.id);
 
-          // const userRef = doc(db, CREATORS_POSTS, postedData.postId);
-          // await setDoc(userRef, postedData);
-        } catch (error) {
-          Alert.alert("Firestoreに保存を失敗しました");
-          console.log("Firestoreに保存を失敗しました", error); //<-- これでエラー内容確認
-        }
+        //   // const userRef = doc(db, CREATORS_POSTS, postedData.postId);
+        //   // await setDoc(userRef, postedData);
+        // } catch (error) {
+        //   Alert.alert("Firestoreに保存を失敗しました");
+        //   console.log("Firestoreに保存を失敗しました", error); //<-- これでエラー内容確認
+        // }
+
+        const resultAction = await dispatch(createNewPost(postedData));
+        unwrapResult(resultAction);
       } catch (error) {
         Alert.alert("エラーです。もう一度お願いします。");
       } finally {
@@ -252,7 +258,7 @@ export const AddPostPage = () => {
                   onChange(value);
                 }}
                 setOpen={setOpen}
-                setItems={setItems}
+                // setItems={setItems}
               />
             )}
             name="genre"

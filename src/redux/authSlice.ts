@@ -40,9 +40,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    clearCurrentUser: (state) => {
-      state.currentUser = initialState.currentUser;
-    }
+    // clearCurrentUser: (state) => {
+    //   state.currentUser = initialState.currentUser;
+    // }
     // setCurrentUser: (state, action: PayloadAction<User>) => {
     //   //autoLoginに使える
     //   // if (action.payload.email !== null) {
@@ -128,6 +128,6 @@ const authSlice = createSlice({
 const { actions, reducer } = authSlice;
 export const authReducer = reducer;
 
-export const { clearCurrentUser } = actions;
+// export const { clearCurrentUser } = actions;
 
 // export const selectCurrentUser = (state: RootState) => state.auth.currentUser;
