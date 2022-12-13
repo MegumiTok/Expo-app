@@ -60,8 +60,6 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
           userFlg: "general" //アプリからの会員登録は全員一般ユーザー
         };
 
-        const { email, password, userName, userFlg } = resisterData;
-
         console.log("登録データ", resisterData);
 
         // const userRef = doc(db, ALL_USERS, userName); //名前は変更不可にする(名前の重複も不可)

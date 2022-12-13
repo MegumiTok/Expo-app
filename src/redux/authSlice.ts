@@ -13,6 +13,7 @@ import type { User } from "firebase/auth";
 import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import type { Auth } from "@models/AuthTypes";
 import type { Status } from "@models/StatusType";
+import type { RootState } from "./store";
 // import { flg } from "@models/AuthTypes";
 
 export interface AuthProps {
@@ -41,18 +42,16 @@ const authSlice = createSlice({
   reducers: {
     clearCurrentUser: (state) => {
       state.currentUser = initialState.currentUser;
-    },
-    setCurrentUser: (state, action: PayloadAction<User>) => {
-      //autoLoginに使える
-      // if (action.payload.email !== null) {
-      state.currentUser.userId = action.payload.uid;
-      state.currentUser.userName = action.payload.displayName;
-      state.currentUser.email = action.payload.email;
-      state.currentUser.userPhoto = action.payload.photoURL;
-      // }
-
-      // state.currentUser = action.payload;
     }
+    // setCurrentUser: (state, action: PayloadAction<User>) => {
+    //   //autoLoginに使える
+    //   // if (action.payload.email !== null) {
+    //   state.currentUser.userId = action.payload.uid;
+    //   state.currentUser.userName = action.payload.displayName;
+    //   state.currentUser.email = action.payload.email;
+    //   state.currentUser.userPhoto = action.payload.photoURL;
+    //   // }
+    // }
   },
   extraReducers: (builder) => {
     //ログアウト＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -126,5 +125,9 @@ const authSlice = createSlice({
   }
 });
 
-const { reducer } = authSlice;
+const { actions, reducer } = authSlice;
 export const authReducer = reducer;
+
+export const { clearCurrentUser } = actions;
+
+// export const selectCurrentUser = (state: RootState) => state.auth.currentUser;

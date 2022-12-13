@@ -18,10 +18,14 @@ import type { FC } from "react";
 import { AuthRoutes } from "@models/NavTypes";
 
 // firebase----------------------------
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "src/config/firebase";
+// import { signInWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "src/config/firebase";
+
+//+redux--------------------------------------------------------
+import { useAuthentication } from "@Redux/hook";
 
 export const LoginPage: FC<LogInProps> = ({ navigation }) => {
+  const { loginWithEmailAndPassword } = useAuthentication();
   const {
     control,
     handleSubmit,
@@ -32,13 +36,14 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
   const onSubmit = useCallback(
     handleSubmit((data: Login) => {
       _inputStrictCheck(data);
-      try {
-        signInWithEmailAndPassword(auth, data.email, data.password);
-        Alert.alert("ログイン成功", `${data.email}`);
-      } catch (e: any) {
-        console.log(e.code);
-        Alert.alert("ログイン失敗", `${data.email}`);
-      }
+      // try {
+      //   signInWithEmailAndPassword(auth, data.email, data.password);
+      //   Alert.alert("ログイン成功", `${data.email}`);
+      // } catch (e: any) {
+      //   console.log(e.code);
+      //   Alert.alert("ログイン失敗", `${data.email}`);
+      // }
+      loginWithEmailAndPassword(data);
     }),
     []
   );
