@@ -19,7 +19,12 @@ export const updateCreatorInfo = createAsyncThunk(
   //これはcreatorsではなくAuthスライスで管理すべきだったかも。
   //ただ、Userのprofileアップデートとは別なのでとりあえずこっちに振り分けます。
   async (profile: Creator) => {
-    const { creatorId, creatorPhoto, mainComment, creatorName } = profile;
+    const {
+      creatorId,
+      creatorPhoto: userPhoto,
+      mainComment,
+      creatorName
+    } = profile;
     const updatedAt = new Date().toISOString();
     try {
       if (creatorName) {
@@ -28,7 +33,7 @@ export const updateCreatorInfo = createAsyncThunk(
         await setDoc(
           //もともと無かったupdatedAtを追加したのでupdateにはsetDocを使う
           creatorRef,
-          { creatorPhoto, mainComment, updatedAt },
+          { userPhoto, mainComment, updatedAt },
           { merge: true }
         );
         // await updateDoc(creatorRef, {
@@ -36,7 +41,7 @@ export const updateCreatorInfo = createAsyncThunk(
         //   mainComment,
         // });
       }
-      return { creatorId, creatorPhoto, mainComment, creatorName, updatedAt };
+      return { creatorId, userPhoto, mainComment, creatorName, updatedAt };
     } catch (e) {
       console.log(e);
     }
