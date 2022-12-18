@@ -30,6 +30,10 @@ import {
 } from "firebase/firestore";
 
 import { GENRES, CREATORS_POSTS } from "src/config/const";
+//redux --------------------------------
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { updatePost, selectSinglePostById } from "@Redux/postsSlice";
 
 //style-------------------------------------------------------------------
 import { basicStyles } from "@components/styles/theme/basicStyleSheet";
@@ -45,6 +49,7 @@ interface FormInput {
 }
 
 export const EditPostPage: FC<any> = ({ route }) => {
+  const dispatch = useAppDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [open, setOpen] = useState<boolean>(false);
   //   const [items, setItems] = useState(GENRES) as ItemType<ValueType>;
@@ -113,37 +118,31 @@ export const EditPostPage: FC<any> = ({ route }) => {
       try {
         setAddRequestStatus("pending");
 
-        const postInfo = {
-          comment: data.comment,
-          // updatedAt: Timestamp.fromDate(new Date())
-          updatedAt: new Date().toISOString()
-        } as Post;
+        // const postInfo = {
+        //   comment: data.comment,
+        //   // updatedAt: Timestamp.fromDate(new Date())
+        //   updatedAt: new Date().toISOString()
+        // } as Post;
 
-        // const resultAction = dispatch(
-        //   updatePost({
-        //     // creatorName: post.creatorName,
-        //     // creatorPhoto: post.creatorPhoto,
-        //     // postedImage: post.postedImage,
-        //     // date: post.date,
-        //     // reactions: post.reactions,
-        //     // isLiked: post.isLiked,
-        //     // imageW: post.imageW,
-        //     // imageH: post.imageH,
-        //     ...post,
-        //     postId,
-        //     comment: data.comment,
-        //     genre: data.genre
-        //   })
+        // const postRef = doc(db, CREATORS_POSTS, item.postId);
+
+        // await setDoc(
+        //   //もともと無かったupdatedAtを追加したのでupdateにはsetDocを使う
+        //   postRef,
+        //   postInfo,
+        //   { merge: true }
         // );
-        // unwrapResult(resultAction);
-        const postRef = doc(db, CREATORS_POSTS, item.postId);
 
-        await setDoc(
-          //もともと無かったupdatedAtを追加したのでupdateにはsetDocを使う
-          postRef,
-          postInfo,
-          { merge: true }
+        const resultAction = dispatch(
+          updatePost({
+            ...item,
+            postId: item.postId,
+            comment: data.comment,
+            genre: data.genre,
+            postedAt: new Date().toISOString()
+          })
         );
+        unwrapResult(resultAction);
         // navigation.navigate(Routes.SinglePost, { postId });
 
         //----------------------------------------------------------------------

@@ -28,14 +28,14 @@ const getPosts = async () => {
     imageH: res.data().imageH,
     product: res.data().product,
 
-    postedAt: new Date().toISOString(),
-    reactions: {
-      thumbsUp: 0,
-      hooray: 0,
-      heart: 0,
-      clap: 0,
-      surprise: 0
-    }
+    postedAt: res.data().postedAt
+    // reactions: {
+    //   thumbsUp: 0,
+    //   hooray: 0,
+    //   heart: 0,
+    //   clap: 0,
+    //   surprise: 0
+    // }
   }));
   return posts;
 };
@@ -65,7 +65,18 @@ export const createNewPost = createAsyncThunk(
       //   const postRef = doc(postsColRef);
       const postRef = doc(db, CREATORS_POSTS, creatorPost.postId); //✅docIdをpostIdと同じにすることで参照がしやすくなる
 
-      await setDoc(postRef, creatorPost);
+      const posts: Post = {
+        ...creatorPost,
+        postedAt: new Date().toISOString(),
+        reactions: {
+          thumbsUp: 0,
+          hooray: 0,
+          heart: 0,
+          clap: 0,
+          surprise: 0
+        }
+      };
+      await setDoc(postRef, posts);
       return creatorPost;
     } catch (error) {
       console.log("createNewPostで例外処理発生", error);

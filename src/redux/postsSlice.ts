@@ -28,13 +28,14 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     updatePost(state, action: PayloadAction<Post>) {
-      const { postId, comment, genre } = action.payload;
+      const { postId, comment, genre, postedAt } = action.payload;
       const existingPost = state.allPosts.find(
         (item) => item.postId === postId
       );
       if (existingPost) {
         existingPost.comment = comment;
         existingPost.genre = genre;
+        existingPost.postedAt = postedAt;
       }
     }
   },

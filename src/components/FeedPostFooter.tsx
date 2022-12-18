@@ -1,15 +1,38 @@
+import { Text } from "native-base";
 import { View, StyleSheet } from "react-native";
-
+import { parseISO, formatDistanceToNow } from "date-fns";
 //styles----------------------------
+import type { Post } from "@models/PostTypes";
 import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 // import LikeButtonAnimated from "@assets/Icons/LikeButtonAnimated";
-import type { FeedProps } from "@models/NavTypes";
+// import type { FeedProps } from "@models/NavTypes";
 
 // import { ReactionButtons } from "@components/templates/ReactionButtons";
 //compsーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 import ReadContinue from "./ReadContinue";
 
-export const FeedPostFooter = ({ item }: FeedProps) => {
+export const FeedPostFooter = ({ item }: { item: Post }) => {
+  let timeAgo = "";
+  // const timestamp = item.updatedAt || item.postedAt;
+  const updatedAt = item.updatedAt;
+  const postedAt = item.postedAt;
+  // if (updatedAt) {
+  //   console.log("updatedAt:", updatedAt);
+  //   const date = parseISO(updatedAt);
+  //   const timePeriod = formatDistanceToNow(date);
+  //   timeAgo = `updated ${timePeriod} ago`;
+  // } else {
+  //   console.log("postedAt:", postedAt);
+  //   const date = parseISO(postedAt);
+  //   const timePeriod = formatDistanceToNow(date);
+  //   timeAgo = ` ${timePeriod} ago`;
+  // }
+  const date = parseISO(postedAt);
+  const timePeriod = formatDistanceToNow(date);
+  timeAgo = ` ${timePeriod} ago`;
+  // console.log("updatedAt:", updatedAt);
+
+  // timeAgo = ` ${item.postedAt} ago`;
   return (
     <>
       <View style={styles.containerMain}>
@@ -17,11 +40,14 @@ export const FeedPostFooter = ({ item }: FeedProps) => {
           <LikeButtonAnimated />
           <ReactionButtons item={item} />
         </View> */}
-        <View style={{ flexDirection: "row" }} />
+        {/* <View style={{ flexDirection: "row" }} /> */}
         {/* <SavedButtonAnimated /> */}
+        <View>
+          <Text fontSize="xs">{timeAgo}</Text>
+        </View>
       </View>
       <View style={{ paddingHorizontal: 15, paddingBottom: 15 }}>
-        <ReadContinue section={item} />
+        <ReadContinue comment={item.comment} />
       </View>
     </>
   );
