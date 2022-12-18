@@ -68,7 +68,7 @@ export const signUpWithEmailPassword = createAsyncThunk(
           userId: user.uid,
           userPhoto: "",
           userFlg: userFlg,
-          createdAt: Timestamp.fromDate(new Date()),
+          createdAt: new Date().toISOString(),
           mainComment: ""
         });
 

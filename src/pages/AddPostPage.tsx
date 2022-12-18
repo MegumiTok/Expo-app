@@ -143,22 +143,16 @@ export const AddPostPage = () => {
         const postedData = {
           creatorName: user.displayName,
           creatorPhoto: user.photoURL, //投稿時はログインしているのだからこれでいい
-          // date: serverTimestamp(),
-          date: new Date().toString(),
+
           genre: data.genre,
           comment: data.comment,
           postedImage: imageData?.uri,
           imageW: imageData?.width,
           imageH: imageData?.height,
           isLiked: false,
-          reactions: {
-            thumbsUp: 0,
-            hooray: 0,
-            heart: 0,
-            clap: 0,
-            surprise: 0
-          },
+
           product: data.product || false,
+
           creatorId: user.uid,
           postId: randomId
           // updatedAt

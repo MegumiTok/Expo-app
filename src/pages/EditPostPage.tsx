@@ -28,6 +28,7 @@ import {
   query,
   where
 } from "firebase/firestore";
+
 import { GENRES, CREATORS_POSTS } from "src/config/const";
 
 //style-------------------------------------------------------------------
@@ -114,7 +115,8 @@ export const EditPostPage: FC<any> = ({ route }) => {
 
         const postInfo = {
           comment: data.comment,
-          updatedAt: Timestamp.fromDate(new Date())
+          // updatedAt: Timestamp.fromDate(new Date())
+          updatedAt: new Date().toISOString()
         } as Post;
 
         // const resultAction = dispatch(

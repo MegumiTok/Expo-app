@@ -1,6 +1,6 @@
 // firebase-----------------------------
 import { db, postsColRef } from "src/config/firebase";
-import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDocs, getDoc, Timestamp } from "firebase/firestore";
 import { CREATORS_POSTS } from "src/config/const";
 
 //type-----------------------------------------------------
@@ -19,14 +19,23 @@ const getPosts = async () => {
     creatorId: res.data().creatorId,
     creatorName: res.data().creatorName,
     creatorPhoto: res.data().creatorPhoto,
-    date: res.data().date,
+
     genre: res.data().genre,
     comment: res.data().comment,
     postedImage: res.data().postedImage,
-    reactions: res.data().reactions,
+
     imageW: res.data().imageW,
     imageH: res.data().imageH,
-    product: res.data().product
+    product: res.data().product,
+
+    postedAt: new Date().toISOString(),
+    reactions: {
+      thumbsUp: 0,
+      hooray: 0,
+      heart: 0,
+      clap: 0,
+      surprise: 0
+    }
   }));
   return posts;
 };

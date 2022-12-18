@@ -34,19 +34,22 @@ import { auth, db, postsColRef } from "src/config/firebase";
 
 import {
   doc,
-  setDoc,
   getDoc,
-  Timestamp,
   updateDoc,
   query,
   where,
   getDocs
 } from "firebase/firestore";
-import { getAuth, updateProfile } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
+
+//redux------------------------
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { updateCreatorInfo } from "@Redux/creatorsActions";
+
 //type--------------------------------
-import type { Auth } from "@models/AuthTypes";
+import type { Creator } from "@models/AuthTypes";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import ErrorPage from "@components/ErrorPage";
 import type { User } from "firebase/auth";
 
 // import { parseISO, formatDistanceToNow } from "date-fns";
@@ -56,8 +59,9 @@ interface FormInput {
 }
 
 export const EditProfilePage = () => {
+  const dispatch = useAppDispatch();
   const { user } = useUser();
-  const [userData, setUserData] = useState<Auth>();
+  const [userData, setUserData] = useState<Creator>();
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -69,7 +73,7 @@ export const EditProfilePage = () => {
 
         if (docSnap.exists()) {
           //   console.log("Document data:", docSnap.data());
-          const result = docSnap.data() as Auth;
+          const result = docSnap.data() as Creator;
           //   const { userPhoto, mainComment } = docSnap.data();
           setUserData(result);
         } else {
@@ -151,25 +155,28 @@ export const EditProfilePage = () => {
           user?.displayName //fName
         );
         console.log("ファイル名", filename);
-        const authInfo = {
-          userPhoto: imageData,
-          mainComment: data.mainComment,
-          updatedAt: Timestamp.fromDate(new Date())
-        } as Auth;
 
         Alert.alert("Storageに画像を追加しました。");
 
-        // これだとprofileを変更したときだけ画像が更新され、addPostページでは変更がない( addPostページではcreatorPhoto: user.photoURL, )
+        const authInfo = {
+          creatorId: user?.uid,
+          creatorName: user?.displayName,
+          creatorPhoto: imageData,
+          mainComment: data.mainComment
+          // updatedAt: Timestamp.fromDate(new Date())
+        } as Creator;
+
         try {
           if (user?.displayName) {
-            //ここの断りが必要
-            const creatorRef = doc(db, ALL_USERS, user.displayName);
-            await setDoc(
-              //もともと無かったupdatedAtを追加したのでupdateにはsetDocを使う
-              creatorRef,
-              authInfo,
-              { merge: true }
-            );
+            // const creatorRef = doc(db, ALL_USERS, user.displayName);
+            // await setDoc(
+            //   //もともと無かったupdatedAtを追加したのでupdateにはsetDocを使う
+            //   creatorRef,
+            //   authInfo,
+            //   { merge: true }
+            // );
+
+            await dispatch(updateCreatorInfo(authInfo)).unwrap();
 
             //🔵creators_postコレクションのphotoもここで更新する
             const q = query(
@@ -179,11 +186,6 @@ export const EditProfilePage = () => {
             //After creating a query object, use the get() function to retrieve the results:
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((document) => {
-              // doc.data() is never undefined for query doc snapshots
-              //   setPostId(document.id);//これだとpostIdがレンダリング前で反映されない
-              //   console.log("potId", postId);
-
-              //ループの中で`updateDoc`を使うのが安全か不安だが今のところ問題見られない
               console.log("potId", document.id);
               const ref = doc(db, CREATORS_POSTS, document.id);
               updateDoc(ref, {
@@ -203,7 +205,6 @@ export const EditProfilePage = () => {
               } as User);
             }
           }
-          // return { userPhoto, mainComment, userName, updatedAt };
         } catch (e) {
           Alert.alert("Firestoreに保存を失敗しました");
           console.log("Firestoreに保存を失敗しました", e); //<-- これでエラー内容確認

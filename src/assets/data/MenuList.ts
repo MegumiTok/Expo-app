@@ -10,6 +10,7 @@ import AddPostPage from "@pages/AddPostPage";
 import TestTwo from "@private/TestTwo";
 import EditProfilePage from "@pages/EditProfilePage";
 import EditPostPage from "@pages/EditPostPage";
+import { Test_Date } from "@private/Test_Date";
 
 export const MenuList = [
   {
@@ -52,6 +53,12 @@ export const MenuList = [
     name: "EditProfilePage",
     label: "EditProfilePage",
     component: EditProfilePage,
+    options: { headerShown: true }
+  },
+  {
+    name: "Test_Date",
+    label: "Test_Date",
+    component: Test_Date,
     options: { headerShown: true }
   }
 

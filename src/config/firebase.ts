@@ -1,20 +1,8 @@
 import { initializeApp } from "firebase/app";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  query,
-  where
-} from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
-import Constants from "expo-constants";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  signInWithCredential,
-  initializeAuth
-} from "firebase/auth";
+
+import { initializeAuth } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getReactNativePersistence } from "firebase/auth/react-native";
 
