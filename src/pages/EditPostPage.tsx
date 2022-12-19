@@ -33,8 +33,7 @@ import { GENRES, CREATORS_POSTS } from "src/config/const";
 //redux --------------------------------
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@Redux/hook";
-import { updatePost, selectSinglePostById } from "@Redux/postsSlice";
-
+import { updatePost } from "@Redux/postActions";
 //style-------------------------------------------------------------------
 import { basicStyles } from "@components/styles/theme/basicStyleSheet";
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
@@ -118,6 +117,7 @@ export const EditPostPage: FC<any> = ({ route }) => {
       try {
         setAddRequestStatus("pending");
 
+        // reduxを使わない場合======================================
         // const postInfo = {
         //   comment: data.comment,
         //   // updatedAt: Timestamp.fromDate(new Date())
@@ -133,14 +133,24 @@ export const EditPostPage: FC<any> = ({ route }) => {
         //   { merge: true }
         // );
 
-        const resultAction = dispatch(
+        // createAsyncThunkを使わずにreducers内で処理する場合=======
+        // ただその場合import { updatePost} from "@Redux/postsSlice";のようにupdatePostのimport元が変わるので注意
+        // const resultAction = await dispatch(
+        //   updatePost({
+        //     ...item,
+        //     postId: item.postId,
+        //     comment: data.comment,
+        //     genre: data.genre,
+        //     postedAt: new Date().toISOString()
+        //   })
+        // );
+
+        const resultAction = await dispatch(
           updatePost({
-            ...item,
-            postId: item.postId,
             comment: data.comment,
             genre: data.genre,
-            postedAt: new Date().toISOString()
-          })
+            postId: item.postId
+          } as Post)
         );
         unwrapResult(resultAction);
         // navigation.navigate(Routes.SinglePost, { postId });

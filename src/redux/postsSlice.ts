@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchAllPosts, createNewPost } from "./postActions";
+import { fetchAllPosts, createNewPost, updatePost } from "./postActions";
 //+type---------------------------------
 import type { Status } from "@models/StatusType";
 import type { Post } from "@models/PostTypes";
@@ -27,17 +27,17 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    updatePost(state, action: PayloadAction<Post>) {
-      const { postId, comment, genre, postedAt } = action.payload;
-      const existingPost = state.allPosts.find(
-        (item) => item.postId === postId
-      );
-      if (existingPost) {
-        existingPost.comment = comment;
-        existingPost.genre = genre;
-        existingPost.postedAt = postedAt;
-      }
-    }
+    // updatePost(state, action: PayloadAction<Post>) {
+    //   const { postId, comment, genre, postedAt } = action.payload;
+    //   const existingPost = state.allPosts.find(
+    //     (item) => item.postId === postId
+    //   );
+    //   if (existingPost) {
+    //     existingPost.comment = comment;
+    //     existingPost.genre = genre;
+    //     existingPost.postedAt = postedAt;
+    //   }
+    // }
   },
   extraReducers(builder) {
     builder
@@ -45,12 +45,16 @@ const postsSlice = createSlice({
       .addCase(createNewPost.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createNewPost.fulfilled, (state, action) => {
-        if (action.payload) {
+      .addCase(createNewPost.fulfilled, (state, { payload }) => {
+        // console.log(payload);
+        if (payload) {
           //この書き方がいいかわからないがこれでundefined問題を解決
           state.status = "succeeded";
-          state.allPosts.push(action.payload); //undefined問題解決したい
+          state.allPosts.push(payload);
         }
+
+        // state.status = "succeeded";
+        // state.allPosts.push(payload);
       })
       .addCase(createNewPost.rejected, (state, action) => {
         state.status = "failed";
@@ -69,11 +73,41 @@ const postsSlice = createSlice({
       .addCase(fetchAllPosts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+
+      //投稿をアップデートする=====================================================================================
+      .addCase(updatePost.pending, (state) => {
+        console.log("投稿をアップデートする:");
+        state.status = "loading";
+      })
+      // .addCase(updatePost.fulfilled, (state, action) => {
+      //   state.status = "succeeded";
+      //   state.currentPost = action.payload;
+      // })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        // if (action.payload) {
+        console.log("テスト:", action.payload);
+        state.status = "succeeded";
+        const { postId, comment, genre, postedAt } = action.payload;
+        const existingPost = state.allPosts.find(
+          (item) => item.postId === postId
+        );
+        if (existingPost) {
+          existingPost.comment = comment;
+          existingPost.genre = genre;
+          existingPost.postedAt = postedAt;
+        }
+        // }
+      })
+
+      .addCase(updatePost.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   }
 });
 
-export const { updatePost } = postsSlice.actions;
+// export const { updatePost } = postsSlice.actions;
 
 export const postsReducer = postsSlice.reducer;
 

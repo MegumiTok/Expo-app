@@ -28,7 +28,11 @@ import type { Creator } from "@models/AuthTypes";
 import { getDocs } from "firebase/firestore";
 import { allUsersColRef } from "src/config/firebase";
 
+//redux----------------------------------------------------------------
+import { useAppDispatch, useAppSelector } from "@Redux/hook";
+
 export const CreatorList = ({ navigation: { navigate } }) => {
+  const dispatch = useAppDispatch();
   // const { navigate } = useNavigation<CreatorListProps>();
   const scrollX = useRef(new Animated.Value(0)).current;
 

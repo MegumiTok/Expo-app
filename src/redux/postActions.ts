@@ -1,6 +1,6 @@
 // firebase-----------------------------
 import { db, postsColRef } from "src/config/firebase";
-import { doc, setDoc, getDocs, getDoc, Timestamp } from "firebase/firestore";
+import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 import { CREATORS_POSTS } from "src/config/const";
 
 //type-----------------------------------------------------
@@ -76,10 +76,39 @@ export const createNewPost = createAsyncThunk(
           surprise: 0
         }
       };
+
       await setDoc(postRef, posts);
-      return creatorPost;
+      // return creatorPost;
+      return posts;
     } catch (error) {
       console.log("createNewPostで例外処理発生", error);
+    }
+  }
+);
+
+export const updatePost = createAsyncThunk(
+  "posts/updatePost",
+  async (data: Post, thunkAPI) => {
+    try {
+      const postRef = doc(db, CREATORS_POSTS, data.postId);
+
+      const posts = {
+        postedAt: new Date().toISOString(),
+        comment: data.comment,
+        genre: data.genre
+      } as Post;
+      await setDoc(
+        //If the document does not exist, it will be created. If the document does exist, its contents will be overwritten with the newly provided data,
+        postRef,
+        posts,
+        { merge: true }
+      );
+
+      return posts;
+    } catch (error) {
+      console.log("createNewPostで例外処理発生", error);
+      // thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
