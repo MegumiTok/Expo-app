@@ -1,6 +1,6 @@
 import { Text } from "native-base";
 import { View, StyleSheet } from "react-native";
-import { parseISO, formatDistanceToNow } from "date-fns";
+// import { parseISO, formatDistanceToNow } from "date-fns";
 //styles----------------------------
 import type { Post } from "@models/PostTypes";
 import { SCREEN_WIDTH } from "@components/styles/theme/layout";
@@ -8,11 +8,13 @@ import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 // import type { FeedProps } from "@models/NavTypes";
 
 // import { ReactionButtons } from "@components/templates/ReactionButtons";
+
+import { _timeAgo } from "@functions/_timeAgo";
 //compsーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 import ReadContinue from "./ReadContinue";
 
 export const FeedPostFooter = ({ item }: { item: Post }) => {
-  let timeAgo = "";
+  // let timeAgo = "";
   // const timestamp = item.updatedAt || item.postedAt;
   const updatedAt = item.updatedAt;
   const postedAt = item.postedAt;
@@ -27,9 +29,8 @@ export const FeedPostFooter = ({ item }: { item: Post }) => {
   //   const timePeriod = formatDistanceToNow(date);
   //   timeAgo = ` ${timePeriod} ago`;
   // }
-  const date = parseISO(postedAt);
-  const timePeriod = formatDistanceToNow(date);
-  timeAgo = ` ${timePeriod} ago`;
+
+  const timeAgo = _timeAgo(postedAt);
   // console.log("updatedAt:", updatedAt);
 
   // timeAgo = ` ${item.postedAt} ago`;

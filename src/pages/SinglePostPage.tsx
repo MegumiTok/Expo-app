@@ -18,7 +18,8 @@ import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
 
 //ローカルーーーーーーーーーーーーーーーーーーー
 import { posts } from "@assets/data/posts";
-
+//function-------------------------------
+import { _timeAgo } from "@functions/_timeAgo";
 //redux--------------------------------------------------------
 import { useAppSelector } from "@Redux/hook";
 import { selectSinglePostById } from "@Redux/postsSlice";
@@ -37,7 +38,7 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
     return (
       <Center flex={1}>
         <Center>
-          <Text> 画像がありません</Text>
+          <Text> postがありません</Text>
         </Center>
       </Center>
     );
@@ -46,6 +47,8 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
 
   const _takasa: number =
     calculatedMaxH < PHOTO_HEIGHT ? calculatedMaxH : PHOTO_HEIGHT;
+
+  const timeAgo = _timeAgo(post.postedAt);
   return (
     <>
       <StatusBar hidden />
@@ -58,7 +61,7 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
         </View>
         {/* <View mb={15}> */}
         <PostHeader item={post} />
-        {/* <TimeAgo timestamp={post.date} /> */}
+        <Text> {timeAgo}</Text>
         {/* </View> */}
         <Image
           style={{ width: SCREEN_WIDTH, height: _takasa }}
