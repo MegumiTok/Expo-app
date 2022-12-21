@@ -42,7 +42,6 @@ export const creatorsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
       //Activeユーザー（クリエイターのみ）のプロフィール変更＝＝＝＝＝＝＝＝＝＝
       .addCase(updateCreatorInfo.pending, (state) => {
         state.status = "loading";
@@ -64,19 +63,12 @@ export const creatorsSlice = createSlice({
         (state, action: PayloadAction<Creator[]>) => {
           state.status = "succeeded";
           state.allCreators = action.payload;
-          // Add any fetched posts to the array
-          // state.allCreators = state.allCreators.concat(action.payload);
         }
       )
       .addCase(fetchCreators.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
-
-    // builder.addCase(fetchInboxUsers.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   state.inboxUsers = action.payload;
-    // });
   }
 });
 
