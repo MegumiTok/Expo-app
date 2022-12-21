@@ -225,6 +225,7 @@ export const EditProfilePage = () => {
   //   if (!currentUser) return null;
   return (
     <ScrollView>
+      <Center mt={3}>プロフィールの画像とコメントを変更できます</Center>
       <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss;
@@ -298,7 +299,7 @@ export const EditProfilePage = () => {
           <View width={"100%"}>
             <OutlineButton
               onPress={handleSubmit(onPressSaveButton)}
-              title="投稿"
+              title="編集完了"
               disabled={!canSave}
             />
           </View>

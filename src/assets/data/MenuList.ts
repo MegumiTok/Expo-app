@@ -13,12 +13,12 @@ import EditPostPage from "@pages/EditPostPage";
 import { Test_Date } from "@private/Test_Date";
 
 export const MenuList = [
-  {
-    name: "Test",
-    label: "Test",
-    component: Test,
-    options: { headerShown: false }
-  },
+  // {
+  //   name: "Test",
+  //   label: "Test",
+  //   component: Test,
+  //   options: { headerShown: false }
+  // },
   {
     name: "AniOne",
     label: "AniOne",
@@ -36,31 +36,20 @@ export const MenuList = [
     label: "LogoutPage",
     component: LogoutPage,
     options: { headerShown: true }
-  },
+  }
   // {
   //   name: "AddPostPage",
   //   label: "AddPostPage",
   //   component: AddPostPage,
   //   options: { headerShown: true }
   // },
-  {
-    name: "TestTwo",
-    label: "TestTwo",
-    component: TestTwo,
-    options: { headerShown: true }
-  },
-  {
-    name: "EditProfilePage",
-    label: "EditProfilePage",
-    component: EditProfilePage,
-    options: { headerShown: true }
-  },
-  {
-    name: "Test_Date",
-    label: "Test_Date",
-    component: Test_Date,
-    options: { headerShown: true }
-  }
+
+  // {
+  //   name: "EditProfilePage",
+  //   label: "EditProfilePage",
+  //   component: EditProfilePage,
+  //   options: { headerShown: true }
+  // }
 
   // { name: "StickyHeader", label: "StickyHeader", component: StickyHeader },
   // {

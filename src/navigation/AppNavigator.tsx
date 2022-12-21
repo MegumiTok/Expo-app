@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { View } from "native-base";
+import { Center, View } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 
 import Test from "@components/Test";
@@ -24,6 +24,7 @@ import SinglePostPage from "@pages/SinglePostPage";
 import WebShop from "@pages/WebShop";
 import AddPostPage from "@pages/AddPostPage";
 import EditPostPage from "@pages/EditPostPage";
+import EditProfilePage from "@pages/EditProfilePage";
 //data
 import MenuList from "@assets/data/MenuList";
 
@@ -148,6 +149,11 @@ const FeedScreens = () => {
         // options={addPostPageOptions}
       />
       <Stack.Screen
+        name={Routes.EditProfile}
+        component={EditProfilePage}
+        // options={addPostPageOptions}
+      />
+      <Stack.Screen
         name={Routes.EditPost}
         component={EditPostPage}
         options={{
@@ -240,19 +246,36 @@ const StackCommonScreenOptions = ({ navigation }) => {
     animation: "fade", //💚
     headerTitle: () => (
       <Image
-        style={{ width: 200, height: HEADER_ICON_SIZE, top: -9 }}
+        style={{ width: 200, height: HEADER_ICON_SIZE, top: -7 }}
         source={require("@assets/images/logo_2.png")}
         resizeMode="contain"
       />
     ),
     headerRight: () => (
-      <TouchableWithoutFeedback
-        style={{ flexDirection: "row" }}
-        onPress={() => navigation.navigate(Routes.AddPost)}
-        // onPress={() => true}
+      <View
+        style={{
+          flexDirection: "row",
+          // backgroundColor: "tomato",
+          width: 80,
+          justifyContent: "space-between"
+        }}
       >
-        <FontAwesome5 name="plus-square" size={30} color="white" />
-      </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          style={{ padding: 5, backgroundColor: "blue" }}
+          onPress={() => navigation.navigate(Routes.AddPost)}
+          // onPress={() => true}
+        >
+          <FontAwesome5 name="plus-square" size={30} color="white" />
+        </TouchableWithoutFeedback>
+
+        <TouchableWithoutFeedback
+          style={{ right: -45, margin: 5 }}
+          onPress={() => navigation.navigate(Routes.EditProfile)}
+          // onPress={() => true}
+        >
+          <Feather name="user" color="white" size={30} />
+        </TouchableWithoutFeedback>
+      </View>
     )
   };
 };
