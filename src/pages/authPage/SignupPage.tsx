@@ -57,7 +57,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
           // userPhoto: filename,
           email: data.email,
           password: data.password,
-          userFlg: "general" //アプリからの会員登録は全員一般ユーザー
+          userFlg: "creator" //アプリからの会員登録は全員一般ユーザー(general)だが一時的にcreator使用中
         };
 
         console.log("登録データ", resisterData);

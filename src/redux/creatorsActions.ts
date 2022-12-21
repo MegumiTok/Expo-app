@@ -1,14 +1,7 @@
-import { ALL_USERS } from "src/config/const";
+import { ALL_USERS, TEST_IMAGE } from "src/config/const";
 import { db, allUsersColRef } from "src/config/firebase";
 
-import {
-  doc,
-  where,
-  setDoc,
-  getDocs,
-  query,
-  Timestamp
-} from "firebase/firestore";
+import { doc, where, setDoc, getDocs, query } from "firebase/firestore";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 //types--------------------------------------------
@@ -62,7 +55,7 @@ export const fetchCreators = createAsyncThunk(
       const allCreators: Creator[] = querySnapshot.docs.map((res) => ({
         creatorId: res.data().userId,
         creatorName: res.data().userName,
-        creatorPhoto: res.data().userPhoto,
+        creatorPhoto: res.data().userPhoto || TEST_IMAGE,
         mainComment: res.data().mainComment as string
       }));
       return allCreators;

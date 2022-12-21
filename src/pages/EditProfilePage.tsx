@@ -176,6 +176,7 @@ export const EditProfilePage = () => {
             //   { merge: true }
             // );
 
+            // ToolkitのunwrapResult functionを使うよりこっちの方がスマートかも
             await dispatch(updateCreatorInfo(authInfo)).unwrap();
 
             //🔵creators_postコレクションのphotoもここで更新する
@@ -186,7 +187,7 @@ export const EditProfilePage = () => {
             //After creating a query object, use the get() function to retrieve the results:
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((document) => {
-              console.log("potId", document.id);
+              console.log("potIdは:", document.id);
               const ref = doc(db, CREATORS_POSTS, document.id);
               updateDoc(ref, {
                 creatorPhoto: imageData
