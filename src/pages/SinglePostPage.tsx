@@ -1,5 +1,5 @@
 import { Image } from "react-native";
-import { View, Text, Button, StatusBar, Icon } from "native-base";
+import { Center, Text, View, Button, StatusBar, Icon } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 
 //templates---------------------------------------------------------------
@@ -16,21 +16,30 @@ import { Colors } from "@components/styles/theme/Colors";
 import { CloseButton } from "@components/styles/button";
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
 
+//ローカルーーーーーーーーーーーーーーーーーーー
 import { posts } from "@assets/data/posts";
+
+//redux--------------------------------------------------------
+import { useAppSelector } from "@Redux/hook";
+import { selectSinglePostById } from "@Redux/postsSlice";
+import useUser from "@hooks/useUser";
+// import { selectCurrentUser } from "@modules/redux/authSlice";
 
 export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
   const { postId } = route.params;
-  //   console.log("1postId: ", postId);
-  //   const user = useAppSelector(selectCurrentUser);
-  //   const post = useAppSelector((state) => selectSinglePostById(state, postId));
-  const post = posts.find((post) => post.postId === postId);
-  //   console.log("postは: ", post);
+  console.log("postId: ", postId);
+  const { user } = useUser();
+  const post = useAppSelector((state) => selectSinglePostById(state, postId));
+  // const post = posts.find((post) => post.postId === postId);
+  // console.log("postは: ", post);
 
   if (!post) {
     return (
-      <View>
-        <Text>投稿がありません</Text>
-      </View>
+      <Center flex={1}>
+        <Center>
+          <Text> 画像がありません</Text>
+        </Center>
+      </Center>
     );
   }
   const calculatedMaxH = Math.round((SCREEN_WIDTH * post.imageH) / post.imageW); //実際ポストされるのサイズに計算

@@ -114,7 +114,7 @@ export const postsReducer = postsSlice.reducer;
 export const selectAllPosts = (state: RootState) => state.posts.allPosts;
 
 export const selectSinglePostById = (state: RootState, postId: string) =>
-  selectAllPosts(state).find((post) => post.creatorId === postId);
+  selectAllPosts(state).find((post) => post.postId === postId);
 
 export const selectPostsByCreator = (state: RootState, creatorId: string) =>
   selectAllPosts(state).filter((post) => post.creatorId === creatorId);
