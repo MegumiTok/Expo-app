@@ -37,12 +37,12 @@ export const MenuList = [
     component: LogoutPage,
     options: { headerShown: true }
   },
-  {
-    name: "AddPostPage",
-    label: "AddPostPage",
-    component: AddPostPage,
-    options: { headerShown: true }
-  },
+  // {
+  //   name: "AddPostPage",
+  //   label: "AddPostPage",
+  //   component: AddPostPage,
+  //   options: { headerShown: true }
+  // },
   {
     name: "TestTwo",
     label: "TestTwo",

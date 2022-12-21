@@ -142,11 +142,11 @@ const FeedScreens = () => {
           headerShown: false
         }}
       /> */}
-      {/* <Stack.Screen
+      <Stack.Screen
         name={Routes.AddPost}
         component={AddPostPage}
-        options={addPostPageOptions}
-      /> */}
+        // options={addPostPageOptions}
+      />
       <Stack.Screen
         name={Routes.EditPost}
         component={EditPostPage}
@@ -229,11 +229,8 @@ const MenuScreens = () => {
 };
 
 //+Common(Stack - screenOptions)-------------------------------------------------------
-const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
+const StackCommonScreenOptions = ({ navigation }) => {
   const HEADER_ICON_SIZE = 40;
-
-  const { navigate } = useNavigation();
-
   return {
     headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
     headerStyle: {
@@ -247,6 +244,15 @@ const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
         source={require("@assets/images/logo_2.png")}
         resizeMode="contain"
       />
+    ),
+    headerRight: () => (
+      <TouchableWithoutFeedback
+        style={{ flexDirection: "row" }}
+        onPress={() => navigation.navigate(Routes.AddPost)}
+        // onPress={() => true}
+      >
+        <FontAwesome5 name="plus-square" size={30} color="white" />
+      </TouchableWithoutFeedback>
     )
   };
 };
