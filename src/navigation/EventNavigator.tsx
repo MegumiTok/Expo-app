@@ -8,6 +8,11 @@ import {
   EventList3
 } from "@pages/eventPage";
 
+//redux----------------------------------------------------------------
+import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { selectAllEvents } from "@Redux/eventSlice";
+import { fetchCreators } from "@Redux/creatorsActions";
+
 //Eventページ内のTopタブ
 const Tab = createMaterialTopTabNavigator();
 

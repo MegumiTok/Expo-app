@@ -149,7 +149,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
 
       {/* メールアドレス ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/}
       <Controller
-        defaultValue=""
+        defaultValue="@sample.com"
         control={control}
         name="email"
         rules={{

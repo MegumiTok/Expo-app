@@ -65,7 +65,7 @@ export const createNewPost = createAsyncThunk(
       //   const postRef = doc(postsColRef);
       const postRef = doc(db, CREATORS_POSTS, creatorPost.postId); //✅docIdをpostIdと同じにすることで参照がしやすくなる
 
-      const posts: Post = {
+      const post: Post = {
         ...creatorPost,
         postedAt: new Date().toISOString(),
         reactions: {
@@ -77,9 +77,9 @@ export const createNewPost = createAsyncThunk(
         }
       };
 
-      await setDoc(postRef, posts);
+      await setDoc(postRef, post);
       // return creatorPost;
-      return posts;
+      return post;
     } catch (error) {
       console.log("createNewPostで例外処理発生", error);
     }

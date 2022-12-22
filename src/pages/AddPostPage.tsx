@@ -65,9 +65,7 @@ export const AddPostPage = () => {
   const [galleryPermission, setGalleryPermission] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const { user } = useUser();
-  //   const genres = useAppSelector((state) => state.genre);
 
-  const items = genres;
   // const [items, setItems] = useState(GENRES);
 
   const toggleModal = () => {
@@ -243,7 +241,7 @@ export const AddPostPage = () => {
             render={({ field: { onChange, value } }) => (
               <DropDownPicker
                 value={value}
-                items={items}
+                items={genres}
                 open={open}
                 setValue={(value) => {
                   onChange(value);

@@ -1,16 +1,6 @@
-// import { AddPostPage } from "@components/pages";
-
-// import EditProfilePage from "@components/pages/EditProfilePage";
-// import LogoutPage from "@components/pages/authPage/LogoutPage";
-import Test from "@components/Test";
 import { AniOne } from "@private/AniOne";
-import { AniTwo } from "@private/AniTwo";
 import LogoutPage from "@pages/authPage/LogoutPage";
-import AddPostPage from "@pages/AddPostPage";
-import TestTwo from "@private/TestTwo";
-import EditProfilePage from "@pages/EditProfilePage";
-import EditPostPage from "@pages/EditPostPage";
-import { Test_Date } from "@private/Test_Date";
+import { AddEventPage } from "@pages/eventPage";
 
 export const MenuList = [
   // {
@@ -36,13 +26,13 @@ export const MenuList = [
     label: "LogoutPage",
     component: LogoutPage,
     options: { headerShown: true }
+  },
+  {
+    name: "AddEventPage",
+    label: "AddEventPage",
+    component: AddEventPage,
+    options: { headerShown: true }
   }
-  // {
-  //   name: "AddPostPage",
-  //   label: "AddPostPage",
-  //   component: AddPostPage,
-  //   options: { headerShown: true }
-  // },
 
   // {
   //   name: "EditProfilePage",
