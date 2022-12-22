@@ -40,8 +40,25 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
   // const postId = item.postId;
 
   const handleDeletePost = () => {
-    dispatch(deletePost(item.postId));
-    Alert.alert("ポストを削除しました");
+    return Alert.alert(
+      "Are your sure?",
+      "Are you sure you want to remove this post?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            dispatch(deletePost(item.postId));
+            // Alert.alert("ポストを削除しました");
+          }
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No"
+        }
+      ]
+    );
   };
   return (
     <ContainerHeader>
