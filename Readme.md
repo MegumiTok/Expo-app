@@ -1,6 +1,9 @@
-# NativeBase TypeScript Expo Template
-
-The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
+# 使用
+- NativeBase 
+- TypeScript 
+- Expo 
+- firebase
+- Redux
 
 # コミットメッセージ
 | 記号 | Description | 
@@ -48,7 +51,7 @@ console.log(Constants.statusBarHeight);
 ```
 その場合はreloadしてください。
 
-#　ブランチ
+# ブランチ
 ## main
 メインブランチ
 

@@ -4,11 +4,11 @@ import { View, StyleSheet } from "react-native";
 //styles----------------------------
 import type { Post } from "@models/PostTypes";
 import { SCREEN_WIDTH } from "@components/styles/theme/layout";
-// import LikeButtonAnimated from "@assets/Icons/LikeButtonAnimated";
+
 // import type { FeedProps } from "@models/NavTypes";
 
 // import { ReactionButtons } from "@components/templates/ReactionButtons";
-
+import LikeButtonAnimated from "./LikeButtonAnimated";
 import { _timeAgo } from "@functions/_timeAgo";
 //compsーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 import ReadContinue from "./ReadContinue";
@@ -37,15 +37,15 @@ export const FeedPostFooter = ({ item }: { item: Post }) => {
   return (
     <>
       <View style={styles.containerMain}>
-        {/* <View style={styles.containerLike}>
-          <LikeButtonAnimated />
-          <ReactionButtons item={item} />
-        </View> */}
-        {/* <View style={{ flexDirection: "row" }} /> */}
-        {/* <SavedButtonAnimated /> */}
         <View>
           <Text fontSize="xs">{timeAgo}</Text>
         </View>
+        <View style={styles.containerLike}>
+          <LikeButtonAnimated />
+          {/* <ReactionButtons item={item} /> */}
+        </View>
+
+        {/* <SavedButtonAnimated /> */}
       </View>
       <View style={{ paddingHorizontal: 15, paddingBottom: 15 }}>
         <ReadContinue comment={item.comment} />
