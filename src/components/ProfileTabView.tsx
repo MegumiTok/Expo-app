@@ -18,7 +18,7 @@ import Posts from "@pages/Posts";
 import type { Post } from "@models/PostTypes";
 
 interface TabViewProps {
-  topHeight: any;
+  topHeight: number;
   posts: Post[];
 }
 export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
@@ -27,7 +27,7 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
   const TOP_SIZE = topHeight;
   // const TOP_HEADER_HEIGHT = SCREEN_WIDTH * 0.21 + SPACING + TOP_SIZE;
   const TOP_HEADER_HEIGHT = SPACING + TOP_SIZE + STATUS_BAR_HEIGHT;
-  //🟠　TOP_HEADER_HEIGHTをアニメーションでスクロールしたら０にするようにすればいいのかな、
+  //🟠TOP_HEADER_HEIGHTをアニメーションでスクロールしたら０にするようにすればいいのかな、
 
   // const squares = [];
   // const numberOfSquare = 21;

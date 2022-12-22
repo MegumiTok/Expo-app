@@ -1,86 +1,39 @@
 import { useState, useCallback, useEffect } from "react";
 
-import {
-  StyleSheet,
-  FlatList,
-  TouchableWithoutFeedback,
-  SafeAreaView,
-  Modal,
-  Alert
-} from "react-native";
+import { FlatList, Alert } from "react-native";
 
 //ローカル
 // import { posts } from "@assets/data/posts";
 
 import { LoadingView } from "@components/styles/LoadingView";
 import FeedPost from "@components/FeedPost";
-// firebase----------------------------
-import { getDocs, doc, getDoc } from "firebase/firestore";
-import { postsColRef, db } from "src/config/firebase";
-import { ALL_USERS } from "src/config/const";
+
+import ErrorPage from "@components/ErrorPage";
+//redux----------------------------------------------------------------
+import { selectAllPosts } from "@Redux/postsSlice";
+import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { fetchAllPosts } from "@Redux/postActions";
 //Context------------------------------------
 import useUser from "@hooks/useUser";
 //type--------------------------------------------
 import type { FC } from "react";
 import type { Post } from "@models/PostTypes";
-import type { Auth } from "@models/AuthTypes";
 
 export const Feed: FC = () => {
+  const dispatch = useAppDispatch();
+  const posts = useAppSelector(selectAllPosts);
+  const postStatus = useAppSelector((state) => state.posts.status);
+  const error = useAppSelector((state) => state.posts.error);
+
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [posts, setPosts] = useState(null);
-
+  // It's important that we only try to fetch the list of posts once. If we do it every time the <PostsList> component renders, or is re-created because we've switched between views, we might end up fetching the posts several times. We can use the posts.status enum to help decide if we need to actually start fetching, by selecting that into the component and only starting the fetch if the status is 'idle'.
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const list = [] as Post[];
-        const querySnapshot = await getDocs(postsColRef);
-        querySnapshot.forEach((doc) => {
-          const {
-            postId,
-            creatorId,
-            creatorName,
-            creatorPhoto,
-            date,
-            genre,
-            comment,
-            postedImage,
-            reactions,
-            imageW,
-            imageH,
-            product
-          } = doc.data();
-
-          list.push({
-            postId,
-            creatorId,
-            creatorName,
-            creatorPhoto,
-            date,
-            genre,
-            comment,
-            postedImage,
-            reactions,
-            imageW,
-            imageH,
-            product
-          });
-        });
-        setPosts(list);
-        console.log("リスト", list);
-
-        if (loading) {
-          setLoading(false);
-        }
-      } catch (e) {
-        Alert.alert("fetchPostsに失敗しました。");
-        console.log("エラー:", e);
-      }
-    };
-
-    fetchPosts(); //async functionを使っているのでこのような書き方になる
-  }, [loading]); //🔴dependency array.を外したらuseEffectが永遠ループに入った
+    if (postStatus === "idle") {
+      dispatch(fetchAllPosts());
+    }
+  }, [postStatus, dispatch]);
 
   const _renderItem = ({ item }: { item: Post }) => {
     return <FeedPost item={item} />;
@@ -107,28 +60,30 @@ export const Feed: FC = () => {
   //   return <>{loading ? <LoadingView /> : null}</>;
   // };
 
-  return (
-    <>
-      {loading ? (
-        <LoadingView />
-      ) : (
-        <FlatList
-          data={posts}
-          keyExtractor={(item) => item.postId}
-          renderItem={_renderItem}
-          showsVerticalScrollIndicator={false}
-          initialNumToRender={3} //default is 10
-          maxToRenderPerBatch={3}
-          windowSize={5}
-          removeClippedSubviews
-          refreshing={refreshing}
-          // onRefresh={_onRefresh}
-          onEndReachedThreshold={0.2}
-          // onEndReached={_onEndReached}
-          // ListFooterComponent={_listFooterComponent}
-          scrollEventThrottle={16}
-        />
-      )}
-    </>
-  );
+  let content;
+  if (postStatus === "loading") {
+    content = <LoadingView />;
+  } else if (postStatus === "succeeded") {
+    content = (
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.postId}
+        renderItem={_renderItem}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={3} //default is 10
+        maxToRenderPerBatch={3}
+        windowSize={5}
+        removeClippedSubviews
+        refreshing={refreshing}
+        // onRefresh={_onRefresh}
+        onEndReachedThreshold={0.2}
+        // onEndReached={_onEndReached}
+        // ListFooterComponent={_listFooterComponent}
+        scrollEventThrottle={16}
+      />
+    );
+  } else if (postStatus === "failed") {
+    content = <ErrorPage error={error} />;
+  }
+  return <>{content}</>;
 };

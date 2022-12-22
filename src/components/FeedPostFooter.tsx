@@ -1,27 +1,54 @@
+import { Text } from "native-base";
 import { View, StyleSheet } from "react-native";
-
+// import { parseISO, formatDistanceToNow } from "date-fns";
 //styles----------------------------
+import type { Post } from "@models/PostTypes";
 import { SCREEN_WIDTH } from "@components/styles/theme/layout";
-// import LikeButtonAnimated from "@assets/Icons/LikeButtonAnimated";
-import type { FeedProps } from "@models/NavTypes";
+
+// import type { FeedProps } from "@models/NavTypes";
 
 // import { ReactionButtons } from "@components/templates/ReactionButtons";
+import LikeButtonAnimated from "./LikeButtonAnimated";
+import { _timeAgo } from "@functions/_timeAgo";
 //compsーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 import ReadContinue from "./ReadContinue";
 
-export const FeedPostFooter = ({ item }: FeedProps) => {
+export const FeedPostFooter = ({ item }: { item: Post }) => {
+  // let timeAgo = "";
+  // const timestamp = item.updatedAt || item.postedAt;
+  const updatedAt = item.updatedAt;
+  const postedAt = item.postedAt;
+  // if (updatedAt) {
+  //   console.log("updatedAt:", updatedAt);
+  //   const date = parseISO(updatedAt);
+  //   const timePeriod = formatDistanceToNow(date);
+  //   timeAgo = `updated ${timePeriod} ago`;
+  // } else {
+  //   console.log("postedAt:", postedAt);
+  //   const date = parseISO(postedAt);
+  //   const timePeriod = formatDistanceToNow(date);
+  //   timeAgo = ` ${timePeriod} ago`;
+  // }
+
+  const timeAgo = _timeAgo(postedAt);
+  // console.log("updatedAt:", updatedAt);
+
+  // timeAgo = ` ${item.postedAt} ago`;
   return (
     <>
       <View style={styles.containerMain}>
-        {/* <View style={styles.containerLike}>
+        <View>
+          <Text fontSize="xs">{timeAgo}</Text>
+        </View>
+        <View style={styles.containerLike}>
           <LikeButtonAnimated />
-          <ReactionButtons item={item} />
-        </View> */}
-        <View style={{ flexDirection: "row" }} />
+          {/* <ReactionButtons item={item} /> */}
+        </View>
+
         {/* <SavedButtonAnimated /> */}
       </View>
       <View style={{ paddingHorizontal: 15, paddingBottom: 15 }}>
-        <ReadContinue section={item} />
+        <ReadContinue comment={item.comment} />
       </View>
     </>
   );

@@ -1,14 +1,14 @@
 export interface Post {
   postId: string;
   creatorId: string; //selectPostsByUserで使用中
-  creatorName: string | undefined | null;
-  creatorPhoto: string | undefined | null; //null必要（type Creator参照）//userで管理しようと思ったがこちらの方が楽
-  date: any;
+  creatorName: string | null;
+  creatorPhoto: string | null; //null必要（type Creator参照）//userで管理しようと思ったがこちらの方が楽
+
   genre: string;
   comment: string;
   // postedImage: string | [];
   postedImage: string; //一枚投稿のみ
-  reactions: {
+  reactions?: {
     thumbsUp: number;
     hooray: number;
     heart: number;
@@ -22,6 +22,7 @@ export interface Post {
   // documentID?: string;
   product: boolean; //追加
 
+  postedAt?: any;
   updatedAt?: any; //追加
 }
 

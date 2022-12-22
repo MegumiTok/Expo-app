@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { View } from "native-base";
+import { Center, View } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 
 import Test from "@components/Test";
@@ -24,6 +24,8 @@ import SinglePostPage from "@pages/SinglePostPage";
 import WebShop from "@pages/WebShop";
 import AddPostPage from "@pages/AddPostPage";
 import EditPostPage from "@pages/EditPostPage";
+import EditProfilePage from "@pages/EditProfilePage";
+import EventSinglePost from "@pages/eventPage/EventSinglePost";
 //data
 import MenuList from "@assets/data/MenuList";
 
@@ -142,11 +144,16 @@ const FeedScreens = () => {
           headerShown: false
         }}
       /> */}
-      {/* <Stack.Screen
+      <Stack.Screen
         name={Routes.AddPost}
         component={AddPostPage}
-        options={addPostPageOptions}
-      /> */}
+        // options={addPostPageOptions}
+      />
+      <Stack.Screen
+        name={Routes.EditProfile}
+        component={EditProfilePage}
+        // options={addPostPageOptions}
+      />
       <Stack.Screen
         name={Routes.EditPost}
         component={EditPostPage}
@@ -205,6 +212,7 @@ const EventScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen name={Routes.EventList} component={EventNavigator} />
+      <Stack.Screen name={Routes.EventSinglePost} component={EventSinglePost} />
     </Stack.Navigator>
   );
 };
@@ -229,11 +237,8 @@ const MenuScreens = () => {
 };
 
 //+Common(Stack - screenOptions)-------------------------------------------------------
-const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
+const StackCommonScreenOptions = ({ navigation }) => {
   const HEADER_ICON_SIZE = 40;
-
-  const { navigate } = useNavigation();
-
   return {
     headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
     headerStyle: {
@@ -243,10 +248,36 @@ const StackCommonScreenOptions = (): NativeStackNavigationOptions => {
     animation: "fade", //💚
     headerTitle: () => (
       <Image
-        style={{ width: 200, height: HEADER_ICON_SIZE, top: -9 }}
+        style={{ width: 200, height: HEADER_ICON_SIZE, top: -7 }}
         source={require("@assets/images/logo_2.png")}
         resizeMode="contain"
       />
+    ),
+    headerRight: () => (
+      <View
+        style={{
+          flexDirection: "row",
+          // backgroundColor: "tomato",
+          width: 80,
+          justifyContent: "space-between"
+        }}
+      >
+        <TouchableWithoutFeedback
+          style={{ padding: 5, backgroundColor: "blue" }}
+          onPress={() => navigation.navigate(Routes.AddPost)}
+          // onPress={() => true}
+        >
+          <FontAwesome5 name="plus-square" size={30} color="white" />
+        </TouchableWithoutFeedback>
+
+        <TouchableWithoutFeedback
+          style={{ right: -45, margin: 5 }}
+          onPress={() => navigation.navigate(Routes.EditProfile)}
+          // onPress={() => true}
+        >
+          <Feather name="user" color="white" size={30} />
+        </TouchableWithoutFeedback>
+      </View>
     )
   };
 };

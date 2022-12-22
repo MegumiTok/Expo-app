@@ -26,7 +26,7 @@ module.exports = function (api) {
           alias: {
             "@models": "./src/models",
             "@functions": "./src/functions",
-            // "@redux": "./src/redux",
+            "@Redux": "./src/redux",
             "@assets": "./src/assets",
             "@components": "./src/components",
             "@private": "./src/private",

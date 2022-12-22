@@ -1,23 +1,16 @@
-// import { AddPostPage } from "@components/pages";
-
-// import EditProfilePage from "@components/pages/EditProfilePage";
-// import LogoutPage from "@components/pages/authPage/LogoutPage";
-import Test from "@components/Test";
 import { AniOne } from "@private/AniOne";
-import { AniTwo } from "@private/AniTwo";
 import LogoutPage from "@pages/authPage/LogoutPage";
-import AddPostPage from "@pages/AddPostPage";
-import TestTwo from "@private/TestTwo";
-import EditProfilePage from "@pages/EditProfilePage";
-import EditPostPage from "@pages/EditPostPage";
+import { AddEventPage } from "@pages/eventPage";
+import Ani_Task from "@private/Ani_Task";
+import { AniFour } from "@private/AniFour";
 
 export const MenuList = [
-  {
-    name: "Test",
-    label: "Test",
-    component: Test,
-    options: { headerShown: false }
-  },
+  // {
+  //   name: "Test",
+  //   label: "Test",
+  //   component: Test,
+  //   options: { headerShown: false }
+  // },
   {
     name: "AniOne",
     label: "AniOne",
@@ -37,21 +30,22 @@ export const MenuList = [
     options: { headerShown: true }
   },
   {
-    name: "AddPostPage",
-    label: "AddPostPage",
-    component: AddPostPage,
+    name: "AddEventPage",
+    label: "AddEventPage",
+    component: AddEventPage,
     options: { headerShown: true }
   },
   {
-    name: "TestTwo",
-    label: "TestTwo",
-    component: TestTwo,
+    name: "Ani_Task",
+    label: "Ani_Task",
+    component: Ani_Task,
     options: { headerShown: true }
   },
+
   {
-    name: "EditProfilePage",
-    label: "EditProfilePage",
-    component: EditProfilePage,
+    name: "AniFour",
+    label: "AniFour",
+    component: AniFour,
     options: { headerShown: true }
   }
 

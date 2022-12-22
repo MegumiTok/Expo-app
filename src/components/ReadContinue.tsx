@@ -5,7 +5,7 @@ import ReadMore from "react-native-read-more-text";
 //style--------------------------------------------
 import basicStyles from "./styles/theme/basicStyleSheet";
 
-export const ReadContinue = ({ section }) => {
+export const ReadContinue = ({ comment }: { comment: string }) => {
   const _renderTruncatedFooter = (handlePress: any) => {
     return (
       <View mt="5" color="#76785F">
@@ -29,7 +29,7 @@ export const ReadContinue = ({ section }) => {
         renderTruncatedFooter={_renderTruncatedFooter}
         renderRevealedFooter={_renderRevealedFooter}
       >
-        <Text style={basicStyles.basicText}>{section.comment}</Text>
+        <Text style={basicStyles.basicText}>{comment}</Text>
       </ReadMore>
     </>
   );

@@ -22,13 +22,18 @@ import type { Register } from "@models/AuthTypes";
 import type { User } from "firebase/auth";
 // import useUser from "@modules/context/hooks/useUser";
 
-// firebase--------------------------
+// // firebase--------------------------
+// import { auth, db } from "src/config/firebase";
+// import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+// import { doc, setDoc, Timestamp } from "firebase/firestore";
 
-import { auth, db } from "src/config/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+//+redux------------------------------
+import { useAppDispatch } from "@Redux/hook";
+import { signUpWithEmailPassword } from "@Redux/authActions";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const SignupPage = ({ navigation }: SignUpProps) => {
+  const dispatch = useAppDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const {
@@ -46,91 +51,52 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        // const q = query(allUsersColRef, where("email", "==", data.email));
-        // const usersDocs = await getDocs(q);
-        // usersDocs.forEach((doc) => {
-        //   // doc.data() is never undefined for query doc snapshots
-        //   console.log(doc.id, " => ", doc.data());
-        // });
 
-        // setUserFlg("general"); //アプリからの会員登録は全員一般ユーザー！
-        // if (usersDocs.docs.length === 0) {//<----------ここのエラーを改善したい
         const resisterData: Register = {
           userName: data.userName,
           // userPhoto: filename,
           email: data.email,
           password: data.password,
-          userFlg: "general"
-          //userFlg: "general", //アプリからの会員登録は全員一般ユーザー！
+          userFlg: "creator" //アプリからの会員登録は全員一般ユーザー(general)だが一時的にcreator使用中
         };
 
-        const { email, password, userName, userFlg } = resisterData;
-
         console.log("登録データ", resisterData);
-        //console.log("apiKeyはkore", API_KEY);// console.logでもエラーだとここで認証失敗する
 
-        const userRef = doc(db, ALL_USERS, userName); //名前は変更不可にする(名前の重複も不可)
+        // const userRef = doc(db, ALL_USERS, userName); //名前は変更不可にする(名前の重複も不可)
+        // const response = await createUserWithEmailAndPassword(
+        //   auth,
+        //   email,
+        //   password
+        // );
 
-        const response = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-        const user = response.user;
-        // const userRef = doc(allUsersColRef);
-
-        await setDoc(userRef, {
-          userName,
-          email,
-          userId: user.uid,
-          userPhoto: TEST_IMAGE,
-          userFlg: userFlg,
-          createdAt: Timestamp.fromDate(new Date()),
-          mainComment: ""
-        });
+        // const user = response.user
+        // await setDoc(userRef, {
+        //   userName,
+        //   email,
+        //   userId: user.uid,
+        //   userPhoto: TEST_IMAGE,
+        //   userFlg: userFlg,
+        //   createdAt: Timestamp.fromDate(new Date()),
+        //   mainComment: ""
+        // });
 
         //The updateProfil method return Promise,so you have to wait the resolution of this before display the displayName.
-        const currentUser = auth.currentUser;
-        if (currentUser !== null) {
-          await updateProfile(user, {
-            // update a user's basic profile information
-            displayName: userName,
-            photoURL: TEST_IMAGE
-          } as User);
-        }
+        // const currentUser = auth.currentUser;
+        // if (currentUser !== null) {
+        //   await updateProfile(user, {
+        //     // update a user's basic profile information
+        //     displayName: userName,
+        //     photoURL: TEST_IMAGE
+        //   } as User);
+        // }
 
-        // createUserWithEmailAndPassword(
-        //   auth,
-        //   resisterData.email,
-        //   resisterData.password
-        // )
-        //   .then((userCredential) => {
-        //     setDoc(userRef, {
-        //       userName,
-        //       email,
-        //       userId: userCredential.user.uid,
-        //       userPhoto: "",
-        //       userFlg: userFlg,
-        //       createdAt: Timestamp.fromDate(new Date()),
-        //       mainComment: ""
-        //     });
-
-        //     const currentUser = auth.currentUser;
-        //     if (currentUser !== null) {
-        //       updateProfile(user, {
-        //         displayName: userName,
-        //         photoURL: TEST_IMAGE
-        //       } as User);
-        //     }
-        //   })
-        //   .catch((e) => {
-        //     console.log(e.code);
-        //   });
+        const resultAction = await dispatch(
+          signUpWithEmailPassword(resisterData)
+        );
+        unwrapResult(resultAction);
 
         //----
         Alert.alert("ユーザー名", `${data.userName}`);
-        // }//<---------- if文の閉じかっこ
       } catch (e) {
         Alert.alert(
           "サインアップ完了できませんでした。",
@@ -183,7 +149,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
 
       {/* メールアドレス ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/}
       <Controller
-        defaultValue=""
+        defaultValue="@sample.com"
         control={control}
         name="email"
         rules={{

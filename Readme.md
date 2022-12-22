@@ -1,6 +1,9 @@
-# NativeBase TypeScript Expo Template
-
-The official NativeBase TypeScript template for [Expo](https://docs.expo.io/)
+# 使用
+- NativeBase 
+- TypeScript 
+- Expo 
+- firebase
+- Redux
 
 # コミットメッセージ
 | 記号 | Description | 
@@ -48,7 +51,7 @@ console.log(Constants.statusBarHeight);
 ```
 その場合はreloadしてください。
 
-#　ブランチ
+# ブランチ
 ## main
 メインブランチ
 
@@ -70,4 +73,14 @@ firebaseのAuthentication部分を実装（SignupPage、LogoutPage、LoginPage�
 また随時v3ブランチに戻ってfirebaseでの実装をすすめようかな、と思います。
 
 ## v4
-Reduxを実装していくブランチ
+Redux と firebase と useContext で実装している。
+※SearchPageはほぼすっぴん
+
+## v4.1
+### 予定
+- Delete機能追加
+- SearchPageを追加
+- Reload機能
+
+## v5　(予定)
+Redux + firebase (useContext なし）で実装
