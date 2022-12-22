@@ -79,5 +79,5 @@ export const eventReducer = eventSlice.reducer;
 
 export const selectAllEvents = (state: RootState) => state.events.allEvents;
 
-export const selectEventByCategory = (state: RootState, category: any) =>
+export const selectEventByCategory = (state: RootState, category: string) =>
   selectAllEvents(state).filter((post) => post.category === category);

@@ -11,7 +11,7 @@ export const EventSinglePost: FC<EventSinglePostProps> = ({ route }) => {
   const [navigationState, setNavigationState] =
     useState<WebViewNavigation | null>(null);
   const { item } = route.params;
-  console.log("ログ:", item.title);
+  //   console.log("ログ:", item.title);
 
   if (!item.eventURL) {
     return (

@@ -12,6 +12,8 @@ import {
 
 import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
+import { LoadingView } from "@components/styles/LoadingView";
+import ErrorPage from "@components/ErrorPage";
 // ローカルデータ=======================
 // import { events } from "@assets/data/events";
 
@@ -20,27 +22,28 @@ import { useAppDispatch, useAppSelector } from "@Redux/hook";
 import { fetchAllEvents } from "@Redux/eventActions";
 import { selectAllEvents } from "@Redux/eventSlice";
 
-export const AllEventList = () => {
+export const AllEventList = ({ route }) => {
+  const { events } = route.params;
   const { navigate } = useNavigation();
-  const dispatch = useAppDispatch();
-  const events = useAppSelector(selectAllEvents);
-  const eventStatus = useAppSelector((state) => state.events.status);
-  const error = useAppSelector((state) => state.posts.error);
+  // const dispatch = useAppDispatch();
+  // const events = useAppSelector(selectAllEvents);
+  // const eventStatus = useAppSelector((state) => state.events.status);
+  // const error = useAppSelector((state) => state.posts.error);
 
   // const [opacity, setOpacity] = useState(1);
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        dispatch(fetchAllEvents());
-      } catch (e) {
-        Alert.alert("fetchAllEventsに失敗しました。");
-        console.log("エラー:", e);
-      }
-    };
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     try {
+  //       dispatch(fetchAllEvents());
+  //     } catch (e) {
+  //       Alert.alert("fetchAllEventsに失敗しました。");
+  //       console.log("エラー:", e);
+  //     }
+  //   };
 
-    fetch();
-  }, [dispatch]);
+  //   fetch();
+  // }, [dispatch]);
 
   const _renderItem = ({ item }: { item: EventType }) => {
     // const { eventId } = item;
@@ -61,6 +64,7 @@ export const AllEventList = () => {
       </Pressable>
     );
   };
+
   return (
     <View style={styles.container}>
       <FlatList
