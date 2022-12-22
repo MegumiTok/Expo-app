@@ -2,8 +2,8 @@ export interface EventType {
   eventId: string;
   postedDate: string;
   title: string;
-  eventImage: string;
-  eventURL: string;
+  // eventImage: string;
+  eventURL: string; // eventURLはfirebaseから追加するようにする
   category: category;
 }
 

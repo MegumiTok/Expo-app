@@ -10,6 +10,7 @@ import type {
 
 import type { Post } from "./PostTypes";
 import type { Creator } from "./AuthTypes";
+import type { EventType } from "./EventType";
 
 import type {
   StackNavigationProp,
@@ -37,6 +38,7 @@ export enum Routes {
   ProductDetail = "ProductDetail",
   EventList = "EventList",
   EventDetail = "EventDetail",
+  EventSinglePost = "EventSinglePost",
   Menu = "Menu",
   EditPost = "EditPost",
   SinglePost = "SinglePost",
@@ -80,6 +82,7 @@ export type RootStackParamList = {
   Search: undefined;
   EditProfile: undefined;
   AddEvent: undefined;
+  EventSinglePost: { item: EventType };
 };
 
 export type AuthStackParamList = {
@@ -110,6 +113,11 @@ export type CreatorTabScreenProps<T extends keyof CreatorTabParamList> =
 export type SinglePostProps = NativeStackScreenProps<
   RootStackParamList,
   Routes.SinglePost
+>;
+
+export type EventSinglePostProps = NativeStackScreenProps<
+  RootStackParamList,
+  Routes.EventSinglePost
 >;
 
 //auth-----------------------------------------------------------

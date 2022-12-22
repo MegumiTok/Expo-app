@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
+import {
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+  StyleSheet
+} from "react-native";
 
 import { Center, Text, View, Icon, ScrollView } from "native-base";
 
@@ -43,8 +48,8 @@ const categories = [
 
 export const AddEventPage = () => {
   const dispatch = useAppDispatch();
-  const [galleryPermission, setGalleryPermission] = useState(null);
-  const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
+  // const [galleryPermission, setGalleryPermission] = useState(null);
+  // const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const [open, setOpen] = useState<boolean>(false);
@@ -56,57 +61,59 @@ export const AddEventPage = () => {
     formState: { errors }
   } = useForm<FormInput>();
 
-  const handlePickImage = async () => {
-    if (!galleryPermission) {
-      const galleryStatus = await PickImage.askLibraryPermission();
-      if (galleryStatus !== "granted") {
-        Alert.alert("アルバムへのアクセス許可をください");
-      }
-      setGalleryPermission(galleryStatus.status === "granted");
-      if (!galleryStatus) return;
-    }
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 0.0
-      });
-      console.log("ログ出し中", result);
-      if (!result.canceled) {
-        const img = result.assets[0];
-        setImageData(img);
-      }
-    } catch (error) {
-      Alert.alert("エラーで投稿できませんでした");
-    }
-  };
+  // const handlePickImage = async () => {
+  //   if (!galleryPermission) {
+  //     const galleryStatus = await PickImage.askLibraryPermission();
+  //     if (galleryStatus !== "granted") {
+  //       Alert.alert("アルバムへのアクセス許可をください");
+  //     }
+  //     setGalleryPermission(galleryStatus.status === "granted");
+  //     if (!galleryStatus) return;
+  //   }
+  //   try {
+  //     const result = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //       allowsEditing: true,
+  //       aspect: [1, 1],
+  //       quality: 0.0
+  //     });
+  //     console.log("ログ出し中", result);
+  //     if (!result.canceled) {
+  //       const img = result.assets[0];
+  //       setImageData(img);
+  //     }
+  //   } catch (error) {
+  //     Alert.alert("エラーで投稿できませんでした");
+  //   }
+  // };
 
-  const canSave = Boolean(imageData) && addRequestStatus === "idle";
+  // const canSave = Boolean(imageData) && addRequestStatus === "idle";
+  const canSave = addRequestStatus === "idle";
 
   const onPressSaveButton = async (data: FormInput) => {
     console.log("追加されたデータ:", data);
 
     if (canSave) {
       try {
-        setAddRequestStatus("pending");
-        await PickImage.uploadImage(
-          imageData?.uri,
-          `eventImages/${data.title}`,
-          data.title
-        );
+        // setAddRequestStatus("pending");
+        // await PickImage.uploadImage(
+        //   imageData?.uri,
+        //   `eventImages/${data.title}`,
+        //   data.title
+        // );
 
-        Alert.alert("Storageに画像を追加しました。");
+        // Alert.alert("Storageに画像を追加しました。");
 
         const postedData = {
           title: data.title,
-          eventImage: imageData?.uri,
+          // eventImage: imageData?.uri,
           eventURL: data.eventURL,
           category: data.category
         } as EventType;
         console.log("postedDataは:", postedData);
 
         const resultAction = await dispatch(addEvent(postedData));
+        Alert.alert("イベントが投稿されました");
         unwrapResult(resultAction);
       } catch (error) {
         Alert.alert("エラーです。もう一度お願いします。");
@@ -119,19 +126,20 @@ export const AddEventPage = () => {
   };
 
   return (
-    <ScrollView>
-      {/* <Spacer /> */}
-      <Center mt={5}>
-        <Text>イベント記事を投稿</Text>
-      </Center>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Keyboard.dismiss();
-        }}
-      >
-        <Center p={5}>
-          {/* 写真を選ぶ ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/}
-          <PhotoWrapper onPress={handlePickImage}>
+    <>
+      <ScrollView>
+        {/* <Spacer /> */}
+        <Center mt={5}>
+          <Text>イベント記事を投稿</Text>
+        </Center>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Keyboard.dismiss();
+          }}
+        >
+          <Center p={5}>
+            {/* 写真を選ぶ ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/}
+            {/* <PhotoWrapper onPress={handlePickImage}>
             <Icon
               as={MaterialCommunityIcons}
               name="camera-plus-outline"
@@ -140,98 +148,118 @@ export const AddEventPage = () => {
               size="md"
             />
             <PostImage source={{ uri: imageData?.uri }} />
-          </PhotoWrapper>
-          {/* タイトル=========================================== */}
-          <Controller
-            defaultValue=""
-            control={control}
-            name="title"
-            rules={{
-              required: true
-            }}
-            render={({ field: { onChange, value, onBlur } }) => (
-              <InputFieldTwo
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                // placeholder="タイトル"
-                title="タイトル"
-              />
-            )}
-          />
-          {errors.title && (
-            <Text style={basicStyles.warningText}>
-              タイトルの入力が必要です
-            </Text>
-          )}
-
-          {/* イベントURL ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-          <Spacer />
-          <Controller
-            defaultValue=""
-            control={control}
-            name="eventURL"
-            rules={{
-              required: true
-            }}
-            render={({ field: { onChange, value, onBlur } }) => (
-              <InputFieldTwo
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                // placeholder="イベントURL"
-                title="イベントURL"
-              />
-            )}
-          />
-          {errors.eventURL && (
-            <Text style={basicStyles.warningText}>
-              イベントURLの入力が必要です
-            </Text>
-          )}
-
-          {/* カテゴリー選択＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-          <Spacer />
-          <Controller
-            control={control}
-            rules={{
-              required: true
-            }}
-            render={({ field: { onChange, value } }) => (
-              <DropDownPicker
-                value={value}
-                items={categories}
-                open={open}
-                setValue={(value) => {
-                  onChange(value);
-                }}
-                onChangeValue={(value) => {
-                  onChange(value);
-                }}
-                setOpen={setOpen}
-                // setItems={setItems}
-              />
-            )}
-            name="category"
-          />
-          {errors.category && (
-            <Text style={basicStyles.warningText}>
-              categoryを選択してください
-            </Text>
-          )}
-          {/* 投稿ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */}
-
-          <View width={"100%"} mt={5}>
-            <OutlineButton
-              onPress={handleSubmit(onPressSaveButton)}
-              title="投稿"
-              disabled={!canSave}
+          </PhotoWrapper> */}
+            {/* タイトル=========================================== */}
+            <Controller
+              defaultValue=""
+              control={control}
+              name="title"
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, value, onBlur } }) => (
+                <InputFieldTwo
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  // placeholder="タイトル"
+                  title="タイトル"
+                />
+              )}
             />
-          </View>
-        </Center>
-      </TouchableWithoutFeedback>
-    </ScrollView>
+            {errors.title && (
+              <Text style={basicStyles.warningText}>
+                タイトルの入力が必要です
+              </Text>
+            )}
+
+            {/* イベントURL ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
+            <Spacer />
+            <Controller
+              defaultValue=""
+              control={control}
+              name="eventURL"
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, value, onBlur } }) => (
+                <InputFieldTwo
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  title="イベントURL"
+                />
+              )}
+            />
+            {errors.eventURL && (
+              <Text style={basicStyles.warningText}>
+                イベントURLの入力が必要です
+              </Text>
+            )}
+
+            {/* カテゴリー選択＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
+            <Spacer />
+            <Controller
+              control={control}
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, value } }) => (
+                <DropDownPicker
+                  value={value}
+                  items={categories}
+                  open={open}
+                  setValue={(value) => {
+                    onChange(value);
+                  }}
+                  onChangeValue={(value) => {
+                    onChange(value);
+                  }}
+                  setOpen={setOpen}
+                  // setItems={setItems}
+                />
+              )}
+              name="category"
+            />
+            {errors.category && (
+              <Text style={basicStyles.warningText}>
+                categoryを選択してください
+              </Text>
+            )}
+          </Center>
+        </TouchableWithoutFeedback>
+      </ScrollView>
+      {/* 投稿ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */}
+      <View style={styles.button}>
+        <OutlineButton
+          onPress={() => {
+            reset({
+              title: "",
+              eventURL: "https://www.kashimayari.net/snow/snowadventure/",
+              category: ""
+            });
+          }}
+          title="リセット"
+        />
+        <Spacer />
+        <OutlineButton
+          onPress={handleSubmit(onPressSaveButton)}
+          title="投稿"
+          disabled={!canSave}
+        />
+      </View>
+    </>
   );
 };
 
 export default AddEventPage;
+
+const styles = StyleSheet.create({
+  button: {
+    position: "absolute",
+    bottom: 15,
+    alignSelf: "center",
+    marginTop: 5,
+    width: "100%"
+  }
+});

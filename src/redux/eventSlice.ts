@@ -4,7 +4,7 @@ import {
   createEntityAdapter
 } from "@reduxjs/toolkit";
 
-import { fetchEvents, deleteEvent, addEvent } from "./eventActions";
+import { fetchAllEvents, deleteEvent, addEvent } from "./eventActions";
 
 //type--------------------------
 import type { Status } from "@models/StatusType";
@@ -31,38 +31,47 @@ export const eventSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
+    //イベントを投稿========================================================
     builder
-      //イベント情報を持ってくる========================================================
-      .addCase(fetchEvents.pending, (state) => {
+      .addCase(addEvent.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchEvents.fulfilled, (state, action) => {
+      .addCase(addEvent.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.status = "succeeded";
+          state.allEvents.push(action.payload);
+        }
+      })
+      .addCase(addEvent.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      //イベント情報を持ってくる========================================================
+      .addCase(fetchAllEvents.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAllEvents.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.allEvents = action.payload;
       })
-      .addCase(fetchEvents.rejected, (state, action) => {
+      .addCase(fetchAllEvents.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      })
-      //イベント情報を削除========================================================
-      .addCase(deleteEvent.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(deleteEvent.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.allEvents = state.allEvents.filter(
-          (doc) => doc.eventId !== action.payload
-        );
-      })
-      .addCase(deleteEvent.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      })
-      //イベントを投稿========================================================
-      .addCase(addEvent.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.allEvents.push(action.payload);
       });
+    //イベント情報を削除========================================================
+    // .addCase(deleteEvent.pending, (state) => {
+    //   state.status = "loading";
+    // })
+    // .addCase(deleteEvent.fulfilled, (state, action) => {
+    //   state.status = "succeeded";
+    //   state.allEvents = state.allEvents.filter(
+    //     (doc) => doc.eventId !== action.payload
+    //   );
+    // })
+    // .addCase(deleteEvent.rejected, (state, action) => {
+    //   state.status = "failed";
+    //   state.error = action.error.message;
+    // });
   }
 });
 

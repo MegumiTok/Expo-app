@@ -25,6 +25,7 @@ import WebShop from "@pages/WebShop";
 import AddPostPage from "@pages/AddPostPage";
 import EditPostPage from "@pages/EditPostPage";
 import EditProfilePage from "@pages/EditProfilePage";
+import EventSinglePost from "@pages/eventPage/EventSinglePost";
 //data
 import MenuList from "@assets/data/MenuList";
 
@@ -211,6 +212,7 @@ const EventScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen name={Routes.EventList} component={EventNavigator} />
+      <Stack.Screen name={Routes.EventSinglePost} component={EventSinglePost} />
     </Stack.Navigator>
   );
 };
