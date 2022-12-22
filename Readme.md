@@ -72,8 +72,12 @@ firebaseのAuthentication部分を実装（SignupPage、LogoutPage、LoginPage�
 すべてをfirebaseベースで実装しようと思いましたがReduxで管理をしたくなったので途中でv4に切り替えてます。
 また随時v3ブランチに戻ってfirebaseでの実装をすすめようかな、と思います。
 
-## v4 
+## v4
 Redux と firebase と useContext で実装している。
+※SearchPageはほぼすっぴん
+
+## v4.1
+SearchPageを追加予定
 
 ## v5　(予定)
 Redux + firebase (useContext なし）で実装
