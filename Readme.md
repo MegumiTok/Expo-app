@@ -77,7 +77,10 @@ Redux と firebase と useContext で実装している。
 ※SearchPageはほぼすっぴん
 
 ## v4.1
-SearchPageを追加予定
+### 予定
+- Delete機能追加
+- SearchPageを追加
+- Reload機能
 
 ## v5　(予定)
 Redux + firebase (useContext なし）で実装

@@ -49,39 +49,6 @@ const getAllEvents = async () => {
       new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
   );
 };
-const getEventByCategory = async (filter: string) => {
-  let q = query(allEventsColRef);
-  if (filter) {
-    q = query(allEventsColRef, where("category", "==", filter));
-  }
-  const querySnapshot = await getDocs(q);
-  const events = [] as EventType[];
-  //   const allEvents: any = [] as EventType[];
-  //   querySnapshot.forEach((doc) => {
-  //     const eventInfo = doc.data() as EventType;
-
-  //     events.push({
-  //       eventId: eventInfo.eventId,
-  //     });
-  //   });
-  const docs = querySnapshot.docs;
-
-  for (let i = 0; i < docs.length; i++) {
-    const eventData = docs[i].data() as EventType;
-
-    // const event = await getEventWithId(eventData.eventId);
-
-    events.push({
-      ...eventData,
-      eventId: docs[i].id
-    });
-  }
-
-  return events.sort(
-    (a, b) =>
-      new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-  );
-};
 
 // createAsyncThunk================================
 /**
