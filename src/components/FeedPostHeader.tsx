@@ -4,6 +4,7 @@ import { VStack, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 // import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { FontAwesome } from "@expo/vector-icons";
 import {
   Menu,
   MenuOptions,
@@ -12,6 +13,8 @@ import {
 } from "react-native-popup-menu";
 import { Routes } from "@models/NavTypes";
 //styles------------------------------------------------
+import type { FC } from "react";
+
 import {
   LeftParts,
   AvatarContainer,
@@ -21,17 +24,25 @@ import {
   ContainerHeader
 } from "@components/styles/pageStyle/FeedStyle";
 import BorderGradient from "./styles/BorderGradient";
-// firebase----------------------------
-import { getDocs, doc, getDoc } from "firebase/firestore";
-import { allUsersColRef, db } from "src/config/firebase";
-import { ALL_USERS } from "src/config/const";
+
+//redux --------------------------------
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { deletePost } from "@Redux/postActions";
+
 //type--------------------------------------------
 import type { Post } from "@models/PostTypes";
 import type { Auth } from "@models/AuthTypes";
 
 export const FeedPostHeader = ({ item }: { item: Post }) => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation();
   // const postId = item.postId;
+
+  const handleDeletePost = () => {
+    dispatch(deletePost(item.postId));
+    Alert.alert("ポストを削除しました");
+  };
   return (
     <ContainerHeader>
       <LeftParts>
@@ -81,7 +92,8 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
             onSelect={() => navigation.navigate(Routes.EditPost, { item })}
             text="編集"
           />
-          <MenuOption onSelect={() => console.log(item.imageH)}>
+          <MenuOption onSelect={handleDeletePost}>
+            {/* <FontAwesome name="trash-o" size={22} /> */}
             <Text>削除</Text>
           </MenuOption>
           {/* <MenuOption onSelect={() => true} text="共有" /> */}

@@ -1,6 +1,6 @@
 // firebase-----------------------------
 import { db, postsColRef } from "src/config/firebase";
-import { doc, setDoc, getDocs, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDocs, getDoc, deleteDoc } from "firebase/firestore";
 import { CREATORS_POSTS } from "src/config/const";
 
 //type-----------------------------------------------------
@@ -58,6 +58,10 @@ const getSinglePostByID = async (postId: string) => {
 };
 
 // createAsyncThunk-------------------------------------------------------------------------
+
+/*
+ * Create
+ */
 export const createNewPost = createAsyncThunk(
   "posts/createNewPost",
   async (creatorPost: Post) => {
@@ -86,6 +90,9 @@ export const createNewPost = createAsyncThunk(
   }
 );
 
+/*
+ * Update
+ */
 export const updatePost = createAsyncThunk(
   "posts/updatePost",
   async (data: Post, thunkAPI) => {
@@ -113,6 +120,9 @@ export const updatePost = createAsyncThunk(
   }
 );
 
+/*
+ * Read
+ */
 export const fetchAllPosts = createAsyncThunk(
   "posts/fetchAllPosts",
   async (_, thunkAPI) => {
@@ -132,5 +142,21 @@ export const fetchSinglePostByID = createAsyncThunk(
   async (id: string) => {
     const singlePost = await getSinglePostByID(id);
     return singlePost;
+  }
+);
+
+/**
+ * Delete
+ */
+export const deletePost = createAsyncThunk(
+  "event/deletePost",
+  async (postId: string, thunkAPI) => {
+    try {
+      await deleteDoc(doc(db, CREATORS_POSTS, postId));
+      return postId;
+    } catch (e: any) {
+      console.error("deletePost", e);
+      return thunkAPI.rejectWithValue({ error: e.message });
+    }
   }
 );

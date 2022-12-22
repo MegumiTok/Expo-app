@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchAllPosts, createNewPost, updatePost } from "./postActions";
+import {
+  fetchAllPosts,
+  createNewPost,
+  updatePost,
+  deletePost
+} from "./postActions";
 //+type---------------------------------
 import type { Status } from "@models/StatusType";
 import type { Post } from "@models/PostTypes";
@@ -101,6 +106,20 @@ const postsSlice = createSlice({
       })
 
       .addCase(updatePost.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      //ポストを削除========================================================
+      .addCase(deletePost.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.allPosts = state.allPosts.filter(
+          (doc) => doc.postId !== action.payload
+        );
+      })
+      .addCase(deletePost.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

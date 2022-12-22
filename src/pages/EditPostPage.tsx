@@ -18,17 +18,6 @@ import { LoadingView } from "@components/styles/LoadingView";
 //3rd party------------------------------------------------------
 import DropDownPicker from "react-native-dropdown-picker";
 
-// firebase----------------------------
-import { db, postsColRef } from "src/config/firebase";
-import {
-  onSnapshot,
-  setDoc,
-  doc,
-  Timestamp,
-  query,
-  where
-} from "firebase/firestore";
-
 import { GENRES, CREATORS_POSTS } from "src/config/const";
 //redux --------------------------------
 import { unwrapResult } from "@reduxjs/toolkit";
