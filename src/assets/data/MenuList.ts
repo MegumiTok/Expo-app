@@ -3,7 +3,7 @@ import LogoutPage from "@pages/authPage/LogoutPage";
 import { AddEventPage } from "@pages/eventPage";
 import Ani_Task from "@private/Ani_Task";
 import { AniFour } from "@private/AniFour";
-
+import FeedLoadingScreen from "@components/FeedLoadingScreen";
 export const MenuList = [
   // {
   //   name: "Test",
@@ -47,15 +47,15 @@ export const MenuList = [
     label: "AniFour",
     component: AniFour,
     options: { headerShown: true }
-  }
+  },
 
   // { name: "StickyHeader", label: "StickyHeader", component: StickyHeader },
-  // {
-  //   name: "EditPostPage",
-  //   label: "EditPostPage",
-  //   component: EditPostPage,
-  //   options: { headerShown: true }
-  // }
+  {
+    name: "FeedLoadingScreen",
+    label: "FeedLoadingScreen",
+    component: FeedLoadingScreen,
+    options: { headerShown: true }
+  }
 ];
 
 export default MenuList;

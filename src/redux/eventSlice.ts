@@ -57,21 +57,21 @@ export const eventSlice = createSlice({
       .addCase(fetchAllEvents.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      })
-      //イベント情報を削除========================================================
-      .addCase(deleteEvent.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(deleteEvent.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.allEvents = state.allEvents.filter(
-          (doc) => doc.eventId !== action.payload
-        );
-      })
-      .addCase(deleteEvent.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
       });
+    //イベント情報を削除========================================================
+    // .addCase(deleteEvent.pending, (state) => {
+    //   state.status = "loading";
+    // })
+    // .addCase(deleteEvent.fulfilled, (state, action) => {
+    //   state.status = "succeeded";
+    //   state.allEvents = state.allEvents.filter(
+    //     (doc) => doc.eventId !== action.payload
+    //   );
+    // })
+    // .addCase(deleteEvent.rejected, (state, action) => {
+    //   state.status = "failed";
+    //   state.error = action.error.message;
+    // });
   }
 });
 

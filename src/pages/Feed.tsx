@@ -5,7 +5,8 @@ import { FlatList, Alert } from "react-native";
 //ローカル
 // import { posts } from "@assets/data/posts";
 
-import { LoadingView } from "@components/styles/LoadingView";
+// import { LoadingView } from "@components/styles/LoadingView";
+import FeedLoadingScreen from "@components/FeedLoadingScreen";
 import FeedPost from "@components/FeedPost";
 
 import ErrorPage from "@components/ErrorPage";
@@ -62,7 +63,12 @@ export const Feed: FC = () => {
 
   let content;
   if (postStatus === "loading") {
-    content = <LoadingView />;
+    content = (
+      <>
+        <FeedLoadingScreen />
+        <FeedLoadingScreen />
+      </>
+    );
   } else if (postStatus === "succeeded") {
     content = (
       <FlatList

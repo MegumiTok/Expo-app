@@ -114,15 +114,15 @@ export const fetchAllEvents = createAsyncThunk(
 /**
  * Delete
  */
-export const deleteEvent = createAsyncThunk(
-  "event/deleteEvent",
-  async (eventId: string, thunkAPI) => {
-    try {
-      await deleteDoc(doc(db, All_EVENTS, eventId));
-      return eventId;
-    } catch (e: any) {
-      console.error("deleteEvent失敗", e);
-      return thunkAPI.rejectWithValue({ error: e.message });
-    }
-  }
-);
+// export const deleteEvent = createAsyncThunk(
+//   "event/deleteEvent",
+//   async (eventId: string, thunkAPI) => {
+//     try {
+//       await deleteDoc(doc(db, All_EVENTS, eventId));
+//       return eventId;
+//     } catch (e: any) {
+//       console.error("deleteEvent失敗", e);
+//       return thunkAPI.rejectWithValue({ error: e.message });
+//     }
+//   }
+// );
