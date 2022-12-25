@@ -128,7 +128,12 @@ export const fetchAllPosts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const posts = await getPosts();
-      return posts;
+      // return posts;
+
+      return posts.sort(
+        (a, b) =>
+          new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime()
+      );
     } catch (e) {
       return thunkAPI.rejectWithValue({
         error: "fetchAllPosts失敗"

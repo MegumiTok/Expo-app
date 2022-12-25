@@ -3,7 +3,7 @@ import LogoutPage from "@pages/authPage/LogoutPage";
 import { AddEventPage } from "@pages/eventPage";
 import Ani_Task from "@private/Ani_Task";
 import { AniFour } from "@private/AniFour";
-import FeedLoadingScreen from "@components/FeedLoadingScreen";
+import { PraSearch } from "@private/PraSearch";
 export const MenuList = [
   // {
   //   name: "Test",
@@ -49,13 +49,14 @@ export const MenuList = [
     options: { headerShown: true }
   },
 
-  // { name: "StickyHeader", label: "StickyHeader", component: StickyHeader },
   {
-    name: "FeedLoadingScreen",
-    label: "FeedLoadingScreen",
-    component: FeedLoadingScreen,
+    name: "PraSearch",
+    label: "PraSearch",
+    component: PraSearch,
     options: { headerShown: true }
   }
+
+  // { name: "StickyHeader", label: "StickyHeader", component: StickyHeader },
 ];
 
 export default MenuList;

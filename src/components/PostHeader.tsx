@@ -1,5 +1,5 @@
 import { TouchableWithoutFeedback } from "react-native";
-
+import { View, Text } from "native-base";
 //const---------------------------------
 import { TEST_IMAGE } from "../config/const";
 //styles-----------------------------------------
@@ -21,9 +21,11 @@ import type { FC } from "react";
 
 interface Props {
   item: Post;
+  timeAgo?: string;
 }
-export const PostHeader: FC<Props> = ({ item }) => {
+export const PostHeader: FC<Props> = ({ item, timeAgo }) => {
   // const { creatorUrl } = useContext(AuthContext);
+
   return (
     <ContainerHeader>
       <LeftParts>
@@ -50,7 +52,11 @@ export const PostHeader: FC<Props> = ({ item }) => {
           {/* <PostGenre genreId={item.genre} /> */}
         </CreatorInfoContainer>
       </LeftParts>
-
+      {timeAgo && (
+        <View marginRight={5}>
+          <Text style={{ alignSelf: "flex-end" }}> {timeAgo}</Text>
+        </View>
+      )}
       {/* <Menu>
         <MenuTrigger>
           <MaterialCommunityIcons
