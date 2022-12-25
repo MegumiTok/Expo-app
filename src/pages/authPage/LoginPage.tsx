@@ -57,7 +57,7 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <Center>
         <Image
-          source={require("@assets/images/logo_2.png")}
+          source={require("@assets/images/logo_3.png")}
           style={styles.logo}
         />
         {/* メールアドレス ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/}
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center"
   },
-  logo: { width: 100, height: 60, resizeMode: "contain" },
+  logo: { width: 120, height: 80, resizeMode: "contain" },
 
   forgotButton: {
     marginVertical: 25
