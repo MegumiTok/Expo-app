@@ -1,9 +1,41 @@
-# 使用
+![Screenshot](src/assets/readme/demo.gif)
+
+## main
+![demo_1](src/assets//readme/demo_1.png)
+![demo_10](src/assets//readme/demo_10.png)
+![demo_7](src/assets//readme/demo_7.png)
+![demo_11](src/assets//readme/demo_11.png)
+![demo_12](src/assets//readme/demo_12.png)
+![demo_13](src/assets//readme/demo_13.png)
+
+## Edit/Remove
+![demo_3](src/assets//readme/demo_3.png)
+![demo_2](src/assets//readme/demo_2.png)
+![demo_5](src/assets//readme/demo_5.png)
+
+## Sign up/in
+![demo_4](src/assets//readme/demo_4.png)
+![demo_14](src/assets//readme/demo_14.png)
+
+## Create
+![demo_6](src/assets//readme/demo_6.png)
+![demo_8](src/assets//readme/demo_8.png)
+
+# 主な使用技術
+
 - NativeBase 
 - TypeScript 
 - Expo 
 - firebase
 - Redux
+
+| 使用技術 | version |
+| --- | --- |
+| NativeBase| 3.4.0| 
+| Expo| 47.0.0| 
+| firebase |9.14.0| 
+| react-redux |8.0.5| 
+
 
 # コミットメッセージ
 | 記号 | Description | 
@@ -12,38 +44,7 @@
 | :wrench: | 修正中/作業中 | 
 | :tada: | 大きめの修正完了 | 
 
-# 便利コマンド
 
-expo-cliを使用
-```sh
-npx expo start
-npx expo start -c　//キャッシュをクリアしてくれる
-```
-treeコマンド
-```sh
-tree -I node_modules -d 　//ファイルを除いてディレクトリだけtree表示
-```
-Git
-```sh
-git branch　//ローカルブランチの一覧を表示する。
-git branch -a // --allオプション
-git status
-git log --oneline --all --graph --decorate  //いい感じのログが見れて便利
-git branch -d <ブランチ名>　//--deleteオプション  指定したブランチを削除する ※大文字、小文字区別
-git checkout feature　//Switching Branches
-git checkout -b <ブランチ名> //新しいブランチを作って同時に切り替えてくれる
-```
-Install Types for Packages
->`@types/` prefix 
-```
-yarn add @types/react-transition-group
-```
-その他
-```sh
-console.log(typeof(something))　//ダンさんが教えてくれた望遠鏡
-watchman watch-del-all && rm -rf node_modules/ && yarn cache clean && yarn install && yarn start -- --reset-cache
-yarn add -D @types/styled-system  // 型対応
-```
 # コメント
 高さに問題がある時もしかすると以下の出力結果が0になっているかもしれません。
 ```js
@@ -74,13 +75,11 @@ firebaseのAuthentication部分を実装（SignupPage、LogoutPage、LoginPage�
 
 ## v4
 Redux と firebase と useContext で実装している。
-※SearchPageはほぼすっぴん
+- SearchPageは保留
 
 ## v4.1
-### 予定
 - Delete機能追加
-- SearchPageを追加
-- Reload機能
+- Reload機能追加
 
 ## v5　(予定)
 Redux + firebase (useContext なし）で実装

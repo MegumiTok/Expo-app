@@ -13,7 +13,7 @@ import type { SinglePostProps } from "@models/NavTypes";
 
 //style--------------------------------------------------------------
 import { Colors } from "@components/styles/theme/Colors";
-import { CloseButton } from "@components/styles/button";
+import { CloseButton, OutlineButton } from "@components/styles/button";
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
 
 //ローカルーーーーーーーーーーーーーーーーーーー
@@ -24,6 +24,7 @@ import { _timeAgo } from "@functions/_timeAgo";
 import { useAppSelector } from "@Redux/hook";
 import { selectSinglePostById } from "@Redux/postsSlice";
 import useUser from "@hooks/useUser";
+import Spacer from "@components/styles/Spacer";
 // import { selectCurrentUser } from "@modules/redux/authSlice";
 
 export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
@@ -52,36 +53,32 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
   return (
     <>
       <StatusBar hidden />
-      <View pt={10}>
+      <View flex={1}>
         {/* <Text style={{ fontWeight: "bold", fontSize: 20, marginBottom: 5 }}>
         {post.comment}
       </Text> */}
-        <View flexDirection="row-reverse">
-          <CloseButton />
-        </View>
-        {/* <View mb={15}> */}
-        <PostHeader item={post} />
-        <Text> {timeAgo}</Text>
-        {/* </View> */}
+        <View margin={5} />
+
+        <PostHeader item={post} timeAgo={timeAgo} />
+        {/* <View marginRight={5}>
+          <Text style={{ alignSelf: "flex-end" }}> {timeAgo}</Text>
+        </View> */}
         <Image
           style={{ width: SCREEN_WIDTH, height: _takasa }}
           source={{ uri: post.postedImage }}
           resizeMode="contain"
         />
+
         <Text style={{ fontSize: 15, marginTop: 20, alignSelf: "center" }}>
           {post.comment}
         </Text>
         {post.product && (
-          <Button
-            colorScheme="success"
-            // leftIcon={
-            //   <Icon name="shoppingcart" type="Ionicons" color="white" />
-            // }
-            variant="outline"
-            onPress={() => navigation.navigate("WebShop")}
-          >
-            詳細をオンラインショップでみる
-          </Button>
+          <View width={"100%"} mt={5}>
+            <OutlineButton
+              onPress={() => navigation.navigate("WebShop")}
+              title=" 詳細をオンラインショップでみる"
+            />
+          </View>
         )}
         {/* <ReactionButtons item={post} /> */}
         {/* {user && post.creatorId === user.userId && (
@@ -93,6 +90,9 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
             投稿を編集する
           </Button>
         )} */}
+      </View>
+      <View style={{ alignItems: "center", bottom: 10 }}>
+        <CloseButton />
       </View>
     </>
   );

@@ -29,7 +29,6 @@ export const SearchPage = () => {
       <StatusBar hidden />
       <ScrollView>
         <SearchBox
-          //   title={"ヒント： #○○で検索"}
           title={"例: フラミンゴ　釣り"}
           onChangeText={setSearch}
           value={search}

@@ -5,10 +5,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { Center, View } from "native-base";
-import { FontAwesome } from "@expo/vector-icons";
+import { View } from "native-base";
 
-import Test from "@components/Test";
 import { Colors } from "@components/styles/theme/Colors";
 
 //main page---------------------------------------
@@ -26,21 +24,11 @@ import AddPostPage from "@pages/AddPostPage";
 import EditPostPage from "@pages/EditPostPage";
 import EditProfilePage from "@pages/EditProfilePage";
 import EventSinglePost from "@pages/eventPage/EventSinglePost";
-//data
+//data =====================
 import MenuList from "@assets/data/MenuList";
 
-// private
-import { CreatorListPra } from "@private/CreatorListPra";
-
 //type--------------------------------------
-// import type {
-//   RootStackParamList,
-//   PrivateMenuStackParamList
-// } from "@modules/models";
-import type { FC } from "react";
-import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 import { Routes } from "@models/NavTypes";
-import { useState } from "react";
 
 // TabNavigator
 const Tab = createMaterialBottomTabNavigator();
@@ -63,6 +51,7 @@ const AppNavigator = () => {
           component={FeedScreens}
           options={{
             tabBarLabel: "Feed",
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons
                 name="image-filter-none"
@@ -77,6 +66,7 @@ const AppNavigator = () => {
           component={CreatorScreens}
           options={{
             tabBarLabel: "Creator",
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons
                 name="clipboard-account"
@@ -91,6 +81,7 @@ const AppNavigator = () => {
           component={SearchScreens}
           options={{
             tabBarLabel: "Search",
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
               <Feather name="search" color={color} size={27} />
             )
@@ -100,7 +91,9 @@ const AppNavigator = () => {
           name="EventTab"
           component={EventScreens}
           options={{
+            tabBarBadge: 3, //<--------
             tabBarLabel: "Event",
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons
                 name="calendar-clock"
@@ -115,6 +108,7 @@ const AppNavigator = () => {
           component={MenuScreens}
           options={{
             tabBarLabel: "Menu",
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="menu" color={color} size={25} />
             )
@@ -137,13 +131,7 @@ const FeedScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen name={Routes.Feed} component={Feed} />
-      {/* <Stack.Screen
-        name={Routes.SinglePost}
-        component={SinglePostPage}
-        options={{
-          headerShown: false
-        }}
-      /> */}
+
       <Stack.Screen
         name={Routes.AddPost}
         component={AddPostPage}
@@ -187,7 +175,6 @@ const CreatorScreens = () => {
         component={WebShop}
         options={{
           headerShown: false
-          //tabBarStyle: { display: "none" }
         }}
       />
     </Stack.Navigator>
@@ -238,7 +225,7 @@ const MenuScreens = () => {
 
 //+Common(Stack - screenOptions)-------------------------------------------------------
 const StackCommonScreenOptions = ({ navigation }) => {
-  const HEADER_ICON_SIZE = 40;
+  const HEADER_ICON_SIZE = 50;
   return {
     headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
     headerStyle: {
@@ -249,7 +236,7 @@ const StackCommonScreenOptions = ({ navigation }) => {
     headerTitle: () => (
       <Image
         style={{ width: 200, height: HEADER_ICON_SIZE, top: -7 }}
-        source={require("@assets/images/logo_2.png")}
+        source={require("@assets/images/logo_3.png")}
         resizeMode="contain"
       />
     ),
@@ -265,7 +252,6 @@ const StackCommonScreenOptions = ({ navigation }) => {
         <TouchableWithoutFeedback
           style={{ padding: 5, backgroundColor: "blue" }}
           onPress={() => navigation.navigate(Routes.AddPost)}
-          // onPress={() => true}
         >
           <FontAwesome5 name="plus-square" size={30} color="white" />
         </TouchableWithoutFeedback>
@@ -273,7 +259,6 @@ const StackCommonScreenOptions = ({ navigation }) => {
         <TouchableWithoutFeedback
           style={{ right: -45, margin: 5 }}
           onPress={() => navigation.navigate(Routes.EditProfile)}
-          // onPress={() => true}
         >
           <Feather name="user" color="white" size={30} />
         </TouchableWithoutFeedback>

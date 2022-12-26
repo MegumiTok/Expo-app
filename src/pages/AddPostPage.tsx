@@ -13,6 +13,7 @@ import {
 } from "native-base";
 
 import { GENRES } from "src/config/const";
+import { Routes } from "@models/NavTypes";
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -53,7 +54,7 @@ interface FormInput {
   genre: string;
   product: boolean;
 }
-export const AddPostPage = () => {
+export const AddPostPage = ({ navigation }) => {
   // const [postedImage, setPostedImage] = useState("");
   const dispatch = useAppDispatch();
   const genres = useAppSelector((state) => state.genre);
@@ -170,6 +171,7 @@ export const AddPostPage = () => {
 
         const resultAction = await dispatch(createNewPost(postedData));
         unwrapResult(resultAction);
+        navigation.navigate(Routes.Feed);
       } catch (error) {
         Alert.alert("エラーです。もう一度お願いします。");
       } finally {
@@ -200,7 +202,7 @@ export const AddPostPage = () => {
             <PostImage source={{ uri: imageData?.uri }} />
           </PhotoWrapper>
           {/* コメント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-          <Button onPress={toggleModal}>コメントをかく</Button>
+          {/* <Button onPress={toggleModal}>コメントをかく</Button>
           <Modal isVisible={isModalVisible}>
             <Center pt={10}>
               <Button onPress={toggleModal}>閉じる</Button>
@@ -230,7 +232,35 @@ export const AddPostPage = () => {
                 </Text>
               )}
             </Center>
-          </Modal>
+          </Modal> */}
+
+          <View>
+            <Controller
+              defaultValue=""
+              control={control}
+              name="comment"
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, value, onBlur } }) => (
+                <StyledTextInput
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="ひとこと書いてください"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  multiline
+                  defaultValue={value} //足してみた
+                />
+              )}
+            />
+            {errors.comment && (
+              <Text style={basicStyles.warningText}>
+                コメントの入力が必要です
+              </Text>
+            )}
+          </View>
           {/* ジャンル＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
           <Spacer />
           <Controller

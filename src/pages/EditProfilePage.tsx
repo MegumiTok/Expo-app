@@ -12,7 +12,7 @@ import {
   ImageBackground,
   ScrollView
 } from "react-native";
-
+import { Routes } from "@models/NavTypes";
 //const---------------------------------
 import { TEST_IMAGE, ALL_USERS, CREATORS_POSTS } from "src/config/const";
 //+functions----------------------------
@@ -43,8 +43,7 @@ import {
 import { updateProfile } from "firebase/auth";
 
 //redux------------------------
-import { unwrapResult } from "@reduxjs/toolkit";
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { useAppDispatch } from "@Redux/hook";
 import { updateCreatorInfo } from "@Redux/creatorsActions";
 
 //type--------------------------------
@@ -58,7 +57,7 @@ interface FormInput {
   mainComment: string;
 }
 
-export const EditProfilePage = () => {
+export const EditProfilePage = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { user } = useUser();
   const [userData, setUserData] = useState<Creator>();
@@ -206,6 +205,7 @@ export const EditProfilePage = () => {
               } as User);
             }
           }
+          navigation.navigate(Routes.Feed);
         } catch (e) {
           Alert.alert("Firestoreに保存を失敗しました");
           console.log("Firestoreに保存を失敗しました", e); //<-- これでエラー内容確認

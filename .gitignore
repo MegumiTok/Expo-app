@@ -14,6 +14,7 @@ web-build/
 
 # Private
 private/
+Reload.tsx
 
 # Environment variables 
 .env

@@ -52,7 +52,7 @@ const getAllEvents = async () => {
 
 // createAsyncThunk================================
 /**
- * 投稿をする
+ * Create
  */
 export const addEvent = createAsyncThunk(
   "event/addEvent",
@@ -77,7 +77,7 @@ export const addEvent = createAsyncThunk(
 );
 
 /**
- * すべてのEventをとってくる
+ * Read
  */
 export const fetchAllEvents = createAsyncThunk(
   "event/fetchAllEvents",
@@ -112,17 +112,17 @@ export const fetchAllEvents = createAsyncThunk(
 // );
 
 /**
- * Eventを削除する
+ * Delete
  */
-export const deleteEvent = createAsyncThunk(
-  "event/deleteEvent",
-  async (eventId: string, thunkAPI) => {
-    try {
-      await deleteDoc(doc(db, All_EVENTS, eventId));
-      return eventId;
-    } catch (error: any) {
-      console.error(error);
-      return thunkAPI.rejectWithValue({ error: error.message });
-    }
-  }
-);
+// export const deleteEvent = createAsyncThunk(
+//   "event/deleteEvent",
+//   async (eventId: string, thunkAPI) => {
+//     try {
+//       await deleteDoc(doc(db, All_EVENTS, eventId));
+//       return eventId;
+//     } catch (e: any) {
+//       console.error("deleteEvent失敗", e);
+//       return thunkAPI.rejectWithValue({ error: e.message });
+//     }
+//   }
+// );

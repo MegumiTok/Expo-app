@@ -3,7 +3,7 @@ import { fetchCreators, updateCreatorInfo } from "./creatorsActions";
 //type------------------------------------------------------------------
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Status } from "@models/StatusType";
-import type { Creator } from "@models/AuthTypes";
+import type { Creator, Auth } from "@models/AuthTypes";
 import type { RootState } from "./store";
 
 interface AllCreatorProps {
@@ -34,11 +34,11 @@ export const creatorsSlice = createSlice({
   name: "creators",
   initialState,
   reducers: {
-    setCreator(state, action: PayloadAction<string>) {
-      state.currentCreator = state.allCreators.find(
-        (user) => user.creatorId === action.payload
-      ) as Creator;
-    }
+    // setCreator(state, action: PayloadAction<string>) {
+    //   state.currentCreator = state.allCreators.find(
+    //     (user) => user.creatorId === action.payload
+    //   ) as Creator;
+    // }
   },
   extraReducers: (builder) => {
     builder
@@ -47,8 +47,12 @@ export const creatorsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(updateCreatorInfo.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.currentCreator = action.payload;
+        if (action.payload) {
+          state.status = "succeeded";
+          state.currentCreator = action.payload;
+        }
+        // state.status = "succeeded";
+        // state.currentCreator = action.payload;
       })
       .addCase(updateCreatorInfo.rejected, (state, action) => {
         state.status = "failed";
@@ -73,7 +77,7 @@ export const creatorsSlice = createSlice({
 });
 
 export const creatorsReducer = creatorsSlice.reducer;
-export const { setCreator } = creatorsSlice.actions;
+// export const { setCreator } = creatorsSlice.actions;
 
 export const creatorsSelector = (state: RootState) => state.creators;
 
@@ -82,5 +86,5 @@ export const selectAllCreators = createDraftSafeSelector(
   (creator) => creator.allCreators
 );
 
-export const selectSingleCreatorById = (state: RootState, userId: string) =>
-  selectAllCreators(state).find((creator) => creator.creatorId === userId);
+// export const selectSingleCreatorById = (state: RootState, userId: string) =>
+//   selectAllCreators(state).find((creator) => creator.creatorId === userId);

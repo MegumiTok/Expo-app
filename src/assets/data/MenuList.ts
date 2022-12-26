@@ -3,7 +3,7 @@ import LogoutPage from "@pages/authPage/LogoutPage";
 import { AddEventPage } from "@pages/eventPage";
 import Ani_Task from "@private/Ani_Task";
 import { AniFour } from "@private/AniFour";
-
+import { PraSearch } from "@private/PraSearch";
 export const MenuList = [
   // {
   //   name: "Test",
@@ -47,15 +47,16 @@ export const MenuList = [
     label: "AniFour",
     component: AniFour,
     options: { headerShown: true }
+  },
+
+  {
+    name: "PraSearch",
+    label: "PraSearch",
+    component: PraSearch,
+    options: { headerShown: true }
   }
 
   // { name: "StickyHeader", label: "StickyHeader", component: StickyHeader },
-  // {
-  //   name: "EditPostPage",
-  //   label: "EditPostPage",
-  //   component: EditPostPage,
-  //   options: { headerShown: true }
-  // }
 ];
 
 export default MenuList;
