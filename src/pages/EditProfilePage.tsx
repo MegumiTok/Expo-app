@@ -43,8 +43,7 @@ import {
 import { updateProfile } from "firebase/auth";
 
 //redux------------------------
-import { unwrapResult } from "@reduxjs/toolkit";
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { useAppDispatch } from "@Redux/hook";
 import { updateCreatorInfo } from "@Redux/creatorsActions";
 
 //type--------------------------------

@@ -200,7 +200,7 @@ export const AddPostPage = () => {
             <PostImage source={{ uri: imageData?.uri }} />
           </PhotoWrapper>
           {/* コメント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-          <Button onPress={toggleModal}>コメントをかく</Button>
+          {/* <Button onPress={toggleModal}>コメントをかく</Button>
           <Modal isVisible={isModalVisible}>
             <Center pt={10}>
               <Button onPress={toggleModal}>閉じる</Button>
@@ -230,7 +230,35 @@ export const AddPostPage = () => {
                 </Text>
               )}
             </Center>
-          </Modal>
+          </Modal> */}
+
+          <View>
+            <Controller
+              defaultValue=""
+              control={control}
+              name="comment"
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, value, onBlur } }) => (
+                <StyledTextInput
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="ひとこと書いてください"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  multiline
+                  defaultValue={value} //足してみた
+                />
+              )}
+            />
+            {errors.comment && (
+              <Text style={basicStyles.warningText}>
+                コメントの入力が必要です
+              </Text>
+            )}
+          </View>
           {/* ジャンル＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
           <Spacer />
           <Controller

@@ -21,7 +21,7 @@ export const PhotoWrapper = styled.TouchableOpacity`
   align-items: center;
   border-radius: 1px;
   border-color: #ddd;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   background-color: white;
 `;
 

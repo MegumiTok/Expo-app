@@ -1,3 +1,5 @@
+![Screenshot](src/assets/readme/demo.gif)
+
 ## main
 ![demo_1](src/assets//readme/demo_1.png)
 ![demo_10](src/assets//readme/demo_10.png)
@@ -18,11 +20,6 @@
 ## Create
 ![demo_6](src/assets//readme/demo_6.png)
 ![demo_8](src/assets//readme/demo_8.png)
-
-
-
-
-
 
 # 主な使用技術
 
@@ -78,13 +75,11 @@ firebaseのAuthentication部分を実装（SignupPage、LogoutPage、LoginPage�
 
 ## v4
 Redux と firebase と useContext で実装している。
-※SearchPageはほぼすっぴん
+- SearchPageは保留
 
 ## v4.1
-### 予定
 - Delete機能追加
-- SearchPageを追加
-- Reload機能
+- Reload機能追加
 
 ## v5　(予定)
 Redux + firebase (useContext なし）で実装
