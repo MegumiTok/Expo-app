@@ -21,8 +21,10 @@ import type { FC } from "react";
 import type { Post } from "@models/PostTypes";
 
 export const Feed: FC = () => {
+  const { user } = useUser();
   const dispatch = useAppDispatch();
   const posts = useAppSelector(selectAllPosts);
+  const post = useAppSelector((state) => state.posts.currentPost);
   const postStatus = useAppSelector((state) => state.posts.status);
   const error = useAppSelector((state) => state.posts.error);
 

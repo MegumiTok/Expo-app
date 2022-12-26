@@ -13,6 +13,7 @@ import {
 } from "native-base";
 
 import { GENRES } from "src/config/const";
+import { Routes } from "@models/NavTypes";
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -53,7 +54,7 @@ interface FormInput {
   genre: string;
   product: boolean;
 }
-export const AddPostPage = () => {
+export const AddPostPage = ({ navigation }) => {
   // const [postedImage, setPostedImage] = useState("");
   const dispatch = useAppDispatch();
   const genres = useAppSelector((state) => state.genre);
@@ -170,6 +171,7 @@ export const AddPostPage = () => {
 
         const resultAction = await dispatch(createNewPost(postedData));
         unwrapResult(resultAction);
+        navigation.navigate(Routes.Feed);
       } catch (error) {
         Alert.alert("エラーです。もう一度お願いします。");
       } finally {

@@ -12,7 +12,7 @@ import {
   ImageBackground,
   ScrollView
 } from "react-native";
-
+import { Routes } from "@models/NavTypes";
 //const---------------------------------
 import { TEST_IMAGE, ALL_USERS, CREATORS_POSTS } from "src/config/const";
 //+functions----------------------------
@@ -57,7 +57,7 @@ interface FormInput {
   mainComment: string;
 }
 
-export const EditProfilePage = () => {
+export const EditProfilePage = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { user } = useUser();
   const [userData, setUserData] = useState<Creator>();
@@ -205,6 +205,7 @@ export const EditProfilePage = () => {
               } as User);
             }
           }
+          navigation.navigate(Routes.Feed);
         } catch (e) {
           Alert.alert("Firestoreに保存を失敗しました");
           console.log("Firestoreに保存を失敗しました", e); //<-- これでエラー内容確認

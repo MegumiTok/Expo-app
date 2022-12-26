@@ -2,7 +2,7 @@
 //画像を変更するばあいはpost自体を削除すればいい
 //なのでここではコメントとジャンルのみ変更できるようにする
 import React, { useState, useEffect } from "react";
-
+import { Routes } from "@models/NavTypes";
 import {
   Keyboard,
   TouchableWithoutFeedback,
@@ -36,7 +36,7 @@ interface FormInput {
   genre: string;
 }
 
-export const EditPostPage: FC<any> = ({ route }) => {
+export const EditPostPage: FC<any> = ({ navigation, route }) => {
   const dispatch = useAppDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [open, setOpen] = useState<boolean>(false);
@@ -106,7 +106,7 @@ export const EditPostPage: FC<any> = ({ route }) => {
           } as Post)
         );
         unwrapResult(resultAction);
-        // navigation.navigate(Routes.SinglePost, { postId });
+        navigation.navigate(Routes.Feed);
 
         //----------------------------------------------------------------------
         Alert.alert("Postの更新がされました");

@@ -20,22 +20,35 @@ export const Routes = () => {
   const { user, setUser } = useContext<AuthState>(AuthContext);
   const [initializing, setInitializing] = useState<boolean>(true);
 
-  const arg = (user: FirebaseAuthTypes.User | null) => {
-    if (user != null) {
-      const uid = user.uid;
-      console.log("User is signed in", uid);
-    } else {
-      console.log("User is signed out");
-    }
+  // const arg = (user: FirebaseAuthTypes.User | null) => {
+  //   if (user != null) {
+  //     const uid = user.uid;
+  //     console.log("User is signed in", uid);
+  //   } else {
+  //     console.log("User is signed out");
+  //   }
 
-    setUser(user);
-    if (initializing) setInitializing(false);
-  };
+  //   setUser(user);
+  //   if (initializing) setInitializing(false);
+  // };
 
   useEffect(() => {
-    const subscriber = onAuthStateChanged(auth, arg);
+    const subscriber = onAuthStateChanged(
+      auth,
+      (user: FirebaseAuthTypes.User | null) => {
+        if (user != null) {
+          const uid = user.uid;
+          console.log("User is signed in", uid);
+        } else {
+          console.log("User is signed out");
+        }
+
+        setUser(user);
+        if (initializing) setInitializing(false);
+      }
+    );
     return subscriber;
-  }, []);
+  }, [initializing, setUser]);
 
   if (initializing) return null;
 
