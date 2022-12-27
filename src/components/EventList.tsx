@@ -1,5 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
-import { Text, View, FlatList, StyleSheet, Pressable } from "react-native";
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  Pressable,
+  ImageBackground
+} from "react-native";
 
 import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
@@ -12,10 +19,11 @@ const ItemSeparatorView = () => {
 };
 export const EventList = ({ items }) => {
   const { navigate } = useNavigation();
-
+  const image = { uri: "https://reactjs.org/logo-og.png" };
   const _renderItem = ({ item }: { item: EventType }) => {
     // const { eventId } = item;
     const day = _day(item.postedDate);
+
     // console.log("時間です:", day);
     return (
       <Pressable
@@ -37,12 +45,19 @@ export const EventList = ({ items }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={items}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={_renderItem}
-        ItemSeparatorComponent={ItemSeparatorView}
-      />
+      <ImageBackground
+        style={styles.image}
+        source={require("@assets/images/pokemon.png")}
+        // source={image}
+        resizeMode="cover"
+      >
+        <FlatList
+          data={items}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={_renderItem}
+          ItemSeparatorComponent={ItemSeparatorView}
+        />
+      </ImageBackground>
     </View>
   );
 };
@@ -51,8 +66,13 @@ export default EventList;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
+    // backgroundColor: "#FFF"
+  },
+  image: {
     flex: 1,
-    backgroundColor: "#FFF"
+    justifyContent: "center"
+    // opacity: 0.6
   },
   box: {
     height: 120,

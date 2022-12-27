@@ -10,7 +10,7 @@ import {
   HeaderWrapper,
   ProfileImage
 } from "@components/styles/pageStyle/profileStyle";
-
+import { Colors } from "@components/styles/theme/Colors";
 //ローカルdata-----------------
 // import { posts } from "@assets/data/posts";
 
@@ -52,10 +52,18 @@ export const Profile = ({
   } else if (postStatus === "succeeded") {
     content = (
       <>
-        <View flex={1} paddingTop={STATUS_BAR_HEIGHT}>
+        <GoBack />
+        <BtnForCreatorsList />
+        <View
+          style={{
+            height: STATUS_BAR_HEIGHT,
+            backgroundColor: Colors.primary.general,
+            top: 0
+          }}
+        />
+        <View flex={1}>
           <StatusBar animated={true} hidden={false} />
-          <GoBack />
-          <BtnForCreatorsList />
+
           <HeaderWrapper onLayout={onLayout}>
             <View
               style={{
@@ -72,7 +80,9 @@ export const Profile = ({
                   alignItems: "center" //これでimageとtextを縦並び
                 }}
               >
-                <Text>{item.creatorName}</Text>
+                <Text fontSize="md" bold style={{ color: "white" }}>
+                  {item.creatorName}
+                </Text>
               </View>
             </View>
           </HeaderWrapper>

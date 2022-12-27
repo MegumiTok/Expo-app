@@ -15,7 +15,8 @@ export const HeaderWrapper = styled.View`
   align-items: center;
   justify-content: space-around;
   padding-top: ${SPACING_BIG}px;
-  padding-bottom: ${SPACING_BIG}px;
+  /* padding-bottom: ${SPACING}px; */
+  background-color: ${Colors.primary.general};
 `;
 
 export const ProfileImage = styled.Image`
@@ -23,4 +24,5 @@ export const ProfileImage = styled.Image`
   height: ${AVATAR_SIZE}px;
   border-radius: ${AVATAR_SIZE}px;
   margin-top: ${SPACING};
+  background-color: white;
 `;

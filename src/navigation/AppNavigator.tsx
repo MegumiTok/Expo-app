@@ -197,7 +197,7 @@ const SearchScreens = () => {
 // + Event Tab
 const EventScreens = () => {
   return (
-    <Stack.Navigator screenOptions={StackCommonScreenOptions}>
+    <Stack.Navigator screenOptions={EventOptions}>
       <Stack.Screen name={Routes.EventList} component={EventNavigator} />
       <Stack.Screen name={Routes.EventSinglePost} component={EventSinglePost} />
     </Stack.Navigator>
@@ -264,6 +264,33 @@ const StackCommonScreenOptions = ({ navigation }) => {
         </TouchableWithoutFeedback>
       </View>
     )
+  };
+};
+
+const EventOptions = ({ navigation }) => {
+  const HEADER_ICON_SIZE = 50;
+  return {
+    headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
+    headerStyle: {
+      backgroundColor: Colors.primary.dark
+    },
+    headerBackTitleVisible: false,
+    animation: "fade", //💚
+    headerTitle: () => (
+      <Image
+        style={{ width: 200, height: HEADER_ICON_SIZE, top: -7 }}
+        source={require("@assets/images/logo_3.png")}
+        resizeMode="contain"
+      />
+    )
+    // headerRight: () => (
+    //   <TouchableWithoutFeedback
+    //     style={{ margin: 5 }}
+    //     onPress={() => navigation.navigate(Routes.EditProfile)}
+    //   >
+    //     <Feather name="user" color="white" size={30} />
+    //   </TouchableWithoutFeedback>
+    // )
   };
 };
 
