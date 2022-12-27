@@ -3,10 +3,11 @@ import { Text, View, FlatList, StyleSheet, Pressable } from "react-native";
 
 import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
+import { _day } from "@functions/_day";
 
 const ItemSeparatorView = () => {
   return (
-    <View style={{ height: 0.5, width: "100%", backgroundColor: "#c8c8c8" }} />
+    <View style={{ height: 0.5, width: "80%", backgroundColor: "#c8c8c8" }} />
   );
 };
 export const EventList = ({ items }) => {
@@ -14,6 +15,8 @@ export const EventList = ({ items }) => {
 
   const _renderItem = ({ item }: { item: EventType }) => {
     // const { eventId } = item;
+    const day = _day(item.postedDate);
+    // console.log("時間です:", day);
     return (
       <Pressable
         style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
@@ -24,7 +27,7 @@ export const EventList = ({ items }) => {
       >
         <View style={styles.box}>
           <View style={styles.textWrapper}>
-            <Text style={styles.title}>{item.postedDate}</Text>
+            <Text style={styles.title}>{day}</Text>
             <Text style={styles.date}>{item.title}</Text>
           </View>
         </View>
