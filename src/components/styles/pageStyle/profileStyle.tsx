@@ -14,7 +14,7 @@ export const HeaderWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  padding-top: ${SPACING_BIG}px;
+  /* padding-top: ${SPACING_BIG}px; */
   /* padding-bottom: ${SPACING}px; */
   background-color: ${Colors.primary.general};
 `;

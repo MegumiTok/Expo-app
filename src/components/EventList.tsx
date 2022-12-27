@@ -11,13 +11,14 @@ import {
 import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
 import { _day } from "@functions/_day";
-
+import Feather from "react-native-vector-icons/Feather";
+import { position } from "styled-system";
 const ItemSeparatorView = () => {
   return (
-    <View style={{ height: 0.5, width: "80%", backgroundColor: "#c8c8c8" }} />
+    <View style={{ height: 0.9, width: "100%", backgroundColor: "#c8c8c8" }} />
   );
 };
-export const EventList = ({ items }) => {
+export const EventList = ({ items, bg }) => {
   const { navigate } = useNavigation();
   const image = { uri: "https://reactjs.org/logo-og.png" };
   const _renderItem = ({ item }: { item: EventType }) => {
@@ -33,10 +34,20 @@ export const EventList = ({ items }) => {
           navigate(Routes.EventSinglePost, { item });
         }}
       >
-        <View style={styles.box}>
-          <View style={styles.textWrapper}>
-            <Text style={styles.title}>{day}</Text>
-            <Text style={styles.date}>{item.title}</Text>
+        <View
+          style={{
+            height: 140,
+
+            backgroundColor: "#FFFFFF95",
+            padding: 10
+          }}
+        >
+          <Text style={styles.date}>{day}</Text>
+          <View style={styles.box}>
+            <View style={styles.textWrapper}>
+              <Text style={styles.title}>{item.title}</Text>
+            </View>
+            <Feather name="chevron-right" size={27} />
           </View>
         </View>
       </Pressable>
@@ -47,9 +58,10 @@ export const EventList = ({ items }) => {
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
-        source={require("@assets/images/pokemon.png")}
+        source={bg}
         // source={image}
         resizeMode="cover"
+        imageStyle={{ opacity: 0.5 }}
       >
         <FlatList
           data={items}
@@ -66,8 +78,9 @@ export default EventList;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-    // backgroundColor: "#FFF"
+    flex: 1,
+    // alignItems: "center",
+    backgroundColor: "#FFF"
   },
   image: {
     flex: 1,
@@ -75,35 +88,29 @@ const styles = StyleSheet.create({
     // opacity: 0.6
   },
   box: {
-    height: 120,
-    width: "100%",
-    flexDirection: "row"
+    // height: 140,
+    // width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flex: 1
+    // backgroundColor: "#FFFFFF95",
+    // padding: 10
   },
   textWrapper: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    padding: 16,
-    justifyContent: "space-between",
-    // borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
-    shadowOpacity: 1,
-    shadowRadius: 1
+    width: "80%"
   },
 
   date: {
-    color: "#000",
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 20
-  },
-  title: {
-    color: "#000",
     fontWeight: "bold",
     textAlign: "left",
-    fontSize: 12
+    fontSize: 12,
+    marginBottom: 5
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 20
+    // justifyContent: "center",
+    // alignItems: "center"
   }
 });

@@ -1,7 +1,7 @@
 import { GoBack } from "@components/styles/button";
 import { View, Text } from "native-base";
 // import { StatusBar } from "expo-status-bar";
-import { StatusBar } from "react-native";
+import { StatusBar, ImageBackground, StyleSheet } from "react-native";
 import { useEffect } from "react";
 //const---------------------------------
 import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "src/config/const";
@@ -57,35 +57,46 @@ export const Profile = ({
         <View
           style={{
             height: STATUS_BAR_HEIGHT,
-            backgroundColor: Colors.primary.general,
-            top: 0
+            backgroundColor: Colors.primary.dark,
+            top: 0,
+            zIndex: -1
           }}
         />
         <View flex={1}>
           <StatusBar animated={true} hidden={false} />
 
           <HeaderWrapper onLayout={onLayout}>
-            <View
-              style={{
-                alignItems: "center" //これでimageとtextを縦並び
+            <ImageBackground
+              style={styles.image}
+              source={{
+                uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
               }}
+              resizeMode="cover"
+              imageStyle={{ opacity: 0.5 }}
             >
-              <ProfileImage
-                source={{
-                  uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
-                }}
-              />
-              <View //🟢Want to know the size of this component
+              <View
                 style={{
                   alignItems: "center" //これでimageとtextを縦並び
                 }}
               >
-                <Text fontSize="md" bold style={{ color: "white" }}>
-                  {item.creatorName}
-                </Text>
+                <ProfileImage
+                  source={{
+                    uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
+                  }}
+                />
+                <View //🟢Want to know the size of this component
+                  style={{
+                    alignItems: "center" //これでimageとtextを縦並び
+                  }}
+                >
+                  <Text fontSize="md" bold style={{ color: "white" }}>
+                    {item.creatorName}
+                  </Text>
+                </View>
               </View>
-            </View>
+            </ImageBackground>
           </HeaderWrapper>
+
           <ProfileTabView topHeight={topHeight} posts={posts} />
         </View>
       </>
@@ -95,3 +106,11 @@ export const Profile = ({
   }
   return <>{content}</>;
 };
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    justifyContent: "center"
+    // opacity: 0.6
+  }
+});
