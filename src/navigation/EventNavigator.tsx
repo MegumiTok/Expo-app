@@ -7,7 +7,7 @@ import {
   EventList1,
   EventList2,
   EventList3
-} from "@pages/eventPage";
+} from "@pages/eventPage/EventLists";
 
 import { LoadingView } from "@components/styles/LoadingView";
 import ErrorPage from "@components/ErrorPage";

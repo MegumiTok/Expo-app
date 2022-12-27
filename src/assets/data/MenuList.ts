@@ -1,6 +1,6 @@
 import { AniOne } from "@private/AniOne";
 import LogoutPage from "@pages/authPage/LogoutPage";
-import { AddEventPage } from "@pages/eventPage";
+import AddEventPage from "@pages/eventPage/AddEventPage";
 import Ani_Task from "@private/Ani_Task";
 import { AniFour } from "@private/AniFour";
 import { PraSearch } from "@private/PraSearch";

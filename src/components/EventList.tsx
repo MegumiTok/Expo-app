@@ -1,13 +1,15 @@
-//イベントcategory1
-
 import { useNavigation } from "@react-navigation/native";
 import { Text, View, FlatList, StyleSheet, Pressable } from "react-native";
 
 import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
 
-export const EventList2 = ({ route }) => {
-  const { category2 } = route.params;
+const ItemSeparatorView = () => {
+  return (
+    <View style={{ height: 0.5, width: "100%", backgroundColor: "#c8c8c8" }} />
+  );
+};
+export const EventList = ({ items }) => {
   const { navigate } = useNavigation();
 
   const _renderItem = ({ item }: { item: EventType }) => {
@@ -33,15 +35,16 @@ export const EventList2 = ({ route }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={category2}
-        keyExtractor={(item, index) => index.toString()}
+        data={items}
+        keyExtractor={(_, index) => index.toString()}
         renderItem={_renderItem}
+        ItemSeparatorComponent={ItemSeparatorView}
       />
     </View>
   );
 };
 
-export default EventList2;
+export default EventList;
 
 const styles = StyleSheet.create({
   container: {
@@ -51,8 +54,6 @@ const styles = StyleSheet.create({
   box: {
     height: 120,
     width: "100%",
-    borderColor: "rgba(255,255,255,0.3)",
-    borderWidth: 5,
     flexDirection: "row"
   },
   textWrapper: {
