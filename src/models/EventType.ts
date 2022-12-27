@@ -7,4 +7,4 @@ export interface EventType {
   category: category;
 }
 
-export type category = "1" | "2" | "3";
+export type category = "Pokémon" | "Hunter × Hunter" | "Attack on Titan";
