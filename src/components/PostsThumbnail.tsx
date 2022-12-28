@@ -9,8 +9,6 @@ import {
   SPACING_SQUARE_SIZE
 } from "@components/styles/theme/layout";
 
-import { SharedElement } from "react-navigation-shared-element";
-
 //type------------------------------------------------
 import type { Post } from "@models/PostTypes";
 
@@ -43,21 +41,18 @@ export const PostsThumbnail: FC<Props> = ({ post }) => {
           opacity
         }}
       >
-        <SharedElement id={postId}>
-          {/* <SharedElement id={`detailPosts.${detail.id}`}> */}
-          <Image
-            source={{
-              uri: post.postedImage
-            }}
-            style={{
-              resizeMode: "cover",
-              width: SPACING_SQUARE_SIZE,
-              height: SPACING_SQUARE_SIZE,
-              margin: SPACING_SQUARE,
-              backgroundColor: "white"
-            }}
-          />
-        </SharedElement>
+        <Image
+          source={{
+            uri: post.postedImage
+          }}
+          style={{
+            resizeMode: "cover",
+            width: SPACING_SQUARE_SIZE,
+            height: SPACING_SQUARE_SIZE,
+            margin: SPACING_SQUARE,
+            backgroundColor: "white"
+          }}
+        />
 
         {/* <Text //これは要らないかも。デザイン的に見栄えが良くない
           style={{

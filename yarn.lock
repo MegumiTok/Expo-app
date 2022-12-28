@@ -11008,7 +11008,7 @@ react-native-shared-element@^0.8.4:
 
 react-native-svg@13.4.0:
   version "13.4.0"
-  resolved "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-13.4.0.tgz#82399ba0956c454144618aa581e2d748dd3f010a"
   integrity sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag==
   dependencies:
     css-select "^5.1.0"

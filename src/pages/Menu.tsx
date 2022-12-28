@@ -28,19 +28,19 @@ export const Menu = (props) => {
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={({ item, index }) => {
             return (
-              <View style={styles.wrapper}>
-                <Feather name={item.icon} size={27} />
-                <Text style={{ fontSize: 24 }}>
-                  {/* {index + 1}.{item.label} */}
-                  {item.label}
-                </Text>
+              <TouchableOpacity
+                onPress={() => props.navigation.push(item.name)}
+              >
+                <View style={styles.wrapper}>
+                  <Feather name={item.icon} size={27} />
+                  <Text style={{ fontSize: 24 }}>
+                    {/* {index + 1}.{item.label} */}
+                    {item.label}
+                  </Text>
 
-                <TouchableOpacity
-                  onPress={() => props.navigation.push(item.name)}
-                >
                   <Feather name="chevron-right" size={27} />
-                </TouchableOpacity>
-              </View>
+                </View>
+              </TouchableOpacity>
             );
           }}
         />
