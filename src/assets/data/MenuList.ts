@@ -19,12 +19,7 @@ export const MenuList = [
     icon: "smile",
     options: { headerShown: false }
   },
-  // {
-  //   name: "AniTwo",
-  //   label: "AniTwo",
-  //   component: AniTwo,
-  //   options: { headerShown: false }
-  // }
+
   {
     name: "LogoutPage",
     label: "LogoutPage",

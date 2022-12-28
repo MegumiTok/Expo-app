@@ -1,10 +1,8 @@
 import { Image } from "react-native";
-import { Center, Text, View, Button, StatusBar, Icon } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
+import { Center, Text, View, StatusBar } from "native-base";
+import Svg, { Path } from "react-native-svg";
 
 //templates---------------------------------------------------------------
-// import { ReactionButtons } from "@components/templates/ReactionButtons";
-// import TimeAgo from "@components/templates/TimeAgo";
 import PostHeader from "@components/PostHeader";
 
 //type-------------------------------------------------------------
@@ -15,34 +13,31 @@ import type { SinglePostProps } from "@models/NavTypes";
 import { Colors } from "@components/styles/theme/Colors";
 import { CloseButton, OutlineButton } from "@components/styles/button";
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
-
-//ローカルーーーーーーーーーーーーーーーーーーー
+import { STATUS_BAR_HEIGHT } from "src/config/const";
+//ローカル==========================
 import { posts } from "@assets/data/posts";
-//function-------------------------------
+//function========================
 import { _timeAgo } from "@functions/_timeAgo";
-//redux--------------------------------------------------------
+//redux=========================
 import { useAppSelector } from "@Redux/hook";
 import { selectSinglePostById } from "@Redux/postsSlice";
+
+//Context========================
 import useUser from "@hooks/useUser";
-import Spacer from "@components/styles/Spacer";
-// import { selectCurrentUser } from "@modules/redux/authSlice";
+
+import { LoadingView } from "@components/styles/LoadingView";
 
 export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
   const { postId } = route.params;
   console.log("postId: ", postId);
   const { user } = useUser();
   const post = useAppSelector((state) => selectSinglePostById(state, postId));
+
   // const post = posts.find((post) => post.postId === postId);
   // console.log("postは: ", post);
 
   if (!post) {
-    return (
-      <Center flex={1}>
-        <Center>
-          <Text> postがありません</Text>
-        </Center>
-      </Center>
-    );
+    return <LoadingView />;
   }
   const calculatedMaxH = Math.round((SCREEN_WIDTH * post.imageH) / post.imageW); //実際ポストされるのサイズに計算
 
@@ -50,14 +45,42 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
     calculatedMaxH < PHOTO_HEIGHT ? calculatedMaxH : PHOTO_HEIGHT;
 
   const timeAgo = _timeAgo(post.postedAt);
+
   return (
     <>
       <StatusBar hidden />
+
       <View flex={1}>
-        {/* <Text style={{ fontWeight: "bold", fontSize: 20, marginBottom: 5 }}>
-        {post.comment}
-      </Text> */}
-        <View margin={5} />
+        <View
+          style={{
+            height: STATUS_BAR_HEIGHT - 10,
+            backgroundColor: Colors.primary.dark,
+            top: 0,
+            opacity: 0.8
+          }}
+        />
+        <View
+          style={{
+            width: SCREEN_WIDTH,
+            height: STATUS_BAR_HEIGHT
+          }}
+        >
+          <Svg
+            width="100%"
+            height="190%"
+            opacity="0.8"
+            viewBox="0 0 1440 320"
+            // viewBox={`0 0 ${originalWidth} ${originalHeight}`}>
+            style={{
+              top: -5
+            }}
+          >
+            <Path
+              fill={Colors.primary.dark}
+              d="M0,224L40,218.7C80,213,160,203,240,165.3C320,128,400,64,480,69.3C560,75,640,149,720,160C800,171,880,117,960,122.7C1040,128,1120,192,1200,213.3C1280,235,1360,213,1400,202.7L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
+            />
+          </Svg>
+        </View>
 
         <PostHeader item={post} timeAgo={timeAgo} />
         {/* <View marginRight={5}>

@@ -1,10 +1,11 @@
 import { GoBack } from "@components/styles/button";
 import { View, Text } from "native-base";
-// import { StatusBar } from "expo-status-bar";
+
 import { StatusBar, ImageBackground, StyleSheet } from "react-native";
 import { useEffect } from "react";
 //const---------------------------------
 import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "src/config/const";
+import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 //styles------------------------------------------------
 import {
   HeaderWrapper,
@@ -56,12 +57,13 @@ export const Profile = ({
         <BtnForCreatorsList />
         <View
           style={{
-            height: STATUS_BAR_HEIGHT,
+            height: STATUS_BAR_HEIGHT - 10,
             backgroundColor: Colors.primary.dark,
             top: 0,
-            zIndex: -1
+            opacity: 0.8
           }}
         />
+
         <View flex={1}>
           <StatusBar animated={true} hidden={false} />
 

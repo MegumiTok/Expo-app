@@ -1,3 +1,6 @@
+//Make some waves!====
+//https://getwaves.io/
+
 import { useRef, useEffect, useState } from "react";
 import {
   Text,
@@ -130,19 +133,11 @@ const CreatorExcerpt = ({ creators }: { creators: Creator[] }) => {
                       borderBottomRightRadius: 20
                     }}
                   >
-                    {/* <WeavyBg
-                        customStyles={styles.svgCurve}
-                        // height={70}
-                        bottom={90}
-                        BgColor={Colors.primary.dark}
-                        WavePattern="M0,32L48,37.3C96,43,192,53,288,74.7C384,96,480,128,576,144C672,160,768,160,864,144C960,128,1056,96,1152,80C1248,64,1344,64,1392,64L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-                      /> */}
-                    {/* <View style={{}}> */}
                     <Svg
                       height="100%"
                       width="100%"
                       viewBox="0 0 1440 320"
-                      style={{ position: "absolute", bottom: 50 }}
+                      style={{ position: "absolute", bottom: 40 }}
                     >
                       <Path
                         fill={Colors.primary.dark}
