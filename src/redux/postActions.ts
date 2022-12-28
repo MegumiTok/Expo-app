@@ -28,7 +28,9 @@ const getPosts = async () => {
     imageH: res.data().imageH,
     product: res.data().product,
 
-    postedAt: res.data().postedAt
+    postedAt: res.data().postedAt,
+
+    isLiked: res.data().isLiked
     // reactions: {
     //   thumbsUp: 0,
     //   hooray: 0,
@@ -113,7 +115,32 @@ export const updatePost = createAsyncThunk(
 
       return posts;
     } catch (error) {
-      console.log("createNewPostで例外処理発生", error);
+      console.log("updatePostで例外処理発生", error);
+      // thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const updateLike = createAsyncThunk(
+  "posts/updateLike",
+  async (data: Post, thunkAPI) => {
+    try {
+      const postRef = doc(db, CREATORS_POSTS, data.postId);
+
+      const posts = {
+        isLiked: data.isLiked
+      } as Post;
+      await setDoc(
+        //If the document does not exist, it will be created. If the document does exist, its contents will be overwritten with the newly provided data,
+        postRef,
+        posts,
+        { merge: true }
+      );
+
+      return posts;
+    } catch (error) {
+      console.log("updateLikeで例外処理発生", error);
       // thunkAPI.rejectWithValue(error);
       return thunkAPI.rejectWithValue(error);
     }

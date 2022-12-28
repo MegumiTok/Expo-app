@@ -13,7 +13,7 @@ import ErrorPage from "@components/ErrorPage";
 //redux----------------------------------------------------------------
 import { selectAllPosts } from "@Redux/postsSlice";
 import { useAppDispatch, useAppSelector } from "@Redux/hook";
-import { fetchAllPosts } from "@Redux/postActions";
+import { fetchAllPosts, updateLike } from "@Redux/postActions";
 //Context------------------------------------
 import useUser from "@hooks/useUser";
 //type--------------------------------------------
@@ -49,6 +49,12 @@ export const Feed: FC = () => {
 
   const onRefresh = () => {
     setRefreshing(true);
+    // dispatch(
+    //   updateLike({
+    //     postId: item.postId,
+    //     isLiked: trigger
+    //   } as Post)
+    // );
     dispatch(fetchAllPosts());
     setRefreshing(false);
   };

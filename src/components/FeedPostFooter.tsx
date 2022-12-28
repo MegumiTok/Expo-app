@@ -3,7 +3,6 @@ import { View, StyleSheet } from "react-native";
 // import { parseISO, formatDistanceToNow } from "date-fns";
 //styles----------------------------
 import type { Post } from "@models/PostTypes";
-import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 
 // import type { FeedProps } from "@models/NavTypes";
 
@@ -16,7 +15,7 @@ import ReadContinue from "./ReadContinue";
 export const FeedPostFooter = ({ item }: { item: Post }) => {
   // let timeAgo = "";
   // const timestamp = item.updatedAt || item.postedAt;
-  const updatedAt = item.updatedAt;
+  // const updatedAt = item.updatedAt;
   const postedAt = item.postedAt;
   // if (updatedAt) {
   //   console.log("updatedAt:", updatedAt);
@@ -31,7 +30,6 @@ export const FeedPostFooter = ({ item }: { item: Post }) => {
   // }
 
   const timeAgo = _timeAgo(postedAt);
-  // console.log("updatedAt:", updatedAt);
 
   // timeAgo = ` ${item.postedAt} ago`;
   return (
@@ -41,7 +39,7 @@ export const FeedPostFooter = ({ item }: { item: Post }) => {
           <Text fontSize="xs">{timeAgo}</Text>
         </View>
         <View style={styles.containerLike}>
-          <LikeButtonAnimated />
+          <LikeButtonAnimated item={item} />
           {/* <ReactionButtons item={item} /> */}
         </View>
 
