@@ -33,8 +33,9 @@ export const useAuthentication = () => {
     dispatch(sendPasswordReset(email));
   };
   const registerWithEmailPassword = (data: Register) => {
-    dispatch(signUpWithEmailPassword(data));
+    return dispatch(signUpWithEmailPassword(data));
   };
+
   // const logoutUser = () => {
   //   dispatch(logout());
   //   dispatch(clearCurrentUser());

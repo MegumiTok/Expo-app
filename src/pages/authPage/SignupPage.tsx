@@ -28,12 +28,13 @@ import type { User } from "firebase/auth";
 // import { doc, setDoc, Timestamp } from "firebase/firestore";
 
 //+redux------------------------------
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
-import { signUpWithEmailPassword } from "@Redux/authActions";
+import { useAuthentication, useAppSelector } from "@Redux/hook";
+
 import { unwrapResult } from "@reduxjs/toolkit";
 
 export const SignupPage = ({ navigation }: SignUpProps) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const { registerWithEmailPassword } = useAuthentication();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const authStatus = useAppSelector((state) => state.auth.status);
   const error = useAppSelector((state) => state.auth.error);
@@ -63,16 +64,9 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
 
         console.log("登録データ", resisterData);
 
-        const resultAction = await dispatch(
-          signUpWithEmailPassword(resisterData)
-        );
+        const resultAction = await registerWithEmailPassword(resisterData);
         console.log(authStatus);
-        // if (authStatus === "failed") {
-        //   Alert.alert("入力されたEmailはすでに利用されています");
-        // }
-        // else if (authStatus === "succeeded") {
-        //   Alert.alert("ユーザー名", `${data.userName}`);
-        // }
+
         unwrapResult(resultAction);
 
         //----
