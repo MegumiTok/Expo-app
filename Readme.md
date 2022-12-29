@@ -1,23 +1,31 @@
-## main
+# main
+## Feed
 ![demo_1](src/assets//readme/demo_1.png)
 ![demo_10](src/assets//readme/demo_10.png)
+
+## Creator Page
 ![demo_7](src/assets//readme/demo_7.png)
 ![demo_11](src/assets//readme/demo_11.png)
-![demo_12](src/assets//readme/demo_12.png)
 ![demo_13](src/assets//readme/demo_13.png)
 
-## Edit/Remove
+## Event Page
+![demo_15](src/assets//readme/demo_15.png)
+![demo_16](src/assets//readme/demo_16.png)
+
+
+# Edit/Remove
 ![demo_3](src/assets//readme/demo_3.png)
 ![demo_2](src/assets//readme/demo_2.png)
 ![demo_5](src/assets//readme/demo_5.png)
 
-## Sign up/in
+# Sign up/in
 ![demo_4](src/assets//readme/demo_4.png)
 ![demo_14](src/assets//readme/demo_14.png)
 
-## Create
+# Create
 ![demo_6](src/assets//readme/demo_6.png)
 ![demo_8](src/assets//readme/demo_8.png)
+
 
 # 主な使用技術
 
