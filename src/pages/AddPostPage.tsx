@@ -178,7 +178,7 @@ export const AddPostPage = ({ navigation }) => {
       // console.log("_takasa", _takasa);
       setTakasa(_takasa);
     }
-  }, []); //emptyにすること（一回のみ実行したいので）
+  }, [imageData]);
 
   return (
     <ScrollView>

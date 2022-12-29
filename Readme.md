@@ -151,9 +151,11 @@ Redux と firebase と useContext で実装している。
     setPosts(POSTS);
   }, []);//<-----第二引数がemptyだったら無限ループは回避できる
 ```
+## v4.4
+- AddPostPage.tsxページの改良
+- 選択した画像のサイズに合わせてプレビューの表示サイズを変えれるようにした
 
-
-
+![Screenshot](src/assets/readme/addPost.gif)
 ## v5　(予定)
 SearchPageを実装
 
