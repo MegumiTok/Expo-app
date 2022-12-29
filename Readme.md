@@ -94,5 +94,39 @@ Redux と firebase と useContext で実装している。
 ![Screenshot](src/assets/readme/creators.gif)
 ![Screenshot](src/assets/readme/event.gif)
 
+## v4.3
+▼修正前:<br>
+期待通りにレンダリングがされない
+この例でいくとhisokaのページに移ってもhisokaのデータを使って再レンダリングがされていない。<br>
+※手動で更新をすると強制レンダリングされるので期待通りにはなる<br>
+
+![Screenshot](src/assets/readme/test_1.gif)
+
+▼修正後:<br>
+### 施行１
+`useState`を使用しfirebaseからfetchしてきたデータを一旦ストアさせ、そのストアデータを使うことで毎回stateが変わるたびにレンダリングが走るようにしてみた。
+
+`Profile.tsx`から一部抜粋:
+```jsx
+  const POSTS = useAppSelector((state) =>
+    selectPostsByCreator(state, item.creatorId)
+  );
+
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    dispatch(fetchAllPosts());
+    setPosts(POSTS);
+  }, [dispatch]);//ここでdependenciesにPOSTSを加えてしまうとレンダリングが永遠繰り返されてしまう
+```
+上記のようにすることでPOSTSが変わるたびに(ステートが変わり)毎回レンダリングが走るので期待通りデータが更新されるようになった。<br>
+
+![Screenshot](src/assets/readme/test_2.gif)
+
+しかし、パフォーマンスに難あり<br>
+以下のようにuseEffectが最低3回走る。不必要なレンダリングがちょくちょく起こるため実用には不向き。
+
+![Screenshot](src/assets/readme/test.png)
+
 ## v5　(予定)
 SearchPageを実装
