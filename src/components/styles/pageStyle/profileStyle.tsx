@@ -23,6 +23,6 @@ export const ProfileImage = styled.Image`
   width: ${AVATAR_SIZE}px;
   height: ${AVATAR_SIZE}px;
   border-radius: ${AVATAR_SIZE}px;
-  margin-top: ${SPACING};
+  margin-top: ${SPACING}px;
   background-color: white;
 `;

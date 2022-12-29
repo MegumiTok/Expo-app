@@ -2,7 +2,7 @@ import { GoBack } from "@components/styles/button";
 import { View, Text } from "native-base";
 
 import { StatusBar, ImageBackground, StyleSheet } from "react-native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 //const---------------------------------
 import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "src/config/const";
 
@@ -29,23 +29,28 @@ import ErrorPage from "@components/ErrorPage";
 import { LoadingView } from "@components/styles/LoadingView";
 // type-------------
 import type { CreatorTabScreenProps } from "@models/NavTypes";
+import type { Post } from "@models/PostTypes";
 
-export const Profile = ({
-  route,
-  navigation
-}: CreatorTabScreenProps<"Profile">) => {
+export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
   const { item } = route.params;
   const [topHeight, onLayout] = useComponentHeight(); //💚 headerのサイズ取得
   const dispatch = useAppDispatch();
   const postStatus = useAppSelector((state) => state.posts.status);
   const error = useAppSelector((state) => state.posts.error);
-  const posts = useAppSelector((state) =>
+  const POSTS = useAppSelector((state) =>
     selectPostsByCreator(state, item.creatorId)
   );
 
+  const [posts, setPosts] = useState<Post[]>([]);
+
   useEffect(() => {
     dispatch(fetchAllPosts());
+    // setPosts(POSTS);
   }, [dispatch]);
+
+  useEffect(() => {
+    setPosts(POSTS);
+  }, []);
 
   let content;
   if (postStatus === "loading") {

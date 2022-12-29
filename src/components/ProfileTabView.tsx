@@ -22,35 +22,15 @@ interface TabViewProps {
   posts: Post[];
 }
 export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
-  // console.log("topHeightの高さだよ", topHeight);
+  // console.log("topHeightの高さです", topHeight);
   const Tab = createMaterialTopTabNavigator();
   const TOP_SIZE = topHeight;
   // const TOP_HEADER_HEIGHT = SCREEN_WIDTH * 0.21 + SPACING + TOP_SIZE;
   // const TOP_HEADER_HEIGHT = SPACING + TOP_SIZE + STATUS_BAR_HEIGHT;
   const TOP_HEADER_HEIGHT = TOP_SIZE;
-  //🟠TOP_HEADER_HEIGHTをアニメーションでスクロールしたら０にするようにすればいいのかな、
-
-  // const squares = [];
-  // const numberOfSquare = 21;
 
   const illustrations = posts.filter((post) => post.product === false);
   const products = posts.filter((post) => post.product === true);
-
-  // for (let index = 0; index < numberOfSquare; index++) {
-  //   squares.push(
-  //     <View key={index}>
-  //       <View
-  //         style={{
-  //           width: SPACING_SQUARE_SIZE,
-  //           height: SPACING_SQUARE_SIZE,
-  //           marginVertical: SPACING_SQUARE,
-  //           backgroundColor: "black",
-  //           opacity: 0.1,
-  //         }}
-  //       />
-  //     </View>
-  //   );
-  // }
 
   return (
     <View //LOWER PART
