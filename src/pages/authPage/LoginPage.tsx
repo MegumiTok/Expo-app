@@ -39,23 +39,18 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
   const onSubmit = useCallback(
     handleSubmit(async (data: Login) => {
       _inputStrictCheck(data);
-      // try {
-      //   loginWithEmailAndPassword(data);
-      //   console.log("hello");
-      // } catch (e: any) {
-      //   console.log(e.code);
-      //   Alert.alert("ログイン失敗", `${data.email}`);
-      // }
+
       try {
         const resultAction = await loginWithEmailAndPassword(data);
 
         unwrapResult(resultAction);
       } catch (e: any) {
         console.error(e);
+        Alert.alert(e, data.email);
         // console.error(error);
-        if (error) {
-          Alert.alert(e, data.email);
-        }
+        // if (error) {
+        //   Alert.alert(e, data.email);
+        // }
       }
 
       // if (authStatus === "failed") {

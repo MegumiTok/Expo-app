@@ -5,7 +5,7 @@ import { StatusBar, ImageBackground, StyleSheet } from "react-native";
 import { useEffect } from "react";
 //const---------------------------------
 import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "src/config/const";
-import { SCREEN_WIDTH } from "@components/styles/theme/layout";
+
 //styles------------------------------------------------
 import {
   HeaderWrapper,

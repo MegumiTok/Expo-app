@@ -1,5 +1,3 @@
-![Screenshot](src/assets/readme/demo.gif)
-
 ## main
 ![demo_1](src/assets//readme/demo_1.png)
 ![demo_10](src/assets//readme/demo_10.png)
@@ -82,6 +80,19 @@ Redux と firebase と useContext で実装している。
 ## v4.1
 - Delete機能追加
 - Reload機能追加
+
+![Screenshot](src/assets/readme/demo.gif)
+
+## v4.2
+- ログイン/サインアップの機能改良
+- デザインを更新
+- イベントページ追加
+など。
+
+![Screenshot](src/assets/readme/login.gif)
+![Screenshot](src/assets/readme/feed.gif)
+![Screenshot](src/assets/readme/creators.gif)
+![Screenshot](src/assets/readme/event.gif)
 
 ## v5　(予定)
 Redux + firebase (useContext なし）で実装
