@@ -134,10 +134,13 @@ const CreatorExcerpt = ({ creators }: { creators: Creator[] }) => {
                     }}
                   >
                     <Svg
-                      height="100%"
+                      height="120%"
                       width="100%"
                       viewBox="0 0 1440 320"
-                      style={{ position: "absolute", bottom: 40 }}
+                      style={{
+                        position: "absolute",
+                        bottom: 48 //<------ ここの計算が現在適当。おそらくコメント数の上限を設けることで値を固定する方法がいい。
+                      }}
                     >
                       <Path
                         fill={Colors.primary.dark}
@@ -221,8 +224,8 @@ const styles = StyleSheet.create({
   posterImage: {
     // borderRadius: 24,
     height: ITEM_SIZE * 1.2,
-    margin: 0,
-    marginBottom: 10,
+    // margin: 0,
+    marginBottom: 25,
     resizeMode: "contain",
     width: "100%"
   },

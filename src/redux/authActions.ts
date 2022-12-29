@@ -103,7 +103,9 @@ export const signInWithEmailPassword = createAsyncThunk(
       await signInWithEmailAndPassword(auth, email, password);
     } catch (e) {
       console.error(e);
-      return thunkAPI.rejectWithValue("エラー");
+      return thunkAPI.rejectWithValue(
+        "登録されているemailかpasswordと一致しません"
+      );
     }
   }
 );

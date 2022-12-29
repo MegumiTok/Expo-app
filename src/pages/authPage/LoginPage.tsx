@@ -23,8 +23,10 @@ import { AuthRoutes } from "@models/NavTypes";
 
 //+redux--------------------------------------------------------
 import { useAuthentication, useAppSelector } from "@Redux/hook";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const LoginPage: FC<LogInProps> = ({ navigation }) => {
+  const error = useAppSelector((state) => state.auth.error);
   const { loginWithEmailAndPassword } = useAuthentication();
   const authStatus = useAppSelector((state) => state.auth.status);
   const {
@@ -35,7 +37,7 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
   } = useForm<Login>();
 
   const onSubmit = useCallback(
-    handleSubmit((data: Login) => {
+    handleSubmit(async (data: Login) => {
       _inputStrictCheck(data);
       // try {
       //   loginWithEmailAndPassword(data);
@@ -44,10 +46,21 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
       //   console.log(e.code);
       //   Alert.alert("ログイン失敗", `${data.email}`);
       // }
-      loginWithEmailAndPassword(data);
-      if (authStatus === "failed") {
-        Alert.alert("メールアドレスかパスワードをもう一度確認してください");
+      try {
+        const resultAction = await loginWithEmailAndPassword(data);
+
+        unwrapResult(resultAction);
+      } catch (e: any) {
+        console.error(e);
+        // console.error(error);
+        if (error) {
+          Alert.alert(e, data.email);
+        }
       }
+
+      // if (authStatus === "failed") {
+      //   Alert.alert("メールアドレスかパスワードをもう一度確認してください");
+      // }
     }),
     []
   );
