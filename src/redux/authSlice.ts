@@ -18,7 +18,7 @@ import type { RootState } from "./store";
 
 export interface AuthProps {
   currentUser: Auth;
-  error?: SerializedError | string;
+  error: string;
   status: Status;
 }
 const initialState: AuthProps = {

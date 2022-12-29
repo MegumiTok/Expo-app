@@ -10,15 +10,7 @@ import {
   updateProfile
 } from "firebase/auth";
 
-import {
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-  Timestamp
-} from "firebase/firestore";
+import { doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
 
 //type-------------------------------------------------------------------
 import type { Auth, Login, Register } from "@models/AuthTypes";
@@ -46,8 +38,18 @@ export const signUpWithEmailPassword = createAsyncThunk(
   "auth/signUpWithEmailPassword",
   async (data: Register, thunkAPI) => {
     const { email, password, userName, userFlg } = data;
+    const msg = "入力された名前は使用されています";
+    const msg_2 = "Email already in us";
     try {
       // const userId = response.user.uid;
+
+      const userNameRef = doc(db, ALL_USERS, userName);
+      const docSnap = await getDoc(userNameRef);
+
+      if (docSnap.exists()) {
+        console.log(msg, userName);
+        return thunkAPI.rejectWithValue(msg);
+      }
 
       const q = query(allUsersColRef, where("email", "==", email));
       const usersDocs = await getDocs(q);
@@ -80,13 +82,16 @@ export const signUpWithEmailPassword = createAsyncThunk(
             photoURL: TEST_IMAGE
           } as User);
         }
+      } else {
+        console.log(msg_2);
+        return thunkAPI.rejectWithValue(msg_2);
       }
     } catch (e: unknown) {
       console.log("エラー:", e);
       // return thunkAPI.rejectWithValue({
-      //   error: "Email already in use",
+      //   error: "Email already in use"
       // });
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue("signUpWithEmailPassword失敗");
     }
   }
 );
@@ -97,10 +102,8 @@ export const signInWithEmailPassword = createAsyncThunk(
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (e) {
-      // return thunkAPI.rejectWithValue({
-      //   error: "emailとパスワードでのログイン失敗",
-      // });
-      return thunkAPI.rejectWithValue(e);
+      console.error(e);
+      return thunkAPI.rejectWithValue("エラー");
     }
   }
 );
@@ -112,7 +115,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     // return thunkAPI.rejectWithValue({
     //   error: "ログアウト失敗",
     // });
-    return thunkAPI.rejectWithValue(e);
+    return thunkAPI.rejectWithValue("エラー");
   }
 });
 
@@ -125,7 +128,7 @@ export const sendPasswordReset = createAsyncThunk(
       // return thunkAPI.rejectWithValue({
       //   error: "パスワードリセット失敗",
       // });
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue("パスワードリセット失敗");
     }
   }
 );

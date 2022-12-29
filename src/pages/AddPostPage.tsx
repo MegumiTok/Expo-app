@@ -95,12 +95,12 @@ export const AddPostPage = ({ navigation }) => {
     }
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [5, 4],
         quality: 0.0
       });
-      console.log("ログ出し中", result);
+      console.log("投稿写真", result);
       if (!result.canceled) {
         const img = result.assets[0];
         setImageData(img);

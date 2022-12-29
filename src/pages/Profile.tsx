@@ -57,7 +57,7 @@ export const Profile = ({
         <BtnForCreatorsList />
         <View
           style={{
-            height: STATUS_BAR_HEIGHT - 10,
+            height: STATUS_BAR_HEIGHT,
             backgroundColor: Colors.primary.dark,
             top: 0,
             opacity: 0.8

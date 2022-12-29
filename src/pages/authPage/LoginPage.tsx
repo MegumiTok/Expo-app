@@ -22,10 +22,11 @@ import { AuthRoutes } from "@models/NavTypes";
 // import { auth } from "src/config/firebase";
 
 //+redux--------------------------------------------------------
-import { useAuthentication } from "@Redux/hook";
+import { useAuthentication, useAppSelector } from "@Redux/hook";
 
 export const LoginPage: FC<LogInProps> = ({ navigation }) => {
   const { loginWithEmailAndPassword } = useAuthentication();
+  const authStatus = useAppSelector((state) => state.auth.status);
   const {
     control,
     handleSubmit,
@@ -37,13 +38,16 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
     handleSubmit((data: Login) => {
       _inputStrictCheck(data);
       // try {
-      //   signInWithEmailAndPassword(auth, data.email, data.password);
-      //   Alert.alert("ログイン成功", `${data.email}`);
+      //   loginWithEmailAndPassword(data);
+      //   console.log("hello");
       // } catch (e: any) {
       //   console.log(e.code);
       //   Alert.alert("ログイン失敗", `${data.email}`);
       // }
       loginWithEmailAndPassword(data);
+      if (authStatus === "failed") {
+        Alert.alert("メールアドレスかパスワードをもう一度確認してください");
+      }
     }),
     []
   );
@@ -119,7 +123,7 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
           marginY={5}
           onPress={() => {
             reset({
-              email: "",
+              email: "@sample.com",
               password: ""
             });
           }}
