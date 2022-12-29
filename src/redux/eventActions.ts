@@ -56,7 +56,7 @@ const getAllEvents = async () => {
  */
 export const addEvent = createAsyncThunk(
   "event/addEvent",
-  async (EventInfo: EventType) => {
+  async (EventInfo: EventType, thunkAPI) => {
     const randomId = nanoid();
     // const { EventInfo } = initialPost;
     try {
@@ -72,6 +72,7 @@ export const addEvent = createAsyncThunk(
       return event;
     } catch (error: unknown) {
       console.log("addNewEventで例外処理発生", error);
+      return thunkAPI.rejectWithValue({ error: "イベント追加に失敗しました" });
     }
   }
 );
@@ -87,7 +88,9 @@ export const fetchAllEvents = createAsyncThunk(
       return events;
     } catch (e) {
       console.log("fetchAllEvents失敗:", e);
-      return thunkAPI.rejectWithValue({ error: "fetchAllEvents失敗" });
+      return thunkAPI.rejectWithValue({
+        error: "イベント情報取得に失敗しました"
+      });
     }
   }
 );

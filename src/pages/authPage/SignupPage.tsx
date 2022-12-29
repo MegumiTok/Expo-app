@@ -28,14 +28,16 @@ import type { User } from "firebase/auth";
 // import { doc, setDoc, Timestamp } from "firebase/firestore";
 
 //+redux------------------------------
-import { useAppDispatch } from "@Redux/hook";
-import { signUpWithEmailPassword } from "@Redux/authActions";
+import { useAuthentication, useAppSelector } from "@Redux/hook";
+
 import { unwrapResult } from "@reduxjs/toolkit";
 
 export const SignupPage = ({ navigation }: SignUpProps) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const { registerWithEmailPassword } = useAuthentication();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-
+  const authStatus = useAppSelector((state) => state.auth.status);
+  const error = useAppSelector((state) => state.auth.error);
   const {
     control,
     handleSubmit,
@@ -62,46 +64,19 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
 
         console.log("登録データ", resisterData);
 
-        // const userRef = doc(db, ALL_USERS, userName); //名前は変更不可にする(名前の重複も不可)
-        // const response = await createUserWithEmailAndPassword(
-        //   auth,
-        //   email,
-        //   password
-        // );
+        const resultAction = await registerWithEmailPassword(resisterData);
+        console.log(authStatus);
 
-        // const user = response.user
-        // await setDoc(userRef, {
-        //   userName,
-        //   email,
-        //   userId: user.uid,
-        //   userPhoto: TEST_IMAGE,
-        //   userFlg: userFlg,
-        //   createdAt: Timestamp.fromDate(new Date()),
-        //   mainComment: ""
-        // });
-
-        //The updateProfil method return Promise,so you have to wait the resolution of this before display the displayName.
-        // const currentUser = auth.currentUser;
-        // if (currentUser !== null) {
-        //   await updateProfile(user, {
-        //     // update a user's basic profile information
-        //     displayName: userName,
-        //     photoURL: TEST_IMAGE
-        //   } as User);
-        // }
-
-        const resultAction = await dispatch(
-          signUpWithEmailPassword(resisterData)
-        );
         unwrapResult(resultAction);
 
         //----
-        Alert.alert("ユーザー名", `${data.userName}`);
-      } catch (e) {
-        Alert.alert(
-          "サインアップ完了できませんでした。",
-          `ユーザー名：${data.userName}`
-        );
+      } catch (e: any) {
+        console.error(e);
+        // console.log(error);
+        // console.log(typeof e);
+        if (error) {
+          Alert.alert(e, `ユーザー名：${data.userName}`);
+        }
       } finally {
         setAddRequestStatus("idle");
       }
@@ -206,7 +181,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
       <Button
         onPress={() => {
           reset({
-            email: "@",
+            email: "@sample.com",
             password: ""
           });
         }}

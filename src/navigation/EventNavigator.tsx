@@ -7,7 +7,7 @@ import {
   EventList1,
   EventList2,
   EventList3
-} from "@pages/eventPage";
+} from "@pages/eventPage/EventLists";
 
 import { LoadingView } from "@components/styles/LoadingView";
 import ErrorPage from "@components/ErrorPage";
@@ -26,13 +26,13 @@ export const EventNavigator = () => {
   const error = useAppSelector((state) => state.posts.error);
 
   const category1 = useAppSelector((state) =>
-    selectEventByCategory(state, "1")
+    selectEventByCategory(state, "Pokémon")
   );
   const category2 = useAppSelector((state) =>
-    selectEventByCategory(state, "2")
+    selectEventByCategory(state, "Hunter × Hunter")
   );
   const category3 = useAppSelector((state) =>
-    selectEventByCategory(state, "3")
+    selectEventByCategory(state, "Attack on Titan")
   );
 
   useEffect(() => {
@@ -62,22 +62,22 @@ export const EventNavigator = () => {
         })}
       >
         <Tab.Screen
-          name="全体"
+          name="All"
           component={AllEventList}
           initialParams={{ events }}
         />
         <Tab.Screen
-          name="お知らせ1"
+          name="Pokémon"
           component={EventList1}
           initialParams={{ category1 }}
         />
         <Tab.Screen
-          name="お知らせ2"
+          name="Hunter × Hunter"
           component={EventList2}
           initialParams={{ category2 }}
         />
         <Tab.Screen
-          name="お知らせ3"
+          name="Attack on Titan"
           component={EventList3}
           initialParams={{ category3 }}
         />

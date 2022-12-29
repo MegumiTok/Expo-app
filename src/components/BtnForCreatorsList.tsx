@@ -1,9 +1,10 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
+import { SPACING } from "./styles/theme/layout";
 import { Text, TouchableOpacity } from "react-native";
-import Constants from "expo-constants";
+
 import { Routes } from "@models/NavTypes";
+import { STATUS_BAR_HEIGHT } from "src/config/const";
 export const BtnForCreatorsList = () => {
   const navigation = useNavigation();
   return (
@@ -15,7 +16,7 @@ export const BtnForCreatorsList = () => {
         alignItems: "center",
         padding: 8,
         position: "absolute",
-        top: Constants.statusBarHeight,
+        top: STATUS_BAR_HEIGHT + SPACING,
         right: 20,
         zIndex: 2
       }}

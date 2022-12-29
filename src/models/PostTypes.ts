@@ -15,7 +15,7 @@ export interface Post {
     clap: number;
     surprise: number;
   };
-  // isLiked: boolean;
+  isLiked: boolean;
   // carrousel: boolean;
   imageW: number;
   imageH: number;

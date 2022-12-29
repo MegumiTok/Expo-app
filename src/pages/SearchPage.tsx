@@ -18,15 +18,22 @@ import {
   SPACING,
   SPACING_BIG
 } from "@components/styles/theme/layout";
-
+import { STATUS_BAR_HEIGHT } from "src/config/const";
 const ITEM_WIDTH = SCREEN_WIDTH / 2 - SPACING;
 
 export const SearchPage = () => {
   const [search, setSearch] = useState("");
   const searchDatas = onlyItems.find((post) => post.comment.includes(search));
   return (
-    <View style={{ paddingTop: Constants.statusBarHeight }}>
+    <View>
       <StatusBar hidden />
+      <View
+        style={{
+          height: STATUS_BAR_HEIGHT,
+          // backgroundColor: Colors.primary.general,
+          top: 0
+        }}
+      />
       <ScrollView>
         <SearchBox
           title={"例: フラミンゴ　釣り"}

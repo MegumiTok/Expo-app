@@ -35,7 +35,7 @@ export const ContainerHeader = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: ${SPACING}px;
+  margin-top: ${SPACING_BIG}px;
   margin-bottom: ${SPACING}px;
   padding-right: ${SPACING}px;
 `;

@@ -6,31 +6,24 @@ import {
   StyleSheet
 } from "react-native";
 
-import { Center, Text, View, Icon, ScrollView } from "native-base";
-
-//functions--------------------------------------------------------
-import * as PickImage from "@functions/_pickImage";
+import { Center, Text, View, ScrollView } from "native-base";
+import { Routes } from "@models/NavTypes";
 //3rd party------------------------------------------------------
-import * as ImagePicker from "expo-image-picker";
+
 import { useForm, Controller } from "react-hook-form";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import DropDownPicker from "react-native-dropdown-picker";
 //redux--------------------------------------------------------------
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { useAppDispatch } from "@Redux/hook";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { addEvent } from "@Redux/eventActions";
 
 //style-------------------------------------------------------------------
-import type { category, EventType } from "@models/EventType";
+import type { EventType } from "@models/EventType";
 import Spacer from "@components/styles/Spacer";
 import basicStyles from "@components/styles/theme/basicStyleSheet";
 import InputFieldTwo from "@components/styles/InputFieldTwo";
-import {
-  PhotoWrapper,
-  PostImage,
-  _width
-} from "@components/styles/pageStyle/AddPostStyle";
+import { _width } from "@components/styles/pageStyle/AddPostStyle";
 
 import { OutlineButton } from "@components/styles/button";
 
@@ -41,12 +34,12 @@ interface FormInput {
 }
 
 const categories = [
-  { label: "1", value: "1" },
-  { label: "2", value: "2" },
-  { label: "3", value: "3" }
+  { label: "Pokémon", value: "Pokémon" },
+  { label: "Hunter × Hunter", value: "Hunter × Hunter" },
+  { label: "Attack on Titan", value: "Attack on Titan" }
 ];
 
-export const AddEventPage = () => {
+export const AddEventPage = ({ navigation }) => {
   const dispatch = useAppDispatch();
   // const [galleryPermission, setGalleryPermission] = useState(null);
   // const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
@@ -115,6 +108,7 @@ export const AddEventPage = () => {
         const resultAction = await dispatch(addEvent(postedData));
         Alert.alert("イベントが投稿されました");
         unwrapResult(resultAction);
+        navigation.navigate(Routes.EventList);
       } catch (error) {
         Alert.alert("エラーです。もう一度お願いします。");
         console.log("エラー:", error);

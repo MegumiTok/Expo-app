@@ -24,7 +24,7 @@ export const useAuthentication = () => {
   const dispatch = useAppDispatch();
 
   const loginWithEmailAndPassword = (data: Login) => {
-    dispatch(signInWithEmailPassword(data));
+    return dispatch(signInWithEmailPassword(data));
   };
   // const loginWithGoogle = () => {
   //   dispatch(signInWithGoogle());
@@ -33,8 +33,9 @@ export const useAuthentication = () => {
     dispatch(sendPasswordReset(email));
   };
   const registerWithEmailPassword = (data: Register) => {
-    dispatch(signUpWithEmailPassword(data));
+    return dispatch(signUpWithEmailPassword(data));
   };
+
   // const logoutUser = () => {
   //   dispatch(logout());
   //   dispatch(clearCurrentUser());

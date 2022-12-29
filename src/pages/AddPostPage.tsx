@@ -95,12 +95,12 @@ export const AddPostPage = ({ navigation }) => {
     }
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [5, 4],
         quality: 0.0
       });
-      console.log("ログ出し中", result);
+      console.log("投稿写真", result);
       if (!result.canceled) {
         const img = result.assets[0];
         setImageData(img);
@@ -157,17 +157,6 @@ export const AddPostPage = ({ navigation }) => {
           // updatedAt
         } as Post;
         console.log("postedDataは:", postedData);
-        // try {
-        //   const postRef = doc(db, CREATORS_POSTS, randomId); //✅docIdをpostIdと同じにすることで参照がしやすくなる
-        //   await setDoc(postRef, postedData);
-        //   // console.log("Document written with ID: ", postRef.id);
-
-        //   // const userRef = doc(db, CREATORS_POSTS, postedData.postId);
-        //   // await setDoc(userRef, postedData);
-        // } catch (error) {
-        //   Alert.alert("Firestoreに保存を失敗しました");
-        //   console.log("Firestoreに保存を失敗しました", error); //<-- これでエラー内容確認
-        // }
 
         const resultAction = await dispatch(createNewPost(postedData));
         unwrapResult(resultAction);
@@ -202,38 +191,6 @@ export const AddPostPage = ({ navigation }) => {
             <PostImage source={{ uri: imageData?.uri }} />
           </PhotoWrapper>
           {/* コメント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-          {/* <Button onPress={toggleModal}>コメントをかく</Button>
-          <Modal isVisible={isModalVisible}>
-            <Center pt={10}>
-              <Button onPress={toggleModal}>閉じる</Button>
-              <Controller
-                defaultValue=""
-                control={control}
-                name="comment"
-                rules={{
-                  required: true
-                }}
-                render={({ field: { onChange, value, onBlur } }) => (
-                  <StyledTextInput
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                    placeholder="ひとこと書いてください"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    multiline
-                    defaultValue={value} //足してみた
-                  />
-                )}
-              />
-              {errors.comment && (
-                <Text style={basicStyles.warningText}>
-                  コメントの入力お願いします！
-                </Text>
-              )}
-            </Center>
-          </Modal> */}
-
           <View>
             <Controller
               defaultValue=""

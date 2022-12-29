@@ -1,5 +1,3 @@
-![Screenshot](src/assets/readme/demo.gif)
-
 ## main
 ![demo_1](src/assets//readme/demo_1.png)
 ![demo_10](src/assets//readme/demo_10.png)
@@ -36,6 +34,8 @@
 | firebase |9.14.0| 
 | react-redux |8.0.5| 
 
+-------------------------------------------------------------
+<br>
 
 # コミットメッセージ
 | 記号 | Description | 
@@ -45,14 +45,14 @@
 | :tada: | 大きめの修正完了 | 
 
 
-# コメント
+# Warning
 高さに問題がある時もしかすると以下の出力結果が0になっているかもしれません。
 ```js
 console.log(Constants.statusBarHeight);
 ```
 その場合はreloadしてください。
 
-# ブランチ
+# Branch
 ## main
 メインブランチ
 
@@ -80,6 +80,19 @@ Redux と firebase と useContext で実装している。
 ## v4.1
 - Delete機能追加
 - Reload機能追加
+
+![Screenshot](src/assets/readme/demo.gif)
+
+## v4.2
+- ログイン/サインアップの機能改良
+- デザインを更新
+- イベントページ追加
+など。
+
+![Screenshot](src/assets/readme/login.gif)
+![Screenshot](src/assets/readme/feed.gif)
+![Screenshot](src/assets/readme/creators.gif)
+![Screenshot](src/assets/readme/event.gif)
 
 ## v5　(予定)
 Redux + firebase (useContext なし）で実装

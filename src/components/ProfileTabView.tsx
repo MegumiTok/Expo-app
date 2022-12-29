@@ -26,7 +26,8 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
   const Tab = createMaterialTopTabNavigator();
   const TOP_SIZE = topHeight;
   // const TOP_HEADER_HEIGHT = SCREEN_WIDTH * 0.21 + SPACING + TOP_SIZE;
-  const TOP_HEADER_HEIGHT = SPACING + TOP_SIZE + STATUS_BAR_HEIGHT;
+  // const TOP_HEADER_HEIGHT = SPACING + TOP_SIZE + STATUS_BAR_HEIGHT;
+  const TOP_HEADER_HEIGHT = TOP_SIZE;
   //🟠TOP_HEADER_HEIGHTをアニメーションでスクロールしたら０にするようにすればいいのかな、
 
   // const squares = [];
@@ -55,7 +56,7 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
     <View //LOWER PART
       style={[
         StyleSheet.absoluteFillObject,
-        { top: TOP_HEADER_HEIGHT, padding: SPACING } //🟢
+        { top: TOP_HEADER_HEIGHT } //🟢
       ]}
     >
       <Tab.Navigator
