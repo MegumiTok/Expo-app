@@ -95,4 +95,4 @@ Redux と firebase と useContext で実装している。
 ![Screenshot](src/assets/readme/event.gif)
 
 ## v5　(予定)
-Redux + firebase (useContext なし）で実装
+SearchPageを実装
