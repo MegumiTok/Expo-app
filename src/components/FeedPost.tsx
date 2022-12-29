@@ -9,12 +9,15 @@ import type { Post } from "@models/PostTypes";
 // interface Props {
 //   element: any;
 // }
+
+//function----------------
+import { _takasaPost } from "@functions/_takasaPost";
+
 export const FeedPost = ({ item }: { item: Post }) => {
-  const calculatedMaxH = Math.round((SCREEN_WIDTH * item.imageH) / item.imageW); //実際ポストされるのサイズに計算
-
-  const _takasa: number =
-    calculatedMaxH < PHOTO_HEIGHT ? calculatedMaxH : PHOTO_HEIGHT;
-
+  const _takasa = _takasaPost({
+    imageH: item.imageH,
+    imageW: item.imageW
+  });
   return (
     <>
       <FeedPostHeader {...{ item }} />

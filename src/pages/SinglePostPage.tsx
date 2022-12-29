@@ -18,6 +18,7 @@ import { STATUS_BAR_HEIGHT } from "src/config/const";
 import { posts } from "@assets/data/posts";
 //function========================
 import { _timeAgo } from "@functions/_timeAgo";
+import { _takasaPost } from "@functions/_takasaPost";
 //redux=========================
 import { useAppSelector } from "@Redux/hook";
 import { selectSinglePostById } from "@Redux/postsSlice";
@@ -39,10 +40,11 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
   if (!post) {
     return <LoadingView />;
   }
-  const calculatedMaxH = Math.round((SCREEN_WIDTH * post.imageH) / post.imageW); //実際ポストされるのサイズに計算
 
-  const _takasa: number =
-    calculatedMaxH < PHOTO_HEIGHT ? calculatedMaxH : PHOTO_HEIGHT;
+  const _takasa = _takasaPost({
+    imageH: post.imageH,
+    imageW: post.imageW
+  });
 
   const timeAgo = _timeAgo(post.postedAt);
 

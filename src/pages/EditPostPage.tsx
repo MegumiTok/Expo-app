@@ -10,10 +10,12 @@ import {
   Image,
   StyleSheet
 } from "react-native";
-import { Text, Button, Center, View, ScrollView } from "native-base";
+import { Text, Center, View, ScrollView } from "native-base";
 
 import { useForm, Controller } from "react-hook-form";
 import { LoadingView } from "@components/styles/LoadingView";
+//function----------------
+import { _takasaPost } from "@functions/_takasaPost";
 //3rd party------------------------------------------------------
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -55,12 +57,11 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
           return null;
         }
         console.log("postIdはこれ:", item.postId);
-        const calculatedMaxH = Math.round(
-          (SCREEN_WIDTH * item.imageH) / item.imageW
-        ); //実際ポストされるのサイズに計算
 
-        const _takasa: number =
-          calculatedMaxH < PHOTO_HEIGHT ? calculatedMaxH : PHOTO_HEIGHT;
+        const _takasa = _takasaPost({
+          imageH: item.imageH,
+          imageW: item.imageW
+        });
 
         setTakasa(_takasa);
         // setPostData(item);

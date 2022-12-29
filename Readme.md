@@ -1,3 +1,18 @@
+# 主な使用技術
+
+- NativeBase 
+- TypeScript 
+- Expo 
+- firebase
+- Redux
+
+| 使用技術 | version |
+| --- | --- |
+| NativeBase| 3.4.0| 
+| Expo| 47.0.0| 
+| firebase |9.14.0| 
+| react-redux |8.0.5| 
+
 # main
 ## Feed
 ![demo_1](src/assets//readme/demo_1.png)
@@ -25,22 +40,6 @@
 # Create
 ![demo_6](src/assets//readme/demo_6.png)
 ![demo_8](src/assets//readme/demo_8.png)
-
-
-# 主な使用技術
-
-- NativeBase 
-- TypeScript 
-- Expo 
-- firebase
-- Redux
-
-| 使用技術 | version |
-| --- | --- |
-| NativeBase| 3.4.0| 
-| Expo| 47.0.0| 
-| firebase |9.14.0| 
-| react-redux |8.0.5| 
 
 -------------------------------------------------------------
 <br>

@@ -1,23 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checkbox from "expo-checkbox";
-import { Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Alert, TouchableWithoutFeedback, Keyboard, Image } from "react-native";
 
-import {
-  Center,
-  Text,
-  View,
-  HStack,
-  Icon,
-  Button,
-  ScrollView
-} from "native-base";
+import { Center, Text, View, HStack, Icon, ScrollView } from "native-base";
 
 import { GENRES } from "src/config/const";
 import { Routes } from "@models/NavTypes";
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
 import DropDownPicker from "react-native-dropdown-picker";
-import Modal from "react-native-modal";
+
 //
 // import Select from "react-select"; //React Nativeで使えない (>.<)
 //
@@ -37,17 +29,18 @@ import type { Post } from "@models/PostTypes";
 
 //functions--------------------------------------------------------
 import * as PickImage from "@functions/_pickImage";
-
+import { _takasaPost } from "@functions/_takasaPost";
 //style-------------------------------------------------------------------
 import Spacer from "@components/styles/Spacer";
 import basicStyles from "@components/styles/theme/basicStyleSheet";
 import {
   StyledTextInput,
   PhotoWrapper,
-  PostImage,
-  _width
+  _width,
+  PostImage
 } from "@components/styles/pageStyle/AddPostStyle";
 import { OutlineButton } from "@components/styles/button";
+import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 
 interface FormInput {
   comment: string;
@@ -64,14 +57,8 @@ export const AddPostPage = ({ navigation }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [takasa, setTakasa] = useState<number>();
   const { user } = useUser();
-
-  // const [items, setItems] = useState(GENRES);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
 
   const {
     control,
@@ -94,13 +81,17 @@ export const AddPostPage = ({ navigation }) => {
       if (!galleryStatus) return;
     }
     try {
+      //An array with two entries [x, y] specifying the aspect ratio to maintain if the user is allowed to edit the image (by passing allowsEditing: true).
+      //This is only applicable on Android, since on iOS the crop rectangle is always a square.
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [5, 4],
-        quality: 0.0
+        allowsEditing: true, //only Android
+        aspect: [1, 1], //only Android
+        quality: 0.0 //pngには意味がない
       });
-      console.log("投稿写真", result);
+      // console.log("投稿写真", result);
+      //このログを出すといかのようなwarnが出るがこれはログ内にcancelledが含まれているため。なので無視してok。
+      //Key "cancelled" in the image picker result is deprecated and will be removed in SDK 48, use "canceled" instead
       if (!result.canceled) {
         const img = result.assets[0];
         setImageData(img);
@@ -127,12 +118,17 @@ export const AddPostPage = ({ navigation }) => {
         // for (let i = 0; i < 8; i++) {
         //   randomId += chars.charAt(Math.floor(Math.random() * chars.length));
         // }
+        if (!imageData) {
+          //canSaveの確認でundefineでないことは確認しているが型チェックのため書いている
+          console.log("HELLO");
+          return null;
+        }
 
         const randomId = nanoid();
 
         setAddRequestStatus("pending");
         await PickImage.uploadImage(
-          imageData?.uri,
+          imageData.uri,
           `postImages/${user.displayName}`,
           randomId //複数投稿があるので名前は変動型にすべき
         );
@@ -146,8 +142,8 @@ export const AddPostPage = ({ navigation }) => {
           genre: data.genre,
           comment: data.comment,
           postedImage: imageData?.uri,
-          imageW: imageData?.width,
-          imageH: imageData?.height,
+          imageW: imageData.width,
+          imageH: imageData.height,
           isLiked: false,
 
           product: data.product || false,
@@ -156,7 +152,9 @@ export const AddPostPage = ({ navigation }) => {
           postId: randomId
           // updatedAt
         } as Post;
-        console.log("postedDataは:", postedData);
+        // console.log("postedDataは:", postedData);
+        console.log("height:", postedData.imageH);
+        console.log("width:", postedData.imageW);
 
         const resultAction = await dispatch(createNewPost(postedData));
         unwrapResult(resultAction);
@@ -169,6 +167,18 @@ export const AddPostPage = ({ navigation }) => {
       }
     }
   };
+
+  useEffect(() => {
+    //useEffectを使わないでuseStateを使うとinfante loopに入った
+    if (imageData) {
+      const _takasa = _takasaPost({
+        imageH: imageData.height,
+        imageW: imageData.width
+      });
+      // console.log("_takasa", _takasa);
+      setTakasa(_takasa);
+    }
+  }, []); //emptyにすること（一回のみ実行したいので）
 
   return (
     <ScrollView>
@@ -188,7 +198,15 @@ export const AddPostPage = ({ navigation }) => {
               style={{ position: "absolute", top: _width / 2 }}
               size="md"
             />
-            <PostImage source={{ uri: imageData?.uri }} />
+            {imageData && (
+              <Image
+                source={{ uri: imageData.uri }}
+                style={{ width: SCREEN_WIDTH, height: takasa }}
+                // style={{ width: imageData.width, height: imageData.height }}//こっちのデザインでもありだとは思う（小さい画像を選択すると見にくいが）
+              />
+            )}
+
+            {!imageData && <PostImage />}
           </PhotoWrapper>
           {/* コメント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
           <View>
