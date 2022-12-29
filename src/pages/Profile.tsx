@@ -45,8 +45,12 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
 
   useEffect(() => {
     dispatch(fetchAllPosts());
-    setPosts(POSTS);
+    // setPosts(POSTS);
   }, [dispatch]);
+
+  useEffect(() => {
+    setPosts(POSTS);
+  }, []);
 
   let content;
   if (postStatus === "loading") {

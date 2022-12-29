@@ -95,15 +95,15 @@ Redux と firebase と useContext で実装している。
 ![Screenshot](src/assets/readme/event.gif)
 
 ## v4.3
+- レンダリングの問題を解決<br>
 ▼修正前:<br>
-期待通りにレンダリングがされない
+期待通りにレンダリングがされない<br>
 この例でいくとhisokaのページに移ってもhisokaのデータを使って再レンダリングがされていない。<br>
 ※手動で更新をすると強制レンダリングされるので期待通りにはなる<br>
 
 ![Screenshot](src/assets/readme/test_1.gif)
 
 ▼修正後:<br>
-### 施行１
 `useState`を使用しfirebaseからfetchしてきたデータを一旦ストアさせ、そのストアデータを使うことで毎回stateが変わるたびにレンダリングが走るようにしてみた。
 
 `Profile.tsx`から一部抜粋:
@@ -128,5 +128,27 @@ Redux と firebase と useContext で実装している。
 
 ![Screenshot](src/assets/readme/test.png)
 
+### Asides:
+>Generally speaking, using setState inside useEffect will create an infinite loop that most likely you don't want to cause. There are a couple of exceptions to that rule which I will get into later.<br>
+>useEffect is called after each render and when `setState` is used inside of it, it will cause the component to re-render which will call `useEffect` and so on and so on.<br>
+>One of the popular cases that using `useState` inside of `useEffect` will not cause an infinite loop is when you pass an empty array as a second argument to `useEffect` like `useEffect(() => {....}, [])` which means that the effect function should be called once: after the first mount/render only. This is used widely when you're doing data fetching in a component and you want to save the request data in the component's state.[^1]
+
+以下のように書き換えることで解決
+```jsx
+  useEffect(() => {
+    dispatch(fetchAllPosts());
+    // setPosts(POSTS);
+  }, [dispatch]);
+
+  useEffect(() => {
+    setPosts(POSTS);
+  }, []);//<-----第二引数がemptyだったら無限ループは回避できる
+```
+
+
+
 ## v5　(予定)
 SearchPageを実装
+
+
+[^1]:https://stackoverflow.com/questions/53715465/can-i-set-state-inside-a-useeffect-hook
