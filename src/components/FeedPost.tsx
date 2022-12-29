@@ -1,3 +1,4 @@
+import { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { Image } from "native-base";
 // styleーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
@@ -13,7 +14,7 @@ import type { Post } from "@models/PostTypes";
 //function----------------
 import { _takasaPost } from "@functions/_takasaPost";
 
-export const FeedPost = ({ item }: { item: Post }) => {
+export const FeedPost = memo(({ item }: { item: Post }) => {
   const _takasa = _takasaPost({
     imageH: item.imageH,
     imageW: item.imageW
@@ -30,6 +31,6 @@ export const FeedPost = ({ item }: { item: Post }) => {
       <FeedPostFooter {...{ item }} />
     </>
   );
-};
+});
 
 export default FeedPost;

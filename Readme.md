@@ -156,6 +156,9 @@ Redux と firebase と useContext で実装している。
 - 選択した画像のサイズに合わせてプレビューの表示サイズを変えれるようにした
 
 ![Screenshot](src/assets/readme/addPost.gif)
+
+- optimizing my code(予定)
+>VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc. {"contentLength": 2074.666748046875, "dt": 844341, "prevDt": 1603}
 ## v5　(予定)
 SearchPageを実装
 
