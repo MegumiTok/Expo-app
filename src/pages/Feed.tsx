@@ -71,9 +71,10 @@ export const Feed: FC = () => {
           keyExtractor={(item) => item.postId}
           renderItem={_renderItem}
           showsVerticalScrollIndicator={false}
-          initialNumToRender={3} //default is 10
-          maxToRenderPerBatch={3}
-          windowSize={5}
+          initialNumToRender={5} //default is 10
+          maxToRenderPerBatch={5} //default is 10
+          updateCellsBatchingPeriod={30} // default is 50
+          windowSize={10} //default value is 21 (10 viewports above, 10 below, and one in between).
           removeClippedSubviews
           refreshing={refreshing}
           // onRefresh={_onRefresh}

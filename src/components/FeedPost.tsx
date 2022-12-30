@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect, memo, useMemo } from "react";
+import { memo } from "react";
 import { Image } from "native-base";
+import FastImage from "react-native-fast-image";
 // styleーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
 // import { FeedPostHeader, FeedPostFooter } from "@components/templates";
@@ -28,6 +29,16 @@ export const FeedPost = memo(({ item }: { item: Post }) => {
         resizeMode="contain"
         alt="post"
       />
+      {/* <FastImage
+        style={{ width: SCREEN_WIDTH, height: _takasa }}
+        // source={{ uri: item.postedImage }}
+        source={{
+          uri: item.postedImage,
+
+          priority: FastImage.priority.normal
+        }}
+        resizeMode={FastImage.resizeMode.contain}
+      /> */}
       <FeedPostFooter {...{ item }} />
     </>
   );
