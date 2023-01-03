@@ -16,10 +16,7 @@ import { useForm, Controller } from "react-hook-form";
 import { LoadingView } from "@components/styles/LoadingView";
 //function----------------
 import { _takasaPost } from "@functions/_takasaPost";
-//3rd party------------------------------------------------------
-import DropDownPicker from "react-native-dropdown-picker";
 
-import { GENRES } from "src/config/const";
 //redux --------------------------------
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useAppDispatch } from "@Redux/hook";

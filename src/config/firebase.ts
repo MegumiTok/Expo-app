@@ -9,7 +9,10 @@ import { getReactNativePersistence } from "firebase/auth/react-native";
 import { getStorage } from "firebase/storage";
 
 import { All_EVENTS, ALL_USERS, CREATORS_POSTS } from "./const";
+
+//Environment variables in Expo-----------
 import ENV from "../../env";
+import Constants from "expo-constants";
 
 // import {
 //   API_KEY,
@@ -53,6 +56,7 @@ import ENV from "../../env";
 //   measurementId: process.env.MEASUREMENT_ID
 // };
 
+//=====================================
 const firebaseConfig = {
   apiKey: ENV.API_KEY,
   authDomain: ENV.AUTH_DOMAIN,

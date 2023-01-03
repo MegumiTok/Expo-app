@@ -2,13 +2,20 @@ import React, { useState, useEffect } from "react";
 import Checkbox from "expo-checkbox";
 import { Alert, TouchableWithoutFeedback, Keyboard, Image } from "react-native";
 
-import { Center, Text, View, HStack, Icon, ScrollView } from "native-base";
+import {
+  Center,
+  Text,
+  View,
+  HStack,
+  Icon,
+  ScrollView,
+  Button
+} from "native-base";
 
-import { GENRES } from "src/config/const";
 import { Routes } from "@models/NavTypes";
+import DropDownPicker from "@components/DropDownPicker";
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
-import DropDownPicker from "react-native-dropdown-picker";
 
 //
 // import Select from "react-select"; //React Nativeで使えない (>.<)
@@ -42,19 +49,30 @@ import {
 import { OutlineButton } from "@components/styles/button";
 import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 
+let genres = [
+  { id: 1, name: "フリージャンル" },
+  { id: 2, name: "お絵かき" },
+  { id: 3, name: "食べ物" },
+  { id: 4, name: "アニメ/マンガ" },
+  { id: 5, name: "キャラクター" },
+  { id: 6, name: "お知らせ" }
+];
+
+interface genreType {
+  id: number;
+  name: "string";
+}
 interface FormInput {
   comment: string;
-  genre: string;
+  genre: genreType;
   product: boolean;
 }
 export const AddPostPage = ({ navigation }) => {
   // const [postedImage, setPostedImage] = useState("");
   const dispatch = useAppDispatch();
-  const genres = useAppSelector((state) => state.genre);
 
   const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
 
-  const [open, setOpen] = useState<boolean>(false);
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
   const [takasa, setTakasa] = useState<number>();
@@ -66,10 +84,6 @@ export const AddPostPage = ({ navigation }) => {
     reset,
     formState: { errors }
   } = useForm<FormInput>();
-
-  //追加すべき？（画像登録処理があるため）
-  // const postStatus = useAppSelector((state) => state.posts.status);
-  // const postError = useAppSelector((state) => state.posts.error);
 
   const handlePickImage = async () => {
     if (!galleryPermission) {
@@ -90,7 +104,7 @@ export const AddPostPage = ({ navigation }) => {
         quality: 0.0 //pngには意味がない
       });
       // console.log("投稿写真", result);
-      //このログを出すといかのようなwarnが出るがこれはログ内にcancelledが含まれているため。なので無視してok。
+      //このログを出すと以下のようなwarnが出るがこれはログ内にcancelledが含まれているため。なので無視してok。
       //Key "cancelled" in the image picker result is deprecated and will be removed in SDK 48, use "canceled" instead
       if (!result.canceled) {
         const img = result.assets[0];
@@ -120,7 +134,6 @@ export const AddPostPage = ({ navigation }) => {
         // }
         if (!imageData) {
           //canSaveの確認でundefineでないことは確認しているが型チェックのため書いている
-          console.log("HELLO");
           return null;
         }
 
@@ -139,7 +152,7 @@ export const AddPostPage = ({ navigation }) => {
           creatorName: user.displayName,
           creatorPhoto: user.photoURL, //投稿時はログインしているのだからこれでいい
 
-          genre: data.genre,
+          genre: data.genre.name,
           comment: data.comment,
           postedImage: imageData?.uri,
           imageW: imageData.width,
@@ -180,9 +193,12 @@ export const AddPostPage = ({ navigation }) => {
     }
   }, [imageData]);
 
+  // const [selectedItem, setSelectedItem] = useState(null);
+  // const onSelect = (item: any) => {
+  //   setSelectedItem(item);
+  // };
   return (
     <ScrollView>
-      {/* <Spacer /> */}
       <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss();
@@ -245,17 +261,14 @@ export const AddPostPage = ({ navigation }) => {
             }}
             render={({ field: { onChange, value } }) => (
               <DropDownPicker
+                data={genres}
+                // value={selectedItem}
+                // onSelect={onSelect}
+
                 value={value}
-                items={genres}
-                open={open}
-                setValue={(value) => {
+                onSelect={(value) => {
                   onChange(value);
                 }}
-                onChangeValue={(value) => {
-                  onChange(value);
-                }}
-                setOpen={setOpen}
-                // setItems={setItems}
               />
             )}
             name="genre"
@@ -281,6 +294,22 @@ export const AddPostPage = ({ navigation }) => {
             />
           </HStack>
 
+          {/* リセットボタン ------------------------*/}
+          <Button
+            marginY={5}
+            onPress={() => {
+              reset({
+                comment: "",
+                genre: undefined,
+                product: false
+              });
+            }}
+            p={3}
+            colorScheme="success"
+            variant="outline"
+          >
+            入力リセット
+          </Button>
           {/* 投稿ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */}
 
           <View width={"100%"} mt={5}>

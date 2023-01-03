@@ -12,7 +12,6 @@ import { Routes } from "@models/NavTypes";
 
 import { useForm, Controller } from "react-hook-form";
 
-import DropDownPicker from "react-native-dropdown-picker";
 //redux--------------------------------------------------------------
 import { useAppDispatch } from "@Redux/hook";
 import { unwrapResult } from "@reduxjs/toolkit";

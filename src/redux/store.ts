@@ -10,15 +10,14 @@ import type { Action } from "@reduxjs/toolkit";
 import { authReducer } from "./authSlice";
 import { creatorsReducer } from "./creatorsSlice";
 import { postsReducer } from "./postsSlice";
-import { genreReducer } from "./genreSlice";
+
 import { eventReducer } from "./eventSlice";
 
 const reducer = {
   auth: authReducer, //認証系
   creators: creatorsReducer, //クリエイターリスト
   posts: postsReducer, //クリエイターの投稿
-  events: eventReducer, //イベント情報
-  genre: genreReducer //ジャンル
+  events: eventReducer //イベント情報
 };
 export const store = configureStore({
   reducer,

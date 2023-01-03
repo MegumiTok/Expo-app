@@ -138,6 +138,7 @@ module.exports = {
     // "import/no-deprecated": 2,
     "import/no-duplicates": ["error", { considerQueryString: true }],
     "comma-dangle": 0,
-    "react-hooks/exhaustive-deps": "warn" // <--- THIS IS THE NEW RULE
+    "react-hooks/exhaustive-deps": "warn", // <--- THIS IS THE NEW RULE
+    "prefer-const": 0 //letを使いたい時があるのでこの設定にする。
   }
 };
