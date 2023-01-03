@@ -29,7 +29,8 @@ export const DropDownPicker = ({
     [onSelect, value?.name]
   );
 
-  // console.log(value?.name);
+  console.log(value?.name);
+  console.log("現在", value);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -38,8 +39,8 @@ export const DropDownPicker = ({
         onPress={() => setShowOption(!showOption)}
       >
         <Text style={styles.text}>
-          {/* {value ? value.name : "Chose an options"} */}
-          {value ? value?.name : "Chose an genre"}
+          {/* 本当はvalueをオブジェクトではなくstringとしてnameだけ持たせて管理できたら一番スマート */}
+          {value ? value?.name || value : "Chose an genre"}
         </Text>
         <View
           style={{
@@ -77,9 +78,10 @@ export const DropDownPicker = ({
 export default DropDownPicker;
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 10,
     flex: 1,
     alignItems: "center"
+    // backgroundColor: "tomato"
   },
   box: {
     borderColor: Colors.border,

@@ -157,7 +157,7 @@ Redux と firebase と useContext で実装している。
 
 ![Screenshot](src/assets/readme/addPost.gif)
 
-- optimizing my code(予定)
+- optimize my code
 >VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc. {"contentLength": 2074.666748046875, "dt": 844341, "prevDt": 1603}
 
 - DropDownPickerを自作

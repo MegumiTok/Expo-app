@@ -49,23 +49,14 @@ import {
 } from "@components/styles/pageStyle/AddPostStyle";
 import { OutlineButton } from "@components/styles/button";
 import { SCREEN_WIDTH } from "@components/styles/theme/layout";
+import { GENRES } from "src/config/const";
 
-let genres = [
-  { id: 1, name: "フリージャンル" },
-  { id: 2, name: "お絵かき" },
-  { id: 3, name: "食べ物" },
-  { id: 4, name: "アニメ/マンガ" },
-  { id: 5, name: "キャラクター" },
-  { id: 6, name: "お知らせ" }
-];
-
-interface genreType {
-  id: number;
-  name: "string";
-}
 interface FormInput {
   comment: string;
-  genre: genreType;
+  genre: {
+    id: number;
+    name: "string";
+  };
   product: boolean;
 }
 export const AddPostPage = ({ navigation }) => {
@@ -262,7 +253,7 @@ export const AddPostPage = ({ navigation }) => {
             }}
             render={({ field: { onChange, value } }) => (
               <DropDownPicker
-                data={genres}
+                data={GENRES}
                 // value={selectedItem}
                 // onSelect={onSelect}
 

@@ -10,10 +10,12 @@ import {
   Image,
   StyleSheet
 } from "react-native";
-import { Text, Center, View, ScrollView } from "native-base";
+import { Text, Center, View, ScrollView, Button } from "native-base";
 
 import { useForm, Controller } from "react-hook-form";
 import { LoadingView } from "@components/styles/LoadingView";
+import { GENRES } from "src/config/const";
+import DropDownPicker from "@components/DropDownPicker";
 //function----------------
 import { _takasaPost } from "@functions/_takasaPost";
 
@@ -32,15 +34,15 @@ import type { FC } from "react";
 
 interface FormInput {
   comment: string;
-  genre: string;
+  genre: {
+    id: number;
+    name: "string";
+  };
 }
 
 export const EditPostPage: FC<any> = ({ navigation, route }) => {
   const dispatch = useAppDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-  const [open, setOpen] = useState<boolean>(false);
-
-  const [items, setItems] = useState(GENRES);
 
   const [loading, setLoading] = useState(true); //<-- いらなかったが残しとく
 
@@ -99,7 +101,7 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
         const resultAction = await dispatch(
           updatePost({
             comment: data.comment,
-            genre: data.genre,
+            genre: data.genre.name,
             postId: item.postId
           } as Post)
         );
@@ -175,45 +177,74 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
                   )}
                 </View>
                 {/* ジャンル＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-                <View>
-                  <Controller
-                    control={control}
-                    rules={{
-                      required: true
+                <Controller
+                  control={control}
+                  rules={{
+                    required: true
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <DropDownPicker
+                      data={GENRES}
+                      value={value}
+                      onSelect={(value) => {
+                        onChange(value);
+                      }}
+                    />
+                  )}
+                  name="genre"
+                />
+                <View style={styles.btn}>
+                  {/* 現在の投稿を表示 ------------------------*/}
+                  <Button
+                    margin={1}
+                    onPress={() => {
+                      reset({
+                        comment: item.comment,
+                        genre: item.genre
+                      });
                     }}
-                    render={({ field: { onChange, value } }) => (
-                      <DropDownPicker
-                        style={styles.dropdown}
-                        value={value}
-                        items={items}
-                        open={open}
-                        //   setValue={(value) => {
-                        //     onChange(value);
-                        //   }}
-                        //   onChangeValue={(value) => {
-                        //     onChange(value);
-                        //   }}
-                        setValue={onChange}
-                        onChangeValue={onChange}
-                        setOpen={setOpen}
-                        setItems={setItems}
-                      />
-                    )}
-                    name="genre"
+                    colorScheme="success"
+                    variant="outline"
+                  >
+                    現在の投稿を表示?
+                  </Button>
+
+                  {/* リセットボタン ------------------------*/}
+                  <Button
+                    margin={1}
+                    onPress={() => {
+                      reset({
+                        comment: "",
+                        genre: undefined
+                      });
+                    }}
+                    colorScheme="success"
+                    variant="outline"
+                  >
+                    入力リセット
+                  </Button>
+                </View>
+
+                {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
+                <View width={"100%"}>
+                  <OutlineButton
+                    onPress={handleSubmit(onPressSaveButton)}
+                    title="編集完了"
+                    disabled={!canSave}
+                    name="check"
                   />
                 </View>
               </Center>
             </ScrollView>
           </TouchableWithoutFeedback>
           {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-
-          <View width={"100%"} style={styles.button}>
+          {/* <View width={"100%"} style={styles.button}>
             <OutlineButton
               onPress={handleSubmit(onPressSaveButton)}
               title="編集完了"
               disabled={!canSave}
             />
-          </View>
+          </View> */}
         </>
       )}
     </>
@@ -230,7 +261,13 @@ const styles = StyleSheet.create({
     bottom: 15,
     alignSelf: "center"
   },
-  dropdown: { marginVertical: 20, width: "100%" }
+  dropdown: { marginVertical: 20, width: "100%" },
+  btn: {
+    flexDirection: "row",
+
+    alignItems: "center",
+    margin: 10
+  }
 });
 
 export default EditPostPage;

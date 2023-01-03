@@ -174,3 +174,6 @@ export const selectSinglePostById = (state: RootState, postId: string) =>
 
 export const selectPostsByCreator = (state: RootState, creatorId: string) =>
   selectAllPosts(state).filter((post) => post.creatorId === creatorId);
+
+export const selectPostsByGenre = (state: RootState, genre: string) =>
+  selectAllPosts(state).filter((post) => post.genre === genre);

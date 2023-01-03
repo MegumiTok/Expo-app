@@ -23,7 +23,7 @@ export const EventNavigator = () => {
   const dispatch = useAppDispatch();
   const events = useAppSelector(selectAllEvents);
   const eventStatus = useAppSelector((state) => state.events.status);
-  const error = useAppSelector((state) => state.posts.error);
+  const error = useAppSelector((state) => state.events.error);
 
   const category1 = useAppSelector((state) =>
     selectEventByCategory(state, "Pokémon")
