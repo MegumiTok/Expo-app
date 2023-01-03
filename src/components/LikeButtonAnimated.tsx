@@ -38,6 +38,7 @@ const LikeButtonAnimated = ({ item }: { item: Post }) => {
     if (user?.uid !== item.creatorId)
       try {
         console.log("likeが押された");
+
         dispatch(
           updateLike({
             postId: item.postId,

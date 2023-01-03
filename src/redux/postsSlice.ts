@@ -134,9 +134,13 @@ const postsSlice = createSlice({
       .addCase(updateLike.fulfilled, (state, action) => {
         state.status = "succeeded";
         const { postId, isLiked } = action.payload;
+        console.log("postIdは", postId);
+
         const existingPost = state.allPosts.find(
           (item) => item.postId === postId
         );
+        console.log(!!existingPost);
+
         if (existingPost) {
           existingPost.isLiked = isLiked;
         }
@@ -177,3 +181,6 @@ export const selectPostsByCreator = (state: RootState, creatorId: string) =>
 
 export const selectPostsByGenre = (state: RootState, genre: string) =>
   selectAllPosts(state).filter((post) => post.genre === genre);
+
+export const selectLikedPost = (state: RootState) =>
+  selectAllPosts(state).filter((post) => post.isLiked === true);

@@ -44,7 +44,9 @@ export enum Routes {
   SinglePost = "Single Post",
   Search = "Search",
   EditProfile = "EditProfile",
-  AddEvent = "AddEvent"
+  AddEvent = "AddEvent",
+  SelectedGenreList = "SelectedGenreList",
+  FavList = "FavList"
 }
 
 export enum AuthRoutes {

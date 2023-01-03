@@ -24,6 +24,8 @@ import AddPostPage from "@pages/AddPostPage";
 import EditPostPage from "@pages/EditPostPage";
 import EditProfilePage from "@pages/EditProfilePage";
 import EventSinglePost from "@pages/eventPage/EventSinglePost";
+import { SelectedGenreList } from "@pages/searchPage/SelectedGenreList";
+import FavList from "@pages/searchPage/FavList";
 //data =====================
 import MenuList from "@assets/data/MenuList";
 
@@ -186,13 +188,23 @@ const CreatorScreens = () => {
   );
 };
 
-// + Search Tab
+// + Search Tab========================
 const SearchScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen
         name={Routes.Search}
         component={SearchNavigator}
+        // options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name={Routes.SelectedGenreList}
+        component={SelectedGenreList}
+        // options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name={Routes.FavList}
+        component={FavList}
         // options={{ header: () => null }}
       />
     </Stack.Navigator>

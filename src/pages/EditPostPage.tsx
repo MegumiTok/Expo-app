@@ -89,8 +89,9 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
   //   navigation.navigate(Routes.SinglePost, { postId });
   // }
 
-  const onPressSaveButton = async (data: FormInput) => {
+  const _onPress = async (data: FormInput) => {
     console.log("編集後データ", data);
+
     if (canSave) {
       if (!item) {
         return null;
@@ -101,7 +102,7 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
         const resultAction = await dispatch(
           updatePost({
             comment: data.comment,
-            genre: data.genre.name,
+            genre: data.genre.name || data.genre,
             postId: item.postId
           } as Post)
         );
@@ -228,7 +229,7 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
                 {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
                 <View width={"100%"}>
                   <OutlineButton
-                    onPress={handleSubmit(onPressSaveButton)}
+                    onPress={handleSubmit(_onPress)}
                     title="編集完了"
                     disabled={!canSave}
                     name="check"

@@ -10,7 +10,7 @@ import {
   SPACING_SQUARE,
   SPACING_SQUARE_SIZE
 } from "@components/styles/theme/layout";
-import { Colors } from "./styles/theme/Colors";
+import { Colors } from "@components/styles/theme/Colors";
 import { useNavigation } from "@react-navigation/native";
 
 import { Routes } from "@models/NavTypes";
@@ -48,15 +48,17 @@ export const _genre = [
   }
 ];
 
-export const SearchList = () => {
+export const GenreList = () => {
   const { navigate } = useNavigation();
   const _renderItem = ({ item }) => {
     return (
       <Pressable
         style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
         onPress={() => {
-          // setOpacity(0);
-          navigate(Routes.SelectedGenreList, { item });
+          navigate(Routes.SelectedGenreList, {
+            name: item.name
+          });
+          //   console.log(item);
         }}
       >
         <ImageBackground
@@ -67,7 +69,7 @@ export const SearchList = () => {
             margin: SPACING_SQUARE,
             backgroundColor: Colors.primary.dark
           }}
-          imageStyle={{ resizeMode: "contain", opacity: 0.4 }}
+          imageStyle={{ resizeMode: "contain", opacity: 0.5 }}
         >
           <Center flex={1}>
             <Text style={styles.text}>{item.name}</Text>
@@ -89,7 +91,7 @@ export const SearchList = () => {
   );
 };
 
-export default SearchList;
+export default GenreList;
 
 const styles = StyleSheet.create({
   text: {

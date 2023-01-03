@@ -1,45 +1,21 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { useEffect } from "react";
-import { Alert } from "react-native";
+import AntDesign from "react-native-vector-icons/AntDesign";
 //pages
-import { GenreList, FavList, ProductList } from "@pages/seatchPage/SearchLists";
+
 import { LoadingView } from "@components/styles/LoadingView";
 import ErrorPage from "@components/ErrorPage";
+import GenreList from "@pages/searchPage/GenreList";
+import SearchList from "@components/SearchList";
+import FavList from "@pages/searchPage/FavList";
 //redux==============================
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
-import { fetchAllEvents } from "@Redux/eventActions";
-import { selectAllPosts, selectPostsByGenre } from "@Redux/postsSlice";
-//Eventページ内のTopタブ
+import { useAppSelector } from "@Redux/hook";
+
+//Searchページ内のTopタブ
 const Tab = createMaterialTopTabNavigator();
 
 export const SearchNavigator = () => {
-  const dispatch = useAppDispatch();
-  const events = useAppSelector(selectAllPosts);
   const postStatus = useAppSelector((state) => state.posts.status);
   const error = useAppSelector((state) => state.posts.error);
-
-  // const category1 = useAppSelector((state) =>
-  //   selectPostsByGenre(state, "お絵かき")
-  // );
-  // const category2 = useAppSelector((state) =>
-  //   selectPostByCategory(state, "Hunter × Hunter")
-  // );
-  // const category3 = useAppSelector((state) =>
-  //   selectPostByCategory(state, "Attack on Titan")
-  // );
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     try {
-  //       dispatch(fetchAllEvents());
-  //     } catch (e) {
-  //       Alert.alert("fetchAllEventsに失敗しました。");
-  //       console.log("エラー:", e);
-  //     }
-  //   };
-
-  //   fetch();
-  // }, [dispatch]);
 
   let content;
   if (postStatus === "loading") {
@@ -47,28 +23,35 @@ export const SearchNavigator = () => {
   } else if (postStatus === "succeeded") {
     content = (
       <Tab.Navigator
-        screenOptions={() => ({
+        screenOptions={({ route }) => ({
           tabBarIndicatorStyle: {
             backgroundColor: "black", //Indicatorの色
             height: 1.5
-          }
+          },
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === "genre") {
+              iconName = focused ? "slack-square" : "slack";
+              size = 20;
+            } else if (route.name === "favorite") {
+              iconName = focused ? "heart" : "hearto";
+              size = 20;
+            } else if (route.name === "product") {
+              iconName = "skin";
+              size = 20;
+            }
+
+            // You can return any component that you like here!
+            return <AntDesign name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "tomato",
+          tabBarInactiveTintColor: "gray"
         })}
       >
-        <Tab.Screen
-          name="genre"
-          component={GenreList}
-          // initialParams={{ events }}
-        />
-        <Tab.Screen
-          name="favorite"
-          component={FavList}
-          // initialParams={{ category1 }}
-        />
-        <Tab.Screen
-          name="商品"
-          component={ProductList}
-          // initialParams={{ category2 }}
-        />
+        <Tab.Screen name="genre" component={GenreList} />
+        <Tab.Screen name="favorite" component={FavList} />
+        <Tab.Screen name="product" component={SearchList} />
       </Tab.Navigator>
     );
   } else if (postStatus === "failed") {

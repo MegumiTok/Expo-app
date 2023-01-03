@@ -26,7 +26,7 @@ export const DropDownPicker = ({
 
       onSelect(i);
     },
-    [onSelect, value?.name]
+    [onSelect]
   );
 
   console.log(value?.name);
