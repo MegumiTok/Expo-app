@@ -14,6 +14,7 @@ import {
 
 import { Routes } from "@models/NavTypes";
 import DropDownPicker from "@components/DropDownPicker";
+
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
 
@@ -317,6 +318,7 @@ export const AddPostPage = ({ navigation }) => {
               onPress={handleSubmit(onPressSaveButton)}
               title="投稿"
               disabled={!canSave}
+              name="check"
             />
           </View>
         </Center>

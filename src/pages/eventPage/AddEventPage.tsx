@@ -8,6 +8,7 @@ import {
 
 import { Center, Text, View, ScrollView } from "native-base";
 import { Routes } from "@models/NavTypes";
+import DropDownPicker from "@components/DropDownPicker";
 //3rd party------------------------------------------------------
 
 import { useForm, Controller } from "react-hook-form";
@@ -29,22 +30,19 @@ import { OutlineButton } from "@components/styles/button";
 interface FormInput {
   title: string;
   eventURL: string;
-  category: string;
+  category: { id: number; name: string };
 }
 
-const categories = [
-  { label: "Pokémon", value: "Pokémon" },
-  { label: "Hunter × Hunter", value: "Hunter × Hunter" },
-  { label: "Attack on Titan", value: "Attack on Titan" }
+let categories = [
+  { id: 1, name: "Pokémon" },
+  { id: 2, name: "Hunter × Hunter" },
+  { id: 3, name: "Attack on Titan" }
 ];
 
 export const AddEventPage = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  // const [galleryPermission, setGalleryPermission] = useState(null);
-  // const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
-  const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const {
     control,
@@ -52,32 +50,6 @@ export const AddEventPage = ({ navigation }) => {
     reset,
     formState: { errors }
   } = useForm<FormInput>();
-
-  // const handlePickImage = async () => {
-  //   if (!galleryPermission) {
-  //     const galleryStatus = await PickImage.askLibraryPermission();
-  //     if (galleryStatus !== "granted") {
-  //       Alert.alert("アルバムへのアクセス許可をください");
-  //     }
-  //     setGalleryPermission(galleryStatus.status === "granted");
-  //     if (!galleryStatus) return;
-  //   }
-  //   try {
-  //     const result = await ImagePicker.launchImageLibraryAsync({
-  //       mediaTypes: ImagePicker.MediaTypeOptions.All,
-  //       allowsEditing: true,
-  //       aspect: [1, 1],
-  //       quality: 0.0
-  //     });
-  //     console.log("ログ出し中", result);
-  //     if (!result.canceled) {
-  //       const img = result.assets[0];
-  //       setImageData(img);
-  //     }
-  //   } catch (error) {
-  //     Alert.alert("エラーで投稿できませんでした");
-  //   }
-  // };
 
   // const canSave = Boolean(imageData) && addRequestStatus === "idle";
   const canSave = addRequestStatus === "idle";
@@ -87,26 +59,22 @@ export const AddEventPage = ({ navigation }) => {
 
     if (canSave) {
       try {
-        // setAddRequestStatus("pending");
-        // await PickImage.uploadImage(
-        //   imageData?.uri,
-        //   `eventImages/${data.title}`,
-        //   data.title
-        // );
-
-        // Alert.alert("Storageに画像を追加しました。");
-
         const postedData = {
           title: data.title,
           // eventImage: imageData?.uri,
           eventURL: data.eventURL,
-          category: data.category
+          category: data.category.name
         } as EventType;
         console.log("postedDataは:", postedData);
 
         const resultAction = await dispatch(addEvent(postedData));
         Alert.alert("イベントが投稿されました");
         unwrapResult(resultAction);
+        reset({
+          title: "",
+          eventURL: "",
+          category: undefined
+        });
         navigation.navigate(Routes.EventList);
       } catch (error) {
         Alert.alert("エラーです。もう一度お願いします。");
@@ -121,7 +89,6 @@ export const AddEventPage = ({ navigation }) => {
   return (
     <>
       <ScrollView>
-        {/* <Spacer /> */}
         <Center mt={5}>
           <Text>イベント記事を投稿</Text>
         </Center>
@@ -131,17 +98,6 @@ export const AddEventPage = ({ navigation }) => {
           }}
         >
           <Center p={5}>
-            {/* 写真を選ぶ ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝*/}
-            {/* <PhotoWrapper onPress={handlePickImage}>
-            <Icon
-              as={MaterialCommunityIcons}
-              name="camera-plus-outline"
-              color="black"
-              style={{ position: "absolute", top: _width / 2 }}
-              size="md"
-            />
-            <PostImage source={{ uri: imageData?.uri }} />
-          </PhotoWrapper> */}
             {/* タイトル=========================================== */}
             <Controller
               defaultValue=""
@@ -198,18 +154,28 @@ export const AddEventPage = ({ navigation }) => {
                 required: true
               }}
               render={({ field: { onChange, value } }) => (
+                // <DropDownPicker
+                //   value={value}
+                //   items={categories}
+                //   open={open}
+                //   setValue={(value) => {
+                //     onChange(value);
+                //   }}
+                //   onChangeValue={(value) => {
+                //     onChange(value);
+                //   }}
+                //   setOpen={setOpen}
+                //   // setItems={setItems}
+                // />
                 <DropDownPicker
+                  data={categories}
+                  // value={selectedItem}
+                  // onSelect={onSelect}
+
                   value={value}
-                  items={categories}
-                  open={open}
-                  setValue={(value) => {
+                  onSelect={(value) => {
                     onChange(value);
                   }}
-                  onChangeValue={(value) => {
-                    onChange(value);
-                  }}
-                  setOpen={setOpen}
-                  // setItems={setItems}
                 />
               )}
               name="category"
@@ -233,12 +199,14 @@ export const AddEventPage = ({ navigation }) => {
             });
           }}
           title="リセット"
+          color="#32AC60"
         />
         <Spacer />
         <OutlineButton
           onPress={handleSubmit(onPressSaveButton)}
           title="投稿"
           disabled={!canSave}
+          name="check"
         />
       </View>
     </>

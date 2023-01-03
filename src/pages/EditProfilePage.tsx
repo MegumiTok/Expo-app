@@ -301,6 +301,7 @@ export const EditProfilePage = ({ navigation }) => {
               onPress={handleSubmit(onPressSaveButton)}
               title="編集完了"
               disabled={!canSave}
+              name="check"
             />
           </View>
         </Center>

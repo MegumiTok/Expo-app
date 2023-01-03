@@ -12,7 +12,7 @@ import { Colors } from "@components/styles/theme/Colors";
 //main page---------------------------------------
 import { Feed } from "src/pages/Feed";
 import { CreatorList } from "src/pages/CreatorList";
-import { SearchPage } from "@pages/SearchPage";
+import { SearchNavigator } from "@navigation/SearchNavigator";
 import { EventNavigator } from "./EventNavigator";
 import Menu from "@pages/Menu";
 
@@ -50,6 +50,7 @@ const AppNavigator = () => {
           name="FeedTab"
           component={FeedScreens}
           options={{
+            tabBarColor: Colors.primary.dark,
             tabBarLabel: "Feed",
             // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
@@ -65,6 +66,7 @@ const AppNavigator = () => {
           name="CreatorTab"
           component={CreatorScreens}
           options={{
+            tabBarColor: Colors.primary.general,
             tabBarLabel: "Creator",
             // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
@@ -80,6 +82,7 @@ const AppNavigator = () => {
           name="SearchTab"
           component={SearchScreens}
           options={{
+            tabBarColor: "#8EB19D",
             tabBarLabel: "Search",
             // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
@@ -91,6 +94,7 @@ const AppNavigator = () => {
           name="EventTab"
           component={EventScreens}
           options={{
+            tabBarColor: "#cec244",
             tabBarBadge: 3, //<--------
             tabBarLabel: "Event",
             // eslint-disable-next-line react/no-unstable-nested-components
@@ -107,6 +111,7 @@ const AppNavigator = () => {
           name="MenuTab"
           component={MenuScreens}
           options={{
+            tabBarColor: Colors.secondary.general,
             tabBarLabel: "Menu",
             // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({ color }) => (
@@ -129,7 +134,7 @@ const MenuStack = createNativeStackNavigator();
 // + Feed Tab
 const FeedScreens = () => {
   return (
-    <Stack.Navigator screenOptions={StackCommonScreenOptions}>
+    <Stack.Navigator screenOptions={FeedStuckOption}>
       <Stack.Screen name={Routes.Feed} component={Feed} />
 
       <Stack.Screen
@@ -181,14 +186,14 @@ const CreatorScreens = () => {
   );
 };
 
-// + Item Tab
+// + Search Tab
 const SearchScreens = () => {
   return (
     <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen
         name={Routes.Search}
-        component={SearchPage}
-        options={{ header: () => null }}
+        component={SearchNavigator}
+        // options={{ header: () => null }}
       />
     </Stack.Navigator>
   );
@@ -197,7 +202,7 @@ const SearchScreens = () => {
 // + Event Tab
 const EventScreens = () => {
   return (
-    <Stack.Navigator screenOptions={EventOptions}>
+    <Stack.Navigator screenOptions={StackCommonScreenOptions}>
       <Stack.Screen name={Routes.EventList} component={EventNavigator} />
       <Stack.Screen name={Routes.EventSinglePost} component={EventSinglePost} />
     </Stack.Navigator>
@@ -223,8 +228,8 @@ const MenuScreens = () => {
   );
 };
 
-//+Common(Stack - screenOptions)-------------------------------------------------------
-const StackCommonScreenOptions = ({ navigation }) => {
+//  screenOptions=============================================
+const FeedStuckOption = ({ navigation }) => {
   const HEADER_ICON_SIZE = 50;
   return {
     headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
@@ -267,30 +272,42 @@ const StackCommonScreenOptions = ({ navigation }) => {
   };
 };
 
-const EventOptions = ({ navigation }) => {
-  const HEADER_ICON_SIZE = 50;
+const StackCommonScreenOptions = ({ navigation }) => {
   return {
-    headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
+    headerTintColor: "white", //the back button and title both use this property as their color.
     headerStyle: {
       backgroundColor: Colors.primary.dark
     },
-    headerBackTitleVisible: false,
-    animation: "fade", //💚
-    headerTitle: () => (
-      <Image
-        style={{ width: 200, height: HEADER_ICON_SIZE, top: -7 }}
-        source={require("@assets/images/logo_3.png")}
-        resizeMode="contain"
-      />
+    headerTitleStyle: {
+      fontWeight: "800",
+      fontSize: 20
+    },
+    headerBackTitleVisible: true,
+
+    headerRight: () => (
+      <View
+        style={{
+          flexDirection: "row",
+          // backgroundColor: "tomato",
+          width: 80,
+          justifyContent: "space-between"
+        }}
+      >
+        <TouchableWithoutFeedback
+          style={{ padding: 5, backgroundColor: "blue" }}
+          onPress={() => navigation.navigate(Routes.AddPost)}
+        >
+          <FontAwesome5 name="plus-square" size={30} color="white" />
+        </TouchableWithoutFeedback>
+
+        <TouchableWithoutFeedback
+          style={{ right: -45, margin: 5 }}
+          onPress={() => navigation.navigate(Routes.EditProfile)}
+        >
+          <Feather name="user" color="white" size={30} />
+        </TouchableWithoutFeedback>
+      </View>
     )
-    // headerRight: () => (
-    //   <TouchableWithoutFeedback
-    //     style={{ margin: 5 }}
-    //     onPress={() => navigation.navigate(Routes.EditProfile)}
-    //   >
-    //     <Feather name="user" color="white" size={30} />
-    //   </TouchableWithoutFeedback>
-    // )
   };
 };
 
