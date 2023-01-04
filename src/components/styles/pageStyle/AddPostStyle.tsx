@@ -2,13 +2,13 @@ import styled from "styled-components/native";
 import { Colors } from "../theme/Colors";
 import { SPACING_BIG, SCREEN_WIDTH } from "../theme/layout";
 
-export const _width = SCREEN_WIDTH - SPACING_BIG * 2;
+export const _width = SCREEN_WIDTH - SPACING_BIG * 8;
 export const StyledTextInput = styled.TextInput`
   width: 300px;
   height: 100px;
   background-color: white;
   padding: ${SPACING_BIG}px;
-  border-color: ${Colors.bouder};
+  border-color: ${Colors.border};
   border-width: 1px;
   border-radius: ${SPACING_BIG}px;
   /* font-size: 16em; */
@@ -37,6 +37,6 @@ export const CheckBoxWrapper = styled.View`
 
 // export const InputWrapper = styled.View`
 //   border-width: 1px;
-//   border-color: ${Colors.bouder};
+//   border-color: ${Colors.border};
 //   margin-bottom: 30px;
 // `;

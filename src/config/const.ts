@@ -11,13 +11,11 @@ export const ALL_USERS = "all_users";
 export const CREATORS_POSTS = "creators_posts"; //名前にpostsを足しました
 export const All_EVENTS = "all_events";
 
-//ジャンル
 export const GENRES = [
-  { label: "フリージャンル", value: "フリージャンル" },
-  { label: "お絵かき", value: "お絵かき" },
-  { label: "イラスト", value: "イラスト" },
-  { label: "食べ物", value: "食べ物" },
-  { label: "アニメ/マンガ", value: "アニメ/マンガ" },
-  { label: "キャラクター", value: "キャラクター" },
-  { label: "お知らせ", value: "お知らせ" }
+  { id: 1, name: "フリージャンル" },
+  { id: 2, name: "お絵かき" },
+  { id: 3, name: "食べ物" },
+  { id: 4, name: "アニメ/マンガ" },
+  { id: 5, name: "キャラクター" },
+  { id: 6, name: "お知らせ" }
 ];

@@ -50,7 +50,8 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
 
   useEffect(() => {
     setPosts(POSTS);
-  }, []);
+    // setPosts((pos) => [...pos]);
+  }, []); //POSTSはreactive valueでないってことを証明したいがどうすれば(ここでPOSTSをdependencyに加えるとinfinite loop)
 
   let content;
   if (postStatus === "loading") {

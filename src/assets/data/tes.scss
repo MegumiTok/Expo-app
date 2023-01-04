@@ -1,0 +1,38 @@
+.wrapper{
+    display:flex; 
+    flex: 1;
+    flex-direction: column;
+    justify-content: center; 
+    align-items:center;  
+    height: 100vh; 
+    background-color: yellow;
+}
+
+.box{
+    background-color: white;
+    padding: 30px;
+}
+
+.cart{
+    justify-content: center; 
+    display:flex; 
+
+    &_btn{
+        background-color: #FF7371;  border: none;
+        padding: 20px 50px;
+        border-radius: 100px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #FFF;
+        letter-spacing: 1.98px;
+    }
+}
+
+.color-pick{
+    border: none; padding: 10px;  border-radius: 100px;
+}
+.yellow{
+    background-color: #FFE546;
+}

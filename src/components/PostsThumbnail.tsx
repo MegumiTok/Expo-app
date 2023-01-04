@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { useState } from "react";
 import { Pressable, Image, View } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { Routes } from "@models/NavTypes";
 //style-------------------------------------------------
 import {
   SPACING_SQUARE,
@@ -31,7 +32,7 @@ export const PostsThumbnail: FC<Props> = ({ post }) => {
       style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
       onPress={() => {
         setOpacity(0);
-        navigation.navigate("SinglePost", { postId });
+        navigation.navigate(Routes.SinglePost, { postId });
       }}
     >
       <View

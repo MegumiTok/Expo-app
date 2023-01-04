@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { FlatList, RefreshControl } from "react-native";
 
@@ -13,18 +13,15 @@ import ErrorPage from "@components/ErrorPage";
 //redux----------------------------------------------------------------
 import { selectAllPosts } from "@Redux/postsSlice";
 import { useAppDispatch, useAppSelector } from "@Redux/hook";
-import { fetchAllPosts, updateLike } from "@Redux/postActions";
-//Context------------------------------------
-import useUser from "@hooks/useUser";
+import { fetchAllPosts } from "@Redux/postActions";
+
 //type--------------------------------------------
 import type { FC } from "react";
 import type { Post } from "@models/PostTypes";
 
 export const Feed: FC = () => {
-  const { user } = useUser();
   const dispatch = useAppDispatch();
   const posts = useAppSelector(selectAllPosts);
-  const post = useAppSelector((state) => state.posts.currentPost);
   const postStatus = useAppSelector((state) => state.posts.status);
   const error = useAppSelector((state) => state.posts.error);
 
@@ -74,15 +71,15 @@ export const Feed: FC = () => {
           keyExtractor={(item) => item.postId}
           renderItem={_renderItem}
           showsVerticalScrollIndicator={false}
-          initialNumToRender={3} //default is 10
-          maxToRenderPerBatch={3}
-          windowSize={5}
+          initialNumToRender={5} //default is 10
+          maxToRenderPerBatch={5} //default is 10
+          updateCellsBatchingPeriod={30} // default is 50
+          windowSize={10} //default value is 21 (10 viewports above, 10 below, and one in between).
           removeClippedSubviews
           refreshing={refreshing}
           // onRefresh={_onRefresh}
           onEndReachedThreshold={0.2}
           // onEndReached={_onEndReached}
-          // ListFooterComponent={_listFooterComponent}
           scrollEventThrottle={16}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

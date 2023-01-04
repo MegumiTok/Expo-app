@@ -119,7 +119,7 @@ export const EditProfilePage = ({ navigation }) => {
         quality: 0.0
       });
       console.log("ログ出し中", result);
-      console.log("ログ出し中", result.assets[0].uri);
+      // console.log("ログ出し中", result.assets[0].uri);
       if (!result.canceled) {
         const img = result.assets[0].uri;
 
@@ -301,6 +301,7 @@ export const EditProfilePage = ({ navigation }) => {
               onPress={handleSubmit(onPressSaveButton)}
               title="編集完了"
               disabled={!canSave}
+              name="check"
             />
           </View>
         </Center>

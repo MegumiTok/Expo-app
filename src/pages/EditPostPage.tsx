@@ -10,14 +10,15 @@ import {
   Image,
   StyleSheet
 } from "react-native";
-import { Text, Button, Center, View, ScrollView } from "native-base";
+import { Text, Center, View, ScrollView, Button } from "native-base";
 
 import { useForm, Controller } from "react-hook-form";
 import { LoadingView } from "@components/styles/LoadingView";
-//3rd party------------------------------------------------------
-import DropDownPicker from "react-native-dropdown-picker";
-
 import { GENRES } from "src/config/const";
+import DropDownPicker from "@components/DropDownPicker";
+//function----------------
+import { _takasaPost } from "@functions/_takasaPost";
+
 //redux --------------------------------
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useAppDispatch } from "@Redux/hook";
@@ -33,15 +34,15 @@ import type { FC } from "react";
 
 interface FormInput {
   comment: string;
-  genre: string;
+  genre: {
+    id: number;
+    name: "string";
+  };
 }
 
 export const EditPostPage: FC<any> = ({ navigation, route }) => {
   const dispatch = useAppDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-  const [open, setOpen] = useState<boolean>(false);
-
-  const [items, setItems] = useState(GENRES);
 
   const [loading, setLoading] = useState(true); //<-- いらなかったが残しとく
 
@@ -54,13 +55,12 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
         if (!item) {
           return null;
         }
-        console.log("postIdはこれ:", item.postId);
-        const calculatedMaxH = Math.round(
-          (SCREEN_WIDTH * item.imageH) / item.imageW
-        ); //実際ポストされるのサイズに計算
+        console.log("postId:", item.postId);
 
-        const _takasa: number =
-          calculatedMaxH < PHOTO_HEIGHT ? calculatedMaxH : PHOTO_HEIGHT;
+        const _takasa = _takasaPost({
+          imageH: item.imageH,
+          imageW: item.imageW
+        });
 
         setTakasa(_takasa);
         // setPostData(item);
@@ -89,8 +89,9 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
   //   navigation.navigate(Routes.SinglePost, { postId });
   // }
 
-  const onPressSaveButton = async (data: FormInput) => {
+  const _onPress = async (data: FormInput) => {
     console.log("編集後データ", data);
+
     if (canSave) {
       if (!item) {
         return null;
@@ -101,7 +102,7 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
         const resultAction = await dispatch(
           updatePost({
             comment: data.comment,
-            genre: data.genre,
+            genre: data.genre.name || data.genre,
             postId: item.postId
           } as Post)
         );
@@ -177,45 +178,74 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
                   )}
                 </View>
                 {/* ジャンル＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-                <View>
-                  <Controller
-                    control={control}
-                    rules={{
-                      required: true
+                <Controller
+                  control={control}
+                  rules={{
+                    required: true
+                  }}
+                  render={({ field: { onChange, value } }) => (
+                    <DropDownPicker
+                      data={GENRES}
+                      value={value}
+                      onSelect={(value) => {
+                        onChange(value);
+                      }}
+                    />
+                  )}
+                  name="genre"
+                />
+                <View style={styles.btn}>
+                  {/* 現在の投稿を表示 ------------------------*/}
+                  <Button
+                    margin={1}
+                    onPress={() => {
+                      reset({
+                        comment: item.comment,
+                        genre: item.genre
+                      });
                     }}
-                    render={({ field: { onChange, value } }) => (
-                      <DropDownPicker
-                        style={styles.dropdown}
-                        value={value}
-                        items={items}
-                        open={open}
-                        //   setValue={(value) => {
-                        //     onChange(value);
-                        //   }}
-                        //   onChangeValue={(value) => {
-                        //     onChange(value);
-                        //   }}
-                        setValue={onChange}
-                        onChangeValue={onChange}
-                        setOpen={setOpen}
-                        setItems={setItems}
-                      />
-                    )}
-                    name="genre"
+                    colorScheme="success"
+                    variant="outline"
+                  >
+                    現在の投稿を表示?
+                  </Button>
+
+                  {/* リセットボタン ------------------------*/}
+                  <Button
+                    margin={1}
+                    onPress={() => {
+                      reset({
+                        comment: "",
+                        genre: undefined
+                      });
+                    }}
+                    colorScheme="success"
+                    variant="outline"
+                  >
+                    入力リセット
+                  </Button>
+                </View>
+
+                {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
+                <View width={"100%"}>
+                  <OutlineButton
+                    onPress={handleSubmit(_onPress)}
+                    title="編集完了"
+                    disabled={!canSave}
+                    name="check"
                   />
                 </View>
               </Center>
             </ScrollView>
           </TouchableWithoutFeedback>
           {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
-
-          <View width={"100%"} style={styles.button}>
+          {/* <View width={"100%"} style={styles.button}>
             <OutlineButton
               onPress={handleSubmit(onPressSaveButton)}
               title="編集完了"
               disabled={!canSave}
             />
-          </View>
+          </View> */}
         </>
       )}
     </>
@@ -232,7 +262,13 @@ const styles = StyleSheet.create({
     bottom: 15,
     alignSelf: "center"
   },
-  dropdown: { marginVertical: 20, width: "100%" }
+  dropdown: { marginVertical: 20, width: "100%" },
+  btn: {
+    flexDirection: "row",
+
+    alignItems: "center",
+    margin: 10
+  }
 });
 
 export default EditPostPage;

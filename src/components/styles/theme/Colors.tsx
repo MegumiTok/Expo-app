@@ -21,5 +21,5 @@ export const Colors = {
   },
 
   text: "#222222",
-  bouder: "#ccc"
+  border: "#ccc"
 };

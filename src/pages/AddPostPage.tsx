@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checkbox from "expo-checkbox";
-import { Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Alert, TouchableWithoutFeedback, Keyboard, Image } from "react-native";
 
 import {
   Center,
@@ -8,16 +8,16 @@ import {
   View,
   HStack,
   Icon,
-  Button,
-  ScrollView
+  ScrollView,
+  Button
 } from "native-base";
 
-import { GENRES } from "src/config/const";
 import { Routes } from "@models/NavTypes";
+import DropDownPicker from "@components/DropDownPicker";
+
 //3rd party------------------------------------------------------
 import * as ImagePicker from "expo-image-picker";
-import DropDownPicker from "react-native-dropdown-picker";
-import Modal from "react-native-modal";
+
 //
 // import Select from "react-select"; //React Nativeで使えない (>.<)
 //
@@ -37,41 +37,38 @@ import type { Post } from "@models/PostTypes";
 
 //functions--------------------------------------------------------
 import * as PickImage from "@functions/_pickImage";
-
+import { _takasaPost } from "@functions/_takasaPost";
 //style-------------------------------------------------------------------
 import Spacer from "@components/styles/Spacer";
 import basicStyles from "@components/styles/theme/basicStyleSheet";
 import {
   StyledTextInput,
   PhotoWrapper,
-  PostImage,
-  _width
+  _width,
+  PostImage
 } from "@components/styles/pageStyle/AddPostStyle";
 import { OutlineButton } from "@components/styles/button";
+import { SCREEN_WIDTH } from "@components/styles/theme/layout";
+import { GENRES } from "src/config/const";
 
 interface FormInput {
   comment: string;
-  genre: string;
+  genre: {
+    id: number;
+    name: "string";
+  };
   product: boolean;
 }
 export const AddPostPage = ({ navigation }) => {
   // const [postedImage, setPostedImage] = useState("");
   const dispatch = useAppDispatch();
-  const genres = useAppSelector((state) => state.genre);
 
   const [imageData, setImageData] = useState<ImagePicker.ImagePickerAsset>();
 
-  const [open, setOpen] = useState<boolean>(false);
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
   const [galleryPermission, setGalleryPermission] = useState(null);
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [takasa, setTakasa] = useState<number>();
   const { user } = useUser();
-
-  // const [items, setItems] = useState(GENRES);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
 
   const {
     control,
@@ -79,10 +76,6 @@ export const AddPostPage = ({ navigation }) => {
     reset,
     formState: { errors }
   } = useForm<FormInput>();
-
-  //追加すべき？（画像登録処理があるため）
-  // const postStatus = useAppSelector((state) => state.posts.status);
-  // const postError = useAppSelector((state) => state.posts.error);
 
   const handlePickImage = async () => {
     if (!galleryPermission) {
@@ -94,13 +87,17 @@ export const AddPostPage = ({ navigation }) => {
       if (!galleryStatus) return;
     }
     try {
+      //An array with two entries [x, y] specifying the aspect ratio to maintain if the user is allowed to edit the image (by passing allowsEditing: true).
+      //This is only applicable on Android, since on iOS the crop rectangle is always a square.
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [5, 4],
-        quality: 0.0
+        allowsEditing: true, //only Android
+        aspect: [1, 1], //only Android
+        quality: 0.0 //pngには意味がない
       });
-      console.log("投稿写真", result);
+      // console.log("投稿写真", result);
+      //このログを出すと以下のようなwarnが出るがこれはログ内にcancelledが含まれているため。なので無視してok。
+      //Key "cancelled" in the image picker result is deprecated and will be removed in SDK 48, use "canceled" instead
       if (!result.canceled) {
         const img = result.assets[0];
         setImageData(img);
@@ -127,12 +124,16 @@ export const AddPostPage = ({ navigation }) => {
         // for (let i = 0; i < 8; i++) {
         //   randomId += chars.charAt(Math.floor(Math.random() * chars.length));
         // }
+        if (!imageData) {
+          //canSaveの確認でundefineでないことは確認しているが型チェックのため書いている
+          return null;
+        }
 
         const randomId = nanoid();
 
         setAddRequestStatus("pending");
         await PickImage.uploadImage(
-          imageData?.uri,
+          imageData.uri,
           `postImages/${user.displayName}`,
           randomId //複数投稿があるので名前は変動型にすべき
         );
@@ -143,11 +144,11 @@ export const AddPostPage = ({ navigation }) => {
           creatorName: user.displayName,
           creatorPhoto: user.photoURL, //投稿時はログインしているのだからこれでいい
 
-          genre: data.genre,
+          genre: data.genre.name,
           comment: data.comment,
           postedImage: imageData?.uri,
-          imageW: imageData?.width,
-          imageH: imageData?.height,
+          imageW: imageData.width,
+          imageH: imageData.height,
           isLiked: false,
 
           product: data.product || false,
@@ -156,7 +157,9 @@ export const AddPostPage = ({ navigation }) => {
           postId: randomId
           // updatedAt
         } as Post;
-        console.log("postedDataは:", postedData);
+        // console.log("postedDataは:", postedData);
+        console.log("height:", postedData.imageH);
+        console.log("width:", postedData.imageW);
 
         const resultAction = await dispatch(createNewPost(postedData));
         unwrapResult(resultAction);
@@ -170,9 +173,24 @@ export const AddPostPage = ({ navigation }) => {
     }
   };
 
+  useEffect(() => {
+    //useEffectを使わないでuseStateを使うとinfante loopに入った
+    if (imageData) {
+      const _takasa = _takasaPost({
+        imageH: imageData.height,
+        imageW: imageData.width
+      });
+      // console.log("_takasa", _takasa);
+      setTakasa(_takasa);
+    }
+  }, [imageData]);
+
+  // const [selectedItem, setSelectedItem] = useState(null);
+  // const onSelect = (item: any) => {
+  //   setSelectedItem(item);
+  // };
   return (
     <ScrollView>
-      {/* <Spacer /> */}
       <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss();
@@ -188,7 +206,15 @@ export const AddPostPage = ({ navigation }) => {
               style={{ position: "absolute", top: _width / 2 }}
               size="md"
             />
-            <PostImage source={{ uri: imageData?.uri }} />
+            {imageData && (
+              <Image
+                source={{ uri: imageData.uri }}
+                style={{ width: SCREEN_WIDTH, height: takasa }}
+                // style={{ width: imageData.width, height: imageData.height }}//こっちのデザインでもありだとは思う（小さい画像を選択すると見にくいが）
+              />
+            )}
+
+            {!imageData && <PostImage />}
           </PhotoWrapper>
           {/* コメント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
           <View>
@@ -227,17 +253,14 @@ export const AddPostPage = ({ navigation }) => {
             }}
             render={({ field: { onChange, value } }) => (
               <DropDownPicker
+                data={GENRES}
+                // value={selectedItem}
+                // onSelect={onSelect}
+
                 value={value}
-                items={genres}
-                open={open}
-                setValue={(value) => {
+                onSelect={(value) => {
                   onChange(value);
                 }}
-                onChangeValue={(value) => {
-                  onChange(value);
-                }}
-                setOpen={setOpen}
-                // setItems={setItems}
               />
             )}
             name="genre"
@@ -263,6 +286,22 @@ export const AddPostPage = ({ navigation }) => {
             />
           </HStack>
 
+          {/* リセットボタン ------------------------*/}
+          <Button
+            marginY={5}
+            onPress={() => {
+              reset({
+                comment: "",
+                genre: undefined,
+                product: false
+              });
+            }}
+            p={3}
+            colorScheme="success"
+            variant="outline"
+          >
+            入力リセット
+          </Button>
           {/* 投稿ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */}
 
           <View width={"100%"} mt={5}>
@@ -270,6 +309,7 @@ export const AddPostPage = ({ navigation }) => {
               onPress={handleSubmit(onPressSaveButton)}
               title="投稿"
               disabled={!canSave}
+              name="check"
             />
           </View>
         </Center>

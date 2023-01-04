@@ -10,6 +10,10 @@ import { getStorage } from "firebase/storage";
 
 import { All_EVENTS, ALL_USERS, CREATORS_POSTS } from "./const";
 
+//Environment variables in Expo-----------
+import ENV from "../../env";
+import Constants from "expo-constants";
+
 // import {
 //   API_KEY,
 //   AUTH_DOMAIN,
@@ -52,14 +56,15 @@ import { All_EVENTS, ALL_USERS, CREATORS_POSTS } from "./const";
 //   measurementId: process.env.MEASUREMENT_ID
 // };
 
+//=====================================
 const firebaseConfig = {
-  apiKey: "AIzaSyBbxgT0JPTuFcsJ5j0Ei9zi_RuNbVPftkw",
-  authDomain: "expo-app-v1.firebaseapp.com",
-  projectId: "expo-app-v1",
-  storageBucket: "expo-app-v1.appspot.com",
-  messagingSenderId: "101103478402",
-  appId: "1:101103478402:web:af6a87e4405b54cf5fb69b",
-  measurementId: "G-P92J2XYT5E"
+  apiKey: ENV.API_KEY,
+  authDomain: ENV.AUTH_DOMAIN,
+  projectId: ENV.PROJECT_ID,
+  storageBucket: ENV.STORAGE_BUCKET,
+  messagingSenderId: ENV.MESSAGING_SENDER_ID,
+  appId: ENV.APP_ID,
+  measurementId: ENV.MEASUREMENT_ID
 };
 
 // Initialize Firebase

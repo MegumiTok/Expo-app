@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MenuProvider } from "react-native-popup-menu";
 import { store } from "@Redux/store";

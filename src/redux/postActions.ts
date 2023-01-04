@@ -104,7 +104,8 @@ export const updatePost = createAsyncThunk(
       const posts = {
         postedAt: new Date().toISOString(),
         comment: data.comment,
-        genre: data.genre
+        genre: data.genre,
+        postId: data.postId
       } as Post;
       await setDoc(
         //If the document does not exist, it will be created. If the document does exist, its contents will be overwritten with the newly provided data,
@@ -129,7 +130,8 @@ export const updateLike = createAsyncThunk(
       const postRef = doc(db, CREATORS_POSTS, data.postId);
 
       const posts = {
-        isLiked: data.isLiked
+        isLiked: data.isLiked,
+        postId: data.postId
       } as Post;
       await setDoc(
         //If the document does not exist, it will be created. If the document does exist, its contents will be overwritten with the newly provided data,

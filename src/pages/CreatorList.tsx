@@ -1,7 +1,7 @@
 //Make some waves!====
 //https://getwaves.io/
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import {
   Text,
   StyleSheet,
@@ -28,7 +28,7 @@ import { TEST_IMAGE } from "src/config/const";
 import { useNavigation } from "@react-navigation/native";
 // import { creators } from "@assets/data/creators"; //ローカルデータ
 // types ========================
-import type { CreatorListProps } from "@models/NavTypes";
+
 import type { Creator } from "@models/AuthTypes";
 
 //redux----------------------------------------------------------------

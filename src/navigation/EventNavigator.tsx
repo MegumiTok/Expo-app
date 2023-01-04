@@ -23,7 +23,7 @@ export const EventNavigator = () => {
   const dispatch = useAppDispatch();
   const events = useAppSelector(selectAllEvents);
   const eventStatus = useAppSelector((state) => state.events.status);
-  const error = useAppSelector((state) => state.posts.error);
+  const error = useAppSelector((state) => state.events.error);
 
   const category1 = useAppSelector((state) =>
     selectEventByCategory(state, "Pokémon")
@@ -87,20 +87,4 @@ export const EventNavigator = () => {
     content = <ErrorPage error={error} />;
   }
   return <>{content}</>;
-
-  // return (
-  //   <Tab.Navigator
-  //     screenOptions={() => ({
-  //       tabBarIndicatorStyle: {
-  //         backgroundColor: "black", //Indicatorの色
-  //         height: 1.5
-  //       }
-  //     })}
-  //   >
-  //     <Tab.Screen name="全体" component={AllEventList} />
-  //     <Tab.Screen name="お知らせ1" component={EventList1} />
-  //     <Tab.Screen name="お知らせ2" component={EventList2} />
-  //     <Tab.Screen name="お知らせ3" component={EventList3} />
-  //   </Tab.Navigator>
-  // );
 };

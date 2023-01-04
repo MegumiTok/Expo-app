@@ -4,14 +4,9 @@ import AddEventPage from "@pages/eventPage/AddEventPage";
 import Ani_Task from "@private/Ani_Task";
 import { AniFour } from "@private/AniFour";
 import { PraSearch } from "@private/PraSearch";
-
+import WebShopPra from "@private/WebShopPra";
+import { DropdownDemo } from "@private/Dropdown";
 export const MenuList = [
-  // {
-  //   name: "Test",
-  //   label: "Test",
-  //   component: Test,
-  //   options: { headerShown: false }
-  // },
   {
     name: "AniOne",
     label: "AniOne",
@@ -56,6 +51,20 @@ export const MenuList = [
     component: PraSearch,
     icon: "smile",
     options: { headerShown: true }
+  },
+  {
+    name: "WebShopPra",
+    label: "WebShopPra",
+    component: WebShopPra,
+    icon: "smile",
+    options: { headerShown: false }
+  },
+  {
+    name: "DropdownDemo",
+    label: "DropdownDemo",
+    component: DropdownDemo,
+    icon: "smile",
+    options: { headerShown: false }
   }
 
   // { name: "StickyHeader", label: "StickyHeader", component: StickyHeader },

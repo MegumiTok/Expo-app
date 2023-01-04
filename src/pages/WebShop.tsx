@@ -3,6 +3,7 @@ import { Center, View, HStack, Text } from "native-base";
 import { SafeAreaView, TouchableOpacity, Share, Platform } from "react-native";
 import { WebView } from "react-native-webview";
 import type { WebViewNavigation } from "react-native-webview";
+
 // import * as Linking from "expo-linking";
 //style----------------------------------------------------------------
 import { Colors } from "@components/styles/theme/Colors";
@@ -18,6 +19,7 @@ import {
 //type---------------------------------------------------------------------
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
+const localHtmlFile = require("../assets/data/test.html");
 interface Props {
   navigation: NativeStackNavigationProp<any, any>;
 }
@@ -43,6 +45,7 @@ export const WebShop = ({ navigation }: Props) => {
   const [navigationState, setNavigationState] =
     useState<WebViewNavigation | null>(null);
 
+  const uri = "https://github.com/";
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <HStack
@@ -77,18 +80,9 @@ export const WebShop = ({ navigation }: Props) => {
       </HStack>
 
       <WebView
-        // ref={ref}
-        originWhitelist={["*"]}
-        allowsLinkPreview
-        allowsInlineMediaPlayback
-        allowsBackForwardNavigationGestures
-        sharedCookiesEnabled
-        enableApplePay
-        onNavigationStateChange={setNavigationState}
-        // source={{ uri: route.params.url }}
-        source={{
-          uri: "https://github.com/MegumiTok"
-        }}
+        // source={{ uri }}
+        source={localHtmlFile}
+        startInLoadingState={true}
         style={{ width: SCREEN_WIDTH }}
       />
       <SafeAreaView

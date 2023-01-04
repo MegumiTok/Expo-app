@@ -31,20 +31,22 @@ export enum Routes {
   Feed = "Feed",
   Creator = "Creator",
   AddPost = "AddPost",
-  CreatorList = "CreatorList",
+  CreatorList = "Creator List",
   Profile = "Profile",
   WebShop = "WebShop",
   PostsDetail = "PostsDetail",
   ProductDetail = "ProductDetail",
-  EventList = "EventList",
+  EventList = "Event List",
   EventDetail = "EventDetail",
   EventSinglePost = "EventSinglePost",
-  Menu = "Menu",
+  Menu = "Menu List",
   EditPost = "EditPost",
-  SinglePost = "SinglePost",
+  SinglePost = "Single Post",
   Search = "Search",
   EditProfile = "EditProfile",
-  AddEvent = "AddEvent"
+  AddEvent = "AddEvent",
+  SelectedGenreList = "SelectedGenreList",
+  FavList = "FavList"
 }
 
 export enum AuthRoutes {

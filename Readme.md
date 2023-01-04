@@ -1,3 +1,25 @@
+# 主な使用技術
+
+- NativeBase 
+- TypeScript 
+- Expo 
+- firebase
+- Redux
+
+| 使用技術 | version |
+| --- | --- |
+| NativeBase| 3.4.0| 
+| Expo| 47.0.0| 
+| firebase |9.14.0| 
+| react-redux |8.0.5| 
+
+
+![demo](src/assets//readme/demo_18.gif)
+![demo](src/assets//readme/demo_19.gif)
+
+
+- ログインユーザー自身の投稿のみ編集できる
+
 # main
 ## Feed
 ![demo_1](src/assets//readme/demo_1.png)
@@ -25,22 +47,6 @@
 # Create
 ![demo_6](src/assets//readme/demo_6.png)
 ![demo_8](src/assets//readme/demo_8.png)
-
-
-# 主な使用技術
-
-- NativeBase 
-- TypeScript 
-- Expo 
-- firebase
-- Redux
-
-| 使用技術 | version |
-| --- | --- |
-| NativeBase| 3.4.0| 
-| Expo| 47.0.0| 
-| firebase |9.14.0| 
-| react-redux |8.0.5| 
 
 -------------------------------------------------------------
 <br>
@@ -152,11 +158,24 @@ Redux と firebase と useContext で実装している。
     setPosts(POSTS);
   }, []);//<-----第二引数がemptyだったら無限ループは回避できる
 ```
+## v4.4
+- AddPostPage.tsxページの改良
+- 選択した画像のサイズに合わせてプレビューの表示サイズを変えれるようにした
+- その他アップデート機能の修正/改良
 
+![Screenshot](src/assets/readme/addPost.gif)
 
+- optimize my code
+>VirtualizedList: You have a large list that is slow to update - make sure your renderItem function renders components that follow React performance best practices like PureComponent, shouldComponentUpdate, etc. {"contentLength": 2074.666748046875, "dt": 844341, "prevDt": 1603}
 
-## v5　(予定)
-SearchPageを実装
+- DropDownPickerを自作
+`AddPostPage.tsx`にて利便性から画面全体に`<ScrollView>`を使っているが、ここでジャンル選択時に使用しているパッケージ`DropDownPicker`を使うと以下のエラーが出る
+>VirtualizedLists should never be nested inside plain ScrollViews with the same orientation because it can break windowing and other functionality - use another VirtualizedList-backed container instead. 
 
+そのため今回はVirtualizedListsを使用しないDropDownPickerを自作し使用することにした
+
+- Search機能の追加
+
+![demo](src/assets/readme/demo_17.gif)
 
 [^1]:https://stackoverflow.com/questions/53715465/can-i-set-state-inside-a-useeffect-hook
