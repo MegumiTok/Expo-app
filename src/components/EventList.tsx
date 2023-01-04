@@ -12,7 +12,7 @@ import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
 import { _day } from "@functions/_day";
 import Feather from "react-native-vector-icons/Feather";
-import { position } from "styled-system";
+
 const ItemSeparatorView = () => {
   return (
     <View style={{ height: 0.9, width: "100%", backgroundColor: "#c8c8c8" }} />

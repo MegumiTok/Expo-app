@@ -1,17 +1,16 @@
 import { FlatList } from "react-native";
 import PostsThumbnail from "@components/PostsThumbnail";
-import type { FC } from "react";
+
 import type { Post } from "@models/PostTypes";
 
-export const Posts = ({ route }) => {
-  const { illustrations } = route.params;
+export const PostExcerpt = ({ items }) => {
   const _renderItem = ({ item }: { item: Post }) => {
     return <PostsThumbnail post={item} key={item.postId} />;
   };
 
   return (
     <FlatList
-      data={illustrations}
+      data={items}
       decelerationRate="fast"
       contentContainerStyle={{ justifyContent: "space-evenly" }}
       showsVerticalScrollIndicator={false}
@@ -22,4 +21,4 @@ export const Posts = ({ route }) => {
   );
 };
 
-export default Posts;
+export default PostExcerpt;
