@@ -9,8 +9,8 @@ import {
 } from "./postActions";
 //+type---------------------------------
 import type { Status } from "@models/StatusType";
-import type { Post, ReactionType } from "@models/PostTypes";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type { Post } from "@models/PostTypes";
+
 import type { RootState } from "./store";
 
 interface StateType {
@@ -111,6 +111,7 @@ const postsSlice = createSlice({
         const existingPost = state.allPosts.find(
           (item) => item.postId === postId
         );
+
         if (existingPost) {
           existingPost.comment = comment;
           existingPost.genre = genre;
@@ -134,13 +135,11 @@ const postsSlice = createSlice({
       .addCase(updateLike.fulfilled, (state, action) => {
         state.status = "succeeded";
         const { postId, isLiked } = action.payload;
-        console.log("postIdは", postId);
 
         const existingPost = state.allPosts.find(
           (item) => item.postId === postId
         );
-        console.log(!!existingPost);
-
+        console.log("log", postId);
         if (existingPost) {
           existingPost.isLiked = isLiked;
         }
@@ -184,3 +183,6 @@ export const selectPostsByGenre = (state: RootState, genre: string) =>
 
 export const selectLikedPost = (state: RootState) =>
   selectAllPosts(state).filter((post) => post.isLiked === true);
+
+export const selectProducts = (state: RootState) =>
+  selectAllPosts(state).filter((post) => post.product === true);

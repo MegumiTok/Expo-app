@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import AntDesign from "react-native-vector-icons/AntDesign";
 //pages
@@ -5,8 +6,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { LoadingView } from "@components/styles/LoadingView";
 import ErrorPage from "@components/ErrorPage";
 import GenreList from "@pages/searchPage/GenreList";
-import SearchList from "@components/SearchList";
 import FavList from "@pages/searchPage/FavList";
+import ProductList from "@pages/searchPage/ProductList";
 //redux==============================
 import { useAppSelector } from "@Redux/hook";
 
@@ -51,7 +52,7 @@ export const SearchNavigator = () => {
       >
         <Tab.Screen name="genre" component={GenreList} />
         <Tab.Screen name="favorite" component={FavList} />
-        <Tab.Screen name="product" component={SearchList} />
+        <Tab.Screen name="product" component={ProductList} />
       </Tab.Navigator>
     );
   } else if (postStatus === "failed") {

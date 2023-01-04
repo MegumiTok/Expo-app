@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, memo, useMemo } from "react";
+import { useState, useEffect } from "react";
 
 import { FlatList, RefreshControl } from "react-native";
 
@@ -13,7 +13,7 @@ import ErrorPage from "@components/ErrorPage";
 //redux----------------------------------------------------------------
 import { selectAllPosts } from "@Redux/postsSlice";
 import { useAppDispatch, useAppSelector } from "@Redux/hook";
-import { fetchAllPosts, updateLike } from "@Redux/postActions";
+import { fetchAllPosts } from "@Redux/postActions";
 
 //type--------------------------------------------
 import type { FC } from "react";

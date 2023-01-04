@@ -13,6 +13,13 @@
 | firebase |9.14.0| 
 | react-redux |8.0.5| 
 
+
+![demo](src/assets//readme/demo_18.gif)
+![demo](src/assets//readme/demo_19.gif)
+
+
+- ログインユーザー自身の投稿のみ編集できる
+
 # main
 ## Feed
 ![demo_1](src/assets//readme/demo_1.png)
@@ -154,6 +161,7 @@ Redux と firebase と useContext で実装している。
 ## v4.4
 - AddPostPage.tsxページの改良
 - 選択した画像のサイズに合わせてプレビューの表示サイズを変えれるようにした
+- その他アップデート機能の修正/改良
 
 ![Screenshot](src/assets/readme/addPost.gif)
 
@@ -165,8 +173,9 @@ Redux と firebase と useContext で実装している。
 >VirtualizedLists should never be nested inside plain ScrollViews with the same orientation because it can break windowing and other functionality - use another VirtualizedList-backed container instead. 
 
 そのため今回はVirtualizedListsを使用しないDropDownPickerを自作し使用することにした
-## v5　(予定)
-SearchPageを実装
 
+- Search機能の追加
+
+![demo](src/assets/readme/demo_17.gif)
 
 [^1]:https://stackoverflow.com/questions/53715465/can-i-set-state-inside-a-useeffect-hook

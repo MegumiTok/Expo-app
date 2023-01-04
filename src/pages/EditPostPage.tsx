@@ -55,7 +55,7 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
         if (!item) {
           return null;
         }
-        console.log("postIdはこれ:", item.postId);
+        console.log("postId:", item.postId);
 
         const _takasa = _takasaPost({
           imageH: item.imageH,

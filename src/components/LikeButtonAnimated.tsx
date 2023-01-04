@@ -35,19 +35,19 @@ const LikeButtonAnimated = ({ item }: { item: Post }) => {
 
   const handleLike = async () => {
     setTrigger(!trigger);
-    if (user?.uid !== item.creatorId)
-      try {
-        console.log("likeが押された");
+    // if (user?.uid !== item.creatorId)//ログインユーザーのLikeはfirebaseに反映させないようにしようと思っていたがその制約は逆に不便と思いコメントアウト
+    try {
+      console.log("likeが押された");
 
-        dispatch(
-          updateLike({
-            postId: item.postId,
-            isLiked: !trigger
-          } as Post)
-        );
-      } catch (e) {
-        console.error(e);
-      }
+      dispatch(
+        updateLike({
+          postId: item.postId,
+          isLiked: !trigger
+        } as Post)
+      );
+    } catch (e) {
+      console.error(e);
+    }
   };
   return (
     // <TouchableOpacity activeOpacity={1} onPress={() => setTrigger(!trigger)}>

@@ -29,8 +29,8 @@ export const DropDownPicker = ({
     [onSelect]
   );
 
-  console.log(value?.name);
-  console.log("現在", value);
+  // console.log(value?.name);
+  // console.log("現在", value);
   return (
     <View style={styles.container}>
       <TouchableOpacity

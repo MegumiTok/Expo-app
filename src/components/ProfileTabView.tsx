@@ -2,14 +2,7 @@ import { StyleSheet, View } from "react-native";
 import type { FC } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-//style----------------------------------------------
-import {
-  SCREEN_WIDTH,
-  SPACING_SQUARE,
-  SPACING_SQUARE_SIZE,
-  SPACING
-} from "@components/styles/theme/layout";
-import { STATUS_BAR_HEIGHT } from "../config/const";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 //pages---------------------------------------------------
 import Products from "@pages/Products";
 import Posts from "@pages/Posts";
@@ -40,7 +33,7 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
       ]}
     >
       <Tab.Navigator
-        screenOptions={() => ({
+        screenOptions={({ route }) => ({
           tabBarIndicatorStyle: {
             backgroundColor: "black", //Indicatorの色
             height: 1.5
@@ -48,13 +41,21 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
         })}
       >
         <Tab.Screen
-          name="イラスト"
+          name="photos"
           // component={PostNavigator}
           component={Posts}
           initialParams={{ illustrations }}
+          options={
+            {
+              // tabBarLabel: "",
+              // tabBarIcon: ({ color }) => (
+              //   <FontAwesome name="photo" color={color} size={20} />
+              // )
+            }
+          }
         />
         <Tab.Screen
-          name="グッズ"
+          name="products"
           component={Products}
           initialParams={{ products }}
         />
