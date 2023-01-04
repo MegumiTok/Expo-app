@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 //pages---------------------------------------------------
 // import Products from "@pages/Products";
 // import Posts from "@pages/Posts";
-import PostExcerpt from "./PostExcerpt";
+import PostsThumbnail from "./PostsThumbnail";
 //type-----------------------------------------------------------
 import type { Post } from "@models/PostTypes";
 
@@ -65,12 +65,12 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
 
 const Posts = ({ route }) => {
   const { illustrations } = route.params;
-  return <PostExcerpt items={illustrations} />;
+  return <PostsThumbnail items={illustrations} />;
 };
 
 const Products = ({ route }) => {
   const { products } = route.params;
-  return <PostExcerpt items={products} />;
+  return <PostsThumbnail items={products} />;
 };
 
 export default ProfileTabView;

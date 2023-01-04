@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   Text,
@@ -5,13 +6,17 @@ import {
   FlatList,
   StyleSheet,
   Pressable,
-  ImageBackground
+  ImageBackground,
+  RefreshControl
 } from "react-native";
 
 import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
 import { _day } from "@functions/_day";
 import Feather from "react-native-vector-icons/Feather";
+//redux==============================
+import { useAppDispatch } from "@Redux/hook";
+import { fetchAllEvents } from "@Redux/eventActions";
 
 const ItemSeparatorView = () => {
   return (
@@ -19,8 +24,17 @@ const ItemSeparatorView = () => {
   );
 };
 export const EventList = ({ items, bg }) => {
+  const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const _onRefresh = () => {
+    setRefreshing(true);
+
+    dispatch(fetchAllEvents());
+    setRefreshing(false);
+  };
   const { navigate } = useNavigation();
-  const image = { uri: "https://reactjs.org/logo-og.png" };
+
   const _renderItem = ({ item }: { item: EventType }) => {
     // const { eventId } = item;
     const day = _day(item.postedDate);
@@ -68,6 +82,10 @@ export const EventList = ({ items, bg }) => {
           keyExtractor={(_, index) => index.toString()}
           renderItem={_renderItem}
           ItemSeparatorComponent={ItemSeparatorView}
+          refreshing={refreshing}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
+          }
         />
       </ImageBackground>
     </View>
