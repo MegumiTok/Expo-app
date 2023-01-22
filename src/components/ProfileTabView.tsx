@@ -3,8 +3,6 @@ import type { FC } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 //pages---------------------------------------------------
-// import Products from "@pages/Products";
-// import Posts from "@pages/Posts";
 import PostsThumbnail from "./PostsThumbnail";
 //type-----------------------------------------------------------
 import type { Post } from "@models/PostTypes";
@@ -32,7 +30,7 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
       ]}
     >
       <Tab.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={() => ({
           tabBarIndicatorStyle: {
             backgroundColor: "black", //Indicatorの色
             height: 1.5

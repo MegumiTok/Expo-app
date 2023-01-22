@@ -4,3 +4,4 @@ babel.config.js
 metro.config.js
 app.config.js
 env.ts
+__tests__/

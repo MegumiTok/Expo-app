@@ -59,19 +59,19 @@
 | :tada: | 大きめの修正完了 | 
 
 
-# Warning
+# Warnings
 高さに問題がある時もしかすると以下の出力結果が0になっているかもしれません。
 ```js
 console.log(Constants.statusBarHeight);
 ```
 その場合はreloadしてください。
 
-# Branch
+# Branches
 ## main
-メインブランチ
+main branch 
 
 ## dev
-作業中ブランチ
+Daily work is in the dev branch.
 
 ## v1
 NativeBase docsから作られたアプリにeslintとprettierを加えただけのスッピンの状態
@@ -105,6 +105,9 @@ Redux と firebase と useContext で実装している。
 
 ![Screenshot](src/assets/readme/login.gif)
 ![Screenshot](src/assets/readme/feed.gif)
+
+
+
 ![Screenshot](src/assets/readme/creators.gif)
 ![Screenshot](src/assets/readme/event.gif)
 
