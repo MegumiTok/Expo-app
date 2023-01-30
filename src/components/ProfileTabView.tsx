@@ -2,11 +2,8 @@ import { StyleSheet, View } from "react-native";
 import type { FC } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 //pages---------------------------------------------------
-import Products from "@pages/Products";
-import Posts from "@pages/Posts";
-
+import PostsThumbnail from "./PostsThumbnail";
 //type-----------------------------------------------------------
 import type { Post } from "@models/PostTypes";
 
@@ -33,7 +30,7 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
       ]}
     >
       <Tab.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={() => ({
           tabBarIndicatorStyle: {
             backgroundColor: "black", //Indicatorの色
             height: 1.5
@@ -59,10 +56,19 @@ export const ProfileTabView: FC<TabViewProps> = ({ topHeight, posts }) => {
           component={Products}
           initialParams={{ products }}
         />
-        {/* <Tab.Screen name="つぶやき" component={CommentPage}  /> */}
       </Tab.Navigator>
     </View>
   );
+};
+
+const Posts = ({ route }) => {
+  const { illustrations } = route.params;
+  return <PostsThumbnail items={illustrations} />;
+};
+
+const Products = ({ route }) => {
+  const { products } = route.params;
+  return <PostsThumbnail items={products} />;
 };
 
 export default ProfileTabView;

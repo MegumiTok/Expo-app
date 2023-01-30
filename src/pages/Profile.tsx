@@ -64,9 +64,9 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
         <View
           style={{
             height: STATUS_BAR_HEIGHT,
-            backgroundColor: Colors.primary.dark,
-            top: 0,
-            opacity: 0.8
+            backgroundColor: Colors.primary.general,
+            top: 0
+            // opacity: 0.8
           }}
         />
 
@@ -74,35 +74,35 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
           <StatusBar animated={true} hidden={false} />
 
           <HeaderWrapper onLayout={onLayout}>
-            <ImageBackground
+            {/* <ImageBackground
               style={styles.image}
               source={{
                 uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
               }}
               resizeMode="cover"
               imageStyle={{ opacity: 0.5 }}
+            > */}
+            <View
+              style={{
+                alignItems: "center" //これでimageとtextを縦並び
+              }}
             >
-              <View
+              <ProfileImage
+                source={{
+                  uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
+                }}
+              />
+              <View //🟢Want to know the size of this component
                 style={{
                   alignItems: "center" //これでimageとtextを縦並び
                 }}
               >
-                <ProfileImage
-                  source={{
-                    uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
-                  }}
-                />
-                <View //🟢Want to know the size of this component
-                  style={{
-                    alignItems: "center" //これでimageとtextを縦並び
-                  }}
-                >
-                  <Text fontSize="md" bold style={{ color: "white" }}>
-                    {item.creatorName}
-                  </Text>
-                </View>
+                <Text fontSize="md" bold style={{ color: "white" }}>
+                  {item.creatorName}
+                </Text>
               </View>
-            </ImageBackground>
+            </View>
+            {/* </ImageBackground> */}
           </HeaderWrapper>
 
           <ProfileTabView topHeight={topHeight} posts={posts} />

@@ -42,7 +42,7 @@ export const Feed: FC = () => {
   //   return <>{loading ? <LoadingView /> : null}</>;
   // };
 
-  const onRefresh = () => {
+  const _onRefresh = () => {
     setRefreshing(true);
     // dispatch(
     //   updateLike({
@@ -82,7 +82,7 @@ export const Feed: FC = () => {
           // onEndReached={_onEndReached}
           scrollEventThrottle={16}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
           }
         />
       </>

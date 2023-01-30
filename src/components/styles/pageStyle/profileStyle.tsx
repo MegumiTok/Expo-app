@@ -17,6 +17,7 @@ export const HeaderWrapper = styled.View`
   /* padding-top: ${SPACING_BIG}px; */
   /* padding-bottom: ${SPACING}px; */
   background-color: ${Colors.primary.general};
+  padding-top: 20px;
 `;
 
 export const ProfileImage = styled.Image`

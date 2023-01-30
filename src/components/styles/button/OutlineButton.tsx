@@ -7,6 +7,7 @@ export const OutlineButton = ({
   title,
   name,
   color,
+  width,
   ...rest
 }: {
   onPress: () => void;
@@ -14,11 +15,18 @@ export const OutlineButton = ({
   disabled?: any;
   name?: string;
   color?: string;
+  width?: number;
 }) => {
   return (
     <Center>
       <TouchableOpacity
-        style={[styles.userBtn, { borderColor: color ? color : "#2e64e5" }]}
+        style={[
+          styles.userBtn,
+          {
+            borderColor: color ? color : "#2e64e5",
+            width: width ? width : "70%"
+          }
+        ]}
         onPress={onPress}
         {...rest}
       >
@@ -46,8 +54,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingVertical: 8,
     paddingHorizontal: 12,
-    marginHorizontal: 5,
-    width: "70%",
+    // marginHorizontal: 5,
+    // width: "70%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center"

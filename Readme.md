@@ -1,10 +1,13 @@
 # 主な使用技術
 
+- nodejs 16.18.1
 - NativeBase 
 - TypeScript 
 - Expo 
 - firebase
 - Redux
+
+
 
 | 使用技術 | version |
 | --- | --- |
@@ -20,33 +23,35 @@
 
 - ログインユーザー自身の投稿のみ編集できる
 
+※ デザインを若干変更したので上のgif画像と違いがありますが機能は同じです。下記の画像の方が最新に近いデザインです。
 # main
 ## Feed
-![demo_1](src/assets//readme/demo_1.png)
-![demo_10](src/assets//readme/demo_10.png)
+<!-- ![demo_1](src/assets//readme/demo_1.png)
+![demo_10](src/assets//readme/demo_10.png) -->
+![feed](./src//assets/readme/feed.png)
 
 ## Creator Page
-![demo_7](src/assets//readme/demo_7.png)
-![demo_11](src/assets//readme/demo_11.png)
-![demo_13](src/assets//readme/demo_13.png)
+![creator](src/assets//readme/creator.png)
 
 ## Event Page
-![demo_15](src/assets//readme/demo_15.png)
-![demo_16](src/assets//readme/demo_16.png)
+![event](src/assets//readme/event.png)
 
+# Create
+![addPost](src/assets//readme/addPost.png)
+# Add/Edit/Remove
+### Edit Post
+![editPost](src/assets//readme/editPost.png)
 
-# Edit/Remove
-![demo_3](src/assets//readme/demo_3.png)
-![demo_2](src/assets//readme/demo_2.png)
-![demo_5](src/assets//readme/demo_5.png)
+### Edit Profile
+![editProfile](src/assets//readme/editProfile.png)
+
+# Search Page
+![Search](src/assets//readme/search.png)
 
 # Sign up/in
 ![demo_4](src/assets//readme/demo_4.png)
 ![demo_14](src/assets//readme/demo_14.png)
 
-# Create
-![demo_6](src/assets//readme/demo_6.png)
-![demo_8](src/assets//readme/demo_8.png)
 
 -------------------------------------------------------------
 <br>
@@ -59,19 +64,19 @@
 | :tada: | 大きめの修正完了 | 
 
 
-# Warning
+# Warnings
 高さに問題がある時もしかすると以下の出力結果が0になっているかもしれません。
 ```js
 console.log(Constants.statusBarHeight);
 ```
 その場合はreloadしてください。
 
-# Branch
+# Branches
 ## main
-メインブランチ
+main branch 
 
 ## dev
-作業中ブランチ
+Daily work is in the dev branch.
 
 ## v1
 NativeBase docsから作られたアプリにeslintとprettierを加えただけのスッピンの状態
@@ -105,6 +110,9 @@ Redux と firebase と useContext で実装している。
 
 ![Screenshot](src/assets/readme/login.gif)
 ![Screenshot](src/assets/readme/feed.gif)
+
+
+
 ![Screenshot](src/assets/readme/creators.gif)
 ![Screenshot](src/assets/readme/event.gif)
 

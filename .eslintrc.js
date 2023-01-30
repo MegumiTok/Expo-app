@@ -120,6 +120,7 @@ module.exports = {
       }
     ],
     "react/react-in-jsx-scope": "off", // JSX 記述を使用する場合に react モジュールを React としてインポートすることを強制する。新しい JSX 変換形式を用いる場合はインポートが不要になるためこの設定を無効化
+    "react/jsx-uses-react": "off",
     "react-native/no-unused-styles": 2, // 未使用のstyleを検知
     // "react-native/split-platform-components": 2, //スタイルシートに関するカスタマイズ
     "react-native/no-inline-styles": 0, // スタイルシートに関するカスタマイズ

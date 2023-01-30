@@ -30,7 +30,7 @@ export const GoBack = () => {
         size={22}
         color={"#000"}
       />
-      <Text style={{ fontSize: 12 }}>戻る</Text>
+      {/* <Text style={{ fontSize: 12 }}>戻る</Text> */}
     </TouchableOpacity>
   );
 };

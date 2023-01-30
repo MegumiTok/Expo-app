@@ -27,5 +27,6 @@
       // "@env": [".env"],
     }
   },
-  "include": ["./src/**/*", "App.tsx", "db.json"] //App.tsxの場所がsrc/にいるときは変更必要。
+  "include": ["./src/**/*", "App.tsx", "db.json"], //App.tsxの場所がsrc/にいるときは変更必要。
+  "exclude": ["**/__mocks__/*", "**/__tests__/*"]
 }
