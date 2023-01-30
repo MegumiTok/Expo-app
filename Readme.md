@@ -25,8 +25,9 @@
 
 # main
 ## Feed
-![demo_1](src/assets//readme/demo_1.png)
-![demo_10](src/assets//readme/demo_10.png)
+<!-- ![demo_1](src/assets//readme/demo_1.png)
+![demo_10](src/assets//readme/demo_10.png) -->
+![feed](./src//assets/readme/feed.png)
 
 ## Creator Page
 ![demo_7](src/assets//readme/demo_7.png)

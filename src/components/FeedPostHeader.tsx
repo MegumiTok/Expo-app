@@ -8,7 +8,6 @@ import {
 import { VStack, Text, View } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 // import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Entypo, FontAwesome5 } from "@expo/vector-icons";
 // import {
 //   Menu,
@@ -18,7 +17,7 @@ import { Entypo, FontAwesome5 } from "@expo/vector-icons";
 // } from "react-native-popup-menu";
 import { Routes } from "@models/NavTypes";
 //styles------------------------------------------------
-import type { FC } from "react";
+// import type { FC } from "react";
 
 import {
   LeftParts,
@@ -31,21 +30,15 @@ import {
 import BorderGradient from "./styles/BorderGradient";
 import { AuthContext } from "@navigation/AuthProvider";
 //redux --------------------------------
-import { unwrapResult } from "@reduxjs/toolkit";
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { useAppDispatch } from "@Redux/hook";
 import { deletePost } from "@Redux/postActions";
 
 //type--------------------------------------------
 import type { Post } from "@models/PostTypes";
-import type { Auth } from "@models/AuthTypes";
-import { SCREEN_WIDTH } from "./styles/theme/layout";
-import { padding } from "styled-system";
-import { Colors } from "./styles/theme/Colors";
 
 export const FeedPostHeader = ({ item }: { item: Post }) => {
   const { user } = useContext(AuthContext);
   const dispatch = useAppDispatch();
-  const creator = useAppSelector((state) => state.creators.currentCreator);
 
   const navigation = useNavigation();
   // const postId = item.postId;
@@ -79,7 +72,7 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
     <ContainerHeader>
       <LeftParts>
         <AvatarContainer>
-          <BorderGradient width={50} height={50} stroke={6} />
+          <BorderGradient width={50} height={50} stroke={9} />
           <TouchableWithoutFeedback
             onPress={() =>
               navigation.navigate("CreatorTab", {
