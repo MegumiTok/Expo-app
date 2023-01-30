@@ -10,7 +10,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ImageBackground,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from "react-native";
 import { Routes } from "@models/NavTypes";
 //const---------------------------------
@@ -22,10 +23,10 @@ import * as PickImage from "@functions/_pickImage";
 import { basicStyles } from "@components/styles/theme/basicStyleSheet";
 import Spacer from "@components/styles/Spacer";
 import { OutlineButton } from "@components/styles/button";
-import { EditProfileStyle } from "@components/styles/pageStyle/EditProfileStyle";
-import { StyledTextInput } from "@components/styles/pageStyle/AddPostStyle";
-import type { Post } from "@models/PostTypes";
 
+import { StyledTextInput } from "@components/styles/pageStyle/AddPostStyle";
+import { Colors } from "@components/styles/theme/Colors";
+import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
 //context-----------------
 import useUser from "@hooks/useUser";
 
@@ -50,6 +51,7 @@ import { updateCreatorInfo } from "@Redux/creatorsActions";
 import type { Creator } from "@models/AuthTypes";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import type { User } from "firebase/auth";
+import { marginTop } from "styled-system";
 
 // import { parseISO, formatDistanceToNow } from "date-fns";
 
@@ -225,7 +227,11 @@ export const EditProfilePage = ({ navigation }) => {
   //   if (!currentUser) return null;
   return (
     <ScrollView>
-      <Center mt={3}>プロフィールの画像とコメントを変更できます</Center>
+      <Center style={styles.box}>
+        <Text style={styles.text}>
+          ◆ プロフィールの画像とコメントを変更できます
+        </Text>
+      </Center>
       <TouchableWithoutFeedback
         onPress={() => {
           Keyboard.dismiss;
@@ -235,14 +241,14 @@ export const EditProfilePage = ({ navigation }) => {
           {/* プロフィール画像 ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/}
           <TouchableOpacity onPress={handlePickImage}>
             <Center>
-              <Circle size="100">
+              <Circle size="250">
                 <ImageBackground
                   source={{
                     uri: imageData
                       ? imageData
                       : userData?.userPhoto || TEST_IMAGE
                   }}
-                  style={EditProfileStyle.photo}
+                  style={styles.photo}
                   imageStyle={{ borderRadius: 15 }}
                 >
                   <Center flex={1}>
@@ -250,7 +256,8 @@ export const EditProfilePage = ({ navigation }) => {
                       as={MaterialCommunityIcons}
                       name="camera-plus-outline"
                       color="white"
-                      style={EditProfileStyle.photoIcon}
+                      style={styles.photoIcon}
+                      size="10"
                     />
                   </Center>
                 </ImageBackground>
@@ -260,7 +267,7 @@ export const EditProfilePage = ({ navigation }) => {
 
           {/* クリエイター名 ーー名前は変更不可にするーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/}
           <Spacer />
-          <Text>{user?.displayName}</Text>
+          <Text style={styles.name}>{user?.displayName}</Text>
           <Spacer />
           {/* メインメッセージ ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/}
           <Controller
@@ -296,12 +303,13 @@ export const EditProfilePage = ({ navigation }) => {
 
           {/* 完了ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */}
           <Spacer />
-          <View width={"100%"}>
+          <View width={"100%"} mt={10}>
             <OutlineButton
               onPress={handleSubmit(onPressSaveButton)}
               title="編集完了"
               disabled={!canSave}
               name="check"
+              width={SCREEN_WIDTH * 0.8}
             />
           </View>
         </Center>
@@ -311,3 +319,34 @@ export const EditProfilePage = ({ navigation }) => {
 };
 
 export default EditProfilePage;
+
+const styles = StyleSheet.create({
+  box: {
+    padding: 10,
+    margin: 10,
+
+    backgroundColor: Colors.primary.extraLight,
+    borderRadius: 10,
+    borderColor: Colors.primary.general,
+    borderWidth: 1
+  },
+  photo: {
+    height: 250,
+    width: 250
+  },
+  photoIcon: {
+    opacity: 0.9,
+    alignItems: "center",
+    justifyContent: "center",
+    // borderWidth: 1,
+    // borderColor: "#fff",
+    borderRadius: 10
+  },
+  text: {
+    color: "#2f2a37"
+  },
+  name: {
+    color: "#2f2a37",
+    fontSize: 20
+  }
+});

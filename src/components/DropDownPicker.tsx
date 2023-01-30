@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     // justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    width: SCREEN_WIDTH * 0.6,
+    width: SCREEN_WIDTH * 0.8,
     backgroundColor: "white"
   },
   text: {

@@ -1,5 +1,5 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { MenuProvider } from "react-native-popup-menu";
+// import { MenuProvider } from "react-native-popup-menu";
 import { store } from "@Redux/store";
 import { Provider as ReduxProvider } from "react-redux";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -13,11 +13,11 @@ export const Navigation = () => {
     <ReduxProvider store={store}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider>
-          <MenuProvider>
-            <AuthProvider>
-              <Routes />
-            </AuthProvider>
-          </MenuProvider>
+          {/* <MenuProvider> */}
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
+          {/* </MenuProvider> */}
         </SafeAreaProvider>
       </GestureHandlerRootView>
     </ReduxProvider>

@@ -23,6 +23,7 @@
 
 - ログインユーザー自身の投稿のみ編集できる
 
+※ デザインを若干変更したので上のgif画像と違いがありますが機能は同じです。下記の画像の方が最新に近いデザインです。
 # main
 ## Feed
 <!-- ![demo_1](src/assets//readme/demo_1.png)
@@ -30,27 +31,27 @@
 ![feed](./src//assets/readme/feed.png)
 
 ## Creator Page
-![demo_7](src/assets//readme/demo_7.png)
-![demo_11](src/assets//readme/demo_11.png)
-![demo_13](src/assets//readme/demo_13.png)
+![creator](src/assets//readme/creator.png)
 
 ## Event Page
-![demo_15](src/assets//readme/demo_15.png)
-![demo_16](src/assets//readme/demo_16.png)
+![event](src/assets//readme/event.png)
 
+# Create
+![addPost](src/assets//readme/addPost.png)
+# Add/Edit/Remove
+### Edit Post
+![editPost](src/assets//readme/editPost.png)
 
-# Edit/Remove
-![demo_3](src/assets//readme/demo_3.png)
-![demo_2](src/assets//readme/demo_2.png)
-![demo_5](src/assets//readme/demo_5.png)
+### Edit Profile
+![editProfile](src/assets//readme/editProfile.png)
+
+# Search Page
+![Search](src/assets//readme/search.png)
 
 # Sign up/in
 ![demo_4](src/assets//readme/demo_4.png)
 ![demo_14](src/assets//readme/demo_14.png)
 
-# Create
-![demo_6](src/assets//readme/demo_6.png)
-![demo_8](src/assets//readme/demo_8.png)
 
 -------------------------------------------------------------
 <br>

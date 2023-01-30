@@ -4,7 +4,7 @@ import { SPACING_BIG, SCREEN_WIDTH } from "../theme/layout";
 
 export const _width = SCREEN_WIDTH - SPACING_BIG * 8;
 export const StyledTextInput = styled.TextInput`
-  width: 300px;
+  width: ${SCREEN_WIDTH * 0.9}px;
   height: 100px;
   background-color: white;
   padding: ${SPACING_BIG}px;

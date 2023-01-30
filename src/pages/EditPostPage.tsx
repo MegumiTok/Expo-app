@@ -8,9 +8,10 @@ import {
   TouchableWithoutFeedback,
   Alert,
   Image,
+  TextInput,
   StyleSheet
 } from "react-native";
-import { Text, Center, View, ScrollView, Button } from "native-base";
+import { Text, Center, View, ScrollView, StatusBar } from "native-base";
 
 import { useForm, Controller } from "react-hook-form";
 import { LoadingView } from "@components/styles/LoadingView";
@@ -26,11 +27,12 @@ import { updatePost } from "@Redux/postActions";
 //style-------------------------------------------------------------------
 import { basicStyles } from "@components/styles/theme/basicStyleSheet";
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
-import { StyledTextInput } from "@components/styles/pageStyle/AddPostStyle";
+
 import { OutlineButton } from "@components/styles/button";
 //types-----------------------------------------------------------
 import type { Post } from "@models/PostTypes";
 import type { FC } from "react";
+import { Colors } from "@components/styles/theme/Colors";
 
 interface FormInput {
   comment: string;
@@ -123,7 +125,8 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
   const canSave = addRequestStatus === "idle";
 
   return (
-    <>
+    <View style={{ backgroundColor: "#fff" }}>
+      <StatusBar hidden />
       {loading ? (
         <LoadingView />
       ) : (
@@ -134,10 +137,14 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
             }}
           >
             <ScrollView>
-              <Center p={10}>
-                <View paddingY={3}>
-                  <Text>コメントとジャンルを変更できます</Text>
-                  <Text>画像を変更したい場合は投稿をしなおしてください</Text>
+              <Center p={2}>
+                <View style={styles.box}>
+                  <Text style={styles.text}>
+                    ◆ コメントとジャンルを変更できます。
+                  </Text>
+                  <Text style={styles.text}>
+                    ◆ 画像を変更したい場合は投稿をしなおしてください。
+                  </Text>
                 </View>
                 <View style={styles.img}>
                   <Image
@@ -155,7 +162,8 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
                       required: true
                     }}
                     render={({ field: { onChange, value, onBlur } }) => (
-                      <StyledTextInput
+                      <TextInput
+                        style={styles.textInput}
                         onBlur={onBlur}
                         onChangeText={onChange}
                         value={value}
@@ -196,34 +204,29 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
                 />
                 <View style={styles.btn}>
                   {/* 現在の投稿を表示 ------------------------*/}
-                  <Button
-                    margin={1}
+                  <OutlineButton
                     onPress={() => {
                       reset({
                         comment: item.comment,
                         genre: item.genre
                       });
                     }}
-                    colorScheme="success"
-                    variant="outline"
-                  >
-                    現在の投稿を表示?
-                  </Button>
-
+                    title="現在の投稿を表示"
+                    color="green"
+                    width={SCREEN_WIDTH * 0.8 * 0.49}
+                  />
                   {/* リセットボタン ------------------------*/}
-                  <Button
-                    margin={1}
+                  <OutlineButton
                     onPress={() => {
                       reset({
                         comment: "",
                         genre: undefined
                       });
                     }}
-                    colorScheme="success"
-                    variant="outline"
-                  >
-                    入力リセット
-                  </Button>
+                    title="入力リセット"
+                    color="green"
+                    width={SCREEN_WIDTH * 0.7 * 0.49}
+                  />
                 </View>
 
                 {/* Saveボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */}
@@ -233,6 +236,7 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
                     title="編集完了"
                     disabled={!canSave}
                     name="check"
+                    width={SCREEN_WIDTH * 0.8}
                   />
                 </View>
               </Center>
@@ -248,7 +252,7 @@ export const EditPostPage: FC<any> = ({ navigation, route }) => {
           </View> */}
         </>
       )}
-    </>
+    </View>
   );
 };
 
@@ -264,10 +268,32 @@ const styles = StyleSheet.create({
   },
   dropdown: { marginVertical: 20, width: "100%" },
   btn: {
+    width: "80%",
     flexDirection: "row",
-
+    justifyContent: "space-between",
+    alignContent: "space-between",
     alignItems: "center",
-    margin: 10
+    marginVertical: 10
+    // backgroundColor: "tomato"
+  },
+  box: {
+    padding: 10,
+    marginHorizontal: 0,
+    marginBottom: 10,
+    marginTop: 50,
+    backgroundColor: Colors.primary.extraLight,
+    borderRadius: 10,
+    borderColor: Colors.primary.general,
+    borderWidth: 1
+  },
+  text: {
+    color: "#2f2a37"
+  },
+  textInput: {
+    width: SCREEN_WIDTH * 0.9,
+    height: 100,
+    backgroundColor: "#fff",
+    marginTop: 30
   }
 });
 

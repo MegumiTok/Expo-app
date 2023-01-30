@@ -287,7 +287,7 @@ export const AddPostPage = ({ navigation }) => {
           </HStack>
 
           {/* リセットボタン ------------------------*/}
-          <Button
+          {/* <Button
             marginY={5}
             onPress={() => {
               reset({
@@ -301,7 +301,20 @@ export const AddPostPage = ({ navigation }) => {
             variant="outline"
           >
             入力リセット
-          </Button>
+          </Button> */}
+          <View width={"100%"} mt={5}>
+            <OutlineButton
+              onPress={() => {
+                reset({
+                  comment: "",
+                  genre: undefined,
+                  product: false
+                });
+              }}
+              title="入力リセット"
+              color="green"
+            />
+          </View>
           {/* 投稿ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー */}
 
           <View width={"100%"} mt={5}>
