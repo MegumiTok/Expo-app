@@ -1,16 +1,21 @@
-import { useEffect, useState, useContext } from "react";
-import { TouchableWithoutFeedback, Alert } from "react-native";
-import { VStack, Text } from "native-base";
+import { useContext } from "react";
+import {
+  TouchableWithoutFeedback,
+  Alert,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
+import { VStack, Text, View } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 // import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { FontAwesome } from "@expo/vector-icons";
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger
-} from "react-native-popup-menu";
+import { Entypo, FontAwesome5 } from "@expo/vector-icons";
+// import {
+//   Menu,
+//   MenuOptions,
+//   MenuOption,
+//   MenuTrigger
+// } from "react-native-popup-menu";
 import { Routes } from "@models/NavTypes";
 //styles------------------------------------------------
 import type { FC } from "react";
@@ -33,6 +38,9 @@ import { deletePost } from "@Redux/postActions";
 //type--------------------------------------------
 import type { Post } from "@models/PostTypes";
 import type { Auth } from "@models/AuthTypes";
+import { SCREEN_WIDTH } from "./styles/theme/layout";
+import { padding } from "styled-system";
+import { Colors } from "./styles/theme/Colors";
 
 export const FeedPostHeader = ({ item }: { item: Post }) => {
   const { user } = useContext(AuthContext);
@@ -71,7 +79,7 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
     <ContainerHeader>
       <LeftParts>
         <AvatarContainer>
-          <BorderGradient width={47} height={47} stroke={6} />
+          <BorderGradient width={50} height={50} stroke={6} />
           <TouchableWithoutFeedback
             onPress={() =>
               navigation.navigate("CreatorTab", {
@@ -105,29 +113,63 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
 
       {/* 投稿者だけに表示 ======================================================*/}
       {user?.uid === item.creatorId && (
-        <Menu>
-          <MenuTrigger>
-            <MaterialCommunityIcons
-              name="dots-horizontal"
-              size={30}
-              color="black"
-            />
-          </MenuTrigger>
-          <MenuOptions>
-            <MenuOption
-              onSelect={() => navigation.navigate(Routes.EditPost, { item })}
-              text="編集"
-            />
-            <MenuOption onSelect={handleDeletePost}>
-              {/* <FontAwesome name="trash-o" size={22} /> */}
-              <Text>削除</Text>
-            </MenuOption>
-            {/* <MenuOption onSelect={() => true} text="共有" /> */}
-          </MenuOptions>
-        </Menu>
+        // <Menu>
+        //   <MenuTrigger>
+        //     <MaterialCommunityIcons
+        //       name="dots-horizontal"
+        //       size={30}
+        //       color="black"
+        //     />
+        //   </MenuTrigger>
+        //   <MenuOptions customStyles={{ optionText: styles.menuWrapper }}>
+        //     <MenuOption
+        //       onSelect={() => navigation.navigate(Routes.EditPost, { item })}
+        //       text="編集"
+        //     />
+        //     <MenuOption onSelect={handleDeletePost}>
+        //       <View style={styles.selector}>
+        //         <FontAwesome name="trash-o" size={22} />
+        //         <Text>削除</Text>
+        //       </View>
+        //     </MenuOption>
+        //     {/* <MenuOption onSelect={() => true} text="共有" /> */}
+        //   </MenuOptions>
+        // </Menu>
+        <View style={styles.manuWrapper}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate(Routes.EditPost, { item });
+            }}
+          >
+            {/* <Text>Delete Post</Text> */}
+            <Entypo name="edit" size={28} color="#fead16" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={handleDeletePost}>
+            {/* <Text>Delete Post</Text> */}
+            <FontAwesome5 name="trash" size={25} color="#ff4848cc" />
+          </TouchableOpacity>
+        </View>
       )}
     </ContainerHeader>
   );
 };
 
 export default FeedPostHeader;
+
+const styles = StyleSheet.create({
+  button: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+    // backgroundColor: Colors.secondary.general
+  },
+  manuWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: 68,
+    marginHorizontal: 10
+  }
+});

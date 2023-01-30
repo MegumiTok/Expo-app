@@ -1,10 +1,13 @@
 # 主な使用技術
 
+- nodejs 16.18.1
 - NativeBase 
 - TypeScript 
 - Expo 
 - firebase
 - Redux
+
+
 
 | 使用技術 | version |
 | --- | --- |

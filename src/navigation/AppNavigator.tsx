@@ -244,19 +244,29 @@ const MenuScreens = () => {
 const FeedStuckOption = ({ navigation }) => {
   const HEADER_ICON_SIZE = 50;
   return {
-    headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
     headerStyle: {
       backgroundColor: Colors.primary.dark
     },
-    headerBackTitleVisible: false,
+
     animation: "fade", //💚
-    headerTitle: () => (
-      <Image
-        style={{ width: 200, height: HEADER_ICON_SIZE, top: -7 }}
-        source={require("@assets/images/logo_3.png")}
-        resizeMode="contain"
-      />
-    ),
+    // ヘッダーのロゴ表示オンの場合=====
+    // headerTintColor: Colors.primary.light, //the back button and title both use this property as their color.
+    // headerBackTitleVisible: false,
+    // headerTitle: () => (
+    //   <Image
+    //     style={{ width: 200, height: HEADER_ICON_SIZE, top: -7 }}
+    //     source={require("@assets/images/logo_3.png")}
+    //     resizeMode="contain"
+    //   />
+    // ),
+
+    // ヘッダーのロゴ表示オフの場合=====
+    headerTintColor: "white",
+    headerTitleStyle: {
+      fontWeight: "800",
+      fontSize: 20
+    },
+    headerBackTitleVisible: true,
     headerRight: () => (
       <View
         style={{

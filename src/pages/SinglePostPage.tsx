@@ -55,7 +55,7 @@ export const SinglePostPage: FC<SinglePostProps> = ({ navigation, route }) => {
       <View flex={1}>
         <View
           style={{
-            height: STATUS_BAR_HEIGHT - 10,
+            height: STATUS_BAR_HEIGHT + 30,
             // backgroundColor: Colors.primary.dark,
             top: 0,
             opacity: 0.8

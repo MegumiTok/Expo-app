@@ -21,9 +21,9 @@ export const BorderGradient = ({ width, height, stroke }: Props) => {
     >
       <Defs>
         <LinearGradient id="grad" x1="0" y1="1" x2="1" y2="0">
-          <Stop offset="0" stopColor="#f9c73f" stopOpacity="1" />
-          <Stop offset="0.4" stopColor="#3cd9d6" stopOpacity="1" />
-          <Stop offset="1" stopColor="#4c6186" stopOpacity="1" />
+          <Stop offset="0" stopColor="#00F260" stopOpacity="1" />
+          <Stop offset="0.4" stopColor="#91b4d7" stopOpacity="1" />
+          <Stop offset="1" stopColor="#0575E6" stopOpacity="1" />
         </LinearGradient>
       </Defs>
       <Circle stroke="url(#grad)" cx="100" cy="100" r="90" />
