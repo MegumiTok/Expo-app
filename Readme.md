@@ -23,7 +23,7 @@
 
 - ログインユーザー自身の投稿のみ編集できる
 
-※ デザインを若干変更したので上のgif画像と違いがありますが機能は同じです。下記の画像の方が最新に近いデザインです。
+※ デザインを若干変更したので上のgif画像と現行のものに違いがありますが機能は基本的に同じです。下記の画像の方が最新に近いデザインです。
 # main
 ## Feed
 <!-- ![demo_1](src/assets//readme/demo_1.png)
@@ -49,8 +49,8 @@
 ![Search](src/assets//readme/search.png)
 
 # Sign up/in
-![demo_4](src/assets//readme/demo_4.png)
-![demo_14](src/assets//readme/demo_14.png)
+![login](src/assets//readme/login.png)
+
 
 
 -------------------------------------------------------------
