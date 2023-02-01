@@ -3,7 +3,7 @@
 - nodejs 16.18.1
 - NativeBase 
 - TypeScript 
-- Expo 
+- React Native(Expo CLI)
 - firebase
 - Redux
 
@@ -29,6 +29,8 @@
 <!-- ![demo_1](src/assets//readme/demo_1.png)
 ![demo_10](src/assets//readme/demo_10.png) -->
 ![feed](./src//assets/readme/feed.png)
+
+複数枚投稿を前提に最初はデザインしていたのですがExpo CLI範囲内では現状厳しいということが判明したのでこのような仕様です。
 
 ## Creator Page
 ![creator](src/assets//readme/creator.png)
