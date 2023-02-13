@@ -1,7 +1,7 @@
 import { FlatList, Pressable, Image, View } from "react-native";
 // import PostsThumbnail from "@components/PostsThumbnail";
 
-import type { FC } from "react";
+// import type { FC } from "react";
 import { useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Routes } from "@models/NavTypes";

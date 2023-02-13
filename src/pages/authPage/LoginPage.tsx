@@ -22,13 +22,13 @@ import { AuthRoutes } from "@models/NavTypes";
 // import { auth } from "src/config/firebase";
 
 //+redux--------------------------------------------------------
-import { useAuthentication, useAppSelector } from "@Redux/hook";
+import { useAuthentication } from "@Redux/hook";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 export const LoginPage: FC<LogInProps> = ({ navigation }) => {
-  const error = useAppSelector((state) => state.auth.error);
+  // const error = useAppSelector((state) => state.auth.error);
   const { loginWithEmailAndPassword } = useAuthentication();
-  const authStatus = useAppSelector((state) => state.auth.status);
+  // const authStatus = useAppSelector((state) => state.auth.status);
   const {
     control,
     handleSubmit,

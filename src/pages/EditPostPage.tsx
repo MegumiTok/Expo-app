@@ -261,12 +261,12 @@ const styles = StyleSheet.create({
     // borderColor: "pink",
     // borderWidth: 3
   },
-  button: {
-    position: "absolute",
-    bottom: 15,
-    alignSelf: "center"
-  },
-  dropdown: { marginVertical: 20, width: "100%" },
+  // button: {
+  //   position: "absolute",
+  //   bottom: 15,
+  //   alignSelf: "center"
+  // },
+  // dropdown: { marginVertical: 20, width: "100%" },
   btn: {
     width: "80%",
     flexDirection: "row",

@@ -26,7 +26,7 @@ export const Menu = (props) => {
           keyExtractor={(item) => item.name}
           contentContainerStyle={{ flex: 1, justifyContent: "space-evenly" }}
           ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={({ item, index }) => {
+          renderItem={({ item }) => {
             return (
               <TouchableOpacity
                 onPress={() => props.navigation.push(item.name)}

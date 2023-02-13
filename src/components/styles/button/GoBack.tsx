@@ -2,7 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import { SPACING } from "../theme/layout";
 import { STATUS_BAR_HEIGHT } from "src/config/const";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 export const GoBack = () => {
   const navigation = useNavigation();

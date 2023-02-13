@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Image } from "native-base";
-import FastImage from "react-native-fast-image";
+
 // styleーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
 // import { FeedPostHeader, FeedPostFooter } from "@components/templates";

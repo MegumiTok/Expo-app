@@ -1,4 +1,4 @@
-import { Easing, Image, TouchableWithoutFeedback } from "react-native";
+import { Easing, TouchableWithoutFeedback } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import type { FC, ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import type { View } from "native-base";
 import type { LayoutChangeEvent } from "react-native";
 

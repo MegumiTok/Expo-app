@@ -1,17 +1,16 @@
 import { View, StyleSheet, TextInput, Text } from "react-native";
 //type
 import type { FC } from "react";
-import { AntDesign } from "@expo/vector-icons";
 
 interface Props {
   labelValue: string;
-  placeholderText: string;
+  // placeholderText: string;
   title: string;
 }
 
 export const InputFieldTwo: FC<Props> = ({
   labelValue,
-  placeholderText,
+  // placeholderText,
   title,
   ...rest
 }) => {

@@ -1,4 +1,3 @@
-import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { SPACING } from "./styles/theme/layout";
 import { Text, TouchableOpacity } from "react-native";

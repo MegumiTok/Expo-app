@@ -1,6 +1,6 @@
 import { Image } from "react-native";
-import { Center, Text, View, StatusBar } from "native-base";
-import Svg, { Path } from "react-native-svg";
+import { Text, View, StatusBar } from "native-base";
+// import Svg, { Path } from "react-native-svg";
 
 //templates---------------------------------------------------------------
 import PostHeader from "@components/PostHeader";
@@ -10,12 +10,12 @@ import type { FC } from "react";
 import type { SinglePostProps } from "@models/NavTypes";
 
 //style--------------------------------------------------------------
-import { Colors } from "@components/styles/theme/Colors";
+
 import { CloseButton, OutlineButton } from "@components/styles/button";
 import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
 import { STATUS_BAR_HEIGHT } from "src/config/const";
 //ローカル==========================
-import { posts } from "@assets/data/posts";
+// import { posts } from "@assets/data/posts";
 //function========================
 import { _timeAgo } from "@functions/_timeAgo";
 import { _takasaPost } from "@functions/_takasaPost";
@@ -24,7 +24,7 @@ import { useAppSelector } from "@Redux/hook";
 import { selectSinglePostById } from "@Redux/postsSlice";
 
 //Context========================
-import useUser from "@hooks/useUser";
+// import useUser from "@hooks/useUser";
 
 import { LoadingView } from "@components/styles/LoadingView";
 

@@ -1,12 +1,5 @@
 import { db, allEventsColRef } from "src/config/firebase";
-import {
-  query,
-  getDocs,
-  where,
-  deleteDoc,
-  doc,
-  setDoc
-} from "firebase/firestore";
+import { getDocs, doc, setDoc } from "firebase/firestore";
 import { createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import type { EventType } from "@models/EventType";
 import { All_EVENTS } from "src/config/const";

@@ -1,10 +1,6 @@
-import {
-  PayloadAction,
-  createSlice,
-  createEntityAdapter
-} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchAllEvents, deleteEvent, addEvent } from "./eventActions";
+import { fetchAllEvents, addEvent } from "./eventActions";
 
 //type--------------------------
 import type { Status } from "@models/StatusType";

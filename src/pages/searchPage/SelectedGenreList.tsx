@@ -6,7 +6,7 @@ import {
 } from "@components/styles/theme/layout";
 
 //redux==============================
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { useAppSelector } from "@Redux/hook";
 import { selectPostsByGenre } from "@Redux/postsSlice";
 export const SelectedGenreList = ({ route }) => {
   const { name } = route.params;

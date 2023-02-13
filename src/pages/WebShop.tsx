@@ -1,16 +1,14 @@
-import React, { useRef, useState } from "react";
-import { Center, View, HStack, Text } from "native-base";
-import { SafeAreaView, TouchableOpacity, Share, Platform } from "react-native";
+import React, { useRef } from "react";
+import { View, HStack, Text } from "native-base";
+import { SafeAreaView, TouchableOpacity, Platform } from "react-native";
 import { WebView } from "react-native-webview";
-import type { WebViewNavigation } from "react-native-webview";
+// import type { WebViewNavigation } from "react-native-webview";
 
 // import * as Linking from "expo-linking";
 //style----------------------------------------------------------------
 import { Colors } from "@components/styles/theme/Colors";
 import { SCREEN_WIDTH, SPACING } from "@components/styles/theme/layout";
 import {
-  AntDesign,
-  Ionicons,
   FontAwesome5,
   Feather,
   MaterialCommunityIcons
@@ -26,7 +24,7 @@ interface Props {
 import Constants from "expo-constants";
 export const WebShop = ({ navigation }: Props) => {
   const ref = useRef<WebView>(null);
-  const control = (controlType: "reflesh" | "back" | "forward") => {
+  const control = (controlType: "refresh" | "back" | "forward") => {
     if (ref.current) {
       switch (controlType) {
         case "back":
@@ -36,16 +34,16 @@ export const WebShop = ({ navigation }: Props) => {
           ref.current.goForward();
           break;
 
-        case "reflesh":
+        case "refresh":
           ref.current.reload();
           break;
       }
     }
   };
-  const [navigationState, setNavigationState] =
-    useState<WebViewNavigation | null>(null);
+  // const [navigationState, setNavigationState] =
+  //   useState<WebViewNavigation | null>(null);
 
-  const uri = "https://github.com/";
+  // const uri = "https://github.com/";
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <HStack
@@ -101,11 +99,11 @@ export const WebShop = ({ navigation }: Props) => {
           <Feather
             name="chevron-left"
             size={30}
-            color={
-              navigationState?.canGoBack
-                ? Colors.secondary.general
-                : Colors.accent.dark
-            }
+            // color={
+            //   navigationState?.canGoBack
+            //     ? Colors.secondary.general
+            //     : Colors.accent.dark
+            // }
           />
         </TouchableOpacity>
         {/* 右 ー－－－－－－－－－－－－－－－－－－－－－－－－－－*/}
@@ -116,11 +114,11 @@ export const WebShop = ({ navigation }: Props) => {
           <Feather
             name="chevron-right"
             size={30}
-            color={
-              navigationState?.canGoBack
-                ? Colors.secondary.general
-                : Colors.accent.dark
-            }
+            // color={
+            //   navigationState?.canGoBack
+            //     ? Colors.secondary.general
+            //     : Colors.accent.dark
+            // }
           />
         </TouchableOpacity>
 

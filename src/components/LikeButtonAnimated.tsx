@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Animated from "react-native-reanimated";
-import iconAnimation from "./iconAnimation";
-import { AuthContext } from "@navigation/AuthProvider";
+import IconAnimation from "./IconAnimation";
+// import { AuthContext } from "@navigation/AuthProvider";
 import { useAppDispatch } from "@Redux/hook";
 import { updateLike } from "@Redux/postActions";
 // import { updateLike } from "@Redux/postsSlice";
@@ -11,9 +11,9 @@ import { updateLike } from "@Redux/postActions";
 import type { Post } from "@models/PostTypes";
 const LikeButtonAnimated = ({ item }: { item: Post }) => {
   const [trigger, setTrigger] = useState(item.isLiked);
-  const { IconFilled, IconRegular } = iconAnimation(trigger);
+  const { IconFilled, IconRegular } = IconAnimation(trigger);
   const dispatch = useAppDispatch();
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
 
   // useEffect(() => {
   //   const update = async () => {

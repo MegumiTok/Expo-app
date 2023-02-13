@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { View, Text, Center } from "native-base";
-import type { EventType } from "@models/EventType";
+import { Text, Center } from "native-base";
+// import type { EventType } from "@models/EventType";
 import type { FC } from "react";
 import type { EventSinglePostProps } from "@models/NavTypes";
 import { WebView } from "react-native-webview";
-import type { WebViewNavigation } from "react-native-webview";
+// import type { WebViewNavigation } from "react-native-webview";
 import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 
 export const EventSinglePost: FC<EventSinglePostProps> = ({ route }) => {
-  const [navigationState, setNavigationState] =
-    useState<WebViewNavigation | null>(null);
+  // const [navigationState, setNavigationState] =
+  //   useState<WebViewNavigation | null>(null);
   const { item } = route.params;
   //   console.log("ログ:", item.title);
 

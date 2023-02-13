@@ -9,11 +9,10 @@ import {
   signUpWithEmailPassword
 } from "./authActions";
 //type--------------------------
-import type { User } from "firebase/auth";
-import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
+
 import type { Auth } from "@models/AuthTypes";
 import type { Status } from "@models/StatusType";
-import type { RootState } from "./store";
+
 // import { flg } from "@models/AuthTypes";
 
 export interface AuthProps {
@@ -82,7 +81,7 @@ const authSlice = createSlice({
       state.error = action.error.message;
       state.status = "failed";
     });
-    builder.addCase(signUpWithEmailPassword.fulfilled, (state, action) => {
+    builder.addCase(signUpWithEmailPassword.fulfilled, (state) => {
       state.status = "succeeded";
       // state.data = action.payload as Auth;
     });
@@ -125,7 +124,7 @@ const authSlice = createSlice({
   }
 });
 
-const { actions, reducer } = authSlice;
+const { reducer } = authSlice;
 export const authReducer = reducer;
 
 // export const { clearCurrentUser } = actions;
