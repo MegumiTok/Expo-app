@@ -18,6 +18,7 @@ Reload.tsx
 
 # Environment variables 
 .env
+env.ts
 
 eas.json
 
