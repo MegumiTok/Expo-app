@@ -19,7 +19,7 @@ import { TEST_IMAGE, ALL_USERS } from "src/config/const";
 import type { SignUpProps } from "@models/NavTypes";
 import { AuthRoutes } from "@models/NavTypes";
 import type { Register } from "@models/AuthTypes";
-import type { User } from "firebase/auth";
+// import type { User } from "firebase/auth";
 // import useUser from "@modules/context/hooks/useUser";
 
 // // firebase--------------------------
@@ -85,9 +85,9 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
 
   //Googleーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   // const handleGoogleLogin = () => dispatch(signInWithGoogle());
-  const handleGoogleLogin = () => {
-    true;
-  };
+  // const handleGoogleLogin = () => {
+  //   true;
+  // };
 
   return (
     <ScrollView p={SPACING}>

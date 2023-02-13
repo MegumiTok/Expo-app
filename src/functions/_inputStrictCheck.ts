@@ -8,6 +8,7 @@ const jpCheck = (Email: string) => {
 
 //アドレス,パスワードの空文字チェック
 const blankCheck = (props: any) => {
+  // eslint-disable-next-line no-irregular-whitespace
   const regexEmail = /[^\s　]/;
   return !regexEmail.test(props);
 };

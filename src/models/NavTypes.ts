@@ -17,10 +17,7 @@ import type {
   StackScreenProps
 } from "@react-navigation/stack";
 
-import type {
-  BottomTabNavigationProp,
-  BottomTabScreenProps
-} from "@react-navigation/bottom-tabs";
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 export enum Routes {
   Test = "Test", // <--あとで消す

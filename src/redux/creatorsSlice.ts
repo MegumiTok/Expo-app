@@ -3,7 +3,7 @@ import { fetchCreators, updateCreatorInfo } from "./creatorsActions";
 //type------------------------------------------------------------------
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Status } from "@models/StatusType";
-import type { Creator, Auth } from "@models/AuthTypes";
+import type { Creator } from "@models/AuthTypes";
 import type { RootState } from "./store";
 
 interface AllCreatorProps {

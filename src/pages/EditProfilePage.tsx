@@ -51,7 +51,6 @@ import { updateCreatorInfo } from "@Redux/creatorsActions";
 import type { Creator } from "@models/AuthTypes";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import type { User } from "firebase/auth";
-import { marginTop } from "styled-system";
 
 // import { parseISO, formatDistanceToNow } from "date-fns";
 
@@ -100,7 +99,7 @@ export const EditProfilePage = ({ navigation }) => {
   const {
     control,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors }
   } = useForm<FormInput>();
 

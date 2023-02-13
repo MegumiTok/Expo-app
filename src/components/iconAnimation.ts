@@ -1,6 +1,6 @@
 import { Easing, useAnimatedStyle, withTiming } from "react-native-reanimated";
 
-export const iconAnimation = (trigger) => {
+export const IconAnimation = (trigger) => {
   const IconFilled = useAnimatedStyle(() => {
     return {
       transform: [
@@ -37,4 +37,4 @@ export const iconAnimation = (trigger) => {
   return { IconFilled, IconRegular };
 };
 
-export default iconAnimation;
+export default IconAnimation;

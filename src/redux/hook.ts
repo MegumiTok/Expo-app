@@ -6,12 +6,10 @@ import type { Login, Register } from "@models/AuthTypes";
 // import { clearCurrentUser } from "./authSlice";
 
 import {
-  logout,
   sendPasswordReset,
   signInWithEmailPassword,
   // signInWithGoogle,
-  signUpWithEmailPassword,
-  fetchAuthUser
+  signUpWithEmailPassword
 } from "./authActions";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`

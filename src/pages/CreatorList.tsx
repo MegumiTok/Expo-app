@@ -228,9 +228,9 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     resizeMode: "contain",
     width: "100%"
-  },
-  svgCurve: {
-    position: "absolute",
-    width: ITEM_SIZE - SPACING * 2
   }
+  // svgCurve: {
+  //   position: "absolute",
+  //   width: ITEM_SIZE - SPACING * 2
+  // }
 });

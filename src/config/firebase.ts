@@ -12,7 +12,6 @@ import { All_EVENTS, ALL_USERS, CREATORS_POSTS } from "./const";
 
 //Environment variables in Expo-----------
 import ENV from "../../env";
-import Constants from "expo-constants";
 
 // import {
 //   API_KEY,

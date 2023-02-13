@@ -10,7 +10,7 @@ export interface ScalingDotProps {
 }
 
 //ローカルデータ======================================
-import { creators } from "@assets/data/creators";
+// import { creators } from "@assets/data/creators";
 //style-------------------------------------------
 import { Colors } from "@components/styles/theme/Colors";
 import { SCREEN_WIDTH, SPACING } from "@components/styles/theme/layout";

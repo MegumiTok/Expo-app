@@ -2,15 +2,7 @@ import React, { useState, useEffect } from "react";
 import Checkbox from "expo-checkbox";
 import { Alert, TouchableWithoutFeedback, Keyboard, Image } from "react-native";
 
-import {
-  Center,
-  Text,
-  View,
-  HStack,
-  Icon,
-  ScrollView,
-  Button
-} from "native-base";
+import { Center, Text, View, HStack, Icon, ScrollView } from "native-base";
 
 import { Routes } from "@models/NavTypes";
 import DropDownPicker from "@components/DropDownPicker";
@@ -25,7 +17,7 @@ import { useForm, Controller } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 //redux--------------------------------------------------------------
-import { useAppDispatch, useAppSelector } from "@Redux/hook";
+import { useAppDispatch } from "@Redux/hook";
 import "react-native-get-random-values";
 import { createNewPost } from "@Redux/postActions";
 import { unwrapResult, nanoid } from "@reduxjs/toolkit";

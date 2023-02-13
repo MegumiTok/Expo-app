@@ -5,7 +5,7 @@
 
 import * as React from "react";
 import type { ViewStyle, LayoutRectangle } from "react-native";
-import { Animated, View, StyleSheet, Easing, Dimensions } from "react-native";
+import { Animated, View, StyleSheet, Easing } from "react-native";
 
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
@@ -93,7 +93,7 @@ export const SkeletonPlaceholder = ({
         (child: JSX.Element, index: number) => {
           let style: ViewStyle;
           if (child.type.displayName === "SkeletonPlaceholderItem") {
-            const { children, ...styles } = child.props;
+            const { ...styles } = child.props;
             style = styles;
           } else {
             style = child.props.style;

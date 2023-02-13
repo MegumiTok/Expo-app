@@ -1,7 +1,7 @@
 import { GoBack } from "@components/styles/button";
 import { View, Text } from "native-base";
 
-import { StatusBar, ImageBackground, StyleSheet } from "react-native";
+import { StatusBar } from "react-native";
 import { useEffect, useState } from "react";
 //const---------------------------------
 import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "src/config/const";
@@ -115,10 +115,10 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
   return <>{content}</>;
 };
 
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    justifyContent: "center"
-    // opacity: 0.6
-  }
-});
+// const styles = StyleSheet.create({
+//   image: {
+//     flex: 1,
+//     justifyContent: "center"
+//     // opacity: 0.6
+//   }
+// });
