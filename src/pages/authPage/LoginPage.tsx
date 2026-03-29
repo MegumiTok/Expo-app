@@ -131,7 +131,7 @@ export const LoginPage: FC<LogInProps> = ({ navigation }) => {
           marginY={5}
           onPress={() => {
             reset({
-              email: "@sample.com",
+              email: "",
               password: ""
             });
           }}

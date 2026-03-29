@@ -11,7 +11,6 @@ export const Colors = {
     general: "#5FDAE6",
     dark: "#29BDCB", //ブルー
     light: "#A1F1F8", //ブルー
-    // light: "#000101", //Attack of Titan
     extraLight: "#DFFCFF"
   },
   secondary: {
@@ -21,5 +20,17 @@ export const Colors = {
   },
 
   text: "#222222",
-  border: "#ccc"
+  textSub: "#333",
+  textMuted: "#666",
+  border: "#ccc",
+  separator: "#c8c8c8",
+  heart: "rgb(237, 73, 86)",
+  editIcon: "#fead16",
+  deleteIcon: "#ff4848cc",
+  skeleton: {
+    background: "#E1E9EE",
+    highlight: "#F2F8FC"
+  },
+  eventCardBackground: "#FFFFFF95",
+  buttonBackgroundLight: "rgba(255,255,255,0.8)"
 };

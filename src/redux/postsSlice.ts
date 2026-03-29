@@ -32,32 +32,7 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {
-    // updateLike(state, action: PayloadAction<Post>) {
-    //   const { postId, isLiked } = action.payload;
-    //   const existingPost = state.allPosts.find(
-    //     (item) => item.postId === postId
-    //   );
-    //   if (existingPost) {
-    //     existingPost.isLiked = isLiked;
-    //     // existingPost.genre = genre;
-    //     // existingPost.postedAt = postedAt;
-    //   }
-    // }
-    // reactionAdded(
-    //   state,
-    //   action: PayloadAction<{ postId: string; reaction: ReactionType }>
-    // ) {
-    //   const { postId, reaction } = action.payload;
-    //   const existingPost = state.allPosts.find(
-    //     (item) => item.postId === postId
-    //   );
-    //   // const existingPost = state.entities[postId];
-    //   if (existingPost) {
-    //     existingPost.reactions[reaction]++;
-    //   }
-    // }
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       //投稿をする======================================================
@@ -65,7 +40,6 @@ const postsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(createNewPost.fulfilled, (state, { payload }) => {
-        // console.log(payload);
         if (payload) {
           //この書き方がいいかわからないがこれでundefined問題を解決
           state.status = "succeeded";
@@ -96,7 +70,6 @@ const postsSlice = createSlice({
 
       //投稿をアップデートする=====================================================================================
       .addCase(updatePost.pending, (state) => {
-        console.log("投稿をアップデートする:");
         state.status = "loading";
       })
       // .addCase(updatePost.fulfilled, (state, action) => {
@@ -104,8 +77,6 @@ const postsSlice = createSlice({
       //   state.currentPost = action.payload;
       // })
       .addCase(updatePost.fulfilled, (state, action) => {
-        // if (action.payload) {
-        console.log("テスト:", action.payload);
         state.status = "succeeded";
         const { postId, comment, genre, postedAt } = action.payload;
         const existingPost = state.allPosts.find(
@@ -139,7 +110,6 @@ const postsSlice = createSlice({
         const existingPost = state.allPosts.find(
           (item) => item.postId === postId
         );
-        console.log("log", postId);
         if (existingPost) {
           existingPost.isLiked = isLiked;
         }

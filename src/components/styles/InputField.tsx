@@ -2,6 +2,14 @@ import { View, StyleSheet, TextInput } from "react-native";
 //type
 import type { FC } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { Colors } from "./theme/Colors";
+import {
+  SPACING_BIG,
+  FONT_SIZE_MD,
+  INPUT_HEIGHT,
+  BORDER_RADIUS_SM,
+  ICON_SIZE_SM
+} from "./theme/layout";
 
 interface Props {
   labelValue: string;
@@ -18,13 +26,13 @@ export const InputField: FC<Props> = ({
   return (
     <View style={styles.inputContainer}>
       <View style={styles.iconStyle}>
-        <AntDesign name={iconType} size={25} color="#666" />
+        <AntDesign name={iconType} size={ICON_SIZE_SM} color={Colors.textMuted} />
       </View>
       <TextInput
         style={styles.input}
         value={labelValue}
         placeholder={placeholderText}
-        placeholderTextColor="#666"
+        placeholderTextColor={Colors.textMuted}
         numberOfLines={1}
         {...rest}
       />
@@ -37,31 +45,31 @@ export default InputField;
 const styles = StyleSheet.create({
   iconStyle: {
     alignItems: "center",
-    borderRightColor: "#ccc",
+    borderRightColor: Colors.border,
     borderRightWidth: 1,
     height: "100%",
     justifyContent: "center",
-    padding: 10,
+    padding: SPACING_BIG,
     width: 50
   },
   input: {
     alignItems: "center",
-    color: "#333",
+    color: Colors.textSub,
     flex: 1,
     fontFamily: "NotoSansJP-Medium",
-    fontSize: 16,
+    fontSize: FONT_SIZE_MD,
     justifyContent: "center",
-    padding: 10
+    padding: SPACING_BIG
   },
   inputContainer: {
     alignItems: "center",
     backgroundColor: "#fff",
-    borderColor: "#ccc",
-    borderRadius: 3,
+    borderColor: Colors.border,
+    borderRadius: BORDER_RADIUS_SM,
     borderWidth: 1,
     flexDirection: "row",
-    height: 48,
-    marginBottom: 10,
+    height: INPUT_HEIGHT,
+    marginBottom: SPACING_BIG,
     marginTop: 5,
     width: "100%"
   }

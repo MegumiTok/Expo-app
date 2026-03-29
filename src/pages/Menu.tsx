@@ -11,10 +11,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "react-native-vector-icons/Feather";
 
 import MenuList from "@assets/data/MenuList";
+import { Colors } from "@components/styles/theme/Colors";
+import {
+  SEPARATOR_HEIGHT,
+  FONT_SIZE_XL,
+  SPACING_BIG,
+  ICON_SIZE_MD,
+  BORDER_RADIUS_MD
+} from "@components/styles/theme/layout";
 
 const ItemSeparatorView = () => {
   return (
-    <View style={{ height: 0.5, width: "100%", backgroundColor: "#c8c8c8" }} />
+    <View
+      style={{
+        height: SEPARATOR_HEIGHT,
+        width: "100%",
+        backgroundColor: Colors.separator
+      }}
+    />
   );
 };
 export const Menu = (props) => {
@@ -32,13 +46,12 @@ export const Menu = (props) => {
                 onPress={() => props.navigation.push(item.name)}
               >
                 <View style={styles.wrapper}>
-                  <Feather name={item.icon} size={27} />
-                  <Text style={{ fontSize: 24 }}>
-                    {/* {index + 1}.{item.label} */}
+                  <Feather name={item.icon} size={ICON_SIZE_MD} />
+                  <Text style={{ fontSize: FONT_SIZE_XL }}>
                     {item.label}
                   </Text>
 
-                  <Feather name="chevron-right" size={27} />
+                  <Feather name="chevron-right" size={ICON_SIZE_MD} />
                 </View>
               </TouchableOpacity>
             );
@@ -61,10 +74,10 @@ const styles = StyleSheet.create({
     width: "95%",
     backgroundColor: "white",
     flex: 1,
-    borderRadius: 10
+    borderRadius: BORDER_RADIUS_MD
   },
   wrapper: {
-    padding: 10,
+    padding: SPACING_BIG,
     flexDirection: "row",
     justifyContent: "space-between"
   }

@@ -47,7 +47,6 @@ export const signUpWithEmailPassword = createAsyncThunk(
       const docSnap = await getDoc(userNameRef);
 
       if (docSnap.exists()) {
-        console.log(msg, userName);
         return thunkAPI.rejectWithValue(msg);
       }
 
@@ -83,11 +82,9 @@ export const signUpWithEmailPassword = createAsyncThunk(
           } as User);
         }
       } else {
-        console.log(msg_2);
         return thunkAPI.rejectWithValue(msg_2);
       }
     } catch (e: unknown) {
-      console.log("エラー:", e);
       // return thunkAPI.rejectWithValue({
       //   error: "Email already in use"
       // });

@@ -7,17 +7,8 @@ import {
 } from "react-native";
 import { VStack, Text, View } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-// import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { Entypo, FontAwesome5 } from "@expo/vector-icons";
-// import {
-//   Menu,
-//   MenuOptions,
-//   MenuOption,
-//   MenuTrigger
-// } from "react-native-popup-menu";
 import { Routes } from "@models/NavTypes";
-//styles------------------------------------------------
-// import type { FC } from "react";
 
 import {
   LeftParts,
@@ -29,6 +20,7 @@ import {
 } from "@components/styles/pageStyle/FeedStyle";
 import BorderGradient from "./styles/BorderGradient";
 import { AuthContext } from "@navigation/AuthProvider";
+import { Colors } from "@components/styles/theme/Colors";
 //redux --------------------------------
 import { useAppDispatch } from "@Redux/hook";
 import { deletePost } from "@Redux/postActions";
@@ -41,7 +33,6 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
   const dispatch = useAppDispatch();
 
   const navigation = useNavigation();
-  // const postId = item.postId;
 
   const handleDeletePost = () => {
     return Alert.alert(
@@ -64,10 +55,6 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
       ]
     );
   };
-  // console.log("出力1", creator?.creatorId);
-  // console.log("出力2", user?.uid);
-  // console.log("出力3", item.creatorId);
-
   return (
     <ContainerHeader>
       <LeftParts>
@@ -106,28 +93,6 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
 
       {/* 投稿者だけに表示 ======================================================*/}
       {user?.uid === item.creatorId && (
-        // <Menu>
-        //   <MenuTrigger>
-        //     <MaterialCommunityIcons
-        //       name="dots-horizontal"
-        //       size={30}
-        //       color="black"
-        //     />
-        //   </MenuTrigger>
-        //   <MenuOptions customStyles={{ optionText: styles.menuWrapper }}>
-        //     <MenuOption
-        //       onSelect={() => navigation.navigate(Routes.EditPost, { item })}
-        //       text="編集"
-        //     />
-        //     <MenuOption onSelect={handleDeletePost}>
-        //       <View style={styles.selector}>
-        //         <FontAwesome name="trash-o" size={22} />
-        //         <Text>削除</Text>
-        //       </View>
-        //     </MenuOption>
-        //     {/* <MenuOption onSelect={() => true} text="共有" /> */}
-        //   </MenuOptions>
-        // </Menu>
         <View style={styles.manuWrapper}>
           <TouchableOpacity
             style={styles.button}
@@ -135,13 +100,11 @@ export const FeedPostHeader = ({ item }: { item: Post }) => {
               navigation.navigate(Routes.EditPost, { item });
             }}
           >
-            {/* <Text>Delete Post</Text> */}
-            <Entypo name="edit" size={28} color="#fead16" />
+            <Entypo name="edit" size={28} color={Colors.editIcon} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={handleDeletePost}>
-            {/* <Text>Delete Post</Text> */}
-            <FontAwesome5 name="trash" size={25} color="#ff4848cc" />
+            <FontAwesome5 name="trash" size={25} color={Colors.deleteIcon} />
           </TouchableOpacity>
         </View>
       )}

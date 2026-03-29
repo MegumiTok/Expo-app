@@ -1,18 +1,12 @@
 import { memo } from "react";
 import { Image } from "native-base";
 
-// styleーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-import { SCREEN_WIDTH, PHOTO_HEIGHT } from "@components/styles/theme/layout";
-// import { FeedPostHeader, FeedPostFooter } from "@components/templates";
+import { SCREEN_WIDTH } from "@components/styles/theme/layout";
 import FeedPostHeader from "./FeedPostHeader";
 import FeedPostFooter from "./FeedPostFooter";
-//type--------------------------------------------
+//type
 import type { Post } from "@models/PostTypes";
-// interface Props {
-//   element: any;
-// }
-
-//function----------------
+//function
 import { _takasaPost } from "@functions/_takasaPost";
 
 export const FeedPost = memo(({ item }: { item: Post }) => {
@@ -29,16 +23,6 @@ export const FeedPost = memo(({ item }: { item: Post }) => {
         resizeMode="contain"
         alt="post"
       />
-      {/* <FastImage
-        style={{ width: SCREEN_WIDTH, height: _takasa }}
-        // source={{ uri: item.postedImage }}
-        source={{
-          uri: item.postedImage,
-
-          priority: FastImage.priority.normal
-        }}
-        resizeMode={FastImage.resizeMode.contain}
-      /> */}
       <FeedPostFooter {...{ item }} />
     </>
   );

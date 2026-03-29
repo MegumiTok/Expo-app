@@ -23,12 +23,10 @@ export const EventSinglePost: FC<EventSinglePostProps> = ({ route }) => {
     <Center flex={1}>
       <WebView
         // ref={ref}
-        originWhitelist={["*"]}
+        originWhitelist={["https://*", "http://*"]}
         allowsLinkPreview
         allowsInlineMediaPlayback
         allowsBackForwardNavigationGestures
-        sharedCookiesEnabled
-        enableApplePay
         // onNavigationStateChange={setNavigationState}
         // source={{ uri: route.params.url }}
         source={{
