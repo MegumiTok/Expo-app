@@ -102,7 +102,6 @@ export const AddPostPage = ({ navigation }) => {
   const canSave = Boolean(imageData) && addRequestStatus === "idle";
 
   const onPressSaveButton = async (data: FormInput) => {
-    console.log("追加されたデータ:", data);
 
     if (canSave) {
       try {
@@ -149,10 +148,6 @@ export const AddPostPage = ({ navigation }) => {
           postId: randomId
           // updatedAt
         } as Post;
-        // console.log("postedDataは:", postedData);
-        console.log("height:", postedData.imageH);
-        console.log("width:", postedData.imageW);
-
         const resultAction = await dispatch(createNewPost(postedData));
         unwrapResult(resultAction);
         navigation.navigate(Routes.Feed);

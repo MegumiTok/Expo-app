@@ -2,8 +2,8 @@ import { GoBack } from "@components/styles/button";
 import { View, Text } from "native-base";
 
 import { StatusBar } from "react-native";
-import { useEffect, useState } from "react";
-//const---------------------------------
+import { useEffect } from "react";
+//const
 import { TEST_IMAGE, STATUS_BAR_HEIGHT } from "src/config/const";
 
 //styles------------------------------------------------
@@ -27,9 +27,8 @@ import ProfileTabView from "@components/ProfileTabView";
 import BtnForCreatorsList from "@components/BtnForCreatorsList";
 import ErrorPage from "@components/ErrorPage";
 import { LoadingView } from "@components/styles/LoadingView";
-// type-------------
+//type
 import type { CreatorTabScreenProps } from "@models/NavTypes";
-import type { Post } from "@models/PostTypes";
 
 export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
   const { item } = route.params;
@@ -37,21 +36,13 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
   const dispatch = useAppDispatch();
   const postStatus = useAppSelector((state) => state.posts.status);
   const error = useAppSelector((state) => state.posts.error);
-  const POSTS = useAppSelector((state) =>
+  const posts = useAppSelector((state) =>
     selectPostsByCreator(state, item.creatorId)
   );
 
-  const [posts, setPosts] = useState<Post[]>([]);
-
   useEffect(() => {
     dispatch(fetchAllPosts());
-    // setPosts(POSTS);
   }, [dispatch]);
-
-  useEffect(() => {
-    setPosts(POSTS);
-    // setPosts((pos) => [...pos]);
-  }, []); //POSTSはreactive valueでないってことを証明したいがどうすれば(ここでPOSTSをdependencyに加えるとinfinite loop)
 
   let content;
   if (postStatus === "loading") {
@@ -66,7 +57,6 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
             height: STATUS_BAR_HEIGHT,
             backgroundColor: Colors.primary.general,
             top: 0
-            // opacity: 0.8
           }}
         />
 
@@ -74,35 +64,18 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
           <StatusBar animated={true} hidden={false} />
 
           <HeaderWrapper onLayout={onLayout}>
-            {/* <ImageBackground
-              style={styles.image}
-              source={{
-                uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
-              }}
-              resizeMode="cover"
-              imageStyle={{ opacity: 0.5 }}
-            > */}
-            <View
-              style={{
-                alignItems: "center" //これでimageとtextを縦並び
-              }}
-            >
+            <View style={{ alignItems: "center" }}>
               <ProfileImage
                 source={{
                   uri: item.creatorPhoto ? item.creatorPhoto : TEST_IMAGE
                 }}
               />
-              <View //🟢Want to know the size of this component
-                style={{
-                  alignItems: "center" //これでimageとtextを縦並び
-                }}
-              >
+              <View style={{ alignItems: "center" }}>
                 <Text fontSize="md" bold style={{ color: "white" }}>
                   {item.creatorName}
                 </Text>
               </View>
             </View>
-            {/* </ImageBackground> */}
           </HeaderWrapper>
 
           <ProfileTabView topHeight={topHeight} posts={posts} />
@@ -114,11 +87,3 @@ export const Profile = ({ route }: CreatorTabScreenProps<"Profile">) => {
   }
   return <>{content}</>;
 };
-
-// const styles = StyleSheet.create({
-//   image: {
-//     flex: 1,
-//     justifyContent: "center"
-//     // opacity: 0.6
-//   }
-// });

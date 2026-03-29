@@ -29,8 +29,6 @@ export const DropDownPicker = ({
     [onSelect]
   );
 
-  // console.log(value?.name);
-  // console.log("現在", value);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -61,7 +59,7 @@ export const DropDownPicker = ({
                 onPress={() => _onPress(val)}
                 style={{
                   width: SCREEN_WIDTH * 0.6,
-                  backgroundColor: value?.id === val.id ? "pink" : "white",
+                  backgroundColor: value?.id === val.id ? Colors.secondary.general : "white",
                   padding: 5
                 }}
               >
@@ -81,7 +79,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     alignItems: "center"
-    // backgroundColor: "tomato"
   },
   box: {
     borderColor: Colors.border,
@@ -89,7 +86,6 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 6,
     minHeight: 42,
-    // justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
     width: SCREEN_WIDTH * 0.8,

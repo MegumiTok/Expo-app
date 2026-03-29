@@ -62,10 +62,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
           userFlg: "creator" //アプリからの会員登録は全員一般ユーザー(general)だが一時的にcreator使用中
         };
 
-        console.log("登録データ", resisterData);
-
         const resultAction = await registerWithEmailPassword(resisterData);
-        console.log(authStatus);
 
         unwrapResult(resultAction);
 
@@ -124,7 +121,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
 
       {/* メールアドレス ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/}
       <Controller
-        defaultValue="@sample.com"
+        defaultValue=""
         control={control}
         name="email"
         rules={{
@@ -181,7 +178,7 @@ export const SignupPage = ({ navigation }: SignUpProps) => {
       <Button
         onPress={() => {
           reset({
-            email: "@sample.com",
+            email: "",
             password: ""
           });
         }}

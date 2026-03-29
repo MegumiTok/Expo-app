@@ -13,7 +13,7 @@ export const events: EventType[] = [
     postedDate: "2022-12-17T04:11:03.503Z",
     title: "Cobalion in 5-star Raid Battles",
     category: "1",
-    eventURL: "http://abehiroshi.la.coocan.jp/"
+    eventURL: "https://abehiroshi.la.coocan.jp/"
   },
   {
     eventId: "3",
@@ -21,7 +21,7 @@ export const events: EventType[] = [
     category: "3",
     title: "Vivillon Debuts and Vivillon Medal",
 
-    eventURL: "http://abehiroshi.la.coocan.jp/"
+    eventURL: "https://abehiroshi.la.coocan.jp/"
   },
   {
     eventId: "4",
@@ -29,7 +29,7 @@ export const events: EventType[] = [
     category: "1",
     title: "Greedy Gluttons event (November 9 – 17)",
 
-    eventURL: "http://abehiroshi.la.coocan.jp/"
+    eventURL: "https://abehiroshi.la.coocan.jp/"
   },
   {
     eventId: "5",
@@ -37,7 +37,7 @@ export const events: EventType[] = [
     category: "1",
     title: "Elite Raids (November 13)",
 
-    eventURL: "http://abehiroshi.la.coocan.jp/"
+    eventURL: "https://abehiroshi.la.coocan.jp/"
   },
   {
     eventId: "6",
@@ -45,6 +45,6 @@ export const events: EventType[] = [
     category: "1",
     title: "Astral Eclipse event (November 23 – 28)",
 
-    eventURL: "http://abehiroshi.la.coocan.jp/"
+    eventURL: "https://abehiroshi.la.coocan.jp/"
   }
 ];

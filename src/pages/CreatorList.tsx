@@ -16,7 +16,15 @@ import Svg, { Path } from "react-native-svg";
 import Pagination from "@components/Pagination";
 
 //styles==========================
-import { SCREEN_WIDTH, SPACING } from "@components/styles/theme/layout";
+import {
+  SCREEN_WIDTH,
+  SPACING,
+  FONT_SIZE_SM,
+  FONT_SIZE_XL,
+  BORDER_RADIUS_LG,
+  CREATOR_NAME_LINES,
+  CREATOR_COMMENT_LINES
+} from "@components/styles/theme/layout";
 import { Colors } from "@components/styles/theme/Colors";
 import { LoadingView } from "@components/styles/LoadingView";
 import ErrorPage from "@components/ErrorPage";
@@ -92,27 +100,17 @@ const CreatorExcerpt = ({ creators }: { creators: Creator[] }) => {
             >
               <View style={{ width: ITEM_SIZE }}>
                 <Animated.View
-                  style={{
-                    marginHorizontal: SPACING,
-                    padding: SPACING * 2,
-                    alignItems: "center",
-                    shadowColor: Colors.primary.dark,
-                    shadowRadius: 10,
-                    shadowOpacity: 0.6,
-                    elevation: 8,
-                    shadowOffset: {
-                      width: 0,
-                      height: 4
-                    },
-                    transform: [{ translateY }]
-                  }}
+                  style={[
+                    styles.cardContainer,
+                    { transform: [{ translateY }] }
+                  ]}
                 >
                   <Animated.View
                     style={[
                       StyleSheet.absoluteFillObject,
                       {
                         backgroundColor: "white", //カードの色
-                        borderRadius: 34
+                        borderRadius: BORDER_RADIUS_LG
                       }
                     ]}
                   />
@@ -151,11 +149,11 @@ const CreatorExcerpt = ({ creators }: { creators: Creator[] }) => {
                     <View style={{ alignItems: "center", padding: 10 }}>
                       <Text
                         style={{
-                          fontSize: 24,
+                          fontSize: FONT_SIZE_XL,
                           fontFamily: "NotoSansJP-Bold",
                           color: "white"
                         }}
-                        numberOfLines={1}
+                        numberOfLines={CREATOR_NAME_LINES}
                       >
                         {item.creatorName}
                       </Text>
@@ -165,12 +163,12 @@ const CreatorExcerpt = ({ creators }: { creators: Creator[] }) => {
                       {item.mainComment ? (
                         <Text
                           style={{
-                            fontSize: 15,
+                            fontSize: FONT_SIZE_SM,
                             fontFamily: "KosugiMaru-Regular",
                             marginTop: 8,
                             color: "white"
                           }}
-                          numberOfLines={3}
+                          numberOfLines={CREATOR_COMMENT_LINES}
                         >
                           {item.mainComment}
                         </Text>
@@ -202,7 +200,6 @@ export const CreatorList = () => {
         dispatch(fetchCreators());
       } catch (e) {
         Alert.alert("fetchPostsに失敗しました。");
-        console.log("エラー:", e);
       }
     };
 
@@ -221,16 +218,23 @@ export const CreatorList = () => {
 };
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    marginHorizontal: SPACING,
+    padding: SPACING * 2,
+    alignItems: "center",
+    shadowColor: Colors.primary.dark,
+    shadowRadius: 10,
+    shadowOpacity: 0.6,
+    elevation: 8,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    }
+  },
   posterImage: {
-    // borderRadius: 24,
     height: ITEM_SIZE * 1.2,
-    // margin: 0,
     marginBottom: 25,
     resizeMode: "contain",
     width: "100%"
   }
-  // svgCurve: {
-  //   position: "absolute",
-  //   width: ITEM_SIZE - SPACING * 2
-  // }
 });

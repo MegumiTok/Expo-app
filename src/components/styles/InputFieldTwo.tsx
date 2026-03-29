@@ -1,6 +1,13 @@
 import { View, StyleSheet, TextInput, Text } from "react-native";
 //type
 import type { FC } from "react";
+import { Colors } from "./theme/Colors";
+import {
+  SPACING_BIG,
+  FONT_SIZE_MD,
+  INPUT_HEIGHT,
+  BORDER_RADIUS_SM
+} from "./theme/layout";
 
 interface Props {
   labelValue: string;
@@ -25,7 +32,7 @@ export const InputFieldTwo: FC<Props> = ({
           style={styles.input}
           value={labelValue}
           // placeholder={placeholderText}
-          placeholderTextColor="#666"
+          placeholderTextColor={Colors.textMuted}
           numberOfLines={1}
           textAlign="center"
           {...rest}
@@ -39,23 +46,20 @@ export default InputFieldTwo;
 
 const styles = StyleSheet.create({
   input: {
-    // alignItems: "center",
-    color: "#333",
+    color: Colors.textSub,
     flex: 1,
     fontFamily: "NotoSansJP-Medium",
-    fontSize: 16,
-    // justifyContent: "center",
-    padding: 10
+    fontSize: FONT_SIZE_MD,
+    padding: SPACING_BIG
   },
   inputContainer: {
-    // alignItems: "center",
     backgroundColor: "#fff",
-    borderColor: "#ccc",
-    borderRadius: 3,
+    borderColor: Colors.border,
+    borderRadius: BORDER_RADIUS_SM,
     borderWidth: 1,
     flexDirection: "row",
-    height: 48,
-    marginBottom: 10,
+    height: INPUT_HEIGHT,
+    marginBottom: SPACING_BIG,
     marginTop: 5,
     width: "100%"
   },
@@ -68,6 +72,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
     height: 20,
     width: 5,
-    backgroundColor: "#ccc"
+    backgroundColor: Colors.border
   }
 });

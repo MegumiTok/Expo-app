@@ -14,13 +14,28 @@ import { Routes } from "@models/NavTypes";
 import type { EventType } from "@models/EventType";
 import { _day } from "@functions/_day";
 import Feather from "react-native-vector-icons/Feather";
+import { Colors } from "@components/styles/theme/Colors";
+import {
+  SPACING_BIG,
+  FONT_SIZE_XS,
+  FONT_SIZE_LG,
+  EVENT_CARD_HEIGHT,
+  SEPARATOR_HEIGHT,
+  ICON_SIZE_MD
+} from "@components/styles/theme/layout";
 //redux==============================
 import { useAppDispatch } from "@Redux/hook";
 import { fetchAllEvents } from "@Redux/eventActions";
 
 const ItemSeparatorView = () => {
   return (
-    <View style={{ height: 0.9, width: "100%", backgroundColor: "#c8c8c8" }} />
+    <View
+      style={{
+        height: SEPARATOR_HEIGHT,
+        width: "100%",
+        backgroundColor: Colors.separator
+      }}
+    />
   );
 };
 export const EventList = ({ items, bg }) => {
@@ -36,24 +51,20 @@ export const EventList = ({ items, bg }) => {
   const { navigate } = useNavigation();
 
   const _renderItem = ({ item }: { item: EventType }) => {
-    // const { eventId } = item;
     const day = _day(item.postedDate);
 
-    // console.log("時間です:", day);
     return (
       <Pressable
         style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
         onPress={() => {
-          // setOpacity(0);
           navigate(Routes.EventSinglePost, { item });
         }}
       >
         <View
           style={{
-            height: 140,
-
-            backgroundColor: "#FFFFFF95",
-            padding: 10
+            height: EVENT_CARD_HEIGHT,
+            backgroundColor: Colors.eventCardBackground,
+            padding: SPACING_BIG
           }}
         >
           <Text style={styles.date}>{day}</Text>
@@ -61,7 +72,7 @@ export const EventList = ({ items, bg }) => {
             <View style={styles.textWrapper}>
               <Text style={styles.title}>{item.title}</Text>
             </View>
-            <Feather name="chevron-right" size={27} />
+            <Feather name="chevron-right" size={ICON_SIZE_MD} />
           </View>
         </View>
       </Pressable>
@@ -97,23 +108,17 @@ export default EventList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
     backgroundColor: "#FFF"
   },
   image: {
     flex: 1,
     justifyContent: "center"
-    // opacity: 0.6
   },
   box: {
-    // height: 140,
-    // width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     flex: 1
-    // backgroundColor: "#FFFFFF95",
-    // padding: 10
   },
   textWrapper: {
     width: "80%"
@@ -122,13 +127,11 @@ const styles = StyleSheet.create({
   date: {
     fontWeight: "bold",
     textAlign: "left",
-    fontSize: 12,
-    marginBottom: 5
+    fontSize: FONT_SIZE_XS,
+    marginBottom: SPACING
   },
   title: {
     fontWeight: "bold",
-    fontSize: 20
-    // justifyContent: "center",
-    // alignItems: "center"
+    fontSize: FONT_SIZE_LG
   }
 });
